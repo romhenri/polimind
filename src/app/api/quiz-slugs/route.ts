@@ -44,7 +44,8 @@ function compareListingKeys(a: SortKey, b: SortKey): number {
 async function loadListingKey(slug: string): Promise<SortKey> {
   try {
     const raw = await readFile(path.join(DATA_DIR, `${slug}.json`), "utf8");
-    const data = JSON.parse(raw) as Record<string, unknown>;
+    const parsed = JSON.parse(raw);
+    const data = (Array.isArray(parsed) ? (parsed[1] || parsed[0]) : parsed) as Record<string, unknown>;
     const category =
       typeof data.category === "string" ? data.category : "";
     const tags = Array.isArray(data.tags) ? data.tags : [];

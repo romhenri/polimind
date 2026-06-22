@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { GiGreekTemple } from 'react-icons/gi'
 import { useTheme } from '@/contexts/ThemeContext'
+import { useProfile } from '@/contexts/ProfileContext'
 
 export default function Header() {
   const { isDarkMode, toggleTheme } = useTheme()
+  const { avatar, setIsProfileOpen } = useProfile()
 
   return (
     <header className="bg-white border-b-2 border-stone-200 dark:bg-stone-900 dark:border-stone-700">
@@ -20,18 +22,28 @@ export default function Header() {
             </div>
           </Link>
 
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="p-3 transition-colors rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700"
-            aria-label={isDarkMode ? 'Enable light mode' : 'Enable dark mode'}
-          >
-            {isDarkMode ? (
-              <FaSun className="text-lg text-clay-300 sm:text-xl" />
-            ) : (
-              <FaMoon className="text-lg text-stone-700 sm:text-xl" />
-            )}
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="p-3 transition-colors rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 cursor-pointer"
+              aria-label={isDarkMode ? 'Enable light mode' : 'Enable dark mode'}
+            >
+              {isDarkMode ? (
+                <FaSun className="text-lg text-clay-300 sm:text-xl" />
+              ) : (
+                <FaMoon className="text-lg text-stone-700 sm:text-xl" />
+              )}
+            </button>
+
+            <button
+              onClick={() => setIsProfileOpen(true)}
+              className="flex items-center justify-center w-12 h-12 text-2xl transition-all duration-200 bg-stone-100 hover:bg-stone-200 active:scale-95 rounded-full dark:bg-stone-800 dark:hover:bg-stone-700 select-none shadow-sm cursor-pointer"
+              aria-label="Open Profile Settings"
+            >
+              {avatar}
+            </button>
+          </div>
         </div>
       </div>
     </header>

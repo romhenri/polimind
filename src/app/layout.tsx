@@ -4,8 +4,10 @@ import './globals.css'
 import 'katex/dist/katex.min.css'
 import Header from '@/components/Header'
 import FooterOnRoot from '@/components/FooterOnRoot'
+import ProfileModal from '@/components/ProfileModal'
 import { QuizModeProvider } from '@/contexts/QuizModeContext'
 import { ThemeProvider } from '@/contexts/ThemeContext'
+import { ProfileProvider } from '@/contexts/ProfileContext'
 
 const inter = Inter({ subsets: ['latin'] })
 const cormorant = Cormorant_Garamond({
@@ -29,13 +31,16 @@ export default function RootLayout({
       <body className={`${inter.className} ${cormorant.variable}`} suppressHydrationWarning>
         <ThemeProvider>
           <QuizModeProvider>
-            <div className="flex min-h-[100svh] flex-col bg-marble dark:bg-stone-950">
-              <Header />
-              <main className="container max-w-6xl flex-grow px-4 py-2 md:py-8 mx-auto overflow-x-hidden">
-                {children}
-              </main>
-              <FooterOnRoot />
-            </div>
+            <ProfileProvider>
+              <div className="flex min-h-[100svh] flex-col bg-marble dark:bg-stone-950">
+                <Header />
+                <main className="container max-w-6xl flex-grow px-4 py-2 md:py-8 mx-auto overflow-x-hidden">
+                  {children}
+                </main>
+                <FooterOnRoot />
+                <ProfileModal />
+              </div>
+            </ProfileProvider>
           </QuizModeProvider>
         </ThemeProvider>
       </body>

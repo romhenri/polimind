@@ -14,11 +14,14 @@ import { FaArrowLeft } from 'react-icons/fa'
 import Link from 'next/link'
 import { formatSubject } from '@/utils/formatSubject'
 import { useQuizMode } from '@/contexts/QuizModeContext'
+import { useProfile } from '@/contexts/ProfileContext'
 
 export default function QuizPage({ params }: { params: Promise<{ subject: string }> }) {
   const resolvedParams = use(params)
   const { isDynamicMode, timeLimit } = useQuizMode()
+  const { preferPortuguese } = useProfile()
   const [questions, setQuestions] = useState<Question[]>([])
+  const [category, setCategory] = useState<string>('')
   const [mathEnabled, setMathEnabled] = useState(false)
   const [quizType, setQuizType] = useState<QuizType>('options')
   const [quizLang, setQuizLang] = useState<string | undefined>(undefined)
@@ -59,8 +62,12 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
         if (!response.ok) {
           throw new Error('Subject not found')
         }
-        const data = await response.json()
+        const parsed = await response.json()
+        const data = Array.isArray(parsed)
+          ? (preferPortuguese ? parsed[0] : (parsed[1] || parsed[0]))
+          : parsed
         setQuestions(data.questions)
+        setCategory(data.category || 'General')
         const tags = Array.isArray(data.tags) ? data.tags : []
         setMathEnabled(
           tags.some((t: unknown) => String(t).toLowerCase() === 'math')
@@ -75,7 +82,7 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
     }
 
     loadQuestions()
-  }, [resolvedParams.subject])
+  }, [resolvedParams.subject, preferPortuguese])
 
   const handleAnswer = (selectedAnswer: number, timeTaken: number) => {
     setQuizState(prev => {
@@ -200,6 +207,7 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
         quizLang={quizLang}
         quizState={quizState}
         subject={resolvedParams.subject}
+        category={category}
         mathEnabled={mathEnabled}
         onRestart={handleRestart}
       />

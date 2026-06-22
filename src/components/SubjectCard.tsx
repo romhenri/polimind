@@ -31,7 +31,7 @@ export default function SubjectCard({ subject, index, onTagClick }: SubjectCardP
   const bgColor = getColor(subject.color)
   const Icon = getQuizIcon(subject.id, subject.category)
   const animationDelay = `${index * 0.1}s`
-  
+
   return (
     <div
       className="relative flex flex-col justify-between h-full cursor-pointer card card-hover"
@@ -40,7 +40,7 @@ export default function SubjectCard({ subject, index, onTagClick }: SubjectCardP
       <Link
         href={`/quiz/${subject.id}`}
         className="absolute inset-0 z-0 rounded-xl"
-        aria-label={`Iniciar quiz: ${subject.name}`}
+        aria-label={`Start quiz: ${subject.name}`}
       />
       <div className="relative z-10 flex min-h-0 flex-1 flex-col justify-between pointer-events-none">
         <div>
@@ -91,7 +91,7 @@ export default function SubjectCard({ subject, index, onTagClick }: SubjectCardP
         <div className="flex items-center justify-between mt-auto">
           <div className="flex items-center gap-2 text-xs text-stone-600 dark:text-stone-400 sm:text-sm">
             <FaQuestionCircle />
-            <span>{subject.questions} questões</span>
+            <span>{subject.questions} questions</span>
             <span className="flex items-center gap-0.5" title={{ easy: 'Fácil', medium: 'Médio', hard: 'Difícil' }[subject.hardness ?? 'easy']}>
               {[1, 2, 3].map((i) => (
                 <span
@@ -103,7 +103,7 @@ export default function SubjectCard({ subject, index, onTagClick }: SubjectCardP
             </span>
           </div>
           <div className="flex items-center gap-2 font-semibold text-clay-600 dark:text-clay-400">
-            Iniciar
+            Start
             <FaArrowRight />
           </div>
         </div>

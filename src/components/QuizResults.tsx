@@ -23,6 +23,7 @@ import {
 } from '@/types/quiz'
 import { formatSubject } from '@/utils/formatSubject'
 import MathText from '@/components/MathText'
+import { useProfile } from '@/contexts/ProfileContext'
 
 interface QuizResultsProps {
   questions: Question[]
@@ -30,6 +31,7 @@ interface QuizResultsProps {
   quizLang?: string
   quizState: QuizState
   subject: string
+  category: string
   mathEnabled?: boolean
   onRestart: () => void
 }
@@ -40,11 +42,17 @@ export default function QuizResults({
   quizLang,
   quizState,
   subject,
+  category,
   mathEnabled = false,
   onRestart,
 }: QuizResultsProps) {
+  const { completeQuiz } = useProfile()
   const [showConfetti, setShowConfetti] = useState(true)
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 })
+
+  useEffect(() => {
+    completeQuiz(subject, category)
+  }, [subject, category, completeQuiz])
 
   useEffect(() => {
     setWindowSize({
