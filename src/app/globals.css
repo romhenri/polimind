@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased bg-marble text-stone-800 dark:bg-stone-950 dark:text-stone-100;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 font-semibold text-white transition-colors bg-clay-500 rounded-lg hover:bg-clay-600 active:bg-clay-700;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-clay-700 border-clay-500 hover:bg-clay-50 dark:text-clay-300 dark:border-clay-400 dark:hover:bg-stone-800;
+  }
+
+  .card {
+    @apply p-6 bg-white border-2 rounded-xl border-stone-200 dark:bg-stone-900 dark:border-stone-700;
+  }
+
+  .card-hover {
+    @apply transition-colors hover:border-clay-400 dark:hover:border-clay-500;
+  }
+
+  .math-text .katex {
+    font-size: 1.25em;
+  }
+  .math-text .katex,
+  .math-text .katex * {
+    color: inherit;
+  }
+}
