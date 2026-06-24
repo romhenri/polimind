@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useProfile, AvatarOption } from '@/contexts/ProfileContext'
+import { useTheme } from '@/contexts/ThemeContext'
 import { FaTimes, FaCheck, FaAward } from 'react-icons/fa'
 
 const AVATAR_OPTIONS: { emoji: AvatarOption; name: string; desc: string }[] = [
@@ -20,6 +21,7 @@ export default function ProfileModal() {
     isProfileOpen,
     setIsProfileOpen,
   } = useProfile()
+  const { isDarkMode, toggleTheme } = useTheme()
 
   const [categories, setCategories] = useState<string[]>([])
   const [categoryTotals, setCategoryTotals] = useState<Record<string, number>>({})
@@ -144,20 +146,36 @@ export default function ProfileModal() {
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400">
               Preferences
             </h3>
-            <label className="flex items-center justify-between cursor-pointer group">
-              <span className="text-sm font-medium text-stone-700 dark:text-stone-300 group-hover:text-stone-900 dark:group-hover:text-stone-100 transition-colors">
-                Prefer Portuguese when able
-              </span>
-              <div className="relative">
-                <input
-                  type="checkbox"
-                  checked={preferPortuguese}
-                  onChange={(e) => setPreferPortuguese(e.target.checked)}
-                  className="sr-only peer"
-                />
-                <div className="w-11 h-6 bg-stone-200 rounded-full peer dark:bg-stone-700 peer-focus:ring-2 peer-focus:ring-clay-300 dark:peer-focus:ring-clay-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-clay-500 transition-colors"></div>
-              </div>
-            </label>
+            <div className="space-y-4">
+              <label className="flex items-center justify-between cursor-pointer group">
+                <span className="text-sm font-medium text-stone-700 dark:text-stone-300 group-hover:text-stone-900 dark:group-hover:text-stone-100 transition-colors">
+                  Dark mode
+                </span>
+                <div className="relative">
+                  <input
+                    type="checkbox"
+                    checked={isDarkMode}
+                    onChange={toggleTheme}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-stone-200 rounded-full peer dark:bg-stone-700 peer-focus:ring-2 peer-focus:ring-clay-300 dark:peer-focus:ring-clay-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-clay-500 transition-colors"></div>
+                </div>
+              </label>
+              <label className="flex items-center justify-between cursor-pointer group">
+                <span className="text-sm font-medium text-stone-700 dark:text-stone-300 group-hover:text-stone-900 dark:group-hover:text-stone-100 transition-colors">
+                  Prefer Portuguese when able
+                </span>
+                <div className="relative">
+                  <input
+                    type="checkbox"
+                    checked={preferPortuguese}
+                    onChange={(e) => setPreferPortuguese(e.target.checked)}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-stone-200 rounded-full peer dark:bg-stone-700 peer-focus:ring-2 peer-focus:ring-clay-300 dark:peer-focus:ring-clay-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-clay-500 transition-colors"></div>
+                </div>
+              </label>
+            </div>
           </div>
 
           {/* Section 3: Quizzes Completed */}

@@ -1,13 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { FaMoon, FaSun } from 'react-icons/fa'
 import { GiGreekTemple } from 'react-icons/gi'
-import { useTheme } from '@/contexts/ThemeContext'
+import { SiGooglegemini } from 'react-icons/si'
 import { useProfile } from '@/contexts/ProfileContext'
 
 export default function Header() {
-  const { isDarkMode, toggleTheme } = useTheme()
   const { avatar, setIsProfileOpen } = useProfile()
 
   return (
@@ -23,18 +21,13 @@ export default function Header() {
           </Link>
 
           <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="p-3 transition-colors rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 cursor-pointer"
-              aria-label={isDarkMode ? 'Enable light mode' : 'Enable dark mode'}
+            <Link
+              href="/ai"
+              className="inline-flex items-center justify-center p-3 transition-colors rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 cursor-pointer"
+              aria-label="Open AI quiz generator"
             >
-              {isDarkMode ? (
-                <FaSun className="text-lg text-clay-300 sm:text-xl" />
-              ) : (
-                <FaMoon className="text-lg text-stone-700 sm:text-xl" />
-              )}
-            </button>
+              <SiGooglegemini className="text-lg text-clay-500 sm:text-xl" />
+            </Link>
 
             <button
               onClick={() => setIsProfileOpen(true)}
