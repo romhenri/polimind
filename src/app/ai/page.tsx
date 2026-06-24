@@ -12,9 +12,10 @@ import {
 } from 'react-icons/fa'
 import { FaWandMagicSparkles, FaRobot } from 'react-icons/fa6'
 import { QuizMetadata } from '@/types/quiz'
-import { generateQuiz, quizToDataFile } from '@/utils/geminiQuiz'
+import { generateQuiz, regenerateQuestion, quizToDataFile } from '@/utils/geminiQuiz'
 import AiQuizRunner from './AiQuizRunner'
 import MetaEditor from './MetaEditor'
+import QuestionList from './QuestionList'
 
 const API_KEY_STORAGE = 'polimind.geminiKey'
 
@@ -29,6 +30,8 @@ export default function AiPage() {
   const [usedModel, setUsedModel] = useState('')
   const [view, setView] = useState<'form' | 'quiz'>('form')
   const [editing, setEditing] = useState(false)
+  const [regeneratingIndex, setRegeneratingIndex] = useState<number | null>(null)
+  const [regenError, setRegenError] = useState<string | null>(null)
 
   useEffect(() => {
     const stored = localStorage.getItem(API_KEY_STORAGE)
@@ -61,6 +64,25 @@ export default function AiPage() {
   const handleSaveMeta = (meta: Partial<QuizMetadata>) => {
     setQuiz((prev) => (prev ? { ...prev, ...meta } : prev))
     setEditing(false)
+  }
+
+  const handleRegenerateQuestion = async (index: number, instructions?: string) => {
+    if (!quiz || regeneratingIndex !== null) return
+    setRegeneratingIndex(index)
+    setRegenError(null)
+    try {
+      const result = await regenerateQuestion(apiKey.trim(), quiz, index, instructions)
+      setQuiz((prev) => {
+        if (!prev) return prev
+        const questions = [...prev.questions]
+        questions[index] = result.question
+        return { ...prev, questions }
+      })
+    } catch (err) {
+      setRegenError(err instanceof Error ? err.message : 'Failed to regenerate the question.')
+    } finally {
+      setRegeneratingIndex(null)
+    }
   }
 
   const handleDownload = () => {
@@ -217,11 +239,23 @@ export default function AiPage() {
                 <p className="mb-4 text-sm text-stone-600 dark:text-stone-300">{quiz.description}</p>
               )}
 
-              <pre className="p-4 mb-5 overflow-auto text-xs leading-relaxed border-2 rounded-lg max-h-72 border-purple-100 bg-purple-50/50 text-stone-700 dark:border-purple-900/40 dark:bg-stone-800 dark:text-stone-200">
-                {jsonPreview}
-              </pre>
+              <QuestionList
+                quiz={quiz}
+                regeneratingIndex={regeneratingIndex}
+                error={regenError}
+                onRegenerate={handleRegenerateQuestion}
+              />
 
-              <div className="flex flex-col gap-3 sm:flex-row">
+              <details className="mt-5 group">
+                <summary className="text-sm font-semibold cursor-pointer select-none text-purple-700 dark:text-purple-300 hover:underline">
+                  View raw JSON
+                </summary>
+                <pre className="p-4 mt-3 overflow-auto text-xs leading-relaxed border-2 rounded-lg max-h-72 border-purple-100 bg-purple-50/50 text-stone-700 dark:border-purple-900/40 dark:bg-stone-800 dark:text-stone-200">
+                  {jsonPreview}
+                </pre>
+              </details>
+
+              <div className="flex flex-col gap-3 mt-5 sm:flex-row">
                 <button
                   type="button"
                   onClick={handleDownload}

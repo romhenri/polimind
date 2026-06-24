@@ -22,6 +22,17 @@ class GeminiError extends Error {
 const COLOR_KEYS = Object.keys(AVAILABLE_COLORS)
 const HARDNESS_VALUES = ['easy', 'medium', 'hard'] as const
 
+const QUESTION_SCHEMA = {
+  type: 'object',
+  properties: {
+    question: { type: 'string' },
+    options: { type: 'array', items: { type: 'string' } },
+    correctAnswer: { type: 'integer' },
+    explain: { type: 'string' },
+  },
+  required: ['question', 'options', 'correctAnswer', 'explain'],
+}
+
 const RESPONSE_SCHEMA = {
   type: 'object',
   properties: {
@@ -34,16 +45,7 @@ const RESPONSE_SCHEMA = {
     hardness: { type: 'string', enum: [...HARDNESS_VALUES] },
     questions: {
       type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          question: { type: 'string' },
-          options: { type: 'array', items: { type: 'string' } },
-          correctAnswer: { type: 'integer' },
-          explain: { type: 'string' },
-        },
-        required: ['question', 'options', 'correctAnswer', 'explain'],
-      },
+      items: QUESTION_SCHEMA,
     },
   },
   required: ['id', 'name', 'description', 'color', 'category', 'tags', 'hardness', 'questions'],
@@ -75,6 +77,41 @@ function buildPrompt(subject: string, count: number): string {
   ].join('\n')
 }
 
+function buildQuestionPrompt(quiz: QuizMetadata, index: number, instructions?: string): string {
+  const current = quiz.questions[index]
+  const others = quiz.questions
+    .filter((_, i) => i !== index)
+    .map((q, i) => `${i + 1}. ${q.question}`)
+    .join('\n')
+
+  return [
+    'You are a quiz generator for "polimind", a learning platform.',
+    `Generate exactly ONE new multiple-choice question for the quiz "${quiz.name}".`,
+    quiz.description ? `Quiz description: ${quiz.description}` : '',
+    `Category: ${quiz.category}. Difficulty: ${quiz.hardness}.`,
+    '',
+    'Rules:',
+    '- "question": the question text.',
+    '- "options": an array of exactly 4 plausible answer strings.',
+    '- "correctAnswer": the 0-based index (0 to 3) of the correct option.',
+    '- "explain": one short sentence explaining why the answer is correct.',
+    '- Exactly one option is correct.',
+    '- The question must fit the quiz subject and difficulty.',
+    '- It must NOT duplicate any of the existing questions listed below.',
+    '- Write everything in English. Output only the JSON object, with no extra text.',
+    '',
+    'Existing questions to avoid duplicating:',
+    others || '(none)',
+    '',
+    `Question being replaced: ${current?.question ?? '(none)'}`,
+    instructions?.trim()
+      ? `\nFollow these additional instructions for the new question: ${instructions.trim()}`
+      : '',
+  ]
+    .filter(Boolean)
+    .join('\n')
+}
+
 export function slugify(value: string): string {
   const slug = value
     .toLowerCase()
@@ -97,6 +134,25 @@ function parseGeminiError(status: number, body: string): string {
   return `Gemini request failed (status ${status}).`
 }
 
+function normalizeQuestion(item: unknown): OptionsQuestion | null {
+  if (!item || typeof item !== 'object') return null
+  const q = item as Record<string, unknown>
+  const options = Array.isArray(q.options) ? q.options.map(String) : []
+  const correctAnswer = typeof q.correctAnswer === 'number' ? q.correctAnswer : -1
+  if (typeof q.question !== 'string' || !q.question.trim()) return null
+  if (options.length < 2) return null
+  if (correctAnswer < 0 || correctAnswer >= options.length) return null
+  const question: OptionsQuestion = {
+    question: q.question.trim(),
+    options,
+    correctAnswer,
+  }
+  if (typeof q.explain === 'string' && q.explain.trim()) {
+    question.explain = q.explain.trim()
+  }
+  return question
+}
+
 function normalizeQuiz(raw: unknown, fallbackSubject: string): QuizMetadata {
   if (!raw || typeof raw !== 'object') {
     throw new Error('The model did not return a valid quiz object.')
@@ -105,24 +161,7 @@ function normalizeQuiz(raw: unknown, fallbackSubject: string): QuizMetadata {
   const rawQuestions = Array.isArray(data.questions) ? data.questions : []
 
   const questions: OptionsQuestion[] = rawQuestions
-    .map((item) => {
-      if (!item || typeof item !== 'object') return null
-      const q = item as Record<string, unknown>
-      const options = Array.isArray(q.options) ? q.options.map(String) : []
-      const correctAnswer = typeof q.correctAnswer === 'number' ? q.correctAnswer : -1
-      if (typeof q.question !== 'string' || !q.question.trim()) return null
-      if (options.length < 2) return null
-      if (correctAnswer < 0 || correctAnswer >= options.length) return null
-      const question: OptionsQuestion = {
-        question: q.question.trim(),
-        options,
-        correctAnswer,
-      }
-      if (typeof q.explain === 'string' && q.explain.trim()) {
-        question.explain = q.explain.trim()
-      }
-      return question
-    })
+    .map(normalizeQuestion)
     .filter((q): q is OptionsQuestion => q !== null)
 
   if (questions.length === 0) {
@@ -168,15 +207,20 @@ export interface GeneratedQuiz {
   model: string
 }
 
-async function requestModel(apiKey: string, model: string, subject: string, count: number): Promise<QuizMetadata> {
+export interface RegeneratedQuestion {
+  question: OptionsQuestion
+  model: string
+}
+
+async function callGemini(apiKey: string, model: string, prompt: string, schema: object): Promise<unknown> {
   const response = await fetch(`${GEMINI_BASE}/${model}:generateContent?key=${encodeURIComponent(apiKey)}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      contents: [{ parts: [{ text: buildPrompt(subject, count) }] }],
+      contents: [{ parts: [{ text: prompt }] }],
       generationConfig: {
         responseMimeType: 'application/json',
-        responseSchema: RESPONSE_SCHEMA,
+        responseSchema: schema,
         temperature: 0.8,
       },
     }),
@@ -193,23 +237,20 @@ async function requestModel(apiKey: string, model: string, subject: string, coun
     throw new GeminiError('Gemini returned an empty response.', true)
   }
 
-  let parsed: unknown
   try {
-    parsed = JSON.parse(text)
+    return JSON.parse(text)
   } catch {
     throw new GeminiError('Gemini returned malformed JSON.', true)
   }
-
-  return normalizeQuiz(parsed, subject)
 }
 
-export async function generateQuiz(apiKey: string, subject: string, count: number): Promise<GeneratedQuiz> {
+async function withModelFallback<T>(run: (model: string) => Promise<T>): Promise<{ result: T; model: string }> {
   let lastError: Error | null = null
 
   for (const model of GEMINI_MODELS) {
     try {
-      const quiz = await requestModel(apiKey, model, subject, count)
-      return { quiz, model }
+      const result = await run(model)
+      return { result, model }
     } catch (err) {
       if (err instanceof GeminiError && !err.retryable) throw err
       lastError = err instanceof Error ? err : new Error('Unknown error.')
@@ -221,4 +262,28 @@ export async function generateQuiz(apiKey: string, subject: string, count: numbe
       ? `All available models failed. Last error: ${lastError.message}`
       : 'All Gemini models are unavailable right now. Try again later.'
   )
+}
+
+export async function generateQuiz(apiKey: string, subject: string, count: number): Promise<GeneratedQuiz> {
+  const { result, model } = await withModelFallback(async (model) => {
+    const parsed = await callGemini(apiKey, model, buildPrompt(subject, count), RESPONSE_SCHEMA)
+    return normalizeQuiz(parsed, subject)
+  })
+  return { quiz: result, model }
+}
+
+export async function regenerateQuestion(
+  apiKey: string,
+  quiz: QuizMetadata,
+  index: number,
+  instructions?: string
+): Promise<RegeneratedQuestion> {
+  const prompt = buildQuestionPrompt(quiz, index, instructions)
+  const { result, model } = await withModelFallback(async (model) => {
+    const parsed = await callGemini(apiKey, model, prompt, QUESTION_SCHEMA)
+    const question = normalizeQuestion(parsed)
+    if (!question) throw new GeminiError('Gemini returned an invalid question.', true)
+    return question
+  })
+  return { question: result, model }
 }
