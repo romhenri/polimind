@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { FaArrowRight, FaQuestionCircle } from 'react-icons/fa'
 import { getColor } from '@/utils/colorMapper'
@@ -35,7 +36,7 @@ export default function SubjectCard({ subject, index, onTagClick }: SubjectCardP
   return (
     <div
       className="relative flex flex-col justify-between h-full cursor-pointer card card-hover"
-      style={{ animationDelay }}
+      style={{ animationDelay, '--qc': bgColor } as CSSProperties}
     >
       <Link
         href={`/quiz/${subject.id}`}
@@ -72,14 +73,14 @@ export default function SubjectCard({ subject, index, onTagClick }: SubjectCardP
                     e.preventDefault()
                     onTagClick(tag)
                   }}
-                  className="px-2 py-1 text-xs font-semibold transition-colors rounded-md whitespace-nowrap bg-clay-100 text-clay-700 hover:bg-clay-200 dark:bg-clay-900 dark:text-clay-200 dark:hover:bg-clay-800"
+                  className="px-2 py-1 text-xs font-semibold transition-colors rounded-md whitespace-nowrap quiz-tag quiz-tag-interactive quiz-accent"
                 >
                   {tag}
                 </button>
               ) : (
                 <span
                   key={idx}
-                  className="px-2 py-1 text-xs font-semibold rounded-md whitespace-nowrap bg-clay-100 text-clay-700 dark:bg-clay-900 dark:text-clay-200"
+                  className="px-2 py-1 text-xs font-semibold rounded-md whitespace-nowrap quiz-tag quiz-accent"
                 >
                   {tag}
                 </span>
@@ -102,7 +103,7 @@ export default function SubjectCard({ subject, index, onTagClick }: SubjectCardP
               ))}
             </span>
           </div>
-          <div className="flex items-center gap-2 font-semibold text-clay-600 dark:text-clay-400">
+          <div className="flex items-center gap-2 font-semibold quiz-accent">
             Start
             <FaArrowRight />
           </div>

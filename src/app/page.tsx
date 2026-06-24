@@ -3,7 +3,6 @@
 import { useState, useEffect, useMemo } from "react";
 import SubjectCard from "@/components/SubjectCard";
 import DynamicModeToggle from "@/components/DynamicModeToggle";
-import TimeLimitInput from "@/components/TimeLimitInput";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useQuizMode } from "@/contexts/QuizModeContext";
 import { QuizMetadata } from "@/types/quiz";
@@ -100,9 +99,6 @@ export default function Home() {
         <div className="flex flex-wrap justify-center gap-2 px-0">
           <div className="w-full min-w-0 sm:w-auto">
             <DynamicModeToggle />
-          </div>
-          <div className="w-full min-w-0 sm:w-auto">
-            <TimeLimitInput />
           </div>
         </div>
       </div>

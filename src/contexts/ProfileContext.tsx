@@ -2,7 +2,20 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
-export type AvatarOption = '🦉' | '🎓' | '🧠'
+export type AvatarOption = 'sage' | 'scholar' | 'thinker'
+
+const LEGACY_AVATARS: Record<string, AvatarOption> = {
+  '🦉': 'sage',
+  '🎓': 'scholar',
+  '🧠': 'thinker',
+  owl: 'sage',
+}
+
+function normalizeAvatar(value: unknown): AvatarOption {
+  if (value === 'sage' || value === 'scholar' || value === 'thinker') return value
+  if (typeof value === 'string' && LEGACY_AVATARS[value]) return LEGACY_AVATARS[value]
+  return 'sage'
+}
 
 interface ProfileContextType {
   avatar: AvatarOption
@@ -26,7 +39,7 @@ interface StoredProfile {
 }
 
 export function ProfileProvider({ children }: { children: ReactNode }) {
-  const [avatar, setAvatarState] = useState<AvatarOption>('🦉')
+  const [avatar, setAvatarState] = useState<AvatarOption>('sage')
   const [completedQuizzes, setCompletedQuizzes] = useState<Record<string, string[]>>({})
   const [preferPortuguese, setPreferPortugueseState] = useState<boolean>(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
@@ -38,7 +51,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       if (stored) {
         const parsed = JSON.parse(stored) as StoredProfile
         if (parsed.avatar) {
-          setAvatarState(parsed.avatar)
+          setAvatarState(normalizeAvatar(parsed.avatar))
         }
         if (parsed.completedQuizzes) {
           setCompletedQuizzes(parsed.completedQuizzes)
@@ -56,7 +69,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     setAvatarState(newAvatar)
     try {
       const stored = localStorage.getItem(PROFILE_KEY)
-      const current: StoredProfile = stored ? JSON.parse(stored) : { avatar: '🦉', completedQuizzes: {}, preferPortuguese: false }
+      const current: StoredProfile = stored ? JSON.parse(stored) : { avatar: 'sage', completedQuizzes: {}, preferPortuguese: false }
       current.avatar = newAvatar
       localStorage.setItem(PROFILE_KEY, JSON.stringify(current))
     } catch (err) {
@@ -68,7 +81,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     setPreferPortugueseState(pref)
     try {
       const stored = localStorage.getItem(PROFILE_KEY)
-      const current: StoredProfile = stored ? JSON.parse(stored) : { avatar: '🦉', completedQuizzes: {}, preferPortuguese: false }
+      const current: StoredProfile = stored ? JSON.parse(stored) : { avatar: 'sage', completedQuizzes: {}, preferPortuguese: false }
       current.preferPortuguese = pref
       localStorage.setItem(PROFILE_KEY, JSON.stringify(current))
     } catch (err) {
@@ -90,7 +103,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       }
       try {
         const stored = localStorage.getItem(PROFILE_KEY)
-        const current: StoredProfile = stored ? JSON.parse(stored) : { avatar: '🦉', completedQuizzes: {}, preferPortuguese: false }
+        const current: StoredProfile = stored ? JSON.parse(stored) : { avatar: 'sage', completedQuizzes: {}, preferPortuguese: false }
         current.completedQuizzes = updated
         localStorage.setItem(PROFILE_KEY, JSON.stringify(current))
       } catch (err) {

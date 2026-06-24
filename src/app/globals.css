@@ -25,6 +25,22 @@
     @apply transition-colors hover:border-clay-400 dark:hover:border-clay-500;
   }
 
+  .quiz-accent {
+    color: color-mix(in srgb, var(--qc) 82%, #1c1917);
+  }
+
+  .dark .quiz-accent {
+    color: color-mix(in srgb, var(--qc) 72%, white);
+  }
+
+  .quiz-tag {
+    background-color: color-mix(in srgb, var(--qc) 14%, transparent);
+  }
+
+  .quiz-tag-interactive:hover {
+    background-color: color-mix(in srgb, var(--qc) 24%, transparent);
+  }
+
   .math-text .katex {
     font-size: 1.25em;
   }

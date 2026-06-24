@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { GiGreekTemple } from 'react-icons/gi'
 import { SiGooglegemini } from 'react-icons/si'
 import { useProfile } from '@/contexts/ProfileContext'
+import { AVATAR_ICONS } from '@/utils/avatarMapper'
 
 export default function Header() {
   const { avatar, setIsProfileOpen } = useProfile()
+  const AvatarIcon = AVATAR_ICONS[avatar]
 
   return (
     <header className="bg-white border-b-2 border-stone-200 dark:bg-stone-900 dark:border-stone-700">
@@ -31,10 +33,10 @@ export default function Header() {
 
             <button
               onClick={() => setIsProfileOpen(true)}
-              className="flex items-center justify-center w-12 h-12 text-2xl transition-all duration-200 bg-stone-100 hover:bg-stone-200 active:scale-95 rounded-full dark:bg-stone-800 dark:hover:bg-stone-700 select-none shadow-sm cursor-pointer"
+              className="flex items-center justify-center w-12 h-12 transition-all duration-200 bg-stone-100 hover:bg-stone-200 active:scale-95 rounded-full dark:bg-stone-800 dark:hover:bg-stone-700 select-none shadow-sm cursor-pointer"
               aria-label="Open Profile Settings"
             >
-              {avatar}
+              <AvatarIcon className="text-xl text-clay-600 dark:text-clay-400 sm:text-2xl" />
             </button>
           </div>
         </div>

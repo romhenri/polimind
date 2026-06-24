@@ -70,7 +70,7 @@ function buildPrompt(subject: string, count: number): string {
     '    - "correctAnswer": the 0-based index (0 to 3) of the correct option.',
     '    - "explain": one short sentence explaining why the answer is correct.',
     '- Exactly one option is correct, and vary the position of the correct answer across questions.',
-    '- Write everything in English. Output only the JSON object, with no extra text.',
+    '- Write everything in English (id too). Output only the JSON object, with no extra text.',
     '',
     `Subject: ${subject}`,
     `Number of questions: ${count}`,

@@ -1,15 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useProfile, AvatarOption } from '@/contexts/ProfileContext'
+import { useProfile } from '@/contexts/ProfileContext'
 import { useTheme } from '@/contexts/ThemeContext'
+import { useQuizMode } from '@/contexts/QuizModeContext'
 import { FaTimes, FaCheck, FaAward } from 'react-icons/fa'
-
-const AVATAR_OPTIONS: { emoji: AvatarOption; name: string; desc: string }[] = [
-  { emoji: '🦉', name: 'Wise Owl', desc: 'Seeker of deep knowledge' },
-  { emoji: '🎓', name: 'Scholar', desc: 'Academic master' },
-  { emoji: '🧠', name: 'Thinker', desc: 'Analytical mind' },
-]
+import { AVATAR_OPTIONS } from '@/utils/avatarMapper'
 
 export default function ProfileModal() {
   const {
@@ -22,6 +18,7 @@ export default function ProfileModal() {
     setIsProfileOpen,
   } = useProfile()
   const { isDarkMode, toggleTheme } = useTheme()
+  const { isDynamicMode, timeLimit, setTimeLimit } = useQuizMode()
 
   const [categories, setCategories] = useState<string[]>([])
   const [categoryTotals, setCategoryTotals] = useState<Record<string, number>>({})
@@ -90,7 +87,7 @@ export default function ProfileModal() {
       <div className="absolute inset-0" onClick={() => setIsProfileOpen(false)} />
 
       {/* Modal Container */}
-      <div className="relative w-full max-w-lg overflow-hidden bg-white border border-stone-200 shadow-2xl dark:bg-stone-900 dark:border-stone-850 rounded-2xl animate-slide-up">
+      <div className="relative w-full max-w-lg overflow-hidden bg-white border border-stone-200 shadow-2xl dark:bg-stone-900 dark:border-stone-700 rounded-2xl animate-slide-up">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-stone-200 dark:border-stone-800">
           <h2 className="text-xl font-bold tracking-wide font-display text-stone-800 dark:text-white flex items-center gap-2">
@@ -114,19 +111,23 @@ export default function ProfileModal() {
               Choose Avatar
             </h3>
             <div className="grid grid-cols-3 gap-3">
-              {AVATAR_OPTIONS.map(({ emoji, name, desc }) => {
-                const isActive = avatar === emoji
+              {AVATAR_OPTIONS.map(({ id, name, Icon }) => {
+                const isActive = avatar === id
                 return (
                   <button
-                    key={emoji}
-                    onClick={() => setAvatar(emoji)}
+                    key={id}
+                    onClick={() => setAvatar(id)}
                     className={`relative p-4 flex flex-col items-center text-center rounded-xl border-2 transition-all duration-200 ${
                       isActive
                         ? 'border-clay-500 bg-clay-50/50 dark:bg-clay-950/20 dark:border-clay-400'
                         : 'border-stone-200 bg-stone-50 hover:bg-stone-100 hover:border-stone-300 dark:border-stone-800 dark:bg-stone-800/40 dark:hover:bg-stone-800'
                     }`}
                   >
-                    <span className="text-4xl mb-2 select-none">{emoji}</span>
+                    <Icon
+                      className={`mb-2 text-4xl ${
+                        isActive ? 'text-clay-500 dark:text-clay-400' : 'text-stone-500 dark:text-stone-400'
+                      }`}
+                    />
                     <span className="text-xs font-bold text-stone-800 dark:text-stone-200">
                       {name}
                     </span>
@@ -175,6 +176,27 @@ export default function ProfileModal() {
                   <div className="w-11 h-6 bg-stone-200 rounded-full peer dark:bg-stone-700 peer-focus:ring-2 peer-focus:ring-clay-300 dark:peer-focus:ring-clay-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-clay-500 transition-colors"></div>
                 </div>
               </label>
+              <div className={`flex items-center justify-between gap-4 ${!isDynamicMode ? 'opacity-50' : ''}`}>
+                <div className="min-w-0">
+                  <label
+                    htmlFor="timeLimit"
+                    className="text-sm font-medium text-stone-700 dark:text-stone-300"
+                  >
+                    Dynamic time limit
+                  </label>
+                  <p className="mt-0.5 text-xs text-stone-500 dark:text-stone-400">
+                    Seconds allowed per question while Dynamic mode is on
+                  </p>
+                </div>
+                <input
+                  id="timeLimit"
+                  type="number"
+                  value={timeLimit}
+                  onChange={(e) => setTimeLimit(Number(e.target.value))}
+                  disabled={!isDynamicMode}
+                  className="w-20 px-3 py-1.5 text-sm text-stone-800 bg-white border rounded-lg border-stone-200 dark:bg-stone-800 dark:text-white dark:border-stone-600 focus:outline-none focus:ring-2 focus:ring-clay-500 disabled:cursor-not-allowed disabled:bg-stone-100 dark:disabled:bg-stone-800"
+                />
+              </div>
             </div>
           </div>
 
