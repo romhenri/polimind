@@ -42,10 +42,10 @@ export default function Header() {
 
             <button
               onClick={() => setIsProfileOpen(true)}
-              className="flex items-center justify-center w-12 h-12 transition-all duration-200 bg-stone-100 hover:bg-stone-200 active:scale-95 rounded-full dark:bg-stone-800 dark:hover:bg-stone-700 select-none shadow-sm cursor-pointer"
+              className="flex items-center justify-center w-12 h-12 transition-all duration-200 bg-stone-100 hover:bg-stone-200 active:scale-95 rounded-full border-2 border-stone-300 dark:bg-stone-800 dark:hover:bg-stone-700 dark:border-stone-600 select-none cursor-pointer"
               aria-label="Open Profile Settings"
             >
-              <AvatarIcon className="text-xl text-clay-600 dark:text-clay-400 sm:text-2xl" />
+              <AvatarIcon className="text-xl text-stone-500 dark:text-stone-400 sm:text-2xl" />
             </button>
           </div>
         </div>

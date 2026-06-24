@@ -1,16 +1,28 @@
 import type { IconType } from 'react-icons'
-import { FaGraduationCap, FaBrain } from 'react-icons/fa6'
-import { GiWizardFace } from 'react-icons/gi'
+import {
+  FaUser,
+  FaUserGraduate,
+  FaUserTie,
+  FaUserNinja,
+  FaUserAstronaut,
+  FaUserSecret,
+} from 'react-icons/fa6'
 import type { AvatarOption } from '@/contexts/ProfileContext'
 
 export const AVATAR_OPTIONS: { id: AvatarOption; name: string; desc: string; Icon: IconType }[] = [
-  { id: 'sage', name: 'Sage', desc: 'Master of deep knowledge', Icon: GiWizardFace },
-  { id: 'scholar', name: 'Scholar', desc: 'Academic master', Icon: FaGraduationCap },
-  { id: 'thinker', name: 'Thinker', desc: 'Analytical mind', Icon: FaBrain },
+  { id: 'user', name: 'Classic', desc: 'Simple and timeless', Icon: FaUser },
+  { id: 'graduate', name: 'Graduate', desc: 'Academic master', Icon: FaUserGraduate },
+  { id: 'tie', name: 'Executive', desc: 'Polished professional', Icon: FaUserTie },
+  { id: 'ninja', name: 'Ninja', desc: 'Swift and focused', Icon: FaUserNinja },
+  { id: 'astronaut', name: 'Astronaut', desc: 'Explorer of ideas', Icon: FaUserAstronaut },
+  { id: 'secret', name: 'Agent', desc: 'Master of mystery', Icon: FaUserSecret },
 ]
 
 export const AVATAR_ICONS: Record<AvatarOption, IconType> = {
-  sage: GiWizardFace,
-  scholar: FaGraduationCap,
-  thinker: FaBrain,
+  user: FaUser,
+  graduate: FaUserGraduate,
+  tie: FaUserTie,
+  ninja: FaUserNinja,
+  astronaut: FaUserAstronaut,
+  secret: FaUserSecret,
 }
