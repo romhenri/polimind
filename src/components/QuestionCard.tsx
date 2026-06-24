@@ -220,7 +220,7 @@ export default function QuestionCard({
         </div>
       )}
       {quizType === 'options' && 'options' in question && question.options && (
-        <div className="flex flex-col gap-2 md:gap-8">
+        <div className="flex flex-col gap-2 md:gap-4">
           {question.options.map((option, index) => (
             <button
               key={index}

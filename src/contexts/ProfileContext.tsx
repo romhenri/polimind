@@ -22,6 +22,7 @@ interface ProfileContextType {
   setAvatar: (avatar: AvatarOption) => void
   completedQuizzes: Record<string, string[]> // maps category to list of completed subjectIds
   completeQuiz: (subjectId: string, category: string) => void
+  clearData: () => void
   preferPortuguese: boolean
   setPreferPortuguese: (pref: boolean) => void
   isProfileOpen: boolean
@@ -113,6 +114,17 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     })
   }
 
+  const clearData = () => {
+    setAvatarState('sage')
+    setCompletedQuizzes({})
+    setPreferPortugueseState(false)
+    try {
+      localStorage.removeItem(PROFILE_KEY)
+    } catch (err) {
+      console.error('Error clearing profile from localStorage', err)
+    }
+  }
+
   return (
     <ProfileContext.Provider
       value={{
@@ -120,6 +132,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
         setAvatar,
         completedQuizzes,
         completeQuiz,
+        clearData,
         preferPortuguese,
         setPreferPortuguese,
         isProfileOpen,

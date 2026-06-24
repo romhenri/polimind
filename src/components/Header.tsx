@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { GiGreekTemple } from 'react-icons/gi'
 import { SiGooglegemini } from 'react-icons/si'
+import { IoMdMap } from 'react-icons/io'
 import { useProfile } from '@/contexts/ProfileContext'
 import { AVATAR_ICONS } from '@/utils/avatarMapper'
 
@@ -23,6 +24,14 @@ export default function Header() {
           </Link>
 
           <div className="flex items-center gap-3">
+            <Link
+              href="/trails"
+              className="inline-flex items-center justify-center p-3 transition-colors rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 cursor-pointer"
+              aria-label="Browse learning trails"
+            >
+              <IoMdMap className="text-lg text-clay-500 sm:text-xl" />
+            </Link>
+
             <Link
               href="/ai"
               className="inline-flex items-center justify-center p-3 transition-colors rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 cursor-pointer"

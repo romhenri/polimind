@@ -77,6 +77,48 @@ function buildPrompt(subject: string, count: number): string {
   ].join('\n')
 }
 
+export function buildCopyPrompt(subject: string, count: number): string {
+  const subjectLine = subject.trim() || '<describe your subject here>'
+  return [
+    'You are a quiz generator for "polimind", a learning platform.',
+    'Create one high-quality multiple-choice quiz about the subject below and return it as a SINGLE JSON object — no markdown, no code fences, no comments, no extra text.',
+    '',
+    'Output EXACTLY this shape:',
+    '{',
+    '  "id": "kebab-case-slug",',
+    '  "name": "Concise human-readable title",',
+    '  "description": "One engaging sentence describing the quiz.",',
+    `  "color": "one of: ${COLOR_KEYS.join(', ')}",`,
+    '  "category": "A single broad area (e.g. History, Science, Programming, Math)",',
+    '  "tags": ["two", "to", "four", "keywords"],',
+    `  "hardness": "one of: ${HARDNESS_VALUES.join(', ')}",`,
+    '  "type": "options",',
+    '  "questions": [',
+    '    {',
+    '      "question": "The question text",',
+    '      "options": ["option A", "option B", "option C", "option D"],',
+    '      "correctAnswer": 0,',
+    '      "explain": "One short sentence on why the answer is correct."',
+    '    }',
+    '  ]',
+    '}',
+    '',
+    'Rules:',
+    '- "id": lowercase kebab-case slug from the subject, only [a-z0-9-], no spaces.',
+    `- "color": pick exactly ONE from: ${COLOR_KEYS.join(', ')}.`,
+    '- "tags": 2 to 4 lowercase keywords.',
+    `- "hardness": exactly one of ${HARDNESS_VALUES.join(', ')}.`,
+    '- "type": keep it as "options".',
+    `- "questions": exactly ${count} items, each with exactly 4 plausible options.`,
+    '- "correctAnswer": 0-based index (0 to 3) of the correct option; exactly one option is correct.',
+    '- Vary the position of the correct answer across questions.',
+    '- Write everything in English (including "id"). Output ONLY the JSON object.',
+    '',
+    `Subject: ${subjectLine}`,
+    `Number of questions: ${count}`,
+  ].join('\n')
+}
+
 function buildQuestionPrompt(quiz: QuizMetadata, index: number, instructions?: string): string {
   const current = quiz.questions[index]
   const others = quiz.questions

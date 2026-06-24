@@ -242,16 +242,6 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
             </div>
           )}
         </div>
-
-        <div className="h-2 overflow-hidden rounded-full sm:h-3 bg-stone-200 dark:bg-stone-700">
-          <div
-            className="h-full transition-all duration-500 bg-clay-500"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-        <div className="hidden mt-1 text-xs text-center text-stone-600 dark:text-stone-400 sm:mt-2 sm:text-sm sm:block">
-          Question {quizState.currentQuestionIndex + 1} of {questions.length}
-        </div>
       </div>
 
       <QuestionCard
@@ -265,6 +255,18 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
         onTimeOut={handleTimeOut}
         onNext={handleNext}
       />
+
+      <div className="mt-4 sm:mt-6">
+        <div className="h-2 overflow-hidden rounded-full sm:h-3 bg-stone-200 dark:bg-stone-700">
+          <div
+            className="h-full transition-all duration-500 bg-clay-500"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+        <div className="hidden mt-1 text-xs text-center text-stone-600 dark:text-stone-400 sm:mt-2 sm:text-sm sm:block">
+          Question {quizState.currentQuestionIndex + 1} of {questions.length}
+        </div>
+      </div>
     </div>
   )
 }

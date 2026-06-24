@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import type { IconType } from 'react-icons'
 import Link from 'next/link'
 import Confetti from 'react-confetti'
 import {
@@ -8,10 +9,13 @@ import {
   FaTimesCircle,
   FaQuestionCircle,
   FaClock,
-  FaPercentage,
+  FaStopwatch,
+  FaBullseye,
+  FaBolt,
   FaStar,
   FaRedo,
-  FaHome
+  FaHome,
+  FaArrowRight,
 } from 'react-icons/fa'
 import { FaTrophy, FaThumbsUp, FaDumbbell } from 'react-icons/fa6'
 import {
@@ -24,6 +28,53 @@ import {
 import { formatSubject } from '@/utils/formatSubject'
 import MathText from '@/components/MathText'
 import { useProfile } from '@/contexts/ProfileContext'
+import { TRAILS } from '@/data/trails'
+
+interface Stat {
+  label: string
+  value: string | number
+  Icon: IconType
+  tint: string
+}
+
+function StatGroup({
+  title,
+  HeaderIcon,
+  stats,
+  cols,
+}: {
+  title: string
+  HeaderIcon: IconType
+  stats: Stat[]
+  cols: string
+}) {
+  return (
+    <div className="overflow-hidden border-2 rounded-xl border-stone-200 dark:border-stone-700">
+      <div className="flex items-center gap-2 px-4 py-2.5 border-b-2 border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/60">
+        <HeaderIcon className="text-clay-500 dark:text-clay-400" aria-hidden />
+        <h3 className="text-lg font-bold tracking-wide font-display text-stone-800 dark:text-white">
+          {title}
+        </h3>
+      </div>
+      <div className={`grid ${cols} gap-px bg-stone-200 dark:bg-stone-700`}>
+        {stats.map(({ label, value, Icon, tint }) => (
+          <div
+            key={label}
+            className="flex flex-col items-center gap-1.5 px-3 py-5 text-center bg-white dark:bg-stone-900"
+          >
+            <Icon className={`text-lg ${tint} sm:text-xl`} aria-hidden />
+            <div className="text-2xl font-bold text-stone-800 dark:text-white sm:text-3xl">
+              {value}
+            </div>
+            <div className="text-[11px] font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400">
+              {label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 interface QuizResultsProps {
   questions: Question[]
@@ -94,6 +145,24 @@ export default function QuizResults({
   const performance = getPerformanceMessage()
   const PerformanceIcon = performance.Icon
 
+  const trail = TRAILS.find((t) => t.quizzes.includes(subject))
+  const trailIndex = trail ? trail.quizzes.indexOf(subject) : -1
+  const nextSlug =
+    trail && trailIndex >= 0 && trailIndex < trail.quizzes.length - 1
+      ? trail.quizzes[trailIndex + 1]
+      : null
+
+  const precisionStats: Stat[] = [
+    { label: 'Correct', value: correctAnswers, Icon: FaCheckCircle, tint: 'text-green-600 dark:text-green-500' },
+    { label: 'Wrong', value: wrongAnswers, Icon: FaTimesCircle, tint: 'text-red-500 dark:text-red-400' },
+    { label: 'Unanswered', value: unattempted, Icon: FaQuestionCircle, tint: 'text-stone-400 dark:text-stone-500' },
+  ]
+
+  const agilityStats: Stat[] = [
+    { label: 'Total Time', value: `${totalTime}s`, Icon: FaClock, tint: 'text-clay-500 dark:text-clay-400' },
+    { label: 'Avg Time', value: `${avgTime}s`, Icon: FaStopwatch, tint: 'text-clay-500 dark:text-clay-400' },
+  ]
+
   return (
     <div className="max-w-4xl mx-auto animate-fade-in">
       {showConfetti && percentage >= 50 && (
@@ -117,89 +186,73 @@ export default function QuizResults({
         </p>
       </div>
 
-      <div className="mb-6 text-center card sm:mb-8 bg-clay-50 dark:bg-stone-900">
-        <div className="mb-1 text-4xl font-bold text-clay-600 dark:text-clay-400 sm:text-5xl md:text-6xl sm:mb-2">
-          {percentage}%
+      <div className="mb-6 card sm:mb-8 bg-clay-50 dark:bg-stone-900/60">
+        <div className="flex flex-col items-center text-center">
+          <div className="font-display text-5xl font-bold text-clay-600 dark:text-clay-400 sm:text-6xl md:text-7xl">
+            {percentage}%
+          </div>
+          <div className="mt-1 text-base font-semibold text-stone-700 dark:text-stone-200 sm:text-lg">
+            {correctAnswers} of {totalQuestions} correct
+          </div>
         </div>
-        <div className="mb-1 text-lg font-semibold text-stone-700 dark:text-stone-200 sm:text-xl md:text-2xl">
-          {correctAnswers}/{totalQuestions}
-        </div>
-        <div className="text-sm text-stone-600 dark:text-stone-400 sm:text-base md:text-lg">
-          {correctAnswers === 1 ? 'correct' : 'correct'}
+        <div className="w-full h-2.5 mt-4 overflow-hidden rounded-full bg-stone-200 dark:bg-stone-700 sm:mt-5">
+          <div
+            className="h-full transition-all duration-700 bg-clay-500"
+            style={{ width: `${percentage}%` }}
+          />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        <div className="card bg-green-50 border-2 border-green-200 dark:bg-green-950/40 dark:border-green-800">
-          <div className="flex items-center gap-4">
-            <FaCheckCircle className="text-2xl text-green-600 dark:text-green-400 sm:text-3xl md:text-4xl" />
-            <div>
-              <div className="text-2xl font-bold text-green-600 dark:text-green-400 sm:text-3xl">{correctAnswers}</div>
-              <div className="text-xs text-stone-600 dark:text-stone-400 sm:text-sm">Correct Answers</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="card bg-red-50 border-2 border-red-200 dark:bg-red-950/40 dark:border-red-800">
-          <div className="flex items-center gap-4">
-            <FaTimesCircle className="text-2xl text-red-600 dark:text-red-400 sm:text-3xl md:text-4xl" />
-            <div>
-              <div className="text-2xl font-bold text-red-600 dark:text-red-400 sm:text-3xl">{wrongAnswers}</div>
-              <div className="text-xs text-stone-600 dark:text-stone-400 sm:text-sm">Wrong Answers</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-2 card bg-stone-50 border-stone-200 dark:bg-stone-800/80 dark:border-stone-600">
-          <div className="flex items-center gap-4">
-            <FaQuestionCircle className="text-2xl text-stone-600 dark:text-stone-400 sm:text-3xl md:text-4xl" />
-            <div>
-              <div className="text-2xl font-bold text-stone-600 dark:text-stone-300 sm:text-3xl">{unattempted}</div>
-              <div className="text-xs text-stone-600 dark:text-stone-400 sm:text-sm">Unanswered</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-2 card bg-clay-50 border-clay-200 dark:bg-clay-900/40 dark:border-clay-800">
-          <div className="flex items-center gap-4">
-            <FaPercentage className="text-2xl text-clay-600 dark:text-clay-400 sm:text-3xl md:text-4xl" />
-            <div>
-              <div className="text-2xl font-bold text-clay-600 dark:text-clay-400 sm:text-3xl">{percentage}%</div>
-              <div className="text-xs text-stone-600 dark:text-stone-400 sm:text-sm">Percentage</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="card bg-purple-50 border-2 border-purple-200 dark:bg-purple-950/40 dark:border-purple-800">
-          <div className="flex items-center gap-4">
-            <FaClock className="text-2xl text-purple-600 dark:text-purple-400 sm:text-3xl md:text-4xl" />
-            <div>
-              <div className="text-2xl font-bold text-purple-600 dark:text-purple-400 sm:text-3xl">{totalTime}s</div>
-              <div className="text-xs text-stone-600 dark:text-stone-400 sm:text-sm">Total Time</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="card bg-indigo-50 border-2 border-indigo-200 dark:bg-indigo-950/40 dark:border-indigo-800">
-          <div className="flex items-center gap-4">
-            <FaStar className="text-2xl text-indigo-600 dark:text-indigo-400 sm:text-3xl md:text-4xl" />
-            <div>
-              <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400 sm:text-3xl">{avgTime}s</div>
-              <div className="text-xs text-stone-600 dark:text-stone-400 sm:text-sm">Average Time</div>
-            </div>
-          </div>
-        </div>
+      <div className="grid grid-cols-1 gap-4 mb-8 md:grid-cols-2">
+        <StatGroup title="Precision" HeaderIcon={FaBullseye} stats={precisionStats} cols="grid-cols-3" />
+        <StatGroup title="Agility" HeaderIcon={FaBolt} stats={agilityStats} cols="grid-cols-2" />
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <button onClick={onRestart} className="btn-primary flex items-center justify-center gap-2">
-          <FaRedo />
-          Try Again
-        </button>
-        <Link href="/" className="btn-secondary flex items-center justify-center gap-2">
-          <FaHome />
-          Back to Home
-        </Link>
+      <div className="flex flex-col items-center gap-3">
+        <div className="flex flex-col justify-center w-full gap-4 sm:flex-row-reverse">
+          {nextSlug ? (
+            <>
+              <Link href={`/quiz/${nextSlug}`} className="flex items-center justify-center gap-2 btn-primary">
+                Next quiz
+                <FaArrowRight />
+              </Link>
+              <button onClick={onRestart} className="flex items-center justify-center gap-2 btn-secondary">
+                <FaRedo />
+                Retry
+              </button>
+            </>
+          ) : trail ? (
+            <>
+              <Link href={`/trails/${trail.id}`} className="flex items-center justify-center gap-2 btn-primary">
+                Back to {trail.name}
+                <FaArrowRight />
+              </Link>
+              <button onClick={onRestart} className="flex items-center justify-center gap-2 btn-secondary">
+                <FaRedo />
+                Retry
+              </button>
+            </>
+          ) : (
+            <>
+              <button onClick={onRestart} className="flex items-center justify-center gap-2 btn-primary">
+                <FaRedo />
+                Try Again
+              </button>
+              <Link href="/" className="flex items-center justify-center gap-2 btn-secondary">
+                <FaHome />
+                Back to Home
+              </Link>
+            </>
+          )}
+        </div>
+        {trail && (
+          <Link
+            href="/"
+            className="text-sm font-medium transition-colors text-stone-500 hover:text-clay-600 dark:text-stone-400 dark:hover:text-clay-400"
+          >
+            Back to home
+          </Link>
+        )}
       </div>
 
       <div className="mt-12">

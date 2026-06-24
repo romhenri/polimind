@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
-import { FaArrowRight, FaQuestionCircle } from 'react-icons/fa'
+import { FaArrowRight, FaQuestionCircle, FaCheck } from 'react-icons/fa'
 import { getColor } from '@/utils/colorMapper'
 import { getQuizIcon } from '@/utils/iconMapper'
 
@@ -26,9 +26,10 @@ interface SubjectCardProps {
   }
   index: number
   onTagClick?: (tag: string) => void
+  completed?: boolean
 }
 
-export default function SubjectCard({ subject, index, onTagClick }: SubjectCardProps) {
+export default function SubjectCard({ subject, index, onTagClick, completed }: SubjectCardProps) {
   const bgColor = getColor(subject.color)
   const Icon = getQuizIcon(subject.id, subject.category)
   const animationDelay = `${index * 0.1}s`
@@ -43,6 +44,15 @@ export default function SubjectCard({ subject, index, onTagClick }: SubjectCardP
         className="absolute inset-0 z-0 rounded-xl"
         aria-label={`Start quiz: ${subject.name}`}
       />
+      {completed && (
+        <div
+          className="absolute z-10 flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold text-white rounded-full pointer-events-none top-4 right-4"
+          style={{ backgroundColor: bgColor }}
+        >
+          <FaCheck aria-hidden />
+          Complete
+        </div>
+      )}
       <div className="relative z-10 flex min-h-0 flex-1 flex-col justify-between pointer-events-none">
         <div>
           <div className="mb-4">

@@ -1,17 +1,17 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useProfile } from '@/contexts/ProfileContext'
 import { useTheme } from '@/contexts/ThemeContext'
 import { useQuizMode } from '@/contexts/QuizModeContext'
-import { FaTimes, FaCheck, FaAward } from 'react-icons/fa'
+import { FaTimes, FaCheck, FaAward, FaTrashAlt } from 'react-icons/fa'
 import { AVATAR_OPTIONS } from '@/utils/avatarMapper'
 
 export default function ProfileModal() {
   const {
     avatar,
     setAvatar,
-    completedQuizzes,
+    clearData,
     preferPortuguese,
     setPreferPortuguese,
     isProfileOpen,
@@ -20,51 +20,15 @@ export default function ProfileModal() {
   const { isDarkMode, toggleTheme } = useTheme()
   const { isDynamicMode, timeLimit, setTimeLimit } = useQuizMode()
 
-  const [categories, setCategories] = useState<string[]>([])
-  const [categoryTotals, setCategoryTotals] = useState<Record<string, number>>({})
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    if (!isProfileOpen) return
-
-    const loadStats = async () => {
-      setLoading(true)
-      try {
-        const listRes = await fetch('/api/quiz-slugs', { cache: 'no-store' })
-        if (!listRes.ok) throw new Error('Failed to load subjects')
-        const { slugs } = (await listRes.json()) as { slugs: string[] }
-
-        const fetchedCategories: string[] = []
-        const totals: Record<string, number> = {}
-
-        await Promise.all(
-          slugs.map(async (slug) => {
-            try {
-              const res = await fetch(`/data/${slug}.json`)
-              if (!res.ok) return
-              const rawData = await res.json()
-              const data = Array.isArray(rawData) ? rawData[0] : rawData
-              const cat = data.category || 'General'
-              fetchedCategories.push(cat)
-              totals[cat] = (totals[cat] || 0) + 1
-            } catch (err) {
-              console.error(`Error loading data for ${slug}:`, err)
-            }
-          })
-        )
-
-        const uniqueCats = Array.from(new Set(fetchedCategories)).sort()
-        setCategories(uniqueCats)
-        setCategoryTotals(totals)
-      } catch (err) {
-        console.error('Error loading profile stats:', err)
-      } finally {
-        setLoading(false)
-      }
+  const handleClearData = () => {
+    if (
+      window.confirm(
+        'Clear all your saved data (progress, avatar and preferences)? This cannot be undone.'
+      )
+    ) {
+      clearData()
     }
-
-    loadStats()
-  }, [isProfileOpen])
+  }
 
   // Close modal on escape keypress
   useEffect(() => {
@@ -199,55 +163,17 @@ export default function ProfileModal() {
               </div>
             </div>
           </div>
-
-          {/* Section 3: Quizzes Completed */}
-          <div className="pt-2 border-t border-stone-100 dark:border-stone-800/50">
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400">
-              Quizzes Completed
-            </h3>
-
-            {loading ? (
-              <div className="flex flex-col items-center justify-center py-6">
-                <div className="w-8 h-8 border-b-2 rounded-full border-clay-500 animate-spin"></div>
-                <p className="mt-2 text-xs text-stone-500 dark:text-stone-400">Loading stats...</p>
-              </div>
-            ) : categories.length === 0 ? (
-              <p className="text-sm text-stone-500 dark:text-stone-400 text-center py-4">
-                No subjects loaded yet.
-              </p>
-            ) : (
-              <div className="space-y-4">
-                {categories.map((category) => {
-                  const completed = completedQuizzes[category]?.length || 0
-                  const total = categoryTotals[category] || 0
-                  const pct = total > 0 ? Math.round((completed / total) * 100) : 0
-
-                  return (
-                    <div key={category} className="space-y-1.5">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="font-semibold text-stone-700 dark:text-stone-300">
-                          {category}
-                        </span>
-                        <span className="text-xs font-medium text-stone-500 dark:text-stone-400">
-                          {completed} / {total} completed ({pct}%)
-                        </span>
-                      </div>
-                      <div className="h-2.5 overflow-hidden rounded-full bg-stone-100 dark:bg-stone-800">
-                        <div
-                          className="h-full bg-clay-500 rounded-full transition-all duration-500"
-                          style={{ width: `${pct}%` }}
-                        />
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            )}
-          </div>
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 bg-stone-50 dark:bg-stone-900/60 border-t border-stone-200 dark:border-stone-800 flex justify-end">
+        <div className="px-6 py-4 bg-stone-50 dark:bg-stone-900/60 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between gap-3">
+          <button
+            onClick={handleClearData}
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-colors bg-transparent border-2 rounded-lg text-stone-600 border-stone-300 hover:border-red-400 hover:text-red-600 hover:bg-red-50 dark:text-stone-300 dark:border-stone-600 dark:hover:border-red-500/50 dark:hover:text-red-400 dark:hover:bg-red-950/30"
+          >
+            <FaTrashAlt />
+            Clear data
+          </button>
           <button
             onClick={() => setIsProfileOpen(false)}
             className="btn-primary text-sm py-2 px-6"

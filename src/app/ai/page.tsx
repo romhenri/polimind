@@ -9,10 +9,12 @@ import {
   FaPlay,
   FaSpinner,
   FaPen,
+  FaCopy,
+  FaCheck,
 } from 'react-icons/fa'
-import { FaWandMagicSparkles, FaRobot } from 'react-icons/fa6'
+import { FaWandMagicSparkles } from 'react-icons/fa6'
 import { QuizMetadata } from '@/types/quiz'
-import { generateQuiz, regenerateQuestion, quizToDataFile } from '@/utils/geminiQuiz'
+import { generateQuiz, regenerateQuestion, quizToDataFile, buildCopyPrompt } from '@/utils/geminiQuiz'
 import AiQuizRunner from './AiQuizRunner'
 import MetaEditor from './MetaEditor'
 import QuestionList from './QuestionList'
@@ -32,6 +34,7 @@ export default function AiPage() {
   const [editing, setEditing] = useState(false)
   const [regeneratingIndex, setRegeneratingIndex] = useState<number | null>(null)
   const [regenError, setRegenError] = useState<string | null>(null)
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     const stored = localStorage.getItem(API_KEY_STORAGE)
@@ -42,6 +45,18 @@ export default function AiPage() {
   const jsonPreview = useMemo(() => (dataFile ? JSON.stringify(dataFile, null, 2) : ''), [dataFile])
 
   const canGenerate = apiKey.trim() !== '' && subject.trim() !== '' && !loading
+  const canCopy = subject.trim() !== ''
+
+  const handleCopyPrompt = async () => {
+    if (!canCopy) return
+    try {
+      await navigator.clipboard.writeText(buildCopyPrompt(subject.trim(), count))
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      setError('Could not copy to clipboard. Copy it manually from the JSON preview instead.')
+    }
+  }
 
   const handleGenerate = async () => {
     if (!canGenerate) return
@@ -103,13 +118,10 @@ export default function AiPage() {
   return (
     <div className="max-w-3xl mx-auto animate-fade-in">
       <div className="mb-6 text-center">
-        <span className="inline-flex items-center gap-2 px-3 py-1 mb-4 text-xs font-semibold tracking-wide uppercase rounded-full text-purple-700 bg-purple-100 dark:text-purple-200 dark:bg-purple-900/50">
-          <FaRobot /> AI generator
-        </span>
-        <h1 className="mb-2 text-4xl font-bold tracking-wide font-display sm:text-5xl">
-          polimind<span className="text-purple-600 dark:text-purple-400">.ai</span>
+        <h1 className="mt-4 mb-2 text-3xl font-bold tracking-wide font-display sm:text-4xl md:text-5xl">
+          Polimind<span className="text-purple-600 dark:text-purple-400">.ai</span>
         </h1>
-        <p className="text-base text-stone-600 dark:text-stone-300 sm:text-lg">
+        <p className="text-base text-stone-600 dark:text-stone-300 sm:text-lg md:text-xl">
           Generate a custom quiz with Gemini and start playing instantly.
         </p>
       </div>
@@ -164,20 +176,38 @@ export default function AiPage() {
           polimind automatically adds the formatting instructions so the output works as a playable quiz.
         </p>
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-          <div className="sm:w-32">
-            <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
-              Questions
-            </label>
-            <input
-              type="number"
-              min={4}
-              max={20}
-              value={count}
-              onChange={(e) => setCount(Math.max(4, Math.min(20, Number(e.target.value) || 10)))}
-              className="w-full px-4 py-3 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-            />
-          </div>
+        <div className="mb-4 sm:w-40">
+          <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
+            Questions
+          </label>
+          <input
+            type="number"
+            min={4}
+            max={20}
+            value={count}
+            onChange={(e) => setCount(Math.max(4, Math.min(20, Number(e.target.value) || 10)))}
+            className="w-full px-4 py-3 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+          />
+        </div>
+
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <button
+            type="button"
+            onClick={handleCopyPrompt}
+            disabled={!canCopy}
+            title="Copy a ready-to-use prompt to paste into any AI chat"
+            className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-purple-700 border-purple-500 hover:bg-purple-50 dark:text-purple-300 dark:border-purple-400 dark:hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {copied ? (
+              <>
+                <FaCheck /> Copied!
+              </>
+            ) : (
+              <>
+                <FaCopy /> Copy prompt
+              </>
+            )}
+          </button>
           <button
             type="button"
             onClick={handleGenerate}
