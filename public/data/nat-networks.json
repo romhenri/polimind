@@ -1,0 +1,113 @@
+{
+    "id": "nat-networks",
+    "name": "Network Address Translation (NAT)",
+    "description": "Quiz on the operation, advantages, implementation and controversies of the NAT protocol.",
+    "icon": "🔄",
+    "color": "blue",
+    "category": "Computing",
+    "tags": ["networks", "nat"],
+    "hardness": "medium",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What does the NAT (Network Address Translation) protocol essentially do in a network?",
+        "options": [
+          "It allows several local hosts to share a single public IP address on the way out.",
+          "Edge routers drop all malicious packets using IP rules.",
+          "It replaces physical copper cables with exclusive logical connections in local networks.",
+          "It encrypts the payload of each packet to provide local confidentiality."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "How does NAT distinguish the various local-host flows if they use the exact same public IP on the external network?",
+        "options": [
+          "It manipulates and records the active logical port numbers at the transport layer.",
+          "It inserts a strict digital signature that identifies the packets from that router.",
+          "It requires the sender to always use the same route of cables and interfaces.",
+          "It splits the size of the internal bytes to avoid congestion on this side."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which of these options does NOT represent a 'private' IP address space commonly used inside local networks with NAT?",
+        "options": [
+          "The range of addresses strictly starting with the standard global prefix 200.23.16.0/20.",
+          "The IP address space reserved and classified with the classic local prefix 10/8.",
+          "The block of private network addresses widely known as 172.16/12.",
+          "The range of standardized internal addresses starting with the common mask 192.168/16."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the main cybersecurity advantage incidentally provided by the use of the NAT protocol?",
+        "options": [
+          "Local hosts remain completely hidden and cannot be addressed from the outside.",
+          "The system can perfectly neutralize losses at the physical layer of the links.",
+          "The router blocks malicious timers that affect local flow control.",
+          "The network eliminates the continuous request for passwords during a secure session handshake."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Why is the use of the NAT protocol often considered controversial from a purist network architecture point of view?",
+        "options": [
+          "Routers should not change layer-four fields such as the port number.",
+          "Routers should use IPv6 exclusively instead of doing translation in hardware.",
+          "Protocols fail to send analog signals through the internal coaxial cables.",
+          "Web servers block packet switching if there is a failure when reading the bits."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What specifically characterizes the problem known as NAT Traversal (NAT-T) in today's networks?",
+        "options": [
+          "The difficulty of establishing connections when an external client tries to reach the NAT.",
+          "The extremely high propagation delay that occurs during circuit switching on the network.",
+          "The mandatory excessive fragmentation of data in the ISP's core routers.",
+          "The native inability of servers to resolve the domain name on the DNS server."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "To ensure bidirectional data communication, what does the edge router store in its 'NAT translation table'?",
+        "options": [
+          "The pairing between the old source IP and port with the NAT's IP and its new port.",
+          "The complete history of the cryptographic keys generated in the client's handshake.",
+          "The continuous record of packets dropped by the gateway subnet's routers.",
+          "The exact physical control address of the computers' and phones' Wi-Fi interface."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "When a response packet returns from the Internet to your home network, what does the NAT router do with that datagram?",
+        "options": [
+          "The router replaces the NAT IP with the original private IP by consulting its table.",
+          "The system blocks the message, requiring the host to initiate local contact again.",
+          "The router delegates the processing to the DNS to map the host correctly.",
+          "The protocol drops the datagrams to prioritize the active sends of that moment."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "As a network administrator, what is the great architectural advantage of adopting NAT translation internally in your organization?",
+        "options": [
+          "Being able to change the devices' IPs on the network without having to notify the outside world.",
+          "Avoiding congestion failures by converting to circuit switching.",
+          "Replacing the need to use port numbers within the transport layer.",
+          "Isolating all data processing in a cache memory of cloud servers."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Despite its purist limitations and the old hopes that IPv6 would eliminate it, what is the current state of NAT?",
+        "options": [
+          "It remains fundamental and widely used in home networks and 4G and 5G mobile networks.",
+          "It was entirely banned by the IETF after the discovery of its security flaws.",
+          "It ended up being completely replaced as soon as the DNS servers were updated.",
+          "It operates exclusively inside global backbones with no access to real computers."
+        ],
+        "correctAnswer": 0
+      }
+    ]
+  }

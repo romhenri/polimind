@@ -1,0 +1,164 @@
+{
+    "id": "quic",
+    "name": "QUIC Protocol and HTTP/3",
+    "description": "Advanced quiz with 15 questions on the architecture, multiplexing, handshakes and ecosystem of QUIC.",
+    "icon": "🌐",
+    "color": "blue",
+    "category": "Computing",
+    "tags": ["networks", "web", "http", "protocols"],
+    "hardness": "medium",
+    "seq": "6",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What does the acronym QUIC stand for, and which transport-layer protocol is it built on top of?",
+        "options": [
+          "It stands for Quick URL Internal Connections and operates focused within the IP network.",
+          "It stands for Quick UDP Internet Connections and operates directly on top of UDP.",
+          "It stands for Quick UDP Internet Connections and operates directly on top of TCP.",
+          "It stands for Quick URL Internal Connections and operates focused within web networks."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In the initial connection process, what is the great advantage of QUIC compared to TCP with TLS?",
+        "options": [
+          "The format cancels the entire initial handshake and immediately sends the first bit on the network.",
+          "The system now requires three slow serial steps to guarantee protection.",
+          "QUIC resolves the logical establishment and the encryption in a single handshake.",
+          "The protocol shifts the whole weight of the handshake to the efficient edge links."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Why did HTTP/2 running over TCP (before QUIC) suffer from the dreaded 'Head-of-Line' (HOL) blocking?",
+        "options": [
+          "Because TCP treats everything as a single continuous stream; one error delays all the rest.",
+          "Because the native encryption of the old versions consumed excessive baseline bandwidth.",
+          "Because twisted-pair cables ignored the splitting of data originating from the web.",
+          "Because the physical network layer queued large requests into a single router."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "How does the QUIC protocol effectively handle the Head-of-Line (HOL) blocking problem?",
+        "options": [
+          "It consolidates multiple streams into one channel, freezing the queue if any damage occurs.",
+          "It forces the definitive exclusion of the whole parallel data right after errors.",
+          "It actively hides logical ports, bypassing the application's normal systems.",
+          "It isolates all streams; so an isolated error does not block the data of other paths."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Where is the QUIC protocol implemented within the traditional layered network model?",
+        "options": [
+          "In the Application layer, running on top of the Transport layer that uses UDP.",
+          "In the Transport layer, running directly on top of the pure IP Network protocol.",
+          "In the Link layer, shielding the data that comes down from the physical sublayer.",
+          "In the Network layer, operating side by side with all native global IP datagrams."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Being built on top of a UDP channel (which is unreliable), how does QUIC guarantee data integrity?",
+        "options": [
+          "The protocol ignores bit errors because it focuses entirely on real-time audio.",
+          "The model mirrors the robust retransmission algorithms already applied in TCP.",
+          "The network interface takes on this complex function as it injects the signals onto the link.",
+          "The cloud core locks out malware just before it reaches the access machines."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which statement correctly defines the relationship of the QUIC protocol with Cryptography (such as TLS)?",
+        "options": [
+          "The system dispenses with the adoption of encryption to boost its maximum throughput.",
+          "The system's keys are sent only after the exact confirmation of the datagram.",
+          "Final security is handed off to the edge routers via dense dedicated tunnels.",
+          "The encryption negotiation is unified and done already in the first handshake."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Regarding the execution of Congestion Control in the QUIC ecosystem, how does it technically work?",
+        "options": [
+          "Each one of the parallel streams created has its own useful congestion control.",
+          "The architecture's control freezes the transfers whenever it detects a congested network.",
+          "The system completely turns off this check to gain more fluidity in routing.",
+          "The protocol hands the harsh load checking off to the lower layer of the terminal."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Where and by which large corporation was the QUIC protocol initially developed and driven?",
+        "options": [
+          "By Microsoft, with its implementation oriented solely to the Windows system.",
+          "By Google, with its broad adoption focused on the core servers and on YouTube.",
+          "By Mozilla, which aimed to prioritize total security in the new Firefox.",
+          "By Apple, with the clear purpose of speeding up all of Safari's links."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is HTTP/3 in the context of the current evolution of the Internet's network architecture?",
+        "options": [
+          "It is an architecture focused purely on exchanging text messages between datacenters.",
+          "It is the new protocol that completely excludes the use of encryption to generate more bits.",
+          "It is simply the formal definition of the old HTTP/2 encapsulated directly in QUIC.",
+          "It is a version focused on closed local physical connections, such as optical fibers."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How do browsers guarantee access to old sites that still do not support the QUIC or HTTP/3 protocol?",
+        "options": [
+          "They block the connection because they consider the TCP protocol obsolete and insecure.",
+          "They remotely convert the server's code to accept UDP packets.",
+          "They require the user to install a specific driver to emulate HTTP/3.",
+          "They use TCP as an automatic backward-compatibility (fallback) mechanism."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Regarding QUIC's governance and licensing, which statement is correct?",
+        "options": [
+          "It is an open standard (Open Source) developed by Google and now maintained by the IETF.",
+          "It is a proprietary, closed protocol, with use restricted to Alphabet Inc. products.",
+          "It is paid software (SaaS) that requires annual licensing for network administrators.",
+          "It is a technology exclusive to operating systems based on Linux code."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Besides Google and YouTube, which companies and services are major adopters of QUIC and HTTP/3 today?",
+        "options": [
+          "Only government defense agencies that use isolated intranet networks.",
+          "Large CDNs such as Cloudflare and social networks such as Facebook, Instagram and WhatsApp.",
+          "Exclusively email services that operate under the old POP3 protocol.",
+          "Only manufacturers of router hardware for use in home networks."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which QUIC feature allows a video on your phone not to be interrupted when you switch from Wi-Fi to 4G?",
+        "options": [
+          "The advanced cookie system that restarts the session in milliseconds.",
+          "The data compression that stores the whole video in the cache before the network switch.",
+          "Connection ID (CID), which identifies the connection regardless of the IP change.",
+          "The native VPN tunnel that masks the device's physical hardware address."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the main motivation for large content companies (such as Netflix and Meta) to adopt QUIC?",
+        "options": [
+          "To reduce loading latency and improve the experience on unstable networks.",
+          "To eliminate the need to use DNS servers for domain translation.",
+          "To completely replace the physical optical-fiber layer with radio signals.",
+          "To prevent users from using ad blockers in their browsers."
+        ],
+        "correctAnswer": 0
+      }
+    ]
+  }

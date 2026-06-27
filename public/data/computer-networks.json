@@ -1,0 +1,114 @@
+{
+  "id": "computer-networks",
+  "name": "Computer Networks",
+  "description": "Protocols, architectures and layers of computer networks.",
+  "icon": "🌐",
+  "color": "blue",
+  "category": "Computing",
+  "tags": ["networks", "web", "dns", "http", "protocols"],
+  "hardness": "medium",
+  "seq": "1",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "Which layer of the OSI model is responsible for providing reliable transport and delivery of data?",
+      "options": [
+        "Network Layer",
+        "Data Link Layer",
+        "Transport Layer",
+        "Presentation Layer"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "In packet switching, most switches use the 'store-and-forward' technique. What does this mean?",
+      "options": [
+        "The router must reserve all resources along the path to its destination in advance.",
+        "The switch must receive the entire packet before it can start transmitting the first bit.",
+        "Data packets are necessarily held on a central server before being sent.",
+        "The link transmits the bits at the exact arrival rate, with no need to store them."
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "What is the function of the Domain Name System (DNS)?",
+      "options": [
+        "To map website names to their corresponding numeric IP addresses.",
+        "To allocate and configure core routers within web infrastructures.",
+        "To establish fully secure encryption barriers across the external network.",
+        "To guarantee fast routing for the flows coming from virtual applications."
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What is the conceptual definition of 'transmission delay' in a packet network?",
+      "options": [
+        "Time to check for errors and determine the route.",
+        "Time the packet waits in the output queue.",
+        "Time to push all the bits onto the link.",
+        "Time for the signal to travel across the physical medium."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "Which of the characteristics below describes the UDP (User Datagram Protocol) protocol?",
+      "options": [
+        "It guarantees minimum throughput levels and provides data security and encryption.",
+        "It requires a handshake before starting the transmission of data.",
+        "It performs unreliable data transfer between network processes.",
+        "It implements congestion control when the network is overloaded."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "What is the network topology in which a central device connects to all the other nodes?",
+      "options": [
+        "Star",
+        "Ring",
+        "Bus",
+        "Mesh"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What is the cheapest and most widely used guided physical medium, which uses two twisted conductors to reduce electrical interference?",
+      "options": [
+        "Coaxial cable",
+        "Twisted-pair copper wire",
+        "Optical fiber",
+        "Terrestrial radio channels"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "The HTTP protocol is characterized as 'stateless'. What does this mean for the web server?",
+      "options": [
+        "The server abruptly closes the TCP connection after sending packets.",
+        "The server sends data without applying any kind of encryption.",
+        "The server does not store the history or state of a client's requests.",
+        "The server natively prevents the use and storage of web cookies."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "In peer-to-peer (P2P) application architecture, how is communication organized?",
+      "options": [
+        "End systems communicate directly with each other, without a permanent server.",
+        "All network nodes depend exclusively on a single dedicated central datacenter.",
+        "Exchanging information requires the mediation of specific edge routers.",
+        "Only one centralized device manages the distribution of data to the network."
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What is the main purpose of the SMTP protocol in the email architecture?",
+      "options": [
+        "To retrieve emails stored on the recipient's server in folders (as a pull protocol).",
+        "To deliver and store email messages on the recipient's server (as a push protocol).",
+        "To trace packet routes in order to map message delay across the network.",
+        "To convert the recipient's name into its corresponding IP address."
+      ],
+      "correctAnswer": 1
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "id": "computer-networks3",
+  "name": "Computer Networks 3",
+  "description": "Protocols, architectures and layers of computer networks.",
+  "icon": "🌐",
+  "color": "blue",
+  "category": "Computing",
+  "tags": ["networks", "web", "dns", "http", "protocols"],
+  "hardness": "medium",
+  "seq": "3",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "Which of these media is known for being natively immune to electromagnetic interference?",
+      "options": [
+        "Terrestrial radio, since the signal travels freely through the air.",
+        "Coaxial cable, due to the strong shielding mesh in its jacket.",
+        "Optical fiber, since it carries data using pure light.",
+        "Twisted-pair copper that dissipates any electrical noise."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "Which of the following transport protocols would be ideal for video streaming where losses are acceptable but low latency is critical?",
+      "options": [
+        "TCP, since it offers ordered and error-free delivery.",
+        "UDP, since it avoids the delay of building slow connections.",
+        "DNS, due to its extremely high speed when discovering IPs.",
+        "Plain IP, since it guarantees fast delivery to the physical layer."
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Distinct from interception tactics, what exactly does a criminal do during an IP 'spoofing' attack?",
+      "options": [
+        "The unauthorized reading of confidential data inside the corporate network.",
+        "The deliberate overloading of servers seeking to take down external access.",
+        "The deletion of electronic signatures aiming to bypass access rules.",
+        "The injection of malicious packets into the network with a forged source address."
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "When using the Transport-layer Sockets API, what is mandatorily required besides the IP to deliver data to the correct process?",
+      "options": [
+        "The MAC address physically burned into that host.",
+        "The official encryption key that was sent to the local router.",
+        "The connection port number tied to that destination process.",
+        "The size in bits of the transport header contained in the segment."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "Which component of the DNS hierarchy is directly responsible for generic domains such as .com, .org, .net and country domains such as .br?",
+      "options": [
+        "Local DNS Servers",
+        "Root DNS Servers",
+        "Authoritative DNS Servers",
+        "TLD (Top-Level Domain) Servers"
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "What is the main operational characteristic of a 'sniffing' attack?",
+      "options": [
+        "The injection of packets into the network carrying a forged source address.",
+        "The silent and criminal reading of packets traveling across that network.",
+        "The intentional overloading of that resource to make it inoperative.",
+        "The secret alteration of digital signatures to corrupt data."
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "In the routine of packet switching, what essentially triggers the loss of a packet as it passes through the router?",
+      "options": [
+        "The arrival of a packet at a router whose output buffer is already full.",
+        "Collision of several electrical pulses traveling simultaneously on the cable.",
+        "The detection of cyber threats natively blocked by its switch.",
+        "The major incompatibility between the remote sender and the destination machine."
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What is the primary purpose of using the 'conditional GET' request?",
+      "options": [
+        "To guarantee the secure sending of passwords placed in the main body of the request.",
+        "To request only the header of a response, excluding the body of the document.",
+        "To completely replace an existing file on the server with the uploaded version.",
+        "To prevent objects from being sent if the browser already has a current version in cache."
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "In packet networks, what is the correct definition of 'propagation delay'?",
+      "options": [
+        "It is the time the router spends checking for errors",
+        "It is the time the packet waits stuck in the output queue",
+        "It is the time to push all the bits onto the physical link",
+        "It is the time the signal takes to travel the entire link"
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "What fundamentally characterizes the mechanical behavior of a non-persistent HTTP connection?",
+      "options": [
+        "The link closes its own connection right after transmitting a single object.",
+        "The host issues twenty-two parallel requests during a browsing session.",
+        "The central node ignores all encryption in order to act faster.",
+        "The system skips every mandatory handshake aiming for a smooth flow."
+      ],
+      "correctAnswer": 0
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+    "id": "web2",
+    "name": "Web 2",
+    "description": "About web technologies, hosting and HTTP.",
+    "icon": "🌐",
+    "color": "blue",
+    "category": "Programming",
+    "tags": ["web", "http"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What is web hosting?",
+        "options": [
+          "A service for creating websites",
+          "A protocol for transferring files",
+          "A service for storing and serving website files",
+          "A type of domain name"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is a domain name?",
+        "options": [
+          "A website's IP address",
+          "A website's physical location",
+          "A website's name or address on the internet",
+          "A type of web hosting service"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What does DNS stand for in the context of web hosting and domains?",
+        "options": [
+          "Domain Name System",
+          "Dynamic Network Server",
+          "Digital Name Service",
+          "Domain Name Service"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What HTTP status code indicates a 'Not Found' error in web development?",
+        "options": [
+          "404",
+          "200",
+          "500",
+          "301"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is an SSL certificate used for in web hosting?",
+        "options": [
+          "Storing website content",
+          "Encrypting data transmitted between the server and the client",
+          "Registering domain names",
+          "Designing website layouts"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is a Content Management System (CMS) commonly used for in website development?",
+        "options": [
+          "Registering domain names",
+          "Managing website content and structure",
+          "Securing web servers",
+          "Creating SSL certificates"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In an HTTP response, where is the HTML content typically located?",
+        "options": [
+          "In the response header",
+          "In the request URL",
+          "In the response body",
+          "In the request method"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What HTTP method is typically used when a client wants to retrieve data from a server without making any changes to the server's resources?",
+        "options": [
+          "GET",
+          "POST",
+          "PUT",
+          "DELETE"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which HTTP status code indicates a successful request in web development?",
+        "options": [
+          "200",
+          "404",
+          "500",
+          "301"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the primary purpose of HSTS (HTTP Strict Transport Security) in HTTPS?",
+        "options": [
+          "To speed up website loading times",
+          "To prevent mixed content on a webpage",
+          "To ensure all web traffic uses secure HTTPS connections",
+          "To manage website content and structure"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  }

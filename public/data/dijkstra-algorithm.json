@@ -1,0 +1,240 @@
+[
+  {
+    "id": "dijkstra-algorithm",
+    "name": "Algoritmo de Dijkstra",
+    "description": "Estudo do funcionamento, princípios e aplicação do Algoritmo de Dijkstra para encontrar caminhos de custo mínimo em grafos.",
+    "icon": "🗺️",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "graphs",
+      "shortest-path",
+      "greedy"
+    ],
+    "hardness": "medium",
+    "seq": "8",
+    "lang": "pt",
+    "questions": [
+      {
+        "question": "Qual é o objetivo principal do Algoritmo de Dijkstra?",
+        "options": [
+          "Encontrar a Árvore Geradora Mínima de um grafo.",
+          "Encontrar o caminho mais curto de um vértice de origem para todos os outros vértices em um grafo.",
+          "Percorrer todos os vértices de um grafo sem repetir nenhuma aresta (Caminho Euleriano).",
+          "Resolver o Problema do Caixeiro Viajante encontrando o ciclo hamiltoniano ótimo."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "A qual paradigma de projeto de algoritmos o Algoritmo de Dijkstra pertence?",
+        "options": [
+          "Divisão e Conquista.",
+          "Backtracking.",
+          "Programação Dinâmica.",
+          "Algoritmos Gulosos."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Qual é uma restrição fundamental para que o Algoritmo de Dijkstra funcione corretamente?",
+        "options": [
+          "O grafo não pode conter ciclos de nenhuma espécie.",
+          "O grafo deve ser obrigatoriamente um grafo direcionado.",
+          "As arestas do grafo não podem ter pesos negativos.",
+          "O grafo deve ser bipartido e não ponderado."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Como o algoritmo inicializa as estimativas de distância antes de começar a avaliar as arestas?",
+        "options": [
+          "A distância do vértice de origem é 0 e a de todos os outros vértices é inicializada como infinito (+∞).",
+          "Todos os vértices recebem uma estimativa de distância igual a 0.",
+          "A distância do vértice de origem é inicializada como infinito (+∞) e a dos demais como 0.",
+          "As distâncias são inicializadas com a média do peso de todas as arestas do grafo."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "No contexto do Algoritmo de Dijkstra, o que significa o processo de 'relaxamento' de uma aresta (u, v)?",
+        "options": [
+          "Aumentar o peso da aresta para evitar que ela seja usada prematuramente.",
+          "Remover temporariamente a aresta do grafo para verificar se ela afeta a conectividade.",
+          "Atualizar a menor distância conhecida até o vértice 'v', caso o caminho passando por 'u' seja mais curto do que o caminho atual para 'v'.",
+          "Marcar os vértices 'u' e 'v' como finalizados para que não sejam mais visitados."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Qual estrutura de dados é frequentemente utilizada para armazenar os vértices não visitados e tornar a extração do vértice com a menor distância mais eficiente?",
+        "options": [
+          "Pilha (Stack) LIFO.",
+          "Fila de Prioridade (usualmente implementada com um Min-Heap).",
+          "Árvore Binária de Busca desbalanceada.",
+          "Fila Simples (Queue) FIFO."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Por que o Algoritmo de Dijkstra garante a descoberta do caminho ótimo sem precisar retroceder (fazer backtracking)?",
+        "options": [
+          "Porque ele testa exaustivamente todas as permutações possíveis de caminhos antes de responder.",
+          "Porque ele funciona apenas em grafos com no máximo 10 vértices.",
+          "Porque, como não há pesos negativos, ao extrair o vértice com a menor distância atual, é matematicamente impossível encontrar um caminho mais curto para ele depois.",
+          "Porque ele memoriza todas as soluções de subproblemas em uma matriz, caracterizando Programação Dinâmica."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Após a execução, qual informação principal obtemos para cada vértice alcançável a partir da origem?",
+        "options": [
+          "A aresta de maior peso incidente em cada vértice.",
+          "A quantidade total de ciclos que passam por cada vértice.",
+          "A menor distância acumulada da origem até cada vértice.",
+          "A ordem topológica completa do grafo."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Se implementarmos o Algoritmo de Dijkstra usando uma Lista de Adjacência e um Min-Heap (Fila de Prioridade), qual é a sua complexidade de tempo típica?",
+        "options": [
+          "O(V^3)",
+          "O((V + E) log V), onde V é o número de vértices e E o número de arestas.",
+          "O(E + V)",
+          "O(2^V)"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "O que acontece se o Algoritmo de Dijkstra for executado em um grafo que contém um ciclo de pesos positivos?",
+        "options": [
+          "Ele funciona corretamente, pois caminhos mais curtos naturalmente evitarão ciclos com custo positivo extra.",
+          "Ele entrará em loop infinito tentando reduzir o peso do caminho ciclicamente.",
+          "O algoritmo falhará e retornará valores negativos incorretos.",
+          "Ele transformará o ciclo em uma linha reta, removendo arestas automaticamente."
+        ],
+        "correctAnswer": 0
+      }
+    ]
+  },
+  {
+    "id": "dijkstra-algorithm",
+    "name": "Dijkstra's Algorithm",
+    "description": "Study of the mechanics, principles, and application of Dijkstra's Algorithm to find minimum-cost paths in graphs.",
+    "icon": "🗺️",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "graphs",
+      "shortest-path",
+      "greedy"
+    ],
+    "hardness": "medium",
+    "seq": "8",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What is the primary objective of Dijkstra's Algorithm?",
+        "options": [
+          "To find the Minimum Spanning Tree of a graph.",
+          "To find the shortest path from a source vertex to all other vertices in a graph.",
+          "To traverse all vertices of a graph without repeating any edge (Eulerian Path).",
+          "To solve the Traveling Salesperson Problem by finding the optimal Hamiltonian cycle."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "To which algorithm design paradigm does Dijkstra's Algorithm belong?",
+        "options": [
+          "Divide and Conquer.",
+          "Backtracking.",
+          "Dynamic Programming.",
+          "Greedy Algorithms."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What is a fundamental constraint for Dijkstra's Algorithm to function correctly?",
+        "options": [
+          "The graph cannot contain cycles of any kind.",
+          "The graph must strictly be a directed graph.",
+          "The edges of the graph cannot have negative weights.",
+          "The graph must be bipartite and unweighted."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How does the algorithm initialize distance estimates before starting to evaluate edges?",
+        "options": [
+          "The distance of the source vertex is 0 and the distance of all other vertices is initialized as infinity (+∞).",
+          "All vertices receive a distance estimate equal to 0.",
+          "The distance of the source vertex is initialized as infinity (+∞) and the others as 0.",
+          "Distances are initialized with the average weight of all edges in the graph."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "In the context of Dijkstra's Algorithm, what does the process of 'relaxing' an edge (u, v) mean?",
+        "options": [
+          "Increasing the edge weight to prevent it from being used prematurely.",
+          "Temporarily removing the edge from the graph to check if it affects connectivity.",
+          "Updating the shortest known distance to vertex 'v' if the path through 'u' is shorter than the current path to 'v'.",
+          "Marking vertices 'u' and 'v' as finalized so they are no longer visited."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which data structure is frequently used to store unvisited vertices and make extracting the vertex with the minimum distance more efficient?",
+        "options": [
+          "LIFO Stack.",
+          "Priority Queue (usually implemented with a Min-Heap).",
+          "Unbalanced Binary Search Tree.",
+          "FIFO Simple Queue."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Why does Dijkstra's Algorithm guarantee finding the optimal path without needing to backtrack?",
+        "options": [
+          "Because it exhaustively tests all possible permutations of paths before responding.",
+          "Because it only works on graphs with at most 10 vertices.",
+          "Because, since there are no negative weights, when extracting the vertex with the current minimum distance, it is mathematically impossible to find a shorter path to it later.",
+          "Because it memorizes all solutions to subproblems in a matrix, characterizing Dynamic Programming."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "After execution, what primary information do we obtain for each reachable vertex from the source?",
+        "options": [
+          "The highest-weight edge incident on each vertex.",
+          "The total number of cycles passing through each vertex.",
+          "The shortest accumulated distance from the source to each vertex.",
+          "The complete topological ordering of the graph."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "If we implement Dijkstra's Algorithm using an Adjacency List and a Min-Heap (Priority Queue), what is its typical time complexity?",
+        "options": [
+          "O(V^3)",
+          "O((V + E) log V), where V is the number of vertices and E is the number of edges.",
+          "O(E + V)",
+          "O(2^V)"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What happens if Dijkstra's Algorithm is executed on a graph that contains a positive-weight cycle?",
+        "options": [
+          "It functions correctly, since shorter paths will naturally avoid cycles with extra positive cost.",
+          "It will enter an infinite loop trying to cyclically reduce the path weight.",
+          "The algorithm will fail and return incorrect negative values.",
+          "It will transform the cycle into a straight line, automatically removing edges."
+        ],
+        "correctAnswer": 0
+      }
+    ]
+  }
+]

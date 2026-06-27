@@ -1,0 +1,143 @@
+{
+  "id": "reliable-data-transfer",
+  "name": "Reliable Data Transfer Mechanisms",
+  "description": "Quiz on Pipelining, Go-Back-N (GBN) and Selective Repeat (SR).",
+  "icon": "🔄",
+  "color": "blue",
+  "category": "Computing",
+  "tags": ["networks", "pipelining", "gbn", "selective-repeat"],
+  "hardness": "medium",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "What fundamentally characterizes the behavior of pipelined protocols in a network?",
+      "options": [
+        "The sender transmits multiple packets continuously without waiting for their ACKs.",
+        "The switching router consolidates all received packets to optimize the local network.",
+        "The receiver halts the receive window whenever there is high delay on the data network.",
+        "The protocol forces early encryption of the bytes aiming for a failure-free flow."
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Comparing the performance of the protocols, what is the main advantage of Selective Repeat (SR) over Go-Back-N (GBN)?",
+      "options": [
+        "GBN requires fiber connections; SR works exclusively on wireless radio links.",
+        "GBN may end up retransmitting many packets for one error; SR repeats only the lost one.",
+        "GBN applies native congestion control; SR delegates that check to the local network.",
+        "GBN consumes less router memory; SR drops all packets that leave its route."
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "In the Go-Back-N (GBN) protocol architecture, how does the mechanism for sending and validating acknowledgements (ACK) natively work?",
+      "options": [
+        "GBN adopts individual ACKs, so that each datagram is evaluated in isolation.",
+        "GBN drops the ACK response, since it trusts the hardware timer of its local card.",
+        "GBN uses cumulative ACKs, where ACK(n) confirms the receipt of all packets up to n.",
+        "GBN sends negative ACKs (NAK) to confirm the success of flows in lossless networks."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "How does Selective Repeat (SR) react if it receives a packet out of the expected order for that ongoing connection?",
+      "options": [
+        "It instantly discards everything received out of the sequence of its connection.",
+        "It delegates the reassembly of the frames to the application layer to process later.",
+        "It sends a message back to the sender requiring the reset of that interface.",
+        "It stores the out-of-order packets in a buffer until the missing packet is read."
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "What is the main consequence and benefit of adopting Pipelining instead of the traditional 'stop-and-wait' model?",
+      "options": [
+        "To intensely reduce the volume of the transmitted flow in order to prevent congestion.",
+        "To dramatically increase link utilization compared with the stop-and-wait model.",
+        "To natively limit the number of bits in the IP header to speed up all routers.",
+        "To prevent any fragmentation of the packets within the routers in the global web core."
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "In an ideal Selective Repeat (SR) scenario, how does the sender host mechanically handle the management of its timers?",
+      "options": [
+        "The SR sender groups absolutely all datagrams using just a single unified clock.",
+        "The SR sender dispenses with timers due to the natural shielding of the physical layer.",
+        "The SR sender must logically keep an individual timer for each unACKed packet.",
+        "The SR sender hands the time calculation off to the edge switch to free up CPU."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "To avoid catastrophic problems where the receiver cannot distinguish new packets from duplicates in SR, what is the golden mathematical rule?",
+      "options": [
+        "The window size must be increased whenever the link shows intermittent noise.",
+        "The window size must always be exactly equal to the value of the propagation delay.",
+        "The window size completely ignores losses and grows without any mathematical limit.",
+        "The window size must be less than or equal to half of its sequence number space."
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "Implementing Pipelined sending requires some hardware and architecture costs. What is one of the main requirements added to the machine?",
+      "options": [
+        "The mandatory use of buffering on both the sender host and the receiver host.",
+        "The use of optical-fiber cabling to support the light speeds imposed.",
+        "The installation of cloud switches so that each packet is secretly analyzed.",
+        "Turning off the local clocks to avoid the sudden cancellation of a datagram."
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "In how the Go-Back-N protocol works, what will the sender do if it suffers a timeout on one of its local timers?",
+      "options": [
+        "The sender will start sending strictly only the packet that was not acknowledged.",
+        "The system will retransmit the faulty packet and also the following ones in that window.",
+        "The link will be closed by the router right after the connection time silently expires.",
+        "The receiving application automatically drops the video flow and warns all peers."
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "During Selective Repeat (SR), what will the sender logically do when it successfully receives the ACK of a packet that is within its current window?",
+      "options": [
+        "It ignores the content of the isolated ACK until a cumulative ACK covers the whole session.",
+        "It deletes all data held in the cache memory and dispatches an alert to the routers.",
+        "It marks that packet as received and advances the base of its window if it is the oldest.",
+        "It ends the three-way handshake, making room for the communication of other links."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "Besides buffering, what major change to the base structure of the protocols must be made to correctly support continuous sending via Pipelining?",
+      "options": [
+        "The IP addressing space will need to jump from the old 32 bits to the 128-bit range.",
+        "Packets need to adopt very short cryptographic numbers so as not to overload routers.",
+        "Local transport ports must be fixed solely around the low values.",
+        "The number of possible sequence numbers needs to be increased in the transmissions."
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "In the famous 'Selective Repeat Dilemma', which chronic problem occurs if the receive window is disproportionately large relative to the sequence numbers?",
+      "options": [
+        "The sender immediately consumes the entire bandwidth of the Internet access provider.",
+        "The receiver becomes unable to tell a new packet of the flow apart from a retransmission.",
+        "The packet switch's memory overloads due to the failure of its output ports.",
+        "The twisted-pair cable heats up absurdly, causing short circuits across the whole network."
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Within network architecture, at which layer do Pipelining mechanisms (such as Selective Repeat and Go-Back-N) operate, and what is their main objective?",
+      "options": [
+        "They operate at the Transport Layer to guarantee logical communication between processes.",
+        "They run at the Network Layer to ensure global routing between hosts.",
+        "They operate at the Link Layer to prevent physical bit collisions on the access cable.",
+        "They run at the Application Layer to define the exact semantics and message types."
+      ],
+      "correctAnswer": 0
+    }
+  ]
+}

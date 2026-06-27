@@ -1,0 +1,113 @@
+{
+    "id": "ip-addresses",
+    "name": "IP Addressing",
+    "description": "Quiz focused on the IPv4 and IPv6 protocols, logical address resolution, spoofing and ports.",
+    "icon": "🌐",
+    "color": "blue",
+    "category": "Computing",
+    "tags": ["networks", "ip", "dns"],
+    "hardness": "hard",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "In computer network infrastructure, what is the best definition of an IP address?",
+        "options": [
+          "It is a logical address that uniquely identifies a device within the network.",
+          "It is a unique physical address assigned at the factory to each access device.",
+          "It is an encrypted digital signature that securely validates its identity.",
+          "It is a communication port dedicated exclusively to application traffic."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the structural and visual standard universally adopted to represent the IPv4 protocol?",
+        "options": [
+          "It is made of four blocks of numbers, from zero to 255, separated by dots.",
+          "It is made of eight groups of hexadecimal characters separated by commas.",
+          "It is made of sixteen continuous alphanumeric blocks separated by single dashes.",
+          "It is made of 64-bit binary numbers split into three equally sized blocks."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "IPv6 emerged to expand the number of addresses available on the network. What is its main format?",
+        "options": [
+          "It has eight groups of hexadecimal characters strictly separated by dots.",
+          "It has eight groups of hexadecimal characters separated by colons.",
+          "It has four 32-bit numeric groups separated by straight dashes.",
+          "It has twelve groupings of alphanumeric text separated by slashes."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In a device's network configuration, what is the role played by the 'Default Gateway' address?",
+        "options": [
+          "It is the IP address of the local switch, restricted to delivering internal network frames.",
+          "It is the IP address of the web server that hosts your organization's main page.",
+          "It is the IP address of the router used to forward data between different networks.",
+          "It is the IP address of the DNS in charge of translating names into domains."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "There is a fundamental difference between the 'Unicast' and 'Multicast' modes. What characterizes a Multicast address?",
+        "options": [
+          "It identifies exclusively and directly a single device or interface.",
+          "It identifies an entire group of connected devices simultaneously.",
+          "It acts as a barrier that blocks unwanted external access.",
+          "It masks the sender's original IP to provide confidentiality of use."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How is the destination IP address contained in the header used by routers?",
+        "options": [
+          "It is read by the router in its table to map the best link for the exit.",
+          "It is changed by the router at each hop to prevent attacks from malicious networks.",
+          "It is fragmented by the router so it can be sent over several ports in parallel.",
+          "It is discarded at the edge right after the packet manages to reach its output link."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What perfectly characterizes an IP Spoofing attack?",
+        "options": [
+          "The injection of packets that carry a maliciously forged source IP address.",
+          "The silent reading of all IPs contained in the headers traveling over the link.",
+          "The intentional congestion of links by flooding the target IP with fake connections.",
+          "The interception of packets in transit to modify their transport ports."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "At the Transport layer (using Sockets), why is having only the destination IP address not enough to deliver a message?",
+        "options": [
+          "Because the IP points to the router, and the MAC is needed to reach the card.",
+          "Because the IP defines only the machine, and the port number is required for the socket.",
+          "Because the IP address is dynamic, requiring a constant TLS certificate for the route.",
+          "Because the IP changes a lot in switches, requiring a check at the end of the network."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In the Internet architecture, what is the exact functional and dependency relationship between the DNS application protocol and IP?",
+        "options": [
+          "DNS adds an extensive extra layer of encryption on top of the IP datagram.",
+          "DNS fragments IP packets to ensure that they all fit into the primary link.",
+          "DNS maps textual domain names to their IP addresses.",
+          "DNS replaces the use of conventional IP addresses to speed up routes."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Analyzing the historical limitations and the structure of the global routing architecture, it is correct to state that the IPv4 network protocol:",
+        "options": [
+          "Was built using a native architecture with 32-bit addressing fields.",
+          "Was standardized globally to allocate long and unique hexadecimal addresses.",
+          "Was abandoned at the end of the 1990s due to the complete fragility of routers.",
+          "Was designed to allow the handshake to be established in just a single direct path."
+        ],
+        "correctAnswer": 0
+      }
+    ]
+  }

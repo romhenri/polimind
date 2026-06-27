@@ -1,0 +1,114 @@
+{
+    "id": "udp",
+    "name": "UDP Transport Protocol",
+    "description": "Quiz focused exclusively on the UDP protocol, its characteristics, advantages and demultiplexing.",
+    "icon": "🌐",
+    "color": "blue",
+    "category": "Computing",
+    "tags": ["networks", "protocols"],
+    "hardness": "medium",
+    "seq": "5",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What is the essential nature of the transport service provided by the UDP protocol?",
+        "options": [
+          "It requires prior connection setup through the use of handshaking.",
+          "It is a best-effort service where packets may be lost.",
+          "It guarantees the perfectly sequential and ordered delivery of packets.",
+          "It operates at the network layer to find the fastest physical route."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "One of UDP's main mechanical characteristics is that it:",
+        "options": [
+          "Has rigorous flow control to avoid overloading the target nodes",
+          "Applies slow-start algorithms, testing the real capacity of the network",
+          "Lacks congestion control and sends data very fast",
+          "Limits the send rate whenever warnings are issued by the routers"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Due to its characteristics, which of these scenarios is the most suitable for the use of the UDP protocol?",
+        "options": [
+          "Banking systems where absolutely no loss can be tolerated.",
+          "Video streaming applications that tolerate losses and demand speed.",
+          "Legacy web systems based purely on the old HTTP 1 architecture.",
+          "Email access and sending processed under the SMTP protocol."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Regarding connection complexity, what perfectly characterizes the UDP sender and receiver?",
+        "options": [
+          "UDP has a very small header and keeps no state",
+          "UDP keeps complex records of open and active sessions",
+          "UDP requires the client to store the session's receive window",
+          "UDP uses sophisticated timers to define the timeouts"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the main purpose of the 'Checksum' field present in the UDP segment header?",
+        "options": [
+          "To strongly encrypt the entire payload to ensure confidentiality.",
+          "To detect the existence of flipped bits or errors in the received packet.",
+          "To prevent router congestion by delaying the output of new packets.",
+          "To digitally sign the packet, natively blocking IP spoofing tactics."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How does the connectionless demultiplexing process (UDP) direct the received segment to the correct socket?",
+        "options": [
+          "The host examines only the destination port contained in the received segment.",
+          "The receiver processes a four-tuple of information, crossing IPs and their ports.",
+          "The system requests that the sender report its physical route before transmission.",
+          "The core router reads the information recorded in the client's application layer."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "If an application needs highly reliable transfer but decides to run over UDP (such as HTTP/3 with QUIC), what must be done?",
+        "options": [
+          "The developer will need to swap the network cards, enabling the optical fibers",
+          "The network layer itself will be forced to recreate the lost datagram on the path.",
+          "This extra reliability will need to be built at the application layer.",
+          "The edge routers will implement flow control by holding back the packets."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Why is UDP considered capable of starting to send data faster than the TCP protocol?",
+        "options": [
+          "It halves the propagation delay time on the optical-fiber links.",
+          "It avoids buildup in the routers' output queues by compressing each datagram.",
+          "It eliminates the initial delay since it does not require a handshake to create the connection.",
+          "It transmits the packets at the speed of light, eliminating the processing time."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "The UDP Checksum is considered a relatively weak protection. For what structural mathematical reason does this happen?",
+        "options": [
+          "It fails and does not change if a compensating inversion of certain bits occurs.",
+          "It deletes the secret packet whenever a high queuing delay is identified.",
+          "It abruptly ends the transmission when it discovers routing failures on the channel.",
+          "It requires enormous CPU computing power, making its verification slow."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "When creating a UDP socket in network programming (using DatagramSocket), what does the system mandatorily require from the socket's creator?",
+        "options": [
+          "The dedicated reservation of all the bandwidth that the packet network can provide.",
+          "The definition of the alternative transport protocol focused on the session layer.",
+          "The immediate and explicit specification of the local port number of that host.",
+          "The performance of a three-way cryptographic handshake to shield the system."
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  }

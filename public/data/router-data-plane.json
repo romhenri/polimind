@@ -1,0 +1,113 @@
+{
+    "id": "router-data-plane",
+    "name": "Router Data Plane",
+    "description": "Quiz focusing on hardware architecture, switching, TCAM and queues in routers.",
+    "icon": "🌐",
+    "color": "blue",
+    "category": "Computing",
+    "tags": ["networks", "hardware"],
+    "hardness": "hard",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "In network architecture, what is the main difference between a router's Data Plane and Control Plane?",
+        "options": [
+          "The data plane establishes web sessions; the control plane checks bit errors on the wire.",
+          "The data plane acts locally in hardware; the control plane defines the end-to-end route.",
+          "The data plane runs globally in the cloud; the control plane acts physically on the cable.",
+          "The data plane encrypts the free payload; the control plane multiplexes the applications."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Analyzing the structure of a router's 'Input Port', which vital functions occur sequentially in it?",
+        "options": [
+          "Conversion of analog signals to fiber, data encryption and pure scheduling.",
+          "Generation of error-control packets, cloud routing and frame reassembly.",
+          "Execution of global routing protocols, malware blocking and port forwarding.",
+          "Physical line termination, link protocol and the lookup in the forwarding table."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What are the three main types of 'Switching Elements' used in the manufacture of routers?",
+        "options": [
+          "Switching via memory, via internal bus and via direct interconnection networks.",
+          "Switching via radio waves, via short coaxial cables and via local area networks.",
+          "Switching via global software, via clouds of servers and via long-haul networks.",
+          "Switching via multiplexing, via reserved circuits and via strictly web networks."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "In destination-based routing, how does the router use the 'Longest Prefix Matching' technique?",
+        "options": [
+          "The router forwards the packet to the physical port that holds the very long structural cable.",
+          "The switch selects the table entry with the greatest number of matching initial bits.",
+          "The switch always prefers to send datagrams that have a much longer IP header.",
+          "The router cancels all video packets whose physical propagation time is long."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the great practical advantage of using TCAM (Ternary Content Addressable Memory) in modern routers?",
+        "options": [
+          "To temporarily store the whole payload of the datagram to perform bit-level fragmentation.",
+          "To encrypt the routes end to end on the network, protecting the core against cyberattacks.",
+          "To retrieve the address in a single clock cycle, regardless of the total table size.",
+          "To negotiate the three-way handshake with the core servers in order to reserve light bandwidth."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What physically characterizes the severe problem known as Head-of-the-Line (HoL) blocking at the input ports?",
+        "options": [
+          "The datagram held at the front of the input queue prevents the packets right behind it from advancing.",
+          "The packet stored in the output port's memory locks the flow-control requests there.",
+          "The physical transmission link abruptly cuts off sending due to excessive power loss.",
+          "The fragmentation process within the network blocks immediate reassembly at the output terminal."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "For exactly what reason did first-generation routers (based on traditional computers with Switching via Memory) have slow, limited rates?",
+        "options": [
+          "The link suffers frequent thermal interruption, reducing the lifespan of the bare routing chip.",
+          "The CPU requires the prior handshake of the application layer, hugely increasing the link time.",
+          "The packet crosses the central bus twice, limiting the rate by the general memory bandwidth.",
+          "The switch encrypts each local datagram, immediately draining the routers' battery."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How does the 'Switching via Interconnection Network' architecture (such as the multistage crossbar) scale its parallelism internally?",
+        "options": [
+          "It requires building a secure tunnel to carry the data reliably right at the output.",
+          "It splits the datagram into fixed-size cells to switch them and reassemble them at the output.",
+          "It erases the parity bits of the IP header to violently speed up forwarding at the output.",
+          "It silently retransmits the frames in case of a collision physically detected at the output."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Under exactly what condition will a router necessarily suffer packet losses (buffer overflow) at its output ports?",
+        "options": [
+          "When the optical-fiber cable suffers serious damage that blocks the structural passage of frames.",
+          "When the hardware clock loses synchronization, requiring a reset of the main protocol.",
+          "When the fabric sends data at a rate that is higher than the transmission capacity of its link.",
+          "When the transport layer demands the immediate acknowledgement of a single multimedia flow."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "In managing the output-port queues, how do the FCFS (FIFO) and Round Robin scheduling policies work, respectively?",
+        "options": [
+          "FCFS reorders packets based on payload size, and Round Robin drops data that clogs networks.",
+          "FCFS actively prioritizes audio during traffic time, and Round Robin delegates forwarding to Ethernet.",
+          "FCFS halts connections that lose data on the link, and Round Robin applies the base encryption.",
+          "FCFS dispatches in the strict temporal order of arrival, and Round Robin alternates turns between the queues."
+        ],
+        "correctAnswer": 3
+      }
+    ]
+  }

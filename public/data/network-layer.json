@@ -1,0 +1,64 @@
+{
+    "id": "network-layer",
+    "name": "Network Layer",
+    "description": "Quiz focused on routing, forwarding, IP addressing (v4 and v6) and auxiliary protocols (NAT, DHCP).",
+    "icon": "🌐",
+    "color": "blue",
+    "category": "Computing",
+    "tags": ["networks", "web", "protocols"],
+    "hardness": "medium",
+    "lang": "en",
+    "type": "bool",
+    "questions": [
+      {
+        "question": "In the network layer, 'forwarding' refers to planning the end-to-end path across the whole network, while 'routing' is the physical transfer of the packet from the input port to the output port.",
+        "result": false,
+        "explain": "It is the reverse. Forwarding is the local, fast action of moving the packet from input to output within the router. Routing is the global logic of determining the complete route from source to destination."
+      },
+      {
+        "question": "In a router's architecture, the data plane is implemented in hardware and operates in nanoseconds, while the control plane runs in software and operates in milliseconds.",
+        "result": true,
+        "explain": "The data plane is responsible for ultra-fast forwarding (switching), while the control plane handles routing and management, requiring more processing."
+      },
+      {
+        "question": "The Internet's network architecture service model, known as 'best-effort', guarantees a minimum bandwidth and the strictly ordered delivery of packets.",
+        "result": false,
+        "explain": "The Internet's best-effort model offers no guarantees regarding delivery, ordering, timing (delay) or available bandwidth."
+      },
+      {
+        "question": "The scarcity of addresses on the Internet was the main motivator for the creation of IPv6, which expanded the addressing space from 32 bits (in IPv4) to 128 bits.",
+        "result": true,
+        "explain": "IPv4 offers about 4 billion addresses (32 bits), which became insufficient. IPv6 solves this by jumping to 128 bits."
+      },
+      {
+        "question": "To increase processing speed in routers, the IPv6 header eliminated features present in IPv4, such as error checking (checksum) and fragmentation along the path.",
+        "result": true,
+        "explain": "By removing the checksum and forbidding fragmentation by intermediate routers, IPv6 simplifies the header (fixed size of 40 bytes) and speeds up routing."
+      },
+      {
+        "question": "The NAT (Network Address Translation) protocol was created to allow several devices on a local network to use unique public IP addresses when accessing the external Internet.",
+        "result": false,
+        "explain": "NAT does the opposite: it allows dozens of devices with private IPs to share just a single public IP address when communicating with the external network."
+      },
+      {
+        "question": "In the transition between architectures, 'Tunneling' is a technique that allows an entire IPv6 datagram to be carried as the payload inside an IPv4 datagram.",
+        "result": true,
+        "explain": "Tunneling ('a packet inside a packet') is widely used to allow IPv6 data to travel through infrastructures that still only understand IPv4."
+      },
+      {
+        "question": "The DHCP (Dynamic Host Configuration Protocol) is the network-layer component responsible exclusively for translating textual domain names (e.g. ufpb.br) into numeric IP addresses.",
+        "result": false,
+        "explain": "What converts names into IP addresses is DNS. DHCP serves to dynamically allocate an IP, the default router address and the DNS server to a host."
+      },
+      {
+        "question": "To determine a packet's output link, routers use 'longest prefix matching', choosing the table entry that has the most bits identical to the destination IP.",
+        "result": true,
+        "explain": "When a destination IP address matches multiple entries in the routing table, the router forwards the packet through the port associated with the most specific (longest) match."
+      },
+      {
+        "question": "To know which internal machine to return a response from the Internet to, the NAT router changes the source port numbers of the outgoing packets and records that association in its translation table.",
+        "result": true,
+        "explain": "Since the public IP is unique for the whole network, the NAT router uses distinct port numbers to differentiate and demultiplex the active connections of each internal host."
+      }
+    ]
+  }

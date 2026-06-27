@@ -1,0 +1,64 @@
+{
+    "id": "transport-layer",
+    "name": "Transport Layer",
+    "description": "Quiz on control mechanisms, timing and transport protocols.",
+    "icon": "🌐",
+    "color": "blue",
+    "category": "Computing",
+    "tags": ["networks", "web", "protocols", "rtt"],
+    "hardness": "medium",
+    "lang": "en",
+    "type": "bool",
+    "questions": [
+      {
+        "question": "TCP's 'three-way handshake' serves to synchronize the initial sequence numbers and allocate buffers on both hosts.",
+        "result": true,
+        "explain": "The SYN, SYN-ACK and ACK process establishes the parameters needed for a reliable connection before data is sent."
+      },
+      {
+        "question": "UDP uses a 'sliding window' mechanism to avoid network congestion in video transmissions.",
+        "result": false,
+        "explain": "UDP has no native congestion-control or sliding-window mechanisms; it sends data at the rate the application provides."
+      },
+      {
+        "question": "The 'EstimatedRTT' value is an exponentially weighted moving average that gives more weight to the most recent RTT measurements.",
+        "result": true,
+        "explain": "This lets TCP adapt smoothly to current changes in network conditions."
+      },
+      {
+        "question": "The 'Checksum' field in the UDP header is mandatory on IPv4 networks to guarantee data integrity.",
+        "result": false,
+        "explain": "On IPv4, the UDP checksum is optional (although highly recommended and almost always used), unlike IPv6 where it is mandatory."
+      },
+      {
+        "question": "TCP's 'Congestion Control' differs from 'Flow Control' because the former focuses on the network's capacity and the latter on the receiver's capacity.",
+        "result": true,
+        "explain": "Flow control protects the destination's buffer; congestion control protects the routers and links along the path."
+      },
+      {
+        "question": "A 'Port' at the transport layer uniquely identifies a physical network interface (NIC) in the computer.",
+        "result": false,
+        "explain": "Ports identify processes or sockets within the operating system, not the physical hardware."
+      },
+      {
+        "question": "In TCP, the 'Fast Retransmit' technique allows a segment to be retransmitted after receiving three duplicate ACKs, without waiting for the timer to expire.",
+        "result": true,
+        "explain": "This speeds up the recovery of isolated packet losses on high-speed connections."
+      },
+      {
+        "question": "If a TCP host's receive buffer becomes completely full, it will advertise an 'rwnd = 0', forcing the sender to stop sending data.",
+        "result": true,
+        "explain": "This prevents the sender from continuing to send data that would necessarily be dropped by the receiver."
+      },
+      {
+        "question": "The TCP protocol guarantees that, if a bit is altered during transmission, it will be corrected automatically without the need for retransmission.",
+        "result": false,
+        "explain": "TCP detects the error via checksum and drops the segment, requesting retransmission. It does not have Forward Error Correction (FEC) to correct bits."
+      },
+      {
+        "question": "The UDP protocol is immune to denial-of-service (DoS) attacks because it keeps no connection state on the server.",
+        "result": false,
+        "explain": "Although it keeps no state, UDP is frequently used in amplification and flooding attacks; the lack of state does not make it immune."
+      }
+    ]
+  }

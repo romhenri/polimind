@@ -1,0 +1,113 @@
+{
+    "id": "web3",
+    "name": "Web 3",
+    "description": "About web technologies, hosting and HTTP.",
+    "icon": "🌐",
+    "color": "blue",
+    "category": "Programming",
+    "tags": ["web", "http"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What does CRUD stand for in web development?",
+        "options": [
+          "Create, Read, Update, Destroy",
+          "Copy, Rename, Update, Delete",
+          "Compute, Render, Upload, Download",
+          "Connect, Route, Use, Debug"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which HTTP method is typically used for deleting a resource?",
+        "options": [
+          "GET",
+          "POST",
+          "PUT",
+          "DELETE"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What role by the default do browsers play in the HTTP protocol?",
+        "options": [
+          "Browsers are responsible for generating HTTP requests",
+          "Browsers interpret and display HTTP responses",
+          "Browsers establish server connections using HTTP",
+          "Browsers authenticate users for HTTP requests"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In HTTP, what status code indicates a successful request?",
+        "options": [
+          "200",
+          "404",
+          "500",
+          "301"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which HTTP method is typically used for retrieving data?",
+        "options": [
+          "POST",
+          "PUT",
+          "GET",
+          "DELETE"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the purpose of cookies in web browsing?",
+        "options": [
+          "To store session information on the client side",
+          "To encrypt data transmitted over HTTP",
+          "To prevent cross-site scripting attacks",
+          "To establish secure server connections"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which HTTP header is commonly used for caching?",
+        "options": [
+          "Cache-Control",
+          "Content-Type",
+          "Authorization",
+          "User-Agent"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the purpose of the 'User-Agent' header in HTTP requests?",
+        "options": [
+          "To identify the user's IP address",
+          "To specify the browser and operating system making the request",
+          "To authenticate the user for access control",
+          "To specify the language preference of the user"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the purpose of a 'favicon' in web development?",
+        "options": [
+          "To optimize website performance",
+          "To indicate the website's primary language",
+          "To provide a small icon for the website in browser tabs and bookmarks",
+          "To secure user data transmitted over the network"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which HTTP method is typically used for updating existing data?",
+        "options": [
+          "POST",
+          "PUT",
+          "GET",
+          "DELETE"
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  }

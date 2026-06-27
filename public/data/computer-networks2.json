@@ -1,0 +1,114 @@
+{
+  "id": "computer-networks2",
+  "name": "Computer Networks 2",
+  "description": "Protocols, architectures and layers of computer networks.",
+  "icon": "🌐",
+  "color": "blue",
+  "category": "Computing",
+  "tags": ["networks", "web", "dns", "http", "protocols"],
+  "hardness": "medium",
+  "seq": "2",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "In the DNS system, which server is the official last resort if the others cannot resolve a name?",
+      "options": [
+        "The root name server.",
+        "The local DNS server.",
+        "The authoritative server.",
+        "The TLD-level server."
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Which HTTP method sends the user's input to the server by placing the data in the body of the request?",
+      "options": [
+        "GET method.",
+        "PUT method.",
+        "POST method.",
+        "HEAD method."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "In the TCP protocol, what is the 'handshake' required before data transfer?",
+      "options": [
+        "The prior setup of the connection between the client and server processes.",
+        "The immediate transmission of data using the destination IP address and port.",
+        "The lookup in the routing table to find the shortest physical path.",
+        "The abrupt termination of communication after sending the first data packet."
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What is a striking characteristic of the Peer-to-Peer (P2P) architecture for network applications?",
+      "options": [
+        "The requirement of centralized routing.",
+        "The exclusive use of the UDP network protocol.",
+        "The absence of an always-on server.",
+        "The restriction of its reach to the local network (LAN)."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "To correctly address a process running on a host, what is needed in addition to the IP address?",
+      "options": [
+        "The port number associated with the process.",
+        "The MAC address of the sending host's card.",
+        "The encryption key for network access.",
+        "The domain name registered through DNS."
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "HTTP is a 'stateless' protocol. How do web servers usually work around this to identify users and maintain sessions?",
+      "options": [
+        "By keeping the TCP connection always open.",
+        "By switching from the TCP protocol to UDP.",
+        "By inserting cookies in the HTTP headers.",
+        "By requiring authentication at the network level."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "What is the main goal of using Web Cache servers in an institutional local network?",
+      "options": [
+        "To encrypt all network connections.",
+        "To replace the network's local DNS service.",
+        "To guarantee immunity from cyberattacks.",
+        "To reduce the response time to the client."
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "In file distribution via BitTorrent, what is the main function of the component called the 'tracker'?",
+      "options": [
+        "To store the official, complete copy of the file.",
+        "To track and report which peers are in the torrent.",
+        "To limit a client's TCP connection rates.",
+        "To hide the client's IP through encryption."
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "In network security, what characterizes a Denial of Service (DoS) attack?",
+      "options": [
+        "The silent interception of packets on the network aiming to steal passwords.",
+        "The malicious injection of packets containing a fake source IP address.",
+        "The intentional overloading of a network resource to make it unavailable.",
+        "The alteration of digital signatures to compromise data integrity."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "Which protocol requires the sender to explicitly attach the destination IP and port to every packet sent, because it has no prior connection?",
+      "options": [
+        "The TCP protocol (Transmission Control Protocol).",
+        "The UDP protocol (User Datagram Protocol).",
+        "The IP protocol (Internet Protocol v4 or v6).",
+        "The TLS protocol (Transport Layer Security)."
+      ],
+      "correctAnswer": 1
+    }
+  ]
+}

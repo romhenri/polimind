@@ -1,0 +1,113 @@
+{
+    "id": "web1",
+    "name": "Web 1",
+    "description": "About web technologies, hosting and HTTP.",
+    "icon": "🌐",
+    "color": "blue",
+    "category": "Programming",
+    "tags": ["web", "http"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What does HTML stand for?",
+        "options": [
+          "Hyper Text Markup Language",
+          "Highly Technical Modern Language",
+          "Hyperlink and Text Markup Language",
+          "Home Tool Markup Language"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which scripting language is often used for front-end web development?",
+        "options": [
+          "Python",
+          "Java",
+          "JavaScript",
+          "Ruby"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What protocol is used to transfer web pages from a web server to a web browser?",
+        "options": [
+          "HTTP",
+          "FTP",
+          "SMTP",
+          "TCP"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What does the acronym 'URL' stand for in the context of the web?",
+        "options": [
+          "Universal Resource Locator",
+          "Uniform Resource Locator",
+          "Unified Resource Link",
+          "Unique Resource Locator"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What does CSS stand for?",
+        "options": [
+          "Cascading Style Sheet",
+          "Computer Style Sheet",
+          "Creative Style Sheet",
+          "Colorful Style Sheet"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the primary purpose of a web server?",
+        "options": [
+          "Storing web pages",
+          "Rendering web pages",
+          "Serving web pages to clients",
+          "Designing web pages"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which markup language is used to structure content on the web?",
+        "options": [
+          "CSS",
+          "JavaScript",
+          "HTML",
+          "PHP"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which organization or consortium is responsible for setting web standards and specifications?",
+        "options": [
+          "World Wide Web Consortium (W3C)",
+          "Internet Engineering Task Force (IETF)",
+          "Web Standards Organization (WSO)",
+          "Internet Standards Institute (ISI)"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which of the following is used to make a website responsive to different screen sizes?",
+        "options": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "PHP"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What does HTTP stand for?",
+        "options": [
+          "Hypertext Transfer Protocol",
+          "Hypertext Transmission Protocol",
+          "Hypertext Technical Transfer Protocol",
+          "Hypertext Textual Transmission Protocol"
+        ],
+        "correctAnswer": 0
+      }
+    ]
+  }

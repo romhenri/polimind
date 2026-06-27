@@ -1,0 +1,114 @@
+{
+    "id": "tcp",
+    "name": "TCP Transport Protocol",
+    "description": "In-depth quiz on the TCP protocol: reliability, flow control, congestion control and handshaking.",
+    "icon": "🌐",
+    "color": "blue",
+    "category": "Computing",
+    "tags": ["networks", "protocols"],
+    "hardness": "medium",
+    "seq": "4",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "Unlike UDP, what is the nature of the delivery service offered by a TCP connection?",
+        "options": [
+          "It transfers data without prior setup, dispatching packets to the destination.",
+          "It guarantees the delivery of a continuous, ordered and reliable byte stream.",
+          "It delegates to the network layer the vital task of correcting corrupted data.",
+          "It prioritizes minimal network latency by dropping all old packets."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "TCP implements rigorous Flow Control using the 'rwnd' (receive window) field. What is its function?",
+        "options": [
+          "It natively prevents core routers from losing crucial packets along the route.",
+          "It requires the speed of the physical cable to slow down to match the card's capacity.",
+          "It ensures that high-traffic applications do not overload the core CPUs.",
+          "It prevents the sender's send rate from overflowing the receiver's buffer."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "How do Sequence Numbers operate within the TCP segment header?",
+        "options": [
+          "They report the identifier of the logical port allocated to that process.",
+          "They represent the numbering of the first data byte contained in the segment.",
+          "They sequentially indicate the total number of packets already transmitted.",
+          "They define the processing priority of the packet within the IP router."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What does the TCP protocol do if it receives 3 duplicate ACKs (Fast Retransmit)?",
+        "options": [
+          "It promptly retransmits the suspect packet even before suffering the timeout.",
+          "It clears its congestion window and restarts the communication from scratch.",
+          "It immediately triggers slow start, sending only a single MSS.",
+          "It sends a stop signal to the router to relieve the bottlenecks along the path."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "In TCP's Slow Start mechanism, how does the Congestion Window (cwnd) behave initially?",
+        "options": [
+          "It expands its window linearly, adding one segment per RTT cycle.",
+          "It restricts the speed to a single byte in order to empty out routers.",
+          "It doubles the size of its congestion window every elapsed RTT.",
+          "It demands that the client application limit the generation of multimedia flows."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Why does TCP's classic congestion control adopt the behavior known as AIMD ('sawtooth')?",
+        "options": [
+          "To encrypt the transferred flow by scrambling the total sizes of the packets.",
+          "To be able to reserve in advance all the bandwidth on the nodes along the path.",
+          "To probe the network channel, adjusting the rate until it finds its loss limit.",
+          "To avoid hardware interrupts caused by the high processing of data."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Why does creating a TCP connection require the '3-way handshake' instead of a simple two-message exchange?",
+        "options": [
+          "Because the IP protocol demands this mandatory step in its own architecture.",
+          "Because the link layer requires double checks against data collision on the wire.",
+          "Because it is necessary to transfer the security keys before the data begins.",
+          "Because delayed or reordered messages could create faulty connections on the host."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What is the exact semantics of the 'Acknowledgement Number' field sent by the TCP receiver?",
+        "options": [
+          "It carries the sequence number of the next byte the receiver expects to receive.",
+          "It contains the total count of all datagrams already dropped during routing.",
+          "It signals the total number of segments successfully sent in the whole session.",
+          "It records the exact value of the propagation delay measured in the current transmission."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Considering the concept of fairness, is TCP considered a 'fair' protocol for dividing bandwidth at a bottleneck?",
+        "options": [
+          "No, because the protocol always favors audio and video traffic over textual traffic.",
+          "Yes, as long as the competing connections present the same RTT delay on the network.",
+          "Yes, since the edge routers block flows that exceed their quota.",
+          "No, because newer connections receive absolute priority in the output buffers."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How does TCP handle the network's delay variations when defining its Timeout (EstimatedRTT)?",
+        "options": [
+          "It adopts solely and strictly the exact value of the last RTT just measured.",
+          "It delegates this complex calculation to the IP protocol, which sees the global path.",
+          "It uses the Exponentially Weighted Moving Average to avoid abrupt fluctuations.",
+          "It defines the time limit by mathematically dividing the size of a document."
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  }
