@@ -1,0 +1,63 @@
+{
+    "id": "calculus-integrals",
+    "name": "Integrals",
+    "description": "Test your knowledge of immediate integrals and area calculation.",
+    "icon": "∫",
+    "color": "orange",
+    "category": "Math",
+    "tags": ["calculus", "math", "integration"],
+    "hardness": "medium",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What is the indefinite integral of the constant function f(x) = k?",
+        "options": ["k", "0", "kx + C", "k + C"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "By the power rule, what is the integral of f(x) = x^n (for n ≠ -1)?",
+        "options": ["x^n / n + C", "x^{n+1} / (n+1) + C", "n * x^{n-1} + C", "x^{n-1} / (n-1) + C"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the integral of f(x) = 1/x for x > 0?",
+        "options": ["ln(x) + C", "e^x + C", "-1/x^2 + C", "x + C"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the integral of the function f(x) = sin(x)?",
+        "options": ["cos(x) + C", "tan(x) + C", "sec(x) + C", "-cos(x) + C"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What is the value of the definite integral of f(x) = x over the interval [0, 2]?",
+        "options": ["4", "0", "2", "1"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the integral of the exponential function f(x) = e^x?",
+        "options": ["xe^{x-1} + C", "ln(x) + C", "e^{x+1} + C", "e^x + C"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What does the Fundamental Theorem of Calculus state about the integral of f(x) on [a, b]?",
+        "options": ["It is F(b) - F(a)", "It is F(a) + F(b)", "It is f'(b) - f'(a)", "It is f(b) / f(a)"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the integral of f(x) = sec^2(x)?",
+        "options": ["sin(x) + C", "tan(x) + C", "cos(x) + C", "cot(x) + C"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the integral of f(x) = 1 / (1 + x^2)?",
+        "options": ["ln(1+x^2) + C", "arcsin(x) + C", "arctan(x) + C", "tan(x) + C"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Geometrically, what does the definite integral of f(x) ≥ 0 represent?",
+        "options": ["The slope of the line", "The volume of a cube", "The length of the x-axis", "The area under the curve"],
+        "correctAnswer": 3
+      }
+    ]
+  }

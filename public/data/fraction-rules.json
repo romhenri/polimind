@@ -1,0 +1,58 @@
+{
+  "id": "fraction-rules",
+  "name": "Fraction Rules",
+  "description": "Negative powers, addition, product, division (inverse), and simplification — with small numbers.",
+  "icon": "➗",
+  "color": "orange",
+  "category": "Math",
+  "tags": ["fractions", "arithmetic", "algebra", "math"],
+  "hardness": "easy",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "What is the value of (1/2)^(-2)?",
+      "options": ["4", "1/4", "2", "-2"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Calculate 1/2 + 1/4.",
+      "options": ["3/4", "2/6", "2/4", "1/3"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Calculate (1/2) × (1/3).",
+      "options": ["1/6", "1/5", "2/3", "1/2"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Calculate (1/2) ÷ (1/4).",
+      "options": ["2", "1/2", "4", "1/8"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Simplify the fraction 4/6.",
+      "options": ["2/3", "3/2", "1/3", "2/6"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Which expression is equivalent to (a/b)^(-n) with a, b ≠ 0?",
+      "options": ["(b/a)^n", "(a/b)^n", "-(a/b)^n", "n/(a·b)"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Calculate 1/2 − 1/3.",
+      "options": ["1/6", "1/12", "1/5", "0"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Dividing by a nonzero fraction is equivalent to…",
+      "options": [
+        "multiplying by its inverse (reciprocal)",
+        "multiplying only by the numerator",
+        "subtracting that fraction from the numerator",
+        "squaring the numerator and denominator"
+      ],
+      "correctAnswer": 0
+    }
+  ]
+}

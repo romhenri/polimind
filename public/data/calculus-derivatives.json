@@ -1,0 +1,63 @@
+{
+    "id": "calculus-derivatives",
+    "name": "Derivatives",
+    "description": "Test your knowledge of differentiation rules, powers, and trigonometric functions.",
+    "icon": "🧮",
+    "color": "orange",
+    "category": "Math",
+    "tags": ["calculus", "math", "derivatives"],
+    "hardness": "medium",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What is the derivative of the constant function f(x) = 42?",
+        "options": ["f'(x) = 42", "f'(x) = 1", "f'(x) = 0", "f'(x) = x"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Using the power rule, what is the derivative of f(x) = x^5?",
+        "options": ["5x^4", "4x^5", "5x^6", "x^4"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the derivative of the function f(x) = sin(x)?",
+        "options": ["-cos(x)", "cos(x)", "tan(x)", "sin(x)"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the derivative of the natural exponential function f(x) = e^x?",
+        "options": ["xe^{x-1}", "ln(x)", "1", "e^x"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What is the derivative of f(x) = x^2 * cos(x) using the product rule?",
+        "options": [
+          "2x * cos(x) - x^2 * sin(x)",
+          "2x * sin(x)",
+          "2x * cos(x) + x^2 * sin(x)",
+          "-2x * sin(x)"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the derivative of f(x) = ln(x) for x > 0?",
+        "options": ["e^x", "1/x", "1/ln(x)", "1"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "By the chain rule, what is the derivative of f(x) = (3x^2 + 1)^4?",
+        "options": [
+          "4(3x^2 + 1)^3",
+          "12x(3x^2 + 1)^3",
+          "24x(3x^2 + 1)^3",
+          "6x(3x^2 + 1)^4"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "If the position is s(t) = t^3 - 6t^2, what is the acceleration (s'') at time t?",
+        "options": ["3t^2 - 12t", "6t - 12", "6t", "t^2 - 6"],
+        "correctAnswer": 1
+      }
+    ]
+  }

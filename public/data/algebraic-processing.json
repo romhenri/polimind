@@ -1,0 +1,73 @@
+{
+    "id": "algebraic-processing",
+    "name": "Algebraic Processing",
+    "description": "Master the manipulation of powers, roots, and fractions essential for Calculus.",
+    "icon": "⚡",
+    "color": "orange",
+    "category": "Math",
+    "tags": ["calculus", "algebra", "math"],
+    "hardness": "medium",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "How can we rewrite the expression 1/x³ using a negative exponent?",
+        "options": ["x³", "x^{-3}", "3x", "x^{1/3}"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the power form of the square root of x, that is, √x?",
+        "options": ["x^2", "x^{-2}", "x^{1/2}", "x^{2/1}"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How do you rewrite the cube root of x² (∛x²)?",
+        "options": ["x^{2/3}", "x^{3/2}", "x^6", "x^{-2/3}"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "How do you simplify the expression (x⁵) / (x²)?",
+        "options": ["x^{2.5}", "x³", "x⁷", "x^{10}"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "The expression (x + y) / z can be split into which two fractions?",
+        "options": ["x/z + y/z", "x/y + x/z", "xz + yz", "1/z + (x+y)"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the value of x⁻¹ when x = 5/2?",
+        "options": ["-5/2", "2/5", "-2/5", "5/2"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How do you transform the expression 5 / (2x⁴) so that x is in the numerator?",
+        "options": ["(5/2)x^4", "10x^{-4}", "2.5x^{-4}", "5x^{-2}"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the result of x² · x³?",
+        "options": ["x⁶", "x^5", "2x^5", "x^{2/3}"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Simplify the complex fraction (1/x) / x:",
+        "options": ["1", "x²", "1/x²", "x"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How do you rewrite the sum (x² + x) / x to make integration easier?",
+        "options": ["x + 1", "x² + 1", "2x", "x + x"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "How is the expression 1 / √x written as a single power?",
+        "options": ["x^{1/2}", "x^{-1/2}", "x^{-2}", "√x^{-1}"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In the rules of fractions, what is equivalent to a / (b/c)?",
+        "options": ["(a/b) / c", "(a·c) / b", "a / (b·c)", "(a·b) / c"],
+        "correctAnswer": 1
+      }
+    ]
+  }
