@@ -1,0 +1,113 @@
+{
+    "id": "wwi",
+    "name": "World War I",
+    "description": "Challenge your knowledge about the Great War.",
+    "icon": "🎖️",
+    "color": "green",
+    "category": "History",
+    "tags": ["world war", "europe"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What event is widely considered the immediate trigger for WWI?",
+        "options": [
+          "The signing of the Treaty of Versailles",
+          "The assassination of Archduke Franz Ferdinand",
+          "The German invasion of neutral Belgium",
+          "The sinking of the British ship Lusitania"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In which year did World War I officially begin?",
+        "options": [
+          "1912",
+          "1918",
+          "1914",
+          "1939"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which of these nations was NOT part of the Triple Entente?",
+        "options": [
+          "France",
+          "Russian Empire",
+          "United Kingdom",
+          "Ottoman Empire"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What was the dominant style of warfare on the Western Front?",
+        "options": [
+          "Trench warfare",
+          "Blitzkrieg tactics",
+          "Guerrilla fighting",
+          "Naval blockades"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What was the name of the German plan to avoid a two-front war?",
+        "options": [
+          "The Barbarossa Plan",
+          "The Schlieffen Plan",
+          "The Hindenburg Line",
+          "The Bismarck Strategy"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which country exited the war in 1917 following an internal revolution?",
+        "options": [
+          "The Russian Empire",
+          "The Austro-Hungarian Empire",
+          "The Kingdom of Italy",
+          "The German Empire"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What new technology was first used in combat during World War I?",
+        "options": [
+          "Nuclear weapons",
+          "Ballistic missiles",
+          "Radar systems",
+          "Armored tanks"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What was 'No Man's Land' during the conflict?",
+        "options": [
+          "The territory between opposing trench lines",
+          "The neutral sea zones near the Americas",
+          "The underground tunnels used for storage",
+          "The medical camps behind the front lines"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "In what year did the United States officially enter the war?",
+        "options": [
+          "1914",
+          "1917",
+          "1916",
+          "1918"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which treaty officially ended the war between Germany and the Allies?",
+        "options": [
+          "The Treaty of Paris",
+          "The Treaty of London",
+          "The Treaty of Versailles",
+          "The Treaty of Trianon"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  }

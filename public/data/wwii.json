@@ -1,0 +1,63 @@
+{
+    "id": "wwii",
+    "name": "World War II",
+    "description": "World War II questions.",
+    "icon": "🎖️",
+    "color": "green",
+    "category": "History",
+    "tags": ["world war", "eua"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "When did World War II start?",
+        "options": ["1939", "1941", "1945", "1933"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which country was not part of the Axis Powers during World War II?",
+        "options": ["Germany", "Japan", "Italy", "Soviet Union"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What was the code name for the Allied invasion of Normandy on June 6, 1944?",
+        "options": ["Operation Overlord", "Operation Market Garden", "Operation Barbarossa", "Operation Neptune"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which event led to the United States entering World War II?",
+        "options": ["Pearl Harbor attack", "D-Day invasion", "Atomic bombings of Hiroshima and Nagasaki", "Battle of Stalingrad"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Who was the leader of Nazi Germany during World War II?",
+        "options": ["Adolf Hitler", "Joseph Stalin", "Benito Mussolini", "Winston Churchill"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What was the Manhattan Project?",
+        "options": ["A top-secret U.S. project to develop the atomic bomb", "A plan to rebuild post-war Europe", "An Allied invasion of Italy", "A code-breaking operation"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which city in Japan was targeted by the atomic bomb on August 6, 1945?",
+        "options": ["Hiroshima", "Nagasaki", "Tokyo", "Osaka"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What was the name of the aircraft that dropped the atomic bomb on Hiroshima?",
+        "options": ["Memphis Belle", "Bockscar", "Enola Gay", "Big Stink"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which country was invaded by Nazi Germany, leading to the start of World War II?",
+        "options": ["Poland", "France", "Soviet Union", "Austria"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Who was the Prime Minister of the United Kingdom during most of World War II?",
+        "options": ["David Lloyd George", "Neville Chamberlain", "Winston Churchill", "Stanley Baldwin"],
+        "correctAnswer": 2
+      }
+    ]
+  }

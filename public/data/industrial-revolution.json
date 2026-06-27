@@ -1,0 +1,126 @@
+{
+  "id": "industrial-revolution",
+  "name": "Industrial Revolution",
+  "description": "Explore the profound changes that reshaped society, economy, and technology during the Industrial Revolution.",
+  "color": "gray",
+  "category": "History",
+  "tags": [
+    "revolution",
+    "economy",
+    "society"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "Which major invention was crucial for the development of factories during the First Industrial Revolution?",
+      "options": [
+        "Printing Press",
+        "Steam Engine",
+        "Automobile",
+        "Telephone"
+      ],
+      "correctAnswer": 1,
+      "explain": "The steam engine powered machinery and transportation, making large-scale factory production possible."
+    },
+    {
+      "question": "A key characteristic of the early Industrial Revolution was the shift from hand production methods to what?",
+      "options": [
+        "Agricultural farming",
+        "Machine-based manufacturing",
+        "Service-oriented economy",
+        "Artisan workshops"
+      ],
+      "correctAnswer": 1,
+      "explain": "The Industrial Revolution marked a fundamental transition to production using machines in factories."
+    },
+    {
+      "question": "What was a significant social consequence of the rapid growth of factories and industrial cities?",
+      "options": [
+        "Improved living conditions for all",
+        "Decline of urban areas",
+        "Emergence of a new working class and urban slums",
+        "Increased self-sufficiency in rural areas"
+      ],
+      "correctAnswer": 2,
+      "explain": "Rapid urbanization led to the formation of a large industrial working class often living in poor conditions."
+    },
+    {
+      "question": "The invention of the power loom primarily impacted which industry?",
+      "options": [
+        "Steel production",
+        "Textile industry",
+        "Coal mining",
+        "Railway construction"
+      ],
+      "correctAnswer": 1,
+      "explain": "The power loom revolutionized the production of cloth, making textiles a leading industry."
+    },
+    {
+      "question": "What energy source became dominant during the First Industrial Revolution, replacing wood and water power?",
+      "options": [
+        "Solar energy",
+        "Natural gas",
+        "Coal",
+        "Nuclear power"
+      ],
+      "correctAnswer": 2,
+      "explain": "Coal was the primary fuel for steam engines and industrial processes during this period."
+    },
+    {
+      "question": "Which economic system gained prominence during the Industrial Revolution, emphasizing private ownership and free markets?",
+      "options": [
+        "Socialism",
+        "Communism",
+        "Feudalism",
+        "Capitalism"
+      ],
+      "correctAnswer": 3,
+      "explain": "The Industrial Revolution fostered the growth of capitalist economies with private enterprise and market competition."
+    },
+    {
+      "question": "The development of new transportation methods like railways and steamships had what primary effect?",
+      "options": [
+        "Reduced need for trade",
+        "Slower movement of goods",
+        "Faster and cheaper movement of goods and people",
+        "Increased reliance on local production"
+      ],
+      "correctAnswer": 2,
+      "explain": "Innovations in transport drastically improved efficiency in moving raw materials and finished products."
+    },
+    {
+      "question": "What was a significant environmental impact of the Industrial Revolution?",
+      "options": [
+        "Decreased air pollution",
+        "Improved water quality",
+        "Extensive deforestation and increased atmospheric pollution",
+        "Enhanced biodiversity"
+      ],
+      "correctAnswer": 2,
+      "explain": "Industrialization led to increased burning of fossil fuels and resource extraction, causing environmental degradation."
+    },
+    {
+      "question": "The factory system led to a new organization of labor characterized by:",
+      "options": [
+        "Individual craftsmanship",
+        "Decentralized production",
+        "Specialization of tasks and division of labor",
+        "Home-based work"
+      ],
+      "correctAnswer": 2,
+      "explain": "Factories organized workers into specialized roles, increasing efficiency through division of labor."
+    },
+    {
+      "question": "Which of the following describes a key technological innovation of the Second Industrial Revolution, distinct from the first?",
+      "options": [
+        "Water wheel",
+        "Steam locomotive",
+        "Mass production using assembly lines",
+        "Spinning jenny"
+      ],
+      "correctAnswer": 2,
+      "explain": "The Second Industrial Revolution saw advancements like electricity and the adoption of mass production techniques."
+    }
+  ]
+}

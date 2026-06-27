@@ -1,0 +1,126 @@
+{
+  "id": "ancient-greece",
+  "name": "Ancient Greece",
+  "description": "Explore the rich world of Ancient Greek culture, from philosophy and mythology to art and theatre, in this engaging quiz.",
+  "color": "blue",
+  "category": "History",
+  "tags": [
+    "culture",
+    "mythology",
+    "philosophy"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "Who is considered the \"father of Western philosophy\" often associated with the Socratic method?",
+      "options": [
+        "Plato",
+        "Aristotle",
+        "Epicurus",
+        "Socrates"
+      ],
+      "correctAnswer": 3,
+      "explain": "Socrates is widely recognized for laying the foundation of Western philosophy through his method of questioning."
+    },
+    {
+      "question": "What is the name of the king of the gods in Greek mythology, ruling from Mount Olympus?",
+      "options": [
+        "Hades",
+        "Zeus",
+        "Apollo",
+        "Poseidon"
+      ],
+      "correctAnswer": 1,
+      "explain": "Zeus was the king of the Olympian gods and the god of the sky and thunder."
+    },
+    {
+      "question": "What were the two main types of Greek drama?",
+      "options": [
+        "Comedy and Tragedy",
+        "Epic and Lyric",
+        "Satire and Farce",
+        "Mime and Pantomime"
+      ],
+      "correctAnswer": 0,
+      "explain": "Ancient Greek theatre primarily consisted of tragedies and comedies, which were performed at religious festivals."
+    },
+    {
+      "question": "What architectural order is characterized by plain, sturdy columns with a simple capital?",
+      "options": [
+        "Ionic",
+        "Corinthian",
+        "Doric",
+        "Tuscan"
+      ],
+      "correctAnswer": 2,
+      "explain": "The Doric order is the simplest and oldest of the classical Greek architectural orders, known for its unadorned columns."
+    },
+    {
+      "question": "The ancient Olympic Games were held in honor of which god?",
+      "options": [
+        "Hermes",
+        "Zeus",
+        "Ares",
+        "Apollo"
+      ],
+      "correctAnswer": 1,
+      "explain": "The Olympic Games were a series of athletic competitions among representatives of city-states, dedicated to Zeus."
+    },
+    {
+      "question": "Who is traditionally credited with authoring the epic poems \"The Iliad\" and \"The Odyssey\"?",
+      "options": [
+        "Sophocles",
+        "Homer",
+        "Virgil",
+        "Euripides"
+      ],
+      "correctAnswer": 1,
+      "explain": "Homer is the legendary author of the Iliad and the Odyssey, two epic poems that are central works of ancient Greek literature."
+    },
+    {
+      "question": "The concept of democracy, where citizens participate in governance, originated in which Greek city-state?",
+      "options": [
+        "Thebes",
+        "Sparta",
+        "Corinth",
+        "Athens"
+      ],
+      "correctAnswer": 3,
+      "explain": "Democracy, meaning 'rule by the people', was developed in Athens around the 5th century BCE."
+    },
+    {
+      "question": "What famous Greek sculptor is known for works like \"Discobolus\" (Discus Thrower)?",
+      "options": [
+        "Phidias",
+        "Myron",
+        "Polykleitos",
+        "Praxiteles"
+      ],
+      "correctAnswer": 1,
+      "explain": "Myron was an Athenian sculptor from the mid-5th century BC, famous for his bronze sculptures, including the Discobolus."
+    },
+    {
+      "question": "What was the name of the oracle who delivered prophecies at Delphi?",
+      "options": [
+        "Cassandra",
+        "Medea",
+        "Pythia",
+        "Sibyl"
+      ],
+      "correctAnswer": 2,
+      "explain": "The Pythia was the high priestess of the Temple of Apollo at Delphi who served as its oracle."
+    },
+    {
+      "question": "What was the primary focus of education for boys in ancient Sparta?",
+      "options": [
+        "Philosophy and rhetoric",
+        "Military training and discipline",
+        "Art and music",
+        "Mathematics and astronomy"
+      ],
+      "correctAnswer": 1,
+      "explain": "Spartan education, known as the Agoge, focused almost entirely on military training and instilling discipline and loyalty to the state."
+    }
+  ]
+}

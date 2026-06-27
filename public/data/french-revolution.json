@@ -1,0 +1,127 @@
+{
+  "id": "french-revolution",
+  "name": "French Revolution",
+  "description": "Test your knowledge on the pivotal events, figures, and impacts of the French Revolution.",
+  "color": "gray",
+  "category": "History",
+  "tags": [
+    "revolution",
+    "economy",
+    "society"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What was the primary cause of the French Revolution?",
+      "options": [
+        "The American Revolution's influence",
+        "Economic crisis and social inequality",
+        "Religious conflicts within France",
+        "A desire for colonial expansion"
+      ],
+      "correctAnswer": 1,
+      "explain": "The French Revolution was primarily fueled by severe economic problems, including famine and national debt, coupled with deep-seated social inequalities where the Third Estate bore most burdens."
+    },
+
+    {
+      "question": "Which revolutionary leader was a key figure during the Reign of Terror and was eventually guillotined himself?",
+      "options": [
+        "Maximilien Robespierre",
+        "Georges Danton",
+        "Jean-Paul Marat",
+        "Emmanuel-Joseph Sieyès"
+      ],
+      "correctAnswer": 0,
+      "explain": "Maximilien Robespierre was a prominent figure in the Committee of Public Safety and a driving force behind the Reign of Terror, before his own downfall and execution."
+    },
+    {
+      "question": "Which event is traditionally considered the start of the French Revolution?",
+      "options": [
+        "The Tennis Court Oath",
+        "The Women's March on Versailles",
+        "The Storming of the Bastille",
+        "The execution of Louis XVI"
+      ],
+      "correctAnswer": 2,
+      "explain": "The Storming of the Bastille on July 14, 1789, symbolized the beginning of the popular uprising against the monarchy and became a powerful symbol of the revolution."
+    },
+    {
+      "question": "What foundational document, adopted in August 1789, proclaimed the rights of citizens and abolished many feudal privileges?",
+      "options": [
+        "The Magna Carta",
+        "The Edict of Nantes",
+        "The Constitution of 1791",
+        "The Declaration of the Rights of Man and of the Citizen"
+      ],
+      "correctAnswer": 3,
+      "explain": "The Declaration of the Rights of Man and of the Citizen was a fundamental document of the French Revolution, defining individual and collective rights and serving as a precursor to the first French constitution."
+    },
+    {
+      "question": "Who was the king of France during the outbreak of the French Revolution?",
+      "options": [
+        "Louis XIV",
+        "Louis XVI",
+        "Louis XV",
+        "Napoleon Bonaparte"
+      ],
+      "correctAnswer": 1,
+      "explain": "Louis XVI was the last Bourbon king of France, reigning until the monarchy was abolished during the French Revolution."
+    },
+    {
+      "question": "What period of the French Revolution was characterized by extreme violence and mass executions, led primarily by Maximilien Robespierre?",
+      "options": [
+        "The Directory",
+        "The Great Fear",
+        "The Reign of Terror",
+        "The Thermidorian Reaction"
+      ],
+      "correctAnswer": 2,
+      "explain": "The Reign of Terror, from 1793 to 1794, was a period of intense political repression and executions of perceived enemies of the revolution, orchestrated by the Committee of Public Safety."
+    },
+    {
+      "question": "What was the famous slogan that encapsulated the ideals of the French Revolution?",
+      "options": [
+        "Liberty, Equality, Fraternity",
+        "Order, Progress, Nation",
+        "Bread, Land, Peace",
+        "God, King, Country"
+      ],
+      "correctAnswer": 0,
+      "explain": "The slogan 'Liberty, Equality, Fraternity' (Liberté, égalité, fraternité) became the national motto of France and embodied the core principles of the revolution."
+    },
+    {
+      "question": "Which general rose to prominence during the French Revolution and eventually seized power, ending the revolutionary period?",
+      "options": [
+        "Marquis de Lafayette",
+        "Napoleon Bonaparte",
+        "Jean-Baptiste Bernadotte",
+        "Arthur Wellesley"
+      ],
+      "correctAnswer": 1,
+      "explain": "Napoleon Bonaparte was a highly successful military general who orchestrated a coup d'état in 1799, effectively ending the French Revolution and establishing the Consulate."
+    },
+    {
+      "question": "The French Revolution led to the abolition of the monarchy and the establishment of what form of government?",
+      "options": [
+        "An absolute monarchy",
+        "A republic",
+        "A constitutional monarchy",
+        "An empire"
+      ],
+      "correctAnswer": 1,
+      "explain": "One of the most significant outcomes of the French Revolution was the overthrow of the Bourbon monarchy and the declaration of the First French Republic."
+    },
+    {
+      "question": "What was the primary economic grievance that fueled widespread discontent in France leading up to the Revolution?",
+      "options": [
+        "Excessive taxation on the Third Estate and national debt",
+        "Abolition of internal trade tariffs",
+        "The king's lavish spending on foreign wars",
+        "Forced conscription of peasants into the army"
+      ],
+      "correctAnswer": 0,
+      "explain": "The heavy tax burden on the common people and the state's severe debt were major sources of anger and resentment."
+    }
+  ]
+}
