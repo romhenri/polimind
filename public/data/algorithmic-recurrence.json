@@ -1,0 +1,236 @@
+[
+  {
+    "id": "algorithmic-recurrence",
+    "name": "Recorrência Algorítmica",
+    "description": "Estudo de recorrências e métodos de resolução: Iteração, Substituição, Árvore de Recursão e Teorema Mestre.",
+    "icon": "🔄",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "math"
+    ],
+    "hardness": "hard",
+    "seq": "3",
+    "lang": "pt",
+    "questions": [
+      {
+        "question": "O que é uma recorrência no contexto da análise de algoritmos?",
+        "options": [
+          "Uma equação ou inequação que descreve uma função em termos de seu valor sobre pequenas entradas.",
+          "Um laço de repetição infinito que ocorre devido a um erro de sintaxe no código.",
+          "Uma função de tempo exato que não pode ser simplificada pela notação assintótica.",
+          "Um método de ordenação de dados que substitui o modelo RAM."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Em qual situação as recorrências tipicamente aparecem na análise de algoritmos?",
+        "options": [
+          "Quando o programa é compilado em diferentes sistemas operacionais simultaneamente.",
+          "Quando o algoritmo utiliza apenas variáveis globais e laços for simples.",
+          "Quando um algoritmo contém chamadas recursivas para ele mesmo.",
+          "Quando um problema computacional não possui nenhuma instância válida."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Quais são os quatro métodos apresentados para resolver recorrências?",
+        "options": [
+          "Notação Theta, Notação Big-O, Pior Caso e Caso Médio.",
+          "Iteração, Substituição, Árvore de Recursão e Teorema Mestre.",
+          "Empacotamento, Caixeiro Viajante, Vizinho Mais Próximo e Busca Binária.",
+          "Estratificação, Indução Direta, Divisão Rápida e Teorema de Shannon."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Como funciona a estratégia principal do 'Método da Iteração'?",
+        "options": [
+          "Adivinha-se uma solução logarítmica e aplica-se o Teorema Mestre diretamente.",
+          "Substitui-se a função por uma constante e ignora-se os termos de mais baixa ordem.",
+          "Desenha-se uma árvore binária completa para representar as chamadas de funções.",
+          "Converte-se a recorrência em um somatório, itera-se até a condição inicial ser alcançada e usa-se retro-substituição."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Quais são os passos fundamentais para aplicar o 'Método da Substituição'?",
+        "options": [
+          "Adivinhar uma solução e usar indução para provar que a solução está correta.",
+          "Transformar a equação em uma árvore e somar os custos das folhas.",
+          "Comparar f(n) com n^(log_b a) e identificar um dos três casos possíveis.",
+          "Substituir todas as instâncias do problema por constantes de tempo exato."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Qual é a recorrência que descreve o tempo de execução do algoritmo Busca Binária (BINARY-SEARCH)?",
+        "options": [
+          "T(n) = T(n-1) + n",
+          "T(n) = 2T(n/2) + 1",
+          "T(n) = c + T(n/2)",
+          "T(n) = 3T(n/4) + cn²"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "No 'Método da Árvore de Recursão', o que cada nó da árvore representa?",
+        "options": [
+          "O limite superior assintótico (Notação Big-O) de todo o programa.",
+          "O custo incorrido nos vários níveis de recursão.",
+          "Uma variable de memória acessada pelo Modelo RAM.",
+          "Uma instância do pior caso do algoritmo de ordenação."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "O Teorema Mestre é considerado uma 'receita de bolo' para resolver recorrências de qual formato específico?",
+        "options": [
+          "T(n) = T(n-1) + c, onde c > 0",
+          "T(n) = aT(n-b) + f(n), onde a > 0 e b < 1",
+          "T(n) = T(n/2) + T(n/3) + f(n)",
+          "T(n) = aT(n/b) + f(n), onde a ≥ 1, b > 1, e f(n) > 0"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Qual é a ideia central por trás da aplicação do Teorema Mestre?",
+        "options": [
+          "Comparar a função f(n) com n^(log_b a).",
+          "Transformar a variável n em log n para eliminar expoentes altos.",
+          "Provar matematicamente que o algoritmo funciona para o caso base n=1.",
+          "Contar exatamente o número de chamadas de procedimento (call) geradas."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "De acordo com o Caso 1 do Teorema Mestre, o que acontece se f(n) for polinomialmente menor que n^(log_b a)?",
+        "options": [
+          "A complexidade de tempo será T(n) = Θ(f(n)).",
+          "O algoritmo não poderá ser resolvido pelo Teorema Mestre, exigindo o método da substituição.",
+          "A complexidade de tempo será ditada pela parte recursiva, sendo T(n) = Θ(n^(log_b a)).",
+          "A complexidade adiciona um termo logarítmico, resultando em T(n) = Θ(n^(log_b a) * lg n)."
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "algorithmic-recurrence",
+    "name": "Algorithmic Recurrence",
+    "description": "Study of recurrences and resolution methods: Iteration, Substitution, Recursion Tree, and Master Theorem.",
+    "icon": "🔄",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "math"
+    ],
+    "hardness": "hard",
+    "seq": "3",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What is a recurrence in the context of algorithm analysis?",
+        "options": [
+          "An equation or inequality that describes a function in terms of its value on smaller inputs.",
+          "An infinite repetition loop that occurs due to a syntax error in the code.",
+          "An exact time function that cannot be simplified by asymptotic notation.",
+          "A data sorting method that replaces the RAM model."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "In which situation do recurrences typically appear in algorithm analysis?",
+        "options": [
+          "When the program is compiled on different operating systems simultaneously.",
+          "When the algorithm uses only global variables and simple for loops.",
+          "When an algorithm contains recursive calls to itself.",
+          "When a computational problem does not have any valid instance."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What are the four presented methods for solving recurrences?",
+        "options": [
+          "Theta Notation, Big-O Notation, Worst Case, and Average Case.",
+          "Iteration, Substitution, Recursion Tree, and Master Theorem.",
+          "Knapsack, Traveling Salesperson, Nearest Neighbor, and Binary Search.",
+          "Stratification, Direct Induction, Fast Division, and Shannon's Theorem."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How does the main strategy of the 'Iteration Method' work?",
+        "options": [
+          "A logarithmic solution is guessed and the Master Theorem is applied directly.",
+          "The function is replaced by a constant and lower-order terms are ignored.",
+          "A complete binary tree is drawn to represent function calls.",
+          "The recurrence is converted into a summation, iterated until the initial condition is reached, and back-substitution is used."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What are the fundamental steps to apply the 'Substitution Method'?",
+        "options": [
+          "Guessing a solution and using induction to prove that the solution is correct.",
+          "Transforming the equation into a tree and summing the costs of the leaves.",
+          "Comparing f(n) with n^(log_b a) and identifying one of the three possible cases.",
+          "Replacing all problem instances with exact time constants."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which recurrence describes the running time of the Binary Search algorithm (BINARY-SEARCH)?",
+        "options": [
+          "T(n) = T(n-1) + n",
+          "T(n) = 2T(n/2) + 1",
+          "T(n) = c + T(n/2)",
+          "T(n) = 3T(n/4) + cn²"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "In the 'Recursion Tree Method', what does each node of the tree represent?",
+        "options": [
+          "The asymptotic upper bound (Big-O Notation) of the entire program.",
+          "The cost incurred at the various levels of recursion.",
+          "A memory variable accessed by the RAM Model.",
+          "An instance of the worst case of the sorting algorithm."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "The Master Theorem is considered a 'cookbook recipe' for solving recurrences of which specific format?",
+        "options": [
+          "T(n) = T(n-1) + c, where c > 0",
+          "T(n) = aT(n-b) + f(n), where a > 0 and b < 1",
+          "T(n) = T(n/2) + T(n/3) + f(n)",
+          "T(n) = aT(n/b) + f(n), where a ≥ 1, b > 1, and f(n) > 0"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What is the central idea behind applying the Master Theorem?",
+        "options": [
+          "Comparing the function f(n) with n^(log_b a).",
+          "Transforming the variable n into log n to eliminate high exponents.",
+          "Mathematically proving that the algorithm works for the base case n=1.",
+          "Exactly counting the number of procedure calls generated."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "According to Case 1 of the Master Theorem, what happens if f(n) is polynomially smaller than n^(log_b a)?",
+        "options": [
+          "The time complexity will be T(n) = Θ(f(n)).",
+          "The algorithm cannot be solved by the Master Theorem, requiring the substitution method.",
+          "The time complexity will be dictated by the recursive part, being T(n) = Θ(n^(log_b a)).",
+          "The complexity adds a logarithmic term, resulting in T(n) = Θ(n^(log_b a) * lg n)."
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  }
+]

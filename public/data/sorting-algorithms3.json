@@ -1,0 +1,236 @@
+[
+  {
+    "id": "sorting-algorithms3",
+    "name": "Algoritmos de Ordenação 3",
+    "description": "Análise de algoritmos de ordenação, avaliação de melhor e pior caso, e ordenação em tempo linear sem comparações.",
+    "icon": "📊",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "sorting"
+    ],
+    "hardness": "medium",
+    "seq": "6",
+    "lang": "pt",
+    "questions": [
+      {
+        "question": "Em que situação o Quick Sort atinge o seu pior caso de desempenho O(n²)?",
+        "options": [
+          "Quando o vetor é muito grande e ultrapassa a capacidade do cache.",
+          "Quando os elementos estão distribuídos de forma perfeitamente uniforme.",
+          "Quando o pivô escolhido é repetidamente o maior ou o menor elemento.",
+          "Quando o algoritmo é executado em sistemas com múltiplos processadores."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "O Heap Sort utiliza uma estrutura de dados de árvore para ordenar. Qual é a relação de altura da árvore com o tempo de execução?",
+        "options": [
+          "A altura da árvore é log n, o que permite operações de ajuste rápidas.",
+          "A altura cresce linearmente, forçando o algoritmo a ser quadrático.",
+          "A árvore é mantida propositalmente desbalanceada para facilitar a troca.",
+          "O tempo de execução independe da altura, pois o acesso é direto via índice."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Sobre o Radix Sort, qual é o impacto de aumentar o tamanho da base (k) no desempenho do algoritmo?",
+        "options": [
+          "Aumenta o número de passagens necessárias sobre o conjunto de dados.",
+          "Reduz o número de passagens 'd', mas aumenta o custo de cada passada.",
+          "Torna o algoritmo instável, exigindo uma fase de correção via Heap.",
+          "Otimiza o uso de memória, eliminando a necessidade de vetores auxiliares."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "O que ocorre durante a fase de 'Build-Max-Heap' no início do Heap Sort?",
+        "options": [
+          "O vetor é ordenado de trás para frente usando inserções sucessivas.",
+          "Os elementos são organizados para que todo nó seja maior que seus filhos.",
+          "A estrutura é convertida em uma lista ligada para facilitar a remoção.",
+          "O maior elemento é movido para a primeira posição e o menor para a última."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Como o Heap Sort gerencia a memória durante o processo de ordenação?",
+        "options": [
+          "Cria uma cópia completa do vetor em uma estrutura de árvore binária externa.",
+          "Utiliza a própria estrutura do array para representar a árvore (In-place).",
+          "Aloca memória dinâmica para cada nó da árvore durante o 'Heapify'.",
+          "Depende de uma pilha de recursão profunda que consome memória O(n)."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Qual é a principal limitação prática do Radix Sort em comparação a algoritmos baseados em comparação?",
+        "options": [
+          "A necessidade de que os dados sejam representáveis como chaves digitais.",
+          "A incapacidade de ordenar grandes volumes de dados de forma eficiente.",
+          "O fato de possuir uma complexidade de pior caso sempre quadrática.",
+          "A obrigatoriedade de realizar trocas de elementos em endereços distantes."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "O Heap Sort é considerado um algoritmo estável?",
+        "options": [
+          "Sim, pois ele mantém a ordem relativa através da estrutura de árvore.",
+          "Sim, desde que seja utilizado um Min-Heap em vez de um Max-Heap.",
+          "Não, pois as trocas de longa distância no Heap podem alterar a ordem relativa.",
+          "Não, pois algoritmos que utilizam divisões logarítmicas nunca são estáveis."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Qual é a complexidade de tempo para extrair o elemento máximo e reajustar o Heap (Heapify) durante a ordenação?",
+        "options": [
+          "O(1)",
+          "O(n)",
+          "O(n log n)",
+          "O(log n)"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "O Quicksort 'Dual-Pivot' (usado no Java) utiliza dois pivôs. Qual a vantagem teórica dessa abordagem?",
+        "options": [
+          "Garante que o algoritmo nunca caia no pior caso de tempo quadrático.",
+          "Melhora a eficiência ao dividir o vetor em três partes em vez de duas.",
+          "Reduz a complexidade de espaço de O(log n) para tempo constante O(1).",
+          "Permite que o algoritmo seja estável sem o uso de memória adicional."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Qual cenário é o mais problemático para um Radix Sort que utiliza uma base 'k' muito pequena (ex: base 2)?",
+        "options": [
+          "Aumento drástico no número de passadas (d) para números grandes.",
+          "O algoritmo perde a capacidade de processar números negativos.",
+          "A memória auxiliar necessária torna-se proporcional ao quadrado de n.",
+          "O tempo de execução torna-se exponencial em relação ao tamanho da entrada."
+        ],
+        "correctAnswer": 0
+      }
+    ]
+  },
+  {
+    "id": "sorting-algorithms3",
+    "name": "Sorting Algorithms 3",
+    "description": "Analysis of sorting algorithms, best and worst-case evaluation, and non-comparison linear-time sorting.",
+    "icon": "📊",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "sorting"
+    ],
+    "hardness": "medium",
+    "seq": "6",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "In what situation does Quick Sort reach its worst-case performance of O(n²)?",
+        "options": [
+          "When the array is very large and exceeds cache capacity.",
+          "When the elements are perfectly uniformly distributed.",
+          "When the chosen pivot is repeatedly the largest or smallest element.",
+          "When the algorithm is executed on systems with multiple processors."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Heap Sort uses a tree data structure to sort. What is the relation of the tree height to the execution time?",
+        "options": [
+          "The tree height is log n, which allows fast adjustment operations.",
+          "The height grows linearly, forcing the algorithm to be quadratic.",
+          "The tree is purposely kept unbalanced to facilitate swapping.",
+          "The execution time is independent of the height, as access is direct via index."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Regarding Radix Sort, what is the impact of increasing the radix size (k) on the algorithm's performance?",
+        "options": [
+          "It increases the number of passes required over the dataset.",
+          "It reduces the number of passes 'd', but increases the cost of each pass.",
+          "It makes the algorithm unstable, requiring a correction phase via Heap.",
+          "It optimizes memory usage, eliminating the need for auxiliary arrays."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What happens during the 'Build-Max-Heap' phase at the beginning of Heap Sort?",
+        "options": [
+          "The array is sorted backward using successive insertions.",
+          "The elements are organized so that every node is greater than its children.",
+          "The structure is converted into a linked list to facilitate removal.",
+          "The largest element is moved to the first position and the smallest to the last."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How does Heap Sort manage memory during the sorting process?",
+        "options": [
+          "It creates a full copy of the array in an external binary tree structure.",
+          "It uses the structure of the array itself to represent the tree (In-place).",
+          "It allocates dynamic memory for each tree node during 'Heapify'.",
+          "It relies on a deep recursion stack that consumes O(n) memory."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the primary practical limitation of Radix Sort compared to comparison-based algorithms?",
+        "options": [
+          "The requirement that data must be representable as digital keys.",
+          "The inability to efficiently sort large volumes of data.",
+          "The fact that it always possesses a quadratic worst-case complexity.",
+          "The obligation to perform element swaps across distant addresses."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Is Heap Sort considered a stable algorithm?",
+        "options": [
+          "Yes, because it preserves the relative order through the tree structure.",
+          "Yes, as long as a Min-Heap is used instead of a Max-Heap.",
+          "No, because long-distance swaps in the Heap can alter the relative order.",
+          "No, because algorithms using logarithmic splits are never stable."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the time complexity to extract the maximum element and readjust the Heap (Heapify) during sorting?",
+        "options": [
+          "O(1)",
+          "O(n)",
+          "O(n log n)",
+          "O(log n)"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "The 'Dual-Pivot' Quicksort (used in Java) utilizes two pivots. What is the theoretical advantage of this approach?",
+        "options": [
+          "It guarantees that the algorithm never drops into the quadratic worst-case time.",
+          "It improves efficiency by dividing the array into three parts instead of two.",
+          "It reduces space complexity from O(log n) to constant O(1) time.",
+          "It allows the algorithm to be stable without using additional memory."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which scenario is the most problematic for a Radix Sort that uses a very small radix 'k' (e.g., radix 2)?",
+        "options": [
+          "A drastic increase in the number of passes (d) for large numbers.",
+          "The algorithm loses the ability to process negative numbers.",
+          "The required auxiliary memory becomes proportional to the square of n.",
+          "The execution time becomes exponential relative to the input size."
+        ],
+        "correctAnswer": 0
+      }
+    ]
+  }
+]

@@ -1,0 +1,234 @@
+[
+  {
+    "id": "analysis-of-algorithms",
+    "name": "Análise de Algoritmos",
+    "description": "Análise de algoritmos, problemas computacionais, modelo RAM e complexidade assintótica.",
+    "icon": "🧮",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms"
+    ],
+    "hardness": "medium",
+    "seq": "1",
+    "lang": "pt",
+    "questions": [
+      {
+        "question": "O que define a 'Análise de Algoritmos'?",
+        "options": [
+          "A contagem prática de ciclos de clock em processadores multicore.",
+          "O estudo teórico do desempenho de programas de computadores e do consumo de recursos.",
+          "O desenvolvimento de interfaces gráficas para representar dados complexos.",
+          "A garantia de que um software de computador está livre de bugs sintáticos."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Na definição de problemas computacionais, o que caracteriza uma 'instância'?",
+        "options": [
+          "O algoritmo mais rápido existente para um problema.",
+          "A máquina ou hardware em que o problema está sendo executado.",
+          "Um possível valor para a entrada, obtido ao associar valores aos parâmetros do problema.",
+          "O limite superior de uso de memória ram do problema."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Além do desempenho, quais outros aspectos são apontados como mais importantes em um programa?",
+        "options": [
+          "Velocidade do processador e capacidade de armazenamento em disco.",
+          "Custo de aquisição do software e a linguagem em que foi escrito.",
+          "Complexidade assintótica, tempo de compilação e uso do modelo RAM.",
+          "Modularidade, corretude, manutenibilidade, robustez, confiabilidade, simplicidade, entre outros."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "O que garante matematicamente e conceitualmente que um algoritmo está correto?",
+        "options": [
+          "Ele deve compilar sem nenhum aviso de erro (warning) na linguagem de programação escolhida.",
+          "Ele precisa rodar obrigatoriamente em tempo constante, representado por O(1).",
+          "Para qualquer instância válida do problema, ele deve terminar a execução e retornar como saída o valor esperado.",
+          "O algoritmo deve utilizar sempre a menor quantidade de memória e registradores possível no modelo RAM."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Qual é a principal premissa para a avaliação de tempo independente de linguagem e da máquina adotada no Modelo RAM?",
+        "options": [
+          "As instruções sempre ocorrem em formato de paralelismo assíncrono.",
+          "Ignora as constantes da máquina e foca apenas nas operações de entrada e saída em disco.",
+          "Laços e chamadas de funções são considerados operações simples que tomam um passo.",
+          "Cada operação simples (como +, -, =) e cada acesso à memória tomam exatamente um passo."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Um algoritmo que sempre escolhe o caminho mais curto no próximo passo nem sempre garante a menor rota total. Por que isso compromete sua 'corretude'?",
+        "options": [
+          "Porque a corretude exige que o algoritmo funcione rápido em qualquer hardware.",
+          "Porque a lógica falha em garantir o resultado ideal para todos os cenários possíveis.",
+          "Porque a corretude só é atingida se o código não apresentar erros de sintaxe.",
+          "Porque o algoritmo precisaria de inteligência artificial para ser considerado correto."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Considerando o tempo de execução exato para o 'melhor caso' da Ordenação por Inserção, qual é a representation matemática alcançada?",
+        "options": [
+          "T(n) = a * n^2 + b * n + c",
+          "T(n) = a * n + b",
+          "T(n) = n!",
+          "T(n) = c * 2^n"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Por que a análise de algoritmos frequentemente se concentra no tempo de execução do 'pior caso'?",
+        "options": [
+          "Porque o pior caso provê um limite superior sobre o tempo de execução para qualquer instância, funcionando como uma garantia.",
+          "Porque o pior caso é o cenário estatístico mais raro, precisando ser isolado.",
+          "Porque fornece um limite inferior, estipulando o quão rápido um programa consegue ser executado em supercomputadores.",
+          "Porque só existe fórmula matemática para representar o pior caso, enquanto o caso médio é impossível de calcular."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Na prática da Análise Assintótica (Notação Theta), o que fazemos com a função de tempo exato (ex: 3n³ + 90n² - 5n + 6046)?",
+        "options": [
+          "Transformamos o maior termo em um expoente da base 2.",
+          "Mantemos os valores mais altos, que são as constantes (ex: 6046).",
+          "Buscamos somar todos os expoentes para identificar a classe do algoritmo.",
+          "Eliminamos os termos de mais baixa ordem e ignoramos as constantes."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Como determinamos qual de dois algoritmos é mais eficiente comparando suas análises de pior caso?",
+        "options": [
+          "O algoritmo mais eficiente é aquele que tem mais linhas de pseudo-código documentadas.",
+          "O algoritmo mais eficiente é aquele cuja função possui as menores constantes numéricas (como 'a', 'b', ou 'c').",
+          "Um algoritmo é mais eficiente que outro se seu tempo de execução no pior caso tem uma ordem de crescimento menor (dada pelo termo mais significante da função).",
+          "Aquele que não faz nenhuma chamada de procedimento no modelo RAM é sempre o mais eficiente."
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "analysis-of-algorithms",
+    "name": "Analysis of Algorithms",
+    "description": "Analysis of algorithms, computational problems, RAM model, and asymptotic complexity.",
+    "icon": "🧮",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms"
+    ],
+    "hardness": "medium",
+    "seq": "1",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What defines the 'Analysis of Algorithms'?",
+        "options": [
+          "The practical counting of clock cycles in multicore processors.",
+          "The theoretical study of computer program performance and resource consumption.",
+          "The development of graphical interfaces to represent complex data.",
+          "The guarantee that a computer software is free of syntax bugs."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In the definition of computational problems, what characterizes an 'instance'?",
+        "options": [
+          "The fastest existing algorithm for a problem.",
+          "The machine or hardware on which the problem is being executed.",
+          "A possible value for the input, obtained by assigning values to the parameters of the problem.",
+          "The upper limit of RAM memory usage for the problem."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Besides performance, what other aspects are highlighted as most important in a program?",
+        "options": [
+          "Processor speed and disk storage capacity.",
+          "Software acquisition cost and the language in which it was written.",
+          "Asymptotic complexity, compile time, and RAM model usage.",
+          "Modularity, correctness, maintainability, robustness, reliability, simplicity, among others."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What mathematically and conceptually guarantees that an algorithm is correct?",
+        "options": [
+          "It must compile without any error warnings in the chosen programming language.",
+          "It must strictly run in constant time, represented by O(1).",
+          "For any valid instance of the problem, it must halt execution and return the expected output value.",
+          "The algorithm must always use the smallest possible amount of memory and registers in the RAM model."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the main premise for evaluates time independent of the language and machine adopted in the RAM Model?",
+        "options": [
+          "Instructions always occur in an asynchronous parallelism format.",
+          "It ignores machine constants and focuses only on disk input and output operations.",
+          "Loops and function calls are considered simple operations that take one step.",
+          "Each simple operation (such as +, -, =) and each memory access takes exactly one step."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "An algorithm that always chooses the shortest path in the next step does not always guarantee the shortest overall route. Why does this compromise its 'correctness'?",
+        "options": [
+          "Because correctness requires the algorithm to run fast on any hardware.",
+          "Because the logic fails to guarantee the optimal result for all possible scenarios.",
+          "Because correctness is only achieved if the code does not present syntax errors.",
+          "Because the algorithm would need artificial intelligence to be considered correct."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Considering the exact running time for the 'best case' of Insertion Sort, what is the mathematical representation achieved?",
+        "options": [
+          "T(n) = a * n^2 + b * n + c",
+          "T(n) = a * n + b",
+          "T(n) = n!",
+          "T(n) = c * 2^n"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Why does algorithm analysis frequently focus on the 'worst-case' running time?",
+        "options": [
+          "Because the worst case provides an upper bound on the running time for any instance, functioning as a guarantee.",
+          "Because the worst case is the rarest statistical scenario, needing to be isolated.",
+          "Because it provides a lower bound, stipulating how fast a program can run on supercomputers.",
+          "Because a mathematical formula only exists to represent the worst case, while the average case is impossible to calculate."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "In the practice of Asymptotic Analysis (Theta Notation), what do we do with the exact time function (e.g., 3n³ + 90n² - 5n + 6046)?",
+        "options": [
+          "We transform the largest term into an exponent of base 2.",
+          "We keep the highest values, which are the constants (e.g., 6046).",
+          "We seek to sum all exponents to identify the algorithm class.",
+          "We eliminate lower-order terms and ignore constants."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "How do we determine which of two algorithms is more efficient by comparing their worst-case analyses?",
+        "options": [
+          "The most efficient algorithm is the one that has more lines of documented pseudo-code.",
+          "The most efficient algorithm is the one whose function has the smallest numerical constants (such as 'a', 'b', or 'c').",
+          "An algorithm is more efficient than another if its worst-case running time has a lower order of growth (given by the most significant term of the function).",
+          "The one that does not make any procedure calls in the RAM model is always the most efficient."
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  }
+]

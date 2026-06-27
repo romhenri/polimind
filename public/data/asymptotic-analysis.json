@@ -1,0 +1,234 @@
+[
+  {
+    "id": "asymptotic-analysis",
+    "name": "Análise Assintótica",
+    "description": "Estudo da complexidade computacional, notações assintóticas (Big-Oh, Theta, Omega) e análise do tempo de execução de algoritmos.",
+    "icon": "📈",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms"
+    ],
+    "hardness": "hard",
+    "seq": "2",
+    "lang": "pt",
+    "questions": [
+      {
+        "question": "Por que é importante o estudo da Complexidade Computacional?",
+        "options": [
+          "Permite escolher algoritmos eficientes e determinar a viabilidade de soluções.",
+          "Identifica os limites físicos do hardware para realizar overclocking no sistema.",
+          "Elimina a necessidade de realizar testes de robustez durante o desenvolvimento.",
+          "Garante que linguagens diferentes tenham o mesmo tempo real de execução."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Quais são os dois tipos principais de complexidade discutidos no material para a análise de algoritmos?",
+        "options": [
+          "Sintática (erros de código) e Semântica (erros de lógica).",
+          "Espacial (espaço de memória usado) e Temporal (tempo real necessário ou número de instruções).",
+          "Exponencial (algoritmos demorados) e Logarítmica (algoritmos rápidos).",
+          "Estática (tamanho do disco rígido) e Dinâmica (uso da rede de dados)."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Ao utilizar modelos matemáticos simplificados para avaliar a quantidade de trabalho, levamos em conta as 'operações primitivas'. Qual destas NÃO é considerada uma operação primitiva?",
+        "options": [
+          "Atribuição de valores a variáveis.",
+          "Comparação entre dois números.",
+          "Download de pacotes de dados pela internet.",
+          "Acesso a um elemento específico de um array."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Por que as notações assintóticas são consideradas cruciais na avaliação de algoritmos?",
+        "options": [
+          "Pois determinam exatamente em quantos milissegundos o algoritmo será finalizado nas mais diversas máquinas.",
+          "Porque fornecem uma caracterização simples da eficiência, onde termos de baixa ordem e constantes multiplicativas perdem a relevância para entradas muito grandes.",
+          "Pois elas são altamente dependentes da tecnologia atual, permitindo que o programador otimize o código para processadores específicos.",
+          "Porque eliminam a necessidade matemática de se avaliar o limite de pior caso (Big-Oh) nas avaliações teóricas."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Qual é o significado correto das notações Θ (Theta), O (Big-Oh) e Ω (Big-Omega), respectivamente?",
+        "options": [
+          "Limite assintótico inferior, Limite assintótico superior e Limite assintótico exato/apertado..",
+          "Limite assintótico superior, Limite assintótico inferior e Limite assintótico exato/apertado.",
+          "Limite assintótico exato/apertado, Limite assintótico superior e Limite assintótico inferior.",
+          "Melhor caso garantido, Pior caso estatístico e Caso médio."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "O que significa graficamente e conceitualmente dizer que uma função obedece ao limite assintótico apertado f(n) = Θ(g(n))?",
+        "options": [
+          "Que a função f(n) é ignorada pelo sistema após atingir um ponto limite n0.",
+          "Que a função f(n) fica 'prensada' entre duas constantes de g(n) para n grande.",
+          "Que g(n) representa a contagem exata de passos para qualquer valor de n.",
+          "Que a função f(n) cruzará o eixo zero antes de crescer de forma exponencial."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Como algoritmos de tempo exponencial (ex: O(2^n) ou O(n!)) são descritos?",
+        "options": [
+          "Logarítmicos e muito eficientes para grandes volumes de dados.",
+          "Altamente velozes, independentemente do tamanho da entrada.",
+          "Ineficientes, crescendo de forma inviável com o aumento de n.",
+          "Ideais e lineares, sendo o limite almejado em problemas reais."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Se temos a função de tempo f(n) = 8n + 128, qual destas afirmações é verdadeira?",
+        "options": [
+          "A função só pode ser classificada e escrita estritamente como O(n).",
+          "Ela também pode ser validamente descrita como O(n²) ou O(n³), pois essas funções maiores também servem como um 'teto' válido para f(n).",
+          "A presença da constante alta (128) transforma obrigatoriamente a função em O(1).",
+          "A função pertence à classe Ω(n²) porque atua como um teto máximo apertado."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Qual é a condição necessária e suficiente para podermos afirmar que f(n) = Θ(g(n))?",
+        "options": [
+          "Apenas quando f(n) = O(g(n)) e o algoritmo em questão não possuir laços for aninhados.",
+          "Se e somente se o limite de f(n)/g(n) tender ao infinito matemático.",
+          "Se e somente se f(n) = O(g(n)) e, concomitantemente, f(n) = Ω(g(n)).",
+          "Apenas se as funções estiverem dentro do limite do pequeno-o (little-o), sendo f(n) = o(g(n))."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "O que acontece com o comportamento assintótico resultante quando somamos duas funções cujos limites individuais já são conhecidos (Ex: f1(n) = O(g1(n)) e f2(n) = O(g2(n)))?",
+        "options": [
+          "O comportamento da soma é ditado pelo menor valor, sendo O(min(g1(n), g2(n))).",
+          "O comportamento da soma é dominado pela função de maior crescimento, ou seja, O(max(g1(n), g2(n))).",
+          "O resultado obriga a multiplicação matemática direta de ambas: O(g1(n) * g2(n)).",
+          "As duas funções assintóticas se anulam na soma matemática, tornando o tempo de execução constante O(1)."
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  },
+  {
+    "id": "asymptotic-analysis",
+    "name": "Asymptotic Analysis",
+    "description": "Study of computational complexity, asymptotic notations (Big-Oh, Theta, Omega), and algorithm runtime analysis.",
+    "icon": "📈",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms"
+    ],
+    "hardness": "hard",
+    "seq": "2",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "Why is the study of Computational Complexity important?",
+        "options": [
+          "It allows choosing efficient algorithms and determining the viability of solutions.",
+          "It identifies the physical limits of hardware to perform system overclocking.",
+          "It eliminates the need to perform robustness testing during development.",
+          "It guarantees that different languages have the exact same real execution time."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What are the two main types of complexity discussed in the material for algorithm analysis?",
+        "options": [
+          "Syntactic (code errors) and Semantic (logic errors).",
+          "Spatial (used memory space) and Temporal (required real time or number of instructions).",
+          "Exponential (slow algorithms) and Logarithmic (fast algorithms).",
+          "Static (hard drive size) and Dynamic (data network usage)."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "When using simplified mathematical models to evaluate the amount of work, we consider 'primitive operations'. Which of these is NOT considered a primitive operation?",
+        "options": [
+          "Assigning values to variables.",
+          "Comparing two numbers.",
+          "Downloading data packets from the internet.",
+          "Accessing a specific element of an array."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Why are asymptotic notations considered crucial in algorithm evaluation?",
+        "options": [
+          "Because they determine exactly how many milliseconds the algorithm will take to finish across various machines.",
+          "Because they provide a simple characterization of efficiency, where lower-order terms and multiplicative constants lose relevance for very large inputs.",
+          "Because they are highly dependent on current technology, allowing the programmer to optimize code for specific processors.",
+          "Because they eliminate the mathematical need to evaluate the worst-case bound (Big-Oh) in theoretical assessments."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the correct meaning of the notations Θ (Theta), O (Big-Oh), and Ω (Big-Omega), respectively?",
+        "options": [
+          "Asymptotic lower bound, Asymptotic upper bound, and Asymptotic exact/tight bound.",
+          "Asymptotic upper bound, Asymptotic lower bound, and Asymptotic exact/tight bound.",
+          "Asymptotic exact/tight bound, Asymptotic upper bound, and Asymptotic lower bound.",
+          "Guaranteed best case, Statistical worst case, and Average case."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What does it mean graphically and conceptually to say that a function satisfies the tight asymptotic bound f(n) = Θ(g(n))?",
+        "options": [
+          "That the function f(n) is ignored by the system after reaching a limit point n0.",
+          "That the function f(n) is 'sandwiched' between two constants of g(n) for large n.",
+          "That g(n) represents the exact count of steps for any value of n.",
+          "That the function f(n) will cross the zero axis before growing exponentially."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How are exponential time algorithms (e.g., O(2^n) or O(n!)) described?",
+        "options": [
+          "Logarithmic and highly efficient for large volumes of data.",
+          "Highly fast, regardless of the input size.",
+          "Inefficient, growing unfeasibly as n increases.",
+          "Ideal and linear, being the target limit in real-world problems."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "If we have the time function f(n) = 8n + 128, which of these statements is true?",
+        "options": [
+          "The function can only be strictly classified and written as O(n).",
+          "It can also be validly described as O(n²) or O(n³), since these larger functions also serve as a valid 'ceiling' for f(n).",
+          "The presence of the high constant (128) strictly transforms the function into O(1).",
+          "The function belongs to the class Ω(n²) because it acts as a tight maximum ceiling."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the necessary and sufficient condition to state that f(n) = Θ(g(n))?",
+        "options": [
+          "Only when f(n) = O(g(n)) and the algorithm in question does not contain nested for loops.",
+          "If and only if the limit of f(n)/g(n) tends to mathematical infinity.",
+          "If and only if f(n) = O(g(n)) and, concurrently, f(n) = Ω(g(n)).",
+          "Only if the functions are within the limit of little-o, where f(n) = o(g(n))."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What happens to the resulting asymptotic behavior when we add two functions whose individual bounds are already known (e.g., f1(n) = O(g1(n)) and f2(n) = O(g2(n)))?",
+        "options": [
+          "The behavior of the sum is dictated by the smaller value, being O(min(g1(n), g2(n))).",
+          "The behavior of the sum is dominated by the function with the higher growth, that is, O(max(g1(n), g2(n))).",
+          "The result strictly requires the direct mathematical multiplication of both: O(g1(n) * g2(n)).",
+          "The two asymptotic functions cancel each other out in the mathematical addition, making the execution time constant O(1)."
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  }
+]

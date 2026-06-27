@@ -1,0 +1,336 @@
+[
+  {
+    "id": "sorting-algorithms",
+    "name": "Algoritmos de Ordenação 1",
+    "description": "Análise de algoritmos de ordenação, avaliação de melhor e pior caso, e ordenação em tempo linear sem comparações.",
+    "icon": "📊",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "sorting"
+    ],
+    "hardness": "medium",
+    "seq": "4",
+    "lang": "pt",
+    "questions": [
+      {
+        "question": "Qual é o principal objetivo de se aplicar um algoritmo de ordenação a um conjunto de dados?",
+        "options": [
+          "Otimizar o tempo de compilação do código-fonte.",
+          "Facilitar a busca e recuperação eficiente de itens.",
+          "Converter dados brutos em valores de ponto flutuante.",
+          "Zerar o consumo de memória RAM durante a execução."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Embora existam exceções em tempo linear, a maioria dos algoritmos de ordenação baseia-se em qual operação?",
+        "options": [
+          "Indexação direta de matrizes multidimensionais.",
+          "Gerenciamento assíncrono de pilhas de execução.",
+          "Cálculos de exponenciação em números grandes.",
+          "Comparação entre elementos para definir precedência."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Qual é a característica fundamental do melhor caso para o algoritmo Insertion Sort?",
+        "options": [
+          "Ocorre quando a entrada possui apenas valores ímpares.",
+          "Ocorre quando os elementos estão em ordem aleatória.",
+          "Ocorre quando o vetor já se encontra totalmente ordenado.",
+          "Ocorre quando o tamanho do vetor é uma potência de dois."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "No algoritmo Insertion Sort, o que caracteriza o seu pior caso em termos de execução?",
+        "options": [
+          "Entrada em ordem inversa, exigindo o máximo de trocas.",
+          "Vetor com elementos iguais, que anula os laços internos.",
+          "Valores que excedem o limite de precisão de 32 bits.",
+          "Uso excessivo de recursão que gera estouro de pilha."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Qual é a ideia básica de funcionamento por trás do algoritmo Selection Sort?",
+        "options": [
+          "Dividir o vetor em metades para intercalá-las depois.",
+          "Posicionar o menor item restante na sua posição final.",
+          "Inserir os elementos em uma árvore binária balanceada.",
+          "Contar ocorrências de valores em um vetor auxiliar."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "O que define o comportamento dos laços de repetição e a complexidade do Selection Sort?",
+        "options": [
+          "Os laços são ignorados no pior caso para ganhar tempo.",
+          "As repetições variam e tornam o algoritmo linear O(n).",
+          "A estrutura de loops resulta em tempo quadrático O(n²).",
+          "A execução depende da representação de bits dos dados."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Considerando a complexidade de pior caso, qual é a diferença teórica entre Quick Sort e Merge Sort?",
+        "options": [
+          "O Quick Sort é O(n log n) e o Merge Sort é O(n²).",
+          "Ambos possuem a mesma complexidade linear de O(n).",
+          "O Quick Sort é O(n²) e o Merge Sort é O(n log n).",
+          "O Quick Sort é O(1) e o Merge Sort é tempo infinito."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Quais são exemplos de algoritmos lineares que não utilizam comparações para ordenar?",
+        "options": [
+          "Selection Sort, Insertion Sort e Merge Sort.",
+          "Quick Sort, Shell Sort e Heap Sort.",
+          "Counting Sort, Radix Sort e Bucket Sort.",
+          "Bubble Sort, Binary Search e Random Sort."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Qual é a premissa sobre os dados de entrada para o funcionamento do Counting Sort?",
+        "options": [
+          "Os dados devem estar previamente em ordem reversa.",
+          "Os elementos devem ser inteiros em um intervalo definido.",
+          "O vetor deve conter espaços vazios para processamento.",
+          "As chaves de busca devem ter comprimentos variados."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Avaliando as etapas do Counting Sort, qual é a sua complexidade de tempo assintótica?",
+        "options": [
+          "O(n * k)",
+          "O(n² + k)",
+          "O(k * log n)",
+          "O(n + k)"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "O Counting Sort é um algoritmo estável. O que essa característica garante na prática?",
+        "options": [
+          "Mantém a ordem original de elementos com chaves iguais.",
+          "Impede falhas de hardware no processamento em lote.",
+          "Elimina a necessidade de utilizar memória adicional.",
+          "Assegura que o tempo de execução será sempre fixo."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Quais outros dois algoritmos de ordenação também são reconhecidos como estáveis?",
+        "options": [
+          "Selection Sort e Quicksort.",
+          "Merge Sort e Insertion Sort.",
+          "Heap Sort e Radix Sort.",
+          "Radix Sort e Bucket Sort."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Como o Radix Sort processa a ordenação de números com múltiplos dígitos?",
+        "options": [
+          "Ordena o número inteiro de uma vez via divisões.",
+          "Divide o array e busca o maior dígito no centro.",
+          "Ordena partindo do dígito mais significativo à esquerda.",
+          "Ordena partindo do dígito menos significativo à direita."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "No Radix Sort, qual propriedade a sub-rotina de ordenação por dígito deve possuir?",
+        "options": [
+          "Deve realizar comparações baseadas em árvores.",
+          "Deve utilizar recursividade em todos os passos.",
+          "Deve ser obrigatoriamente um algoritmo estável.",
+          "Deve converter dígitos em notação de grande porte."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Considerando 'd' dígitos e 'k' como base, qual a complexidade do Radix Sort com Counting Sort?",
+        "options": [
+          "O(d(n + k))",
+          "O(n² * d + k)",
+          "O(d * log n)",
+          "O(k * d * n²)"
+        ],
+        "correctAnswer": 0
+      }
+    ]
+  },
+  {
+    "id": "sorting-algorithms",
+    "name": "Sorting Algorithms 1",
+    "description": "Analysis of sorting algorithms, best and worst-case evaluation, and non-comparison linear-time sorting.",
+    "icon": "📊",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "sorting"
+    ],
+    "hardness": "medium",
+    "seq": "4",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What is the main objective of applying a sorting algorithm to a dataset?",
+        "options": [
+          "To optimize the compilation time of the source code.",
+          "To facilitate efficient search and retrieval of items.",
+          "To convert raw data into floating-point values.",
+          "To zero out RAM memory consumption during execution."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Although there are linear-time exceptions, most sorting algorithms are based on which operation?",
+        "options": [
+          "Direct indexing of multidimensional arrays.",
+          "Asynchronous management of execution stacks.",
+          "Exponentiation calculations on large numbers.",
+          "Comparison between elements to determine precedence."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What is the fundamental characteristic of the best case for the Insertion Sort algorithm?",
+        "options": [
+          "It occurs when the input contains only odd values.",
+          "It occurs when elements are in a random order.",
+          "It occurs when the array is already fully sorted.",
+          "It occurs when the size of the array is a power of two."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "In the Insertion Sort algorithm, what characterizes its worst case in terms of execution?",
+        "options": [
+          "Input in reverse order, requiring the maximum number of swaps.",
+          "An array with identical elements, which cancels the inner loops.",
+          "Values that exceed the 32-bit precision limit.",
+          "Excessive use of recursion that generates a stack overflow."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the basic underlying idea of the Selection Sort algorithm?",
+        "options": [
+          "To divide the array into halves to merge them later.",
+          "To place the smallest remaining item into its final position.",
+          "To insert elements into a balanced binary tree.",
+          "To count occurrences of values in an auxiliary array."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What defines the behavior of the repetition loops and the complexity of Selection Sort?",
+        "options": [
+          "Loops are ignored in the worst case to save time.",
+          "Repetitions vary, making the algorithm linear O(n).",
+          "The loop structure results in quadratic time O(n²).",
+          "Execution depends on the bit representation of the data."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Considering worst-case complexity, what is the theoretical difference between Quick Sort and Merge Sort?",
+        "options": [
+          "Quick Sort is O(n log n) and Merge Sort is O(n²).",
+          "Both have the same linear complexity of O(n).",
+          "Quick Sort is O(n²) and Merge Sort is O(n log n).",
+          "Quick Sort is O(1) and Merge Sort is infinite time."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What are examples of linear algorithms that do not use comparisons to sort?",
+        "options": [
+          "Selection Sort, Insertion Sort, and Merge Sort.",
+          "Quick Sort, Shell Sort, and Heap Sort.",
+          "Counting Sort, Radix Sort, and Bucket Sort.",
+          "Bubble Sort, Binary Search, and Random Sort."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the premise regarding the input data for Counting Sort to function properly?",
+        "options": [
+          "The data must be previously in reverse order.",
+          "The elements must be integers within a defined range.",
+          "The array must contain empty spaces for processing.",
+          "The search keys must have varying lengths."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Evaluating the stages of Counting Sort, what is its asymptotic time complexity?",
+        "options": [
+          "O(n * k)",
+          "O(n² + k)",
+          "O(k * log n)",
+          "O(n + k)"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Counting Sort is a stable algorithm. What does this characteristic guarantee in practice?",
+        "options": [
+          "It preserves the original order of elements with equal keys.",
+          "It prevents hardware failures during batch processing.",
+          "It eliminates the need to use additional memory.",
+          "It ensures that the execution time will always be fixed."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which other two sorting algorithms are also recognized as stable?",
+        "options": [
+          "Selection Sort and Quicksort.",
+          "Merge Sort and Insertion Sort.",
+          "Heap Sort and Radix Sort.",
+          "Radix Sort and Bucket Sort."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How does Radix Sort process the sorting of numbers with multiple digits?",
+        "options": [
+          "It sorts the entire integer at once via divisions.",
+          "It divides the array and searches for the largest digit at the center.",
+          "It sorts starting from the most significant digit on the left.",
+          "It sorts starting from the least significant digit on the right."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "In Radix Sort, what property must the digit-sorting sub-routine possess?",
+        "options": [
+          "It must perform comparison-based sorting using trees.",
+          "It must utilize recursion in all steps.",
+          "It must strictly be a stable algorithm.",
+          "It must convert digits into large-scale notation."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Considering 'd' digits and 'k' as the base, what is the complexity of Radix Sort using Counting Sort?",
+        "options": [
+          "O(d(n + k))",
+          "O(n² * d + k)",
+          "O(d * log n)",
+          "O(k * d * n²)"
+        ],
+        "correctAnswer": 0
+      }
+    ]
+  }
+]

@@ -1,0 +1,237 @@
+[
+  {
+    "id": "sorting-algorithms2",
+    "name": "Algoritmos de Ordenação 2",
+    "description": "Análise de algoritmos de ordenação, avaliação de melhor e pior caso, e ordenação em tempo linear sem comparações.",
+    "icon": "📊",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "sorting"
+    ],
+    "hardness": "medium",
+    "seq": "5",
+    "lang": "pt",
+    "questions": [
+      {
+        "question": "O que define um algoritmo de ordenação como sendo 'In-place'?",
+        "options": [
+          "O algoritmo não altera a ordem relativa de elementos iguais.",
+          "O algoritmo ordena o vetor sem exigir memória extra proporcional a n.",
+          "O algoritmo é executado apenas dentro de registradores da CPU.",
+          "O algoritmo garante a execução em tempo linear independente da entrada."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Qual é a principal desvantagem do Merge Sort em relação ao uso de recursos de hardware?",
+        "options": [
+          "Sua complexidade de tempo no pior caso é quadrática.",
+          "Ele é um algoritmo instável, alterando a ordem de chaves iguais.",
+          "Sua execução não pode ser paralelizada em sistemas multi-core.",
+          "Ele exige um vetor auxiliar, resultando em complexidade de espaço O(n)."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "No Quicksort, qual é a função do elemento denominado 'pivô'?",
+        "options": [
+          "Atuar como um contador para o número de trocas realizadas.",
+          "Substituir o menor elemento do vetor logo no início da execução.",
+          "Servir de referência para particionar o vetor em dois subconjuntos.",
+          "Garantir que o algoritmo sempre execute em tempo O(n log n)."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Por que a escolha do pivô é crítica para o desempenho do Quicksort?",
+        "options": [
+          "Um pivô ruim pode levar a partições desbalanceadas e tempo O(n²).",
+          "O pivô define se o algoritmo será estável ou instável na execução.",
+          "A escolha do pivô altera a quantidade de memória RAM utilizada.",
+          "O pivô determina se o algoritmo pode ordenar números negativos."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Qual é a relação entre o Heap Sort e a estrutura de dados Heap?",
+        "options": [
+          "O limite inferior teórico (lower bound) para qualquer algoritmo de ordenação por comparação?",
+          "Ω(n)",
+          "Ω(n²)",
+          "Ω(log n)",
+          "Ω(n log n)"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Sobre o algoritmo Bucket Sort, em qual cenário ele apresenta seu melhor desempenho?",
+        "options": [
+          "Quando todos os elementos da entrada são exatamente iguais.",
+          "Quando os dados de entrada seguem uma distribuição uniforme.",
+          "Quando o vetor de entrada já está ordenado de forma decrescente.",
+          "Quando o intervalo de valores k é muito maior que o número de elementos n."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "O que acontece na etapa de 'Intercalação' (Merge) do algoritmo Merge Sort?",
+        "options": [
+          "Dois subvetores ordenados são combinados em um único vetor ordenado.",
+          "O pivô é posicionado no centro do vetor para a próxima recursão.",
+          "O maior elemento do vetor é selecionado e movido para o final.",
+          "Os elementos são distribuídos em baldes baseados em sua magnitude."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Qual é a relação entre o Heap Sort e a estrutura de dados Heap?",
+        "options": [
+          "O Heap Sort usa a árvore para garantir estabilidade na ordenação.",
+          "O Heap serve apenas para armazenar os dados temporários em tempo linear.",
+          "A estrutura Heap é usada para transformar o tempo quadrático em logarítmico.",
+          "O algoritmo constrói um Max-Heap para extrair repetidamente o maior item."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Qual destes algoritmos é frequentemente preferido para sistemas embarcados com pouca memória?",
+        "options": [
+          "Merge Sort, devido à sua previsibilidade de tempo O(n log n).",
+          "Counting Sort, pois ignora a necessidade de comparações de bits.",
+          "Insertion Sort, por ser In-place e eficiente para pequenos conjuntos.",
+          "Radix Sort, pela sua capacidade de lidar com grandes bases numéricas."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Qual é a principal diferença conceitual entre o Counting Sort e o Bucket Sort?",
+        "options": [
+          "O Counting é estável, enquanto o Bucket Sort é sempre instável.",
+          "O Counting usa chaves como índices; o Bucket usa intervalos de valores.",
+          "O Counting exige memória O(n²), enquanto o Bucket exige apenas O(1).",
+          "O Counting ordena por dígitos, enquanto o Bucket ordena por comparações."
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  },
+  {
+    "id": "sorting-algorithms2",
+    "name": "Sorting Algorithms 2",
+    "description": "Analysis of sorting algorithms, best and worst-case evaluation, and non-comparison linear-time sorting.",
+    "icon": "📊",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "sorting"
+    ],
+    "hardness": "medium",
+    "seq": "5",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What defines a sorting algorithm as being 'In-place'?",
+        "options": [
+          "The algorithm does not alter the relative order of equal elements.",
+          "The algorithm sorts the array without requiring extra memory proportional to n.",
+          "The algorithm is executed exclusively within CPU registers.",
+          "The algorithm guarantees linear-time execution regardless of the input."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the main disadvantage of Merge Sort regarding hardware resource usage?",
+        "options": [
+          "Its worst-case time complexity is quadratic.",
+          "It is an unstable algorithm, changing the order of equal keys.",
+          "Its execution cannot be parallelized on multi-core systems.",
+          "It requires an auxiliary array, resulting in O(n) space complexity."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "In Quicksort, what is the role of the element called the 'pivot'?",
+        "options": [
+          "To act as a counter for the number of swaps performed.",
+          "To replace the smallest element of the array right at the start of execution.",
+          "To serve as a reference to partition the array into two subsets.",
+          "To guarantee that the algorithm always runs in O(n log n) time."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Why is the choice of pivot critical for Quicksort's performance?",
+        "options": [
+          "A poor pivot choice can lead to unbalanced partitions and O(n²) time.",
+          "The pivot defines whether the algorithm will be stable or unstable during execution.",
+          "The pivot choice alters the amount of RAM memory utilized.",
+          "The pivot determines whether the algorithm can sort negative numbers."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the theoretical lower bound for any comparison-based sorting algorithm?",
+        "options": [
+          "Ω(n)",
+          "Ω(n²)",
+          "Ω(log n)",
+          "Ω(n log n)"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Regarding the Bucket Sort algorithm, in which scenario does it show its best performance?",
+        "options": [
+          "When all input elements are exactly identical.",
+          "When the input data follows a uniform distribution.",
+          "When the input array is already sorted in descending order.",
+          "When the range of values k is much larger than the number of elements n."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What happens during the 'Merge' stage of the Merge Sort algorithm?",
+        "options": [
+          "Two sorted subarrays are combined into a single sorted array.",
+          "The pivot is positioned at the center of the array for the next recursion.",
+          "The largest element of the array is selected and moved to the end.",
+          "Elements are distributed into buckets based on their magnitude."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the relationship between Heap Sort and the Heap data structure?",
+        "options": [
+          "Heap Sort uses the tree to guarantee stability in sorting.",
+          "The Heap only serves to store temporary data in linear time.",
+          "The Heap structure is used to transform quadratic time into logarithmic time.",
+          "The algorithm builds a Max-Heap to repeatedly extract the largest item."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Which of these algorithms is frequently preferred for embedded systems with low memory?",
+        "options": [
+          "Merge Sort, due to its O(n log n) time predictability.",
+          "Counting Sort, since it bypasses the need for bit comparisons.",
+          "Insertion Sort, because it is In-place and efficient for small datasets.",
+          "Radix Sort, due to its ability to handle large numerical bases."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the main conceptual difference between Counting Sort and Bucket Sort?",
+        "options": [
+          "Counting Sort is stable, while Bucket Sort is always unstable.",
+          "Counting Sort uses keys as indexes; Bucket Sort uses ranges of values.",
+          "Counting Sort requires O(n²) memory, while Bucket Sort requires only O(1).",
+          "Counting Sort sorts by digits, while Bucket Sort sorts by comparisons."
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  }
+]
