@@ -1,0 +1,63 @@
+{
+  "id": "dinosaurs2",
+  "name": "Dinosaur World 2",
+  "description": "Basics about the creatures that once ruled the Earth.",
+  "icon": "🦖",
+  "color": "green",
+  "category": "Science",
+  "tags": ["paleontology", "nature", "dinosaurs", "evolution"],
+  "hardness": "easy",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "Which of these dinosaurs is often called the 'King of the Dinosaurs'?",
+      "options": ["Spinosaurus", "Giganotosaurus", "Tyrannosaurus Rex", "Allosaurus"],
+      "correctAnswer": 2
+    },
+    {
+      "question": "Which modern animals are the closest living relatives of dinosaurs?",
+      "options": ["Lizards", "Crocodiles", "Birds", "Turtles"],
+      "correctAnswer": 2
+    },
+    {
+      "question": "What do we call a dinosaur that only eats plants?",
+      "options": ["Carnivore", "Herbivore", "Omnivore", "Insectivore"],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Which dinosaur is famous for having a large sail on its back?",
+      "options": ["Spinosaurus", "Stegosaurus", "Diplodocus", "Parasaurolophus"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "How many legs did a Velociraptor walk on?",
+      "options": ["Two", "Four", "Six", "It crawled"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Which of these dinosaurs was heavily armored with a club-like tail?",
+      "options": ["Iguanodon", "Ankylosaurus", "Corythosaurus", "Apatosaurus"],
+      "correctAnswer": 1
+    },
+    {
+      "question": "In which period did the Tyrannosaurus Rex actually live?",
+      "options": ["Triassic", "Jurassic", "Cretaceous", "Carboniferous"],
+      "correctAnswer": 2
+    },
+    {
+      "question": "Which dinosaur had a long, hollow crest on its head used to make sounds?",
+      "options": ["Parasaurolophus", "Triceratops", "Pachycephalosaurus", "Gallimimus"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What was the most likely use for the Pachycephalosaurus thick skull?",
+      "options": ["Storing food", "Head-butting", "Swimming", "Regulating heat"],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Which dinosaur was one of the longest ever, reaching up to 27 meters?",
+      "options": ["Velociraptor", "Diplodocus", "Compsognathus", "Deinonychus"],
+      "correctAnswer": 1
+    }
+  ]
+}

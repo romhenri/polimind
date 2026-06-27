@@ -1,0 +1,63 @@
+{
+  "id": "dinosaurs3",
+  "name": "Dinosaur World 3",
+  "description": "Basics about the creatures that once ruled the Earth.",
+  "icon": "🦖",
+  "color": "green",
+  "category": "Science",
+  "tags": ["paleontology", "nature", "dinosaurs", "evolution"],
+  "hardness": "easy",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "Which of these was one of the smallest dinosaurs, about the size of a chicken?",
+      "options": ["Compsognathus", "Argentinosaurus", "Stegosaurus", "Allosaurus"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What were the feathers on some dinosaurs likely used for?",
+      "options": ["Breathing underwater", "Keeping warm and display", "Digging holes", "Eating leaves"],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Which dinosaur is known for its giant claws, which could be up to 1 meter long?",
+      "options": ["Therizinosaurus", "Tyrannosaurus", "Minmi", "Hadrosaurus"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What is the name of the supercontinent that existed when dinosaurs first appeared?",
+      "options": ["Atlantis", "Pangea", "Eurasia", "Gondwana"],
+      "correctAnswer": 1
+    },
+    {
+      "question": "True or false: Some dinosaurs, like the Maiasaura, cared for their babies in nests.",
+      "options": ["True", "False", "Only the carnivores did", "They didn't have nests"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Which of these was a massive long-necked dinosaur from South America?",
+      "options": ["Argentinosaurus", "Microraptor", "Utahraptor", "Carnotaurus"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What did the Oviraptor mostly eat, according to its name (though later disputed)?",
+      "options": ["Fish", "Eggs", "Insects", "Tree bark"],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Which dinosaur had two horns over its eyes and a bull-like appearance?",
+      "options": ["Carnotaurus", "Protoceratops", "Baryonyx", "Troodon"],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What part of a dinosaur's body is most commonly turned into a fossil?",
+      "options": ["Skin", "Muscles", "Bones and teeth", "Eyes"],
+      "correctAnswer": 2
+    },
+    {
+      "question": "Were there any dinosaurs that lived in the water like fish?",
+      "options": ["Yes, many", "No, they were land animals", "Only during the winter", "They lived in bubbles"],
+      "correctAnswer": 1
+    }
+  ]
+}

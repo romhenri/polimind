@@ -1,0 +1,63 @@
+{
+    "id": "dinosaurs",
+    "name": "Dinosaur World",
+    "description": "Basics about the creatures that once ruled the Earth.",
+    "icon": "🦖",
+    "color": "green",
+    "category": "Science",
+    "tags": ["paleontology", "nature", "dinosaurs", "evolution"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "Which of these dinosaurs was a famous carnivore?",
+        "options": ["Triceratops", "Tyrannosaurus Rex", "Brachiosaurus", "Stegosaurus"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In which geological era did the dinosaurs live?",
+        "options": ["Cenozoic", "Paleozoic", "Mesozoic", "Precambrian"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What does the word 'Dinosaur' mean?",
+        "options": ["Terrible lizard", "Giant lizard", "Ancient lizard", "Stone dragon"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which dinosaur had three horns on its head?",
+        "options": ["Velociraptor", "Spinosaurus", "Ankylosaurus", "Triceratops"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "How were dinosaurs born?",
+        "options": ["From their mother's womb", "From eggs", "From seeds", "From cocoons"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What was the main characteristic of the Brachiosaurus?",
+        "options": ["A very long neck", "Spiky armor", "Incredible speed", "Ability to fly"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which of these dinosaurs had plates on its back and spikes on its tail?",
+        "options": ["Diplodocus", "Stegosaurus", "Allosaurus", "Iguanodon"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What do most scientists believe caused the extinction of the dinosaurs?",
+        "options": ["A flood", "Lack of food", "Asteroid impact", "Ice age"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What do we call scientists who study dinosaur fossils?",
+        "options": ["Archaeologists", "Geologists", "Paleontologists", "Biologists"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Was the Pterodactyl technically a dinosaur?",
+        "options": ["Yes, a flying dinosaur", "No, it was a flying reptile", "Yes, from the raptor family", "No, it was an ancient bird"],
+        "correctAnswer": 1
+      }
+    ]
+}

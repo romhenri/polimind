@@ -1,0 +1,72 @@
+{
+"id": "human-physiology",
+"name": "Human Physiology",
+"description": "Discover how the systems of the human body work together to maintain balance and keep you alive.",
+"color": "emerald",
+"category": "Science",
+"tags": ["biology", "human-body", "anatomy", "physiology"],
+"hardness": "medium",
+"type": "options",
+"questions": [
+{
+"question": "Which organ system is primarily responsible for transporting oxygen, nutrients, and waste products throughout the human body?",
+"options": ["Respiratory system", "Digestive system", "Circulatory system", "Endocrine system"],
+"correctAnswer": 2,
+"explain": "The circulatory system, composed of the heart and blood vessels, pumps and moves blood across the whole body."
+},
+{
+"question": "What is the primary function of the red blood cells in the human body?",
+"options": ["To carry oxygen to body tissues", "To fight off bacterial infections", "To help form blood clots after an injury", "To produce digestive enzymes"],
+"correctAnswer": 0,
+"explain": "Red blood cells contain hemoglobin, a protein specialized in binding and carrying oxygen from the lungs to the rest of the body."
+},
+{
+"question": "In which part of the human digestive system does most of the chemical digestion and nutrient absorption take place?",
+"options": ["Stomach", "Large intestine", "Esophagus", "Small intestine"],
+"correctAnswer": 3,
+"explain": "While digestion begins in the mouth and stomach, the small intestine is where most enzymes break down food and nutrients enter the bloodstream."
+},
+{
+"question": "What process describes the body's ability to maintain a stable internal environment despite external changes?",
+"options": ["Homeostasis", "Metabolism", "Respiration", "Peristalsis"],
+"correctAnswer": 0,
+"explain": "Homeostasis regulates internal conditions like temperature and fluid balance to keep body systems functioning correctly."
+},
+{
+"question": "Which gaseous waste product is removed from the blood by the lungs during exhalation?",
+"options": ["Oxygen", "Carbon dioxide", "Nitrogen", "Carbon monoxide"],
+"correctAnswer": 1,
+"explain": "Cells produce carbon dioxide as waste during cellular respiration, which blood carries back to the lungs to be exhaled."
+},
+{
+"question": "What is the primary functional unit of the human kidney responsible for filtering blood and forming urine?",
+"options": ["Neuron", "Nephron", "Alveolus", "Villus"],
+"correctAnswer": 1,
+"explain": "Each kidney contains millions of microscopic structures called nephrons that filter waste materials out of the bloodstream."
+},
+{
+"question": "Which part of the central nervous system controls involuntary functions such as heartbeat, breathing, and blood pressure?",
+"options": ["Cerebrum", "Cerebellum", "Brainstem", "Spinal cord"],
+"correctAnswer": 2,
+"explain": "The brainstem connects the brain to the spinal cord and manages autonomic, life-sustaining functions."
+},
+{
+"question": "What chemical messengers are produced by the endocrine glands and released directly into the bloodstream?",
+"options": ["Hormones", "Neurotransmitters", "Enzymes", "Antibodies"],
+"correctAnswer": 0,
+"explain": "Hormones travel through the circulatory system to send signals to distant organs and regulate processes like growth and metabolism."
+},
+{
+"question": "Where does the gas exchange take place inside the human respiratory system?",
+"options": ["Trachea", "Bronchi", "Alveoli", "Pharynx"],
+"correctAnswer": 2,
+"explain": "Alveoli are tiny, thin-walled air sacs at the end of the bronchioles where oxygen entering the lungs enters the blood and carbon dioxide leaves it."
+},
+{
+"question": "Which type of muscle tissue is found exclusively in the walls of the human heart?",
+"options": ["Skeletal muscle", "Smooth muscle", "Cardiac muscle", "Rough muscle"],
+"correctAnswer": 2,
+"explain": "Cardiac muscle is an involuntary, striated tissue specialized solely for pumping blood throughout the lifetime of the organism."
+}
+]
+}

@@ -1,0 +1,72 @@
+{
+"id": "ecology",
+"name": "Ecology",
+"description": "Test your fundamental knowledge of ecosystems, food chains, and how living organisms interact with their environment.",
+"color": "emerald",
+"category": "Science",
+"tags": ["biology", "ecology", "environment", "ecosystem"],
+"hardness": "easy",
+"type": "options",
+"questions": [
+{
+"question": "What is the primary source of energy for most ecosystems on Earth?",
+"options": ["The Moon", "Geothermal heat", "The Sun", "Wind power"],
+"correctAnswer": 2,
+"explain": "Sunlight provides the solar energy that plants use for photosynthesis, forming the base of most food webs."
+},
+{
+"question": "Which of the following is considered a biotic factor in an ecosystem?",
+"options": ["Fungi", "Water", "Temperature", "Soil minerals"],
+"correctAnswer": 0,
+"explain": "Biotic factors are the living components of an ecosystem, such as fungi, plants, and animals."
+},
+{
+"question": "An organism that can make its own food using sunlight is called a:",
+"options": ["Decomposer", "Producer", "Consumer", "Apex predator"],
+"correctAnswer": 1,
+"explain": "Producers, or autotrophs, generate their own organic food through processes like photosynthesis."
+},
+{
+"question": "What role do bacteria and fungi play when they break down dead organic matter?",
+"options": ["Decomposers", "Primary consumers", "Herbivores", "Secondary producers"],
+"correctAnswer": 0,
+"explain": "Decomposers recycle nutrients by breaking down dead plants and animals back into the ecosystem."
+},
+{
+"question": "Which term describes a group of individuals belonging to the same species living in a specific area?",
+"options": ["Community", "Biosphere", "Ecosystem", "Population"],
+"correctAnswer": 3,
+"explain": "A population consists of organisms of the same species that live in the same place at the same time."
+},
+{
+"question": "What is an animal called that eats only plants?",
+"options": ["Carnivore", "Herbivore", "Omnivore", "Detritivore"],
+"correctAnswer": 1,
+"explain": "Herbivores are primary consumers that feed exclusively on plants."
+},
+{
+"question": "What happens to the amount of available energy as it moves up a food chain?",
+"options": ["It decreases", "It increases", "It stays exactly the same", "It doubles at each level"],
+"correctAnswer": 0,
+"explain": "Energy is lost as heat at each trophic level, meaning less energy is available to organisms higher up the chain."
+},
+{
+"question": "Which of the following describes a symbiotic relationship where both organisms benefit?",
+"options": ["Parasitism", "Commensalism", "Mutualism", "Predation"],
+"correctAnswer": 2,
+"explain": "Mutualism is a biological interaction where both participating species gain a survival advantage."
+},
+{
+"question": "The specific place or environment where an organism naturally lives and grows is its:",
+"options": ["Niche", "Habitat", "Biome", "Trophic level"],
+"correctAnswer": 1,
+"explain": "A habitat is the physical environment where a species lives, while a niche is its functional role within that environment."
+},
+{
+"question": "Which process removes carbon dioxide from the atmosphere?",
+"options": ["Respiration", "Combustion", "Decomposition", "Photosynthesis"],
+"correctAnswer": 3,
+"explain": "Plants absorb carbon dioxide from the air to produce glucose during photosynthesis."
+}
+]
+}

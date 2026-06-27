@@ -1,0 +1,126 @@
+{
+  "id": "cytology",
+  "name": "Cytology",
+  "description": "Test your fundamental knowledge of cells, the basic units of life.",
+  "color": "emerald",
+  "category": "Science",
+  "tags": [
+    "biology",
+    "cytology",
+    "life"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the basic structural and functional unit of all known living organisms?",
+      "options": [
+        "Atom",
+        "Molecule",
+        "Cell",
+        "Tissue"
+      ],
+      "correctAnswer": 2,
+      "explain": "The cell is considered the fundamental unit of life because all living organisms are composed of cells and all cells arise from pre-existing cells."
+    },
+    {
+      "question": "Which part of the cell is often called the 'control center' because it contains the genetic material?",
+      "options": [
+        "Mitochondrion",
+        "Nucleus",
+        "Ribosome",
+        "Cytoplasm"
+      ],
+      "correctAnswer": 1,
+      "explain": "The nucleus houses the cell's chromosomes, which contain DNA, making it the control center for cell activities."
+    },
+    {
+      "question": "What is the primary function of mitochondria in a cell?",
+      "options": [
+        "Protein synthesis",
+        "Waste removal",
+        "Energy production",
+        "Cell division"
+      ],
+      "correctAnswer": 2,
+      "explain": "Mitochondria are known as the powerhouses of the cell, generating most of the cell's supply of adenosine triphosphate (ATP), used as a source of chemical energy."
+    },
+    {
+      "question": "Which organelle is responsible for synthesizing proteins?",
+      "options": [
+        "Golgi apparatus",
+        "Endoplasmic reticulum",
+        "Lysosome",
+        "Ribosome"
+      ],
+      "correctAnswer": 3,
+      "explain": "Ribosomes are responsible for protein synthesis, translating the genetic code carried by messenger RNA (mRNA) into a specific sequence of amino acids."
+    },
+    {
+      "question": "What is the jelly-like substance that fills the cell and surrounds the organelles?",
+      "options": [
+        "Nucleoplasm",
+        "Cytosol",
+        "Cell wall",
+        "Vacuole"
+      ],
+      "correctAnswer": 1,
+      "explain": "Cytosol is the aqueous component of the cytoplasm within which various organelles and particles are suspended."
+    },
+    {
+      "question": "Which type of cell lacks a true nucleus and membrane-bound organelles?",
+      "options": [
+        "Eukaryotic cell",
+        "Prokaryotic cell",
+        "Plant cell",
+        "Animal cell"
+      ],
+      "correctAnswer": 1,
+      "explain": "Prokaryotic cells, like bacteria, are simpler and lack a nucleus and other membrane-bound organelles found in eukaryotic cells."
+    },
+    {
+      "question": "What is the main function of the cell membrane?",
+      "options": [
+        "Provide structural support",
+        "Control the passage of substances into and out of the cell",
+        "Store genetic information",
+        "Produce energy"
+      ],
+      "correctAnswer": 1,
+      "explain": "The cell membrane acts as a selective barrier, regulating what enters and exits the cell."
+    },
+    {
+      "question": "Which organelle is involved in modifying, sorting, and packaging proteins and lipids for secretion or delivery to other organelles?",
+      "options": [
+        "Lysosome",
+        "Vacuole",
+        "Golgi apparatus",
+        "Centriole"
+      ],
+      "correctAnswer": 2,
+      "explain": "The Golgi apparatus acts like a post office, processing and packaging proteins and lipids synthesized in the endoplasmic reticulum."
+    },
+    {
+      "question": "What is the primary difference between plant and animal cells regarding structure?",
+      "options": [
+        "Animal cells have a cell wall, plant cells do not",
+        "Plant cells have chloroplasts, animal cells do not",
+        "Animal cells have a nucleus, plant cells do not",
+        "Plant cells have ribosomes, animal cells do not"
+      ],
+      "correctAnswer": 1,
+      "explain": "Plant cells typically possess a rigid cell wall and chloroplasts for photosynthesis, which are absent in animal cells."
+    },
+    {
+      "question": "What process do plant cells use to convert light energy into chemical energy?",
+      "options": [
+        "Respiration",
+        "Fermentation",
+        "Photosynthesis",
+        "Transpiration"
+      ],
+      "correctAnswer": 2,
+      "explain": "Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll."
+    }
+  ]
+}
