@@ -1,0 +1,43 @@
+{
+    "id": "bmc",
+    "name": "Business Model Canvas",
+    "description": "Easy BMC questions.",
+    "icon": "📊",
+    "color": "emerald",
+    "category": "General",
+    "tags": ["business", "startup", "management", "entrepreneurship"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "A BMC is...",
+        "options": ["a Software", "a Book", "a Methodology", "a Problem"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What's M in BMC?",
+        "options": ["Mode", "Model", "Mood", "Methodology"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How many sections does a BMC have?",
+        "options": ["4", "6", "3", "9"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Which of the following questions is related to the value proposition in a business model canvas?",
+        "options": [
+          "How much is our good or product worth in the market?",
+          "How much is a customer willing to pay for the service or product we offer?",
+          "What is the problem we are trying to help our customer solve?",
+          "Is there anyone in the field who is doing the same job at a lower cost?"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "The Business Model Canvas helps to...?",
+        "options": ["improve management", "increase profit", "reduce losses", "ideate a business"],
+        "correctAnswer": 3
+      }
+    ]
+  }

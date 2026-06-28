@@ -1,0 +1,63 @@
+{
+    "id": "general3",
+    "name": "General 3",
+    "description": "Easy general knowledge questions.",
+    "icon": "🌍",
+    "color": "purple",
+    "category": "General",
+    "tags": ["culture", "history", "geography", "science"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What is the capital of Japan?",
+        "options": ["Beijing", "Seoul", "Tokyo", "Shanghai"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the largest mammal on land?",
+        "options": ["Elephant", "Giraffe", "Hippopotamus", "Rhinoceros"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which gas is responsible for the Earth's ozone layer?",
+        "options": ["Carbon dioxide", "Oxygen", "Ozone", "Chlorofluorocarbons"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which planet is known as the 'Ringed Planet'?",
+        "options": ["Mars", "Venus", "Jupiter", "Saturn"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Who was the first President of the United States?",
+        "options": ["John Adams", "Thomas Jefferson", "George Washington", "Benjamin Franklin"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the smallest prime number?",
+        "options": ["1", "2", "3", "4"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which artist is famous for painting 'The Starry Night'?",
+        "options": ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Who is the author of the novel '1984'?",
+        "options": ["George Orwell", "Aldous Huxley", "Ray Bradbury", "F. Scott Fitzgerald"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which gas do plants release during photosynthesis?",
+        "options": ["Carbon dioxide", "Oxygen", "Nitrogen", "Methane"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the capital of Brazil?",
+        "options": ["Sao Paulo", "Rio de Janeiro", "Brasilia", "Salvador"],
+        "correctAnswer": 2
+      }
+    ]
+  }

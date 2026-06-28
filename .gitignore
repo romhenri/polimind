@@ -42,4 +42,4 @@ pnpm-debug.log*
 *.sw?
 
 # Project-specific ignored data directory
-/public/data/
+# /public/data/

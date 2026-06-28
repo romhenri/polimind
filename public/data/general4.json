@@ -1,0 +1,113 @@
+{
+  "id": "general4",
+  "name": "General 4",
+  "description": "Various questions about general culture",
+  "icon": "🌍",
+  "color": "purple",
+  "category": "General",
+  "tags": ["culture", "history", "geography", "science"],
+  "hardness": "easy",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "What is the capital of France?",
+      "options": [
+        "London",
+        "Berlin",
+        "Paris",
+        "Madrid"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "How many continents are there in the world?",
+      "options": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "Who painted the Mona Lisa?",
+      "options": [
+        "Van Gogh",
+        "Picasso",
+        "Leonardo da Vinci",
+        "Michelangelo"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "What is the largest planet in the solar system?",
+      "options": [
+        "Earth",
+        "Mars",
+        "Saturn",
+        "Jupiter"
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "In what year did man first land on the Moon?",
+      "options": [
+        "1965",
+        "1969",
+        "1972",
+        "1975"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "What is the deepest ocean?",
+      "options": [
+        "Atlantic",
+        "Indian",
+        "Arctic",
+        "Pacific"
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "How many countries are in the United Nations (approximate)?",
+      "options": [
+        "150",
+        "175",
+        "193",
+        "210"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "What is the smallest country in the world?",
+      "options": [
+        "Monaco",
+        "Vatican City",
+        "San Marino",
+        "Liechtenstein"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Who wrote 'Romeo and Juliet'?",
+      "options": [
+        "Charles Dickens",
+        "William Shakespeare",
+        "Jane Austen",
+        "Mark Twain"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "What is the speed of light?",
+      "options": [
+        "300,000 km/s",
+        "150,000 km/s",
+        "450,000 km/s",
+        "600,000 km/s"
+      ],
+      "correctAnswer": 0
+    }
+  ]
+}

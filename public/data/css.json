@@ -1,0 +1,113 @@
+{
+  "id": "css",
+  "name": "CSS",
+  "description": "Test your styling skills",
+  "icon": "🎨",
+  "color": "pink",
+  "category": "Programming",
+  "tags": ["web", "css", "styling", "design"],
+  "hardness": "easy",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "What does CSS stand for?",
+      "options": [
+        "Computer Style Sheets",
+        "Cascading Style Sheets",
+        "Creative Style System",
+        "Colorful Style Sheets"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Which property is used to change the background color?",
+      "options": [
+        "color",
+        "bgcolor",
+        "background-color",
+        "bg-color"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "How do you make text bold with CSS?",
+      "options": [
+        "font-weight: bold;",
+        "text-style: bold;",
+        "font-style: bold;",
+        "text-weight: bold;"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What is Flexbox?",
+      "options": [
+        "A font type",
+        "A CSS layout model",
+        "A JavaScript library",
+        "A framework"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Which unit is relative to the font size of the parent element?",
+      "options": [
+        "px",
+        "em",
+        "pt",
+        "cm"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "How do you center an element horizontally?",
+      "options": [
+        "text-align: center;",
+        "margin: 0 auto;",
+        "align: center;",
+        "center: true;"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "What is a pseudo-element?",
+      "options": [
+        "A fake element",
+        "A selector that allows styling part of an element (::before, ::after)",
+        "A type of class",
+        "A syntax error"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Which property controls spacing between elements?",
+      "options": [
+        "padding",
+        "margin",
+        "spacing",
+        "gap"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "What is CSS Grid?",
+      "options": [
+        "A type of image",
+        "A two-dimensional layout system",
+        "A font",
+        "A framework"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "How do you apply a smooth transition?",
+      "options": [
+        "animation: smooth;",
+        "transition: all 0.3s;",
+        "smooth: true;",
+        "effect: transition;"
+      ],
+      "correctAnswer": 1
+    }
+  ]
+}

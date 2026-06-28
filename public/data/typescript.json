@@ -1,0 +1,113 @@
+{
+  "id": "typescript",
+  "name": "TypeScript 1",
+  "description": "Evaluate your TypeScript knowledge",
+  "icon": "📘",
+  "color": "blue",
+  "category": "Programming",
+  "tags": ["typescript", "javascript", "types", "language", "web"],
+  "hardness": "easy",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "What is TypeScript?",
+      "options": [
+        "A JavaScript framework",
+        "A type library",
+        "A superset of JavaScript with static typing",
+        "A completely different language"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "How do you declare a typed variable in TypeScript?",
+      "options": [
+        "let x = 10: number;",
+        "let number x = 10;",
+        "let x as number = 10;",
+        "let x: number = 10;"
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "What is an interface in TypeScript?",
+      "options": [
+        "An abstract class",
+        "A structure that defines the shape of an object",
+        "A function type",
+        "A component"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "What is the type for true/false values?",
+      "options": [
+        "bool",
+        "bit",
+        "binary",
+        "boolean"
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "How do you define a union type?",
+      "options": [
+        "type X = string | number;",
+        "type X = string & number;",
+        "type X = string + number;",
+        "type X = string, number;"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What does the 'any' type mean?",
+      "options": [
+        "Only numbers",
+        "Any type, disables type checking",
+        "Only strings",
+        "A syntax error"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "How do you make a property optional?",
+      "options": [
+        "name: string?",
+        "optional name: string",
+        "name?: string",
+        "name: string | null"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "What is a generic in TypeScript?",
+      "options": [
+        "A default function",
+        "An error",
+        "A class type",
+        "A generic type that can work with multiple types"
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "Which command compiles TypeScript to JavaScript?",
+      "options": [
+        "tsc",
+        "compile",
+        "ts-compile",
+        "typescript"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What is type assertion?",
+      "options": [
+        "A type error",
+        "A way to assert a specific type",
+        "A validation",
+        "A test"
+      ],
+      "correctAnswer": 1
+    }
+  ]
+}

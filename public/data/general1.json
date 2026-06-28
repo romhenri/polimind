@@ -1,0 +1,63 @@
+{
+    "id": "general1",
+    "name": "General 1",
+    "description": "Easy general knowledge questions.",
+    "icon": "🌍",
+    "color": "purple",
+    "category": "General",
+    "tags": ["culture", "history", "geography", "science"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What's Messi's country?",
+        "options": ["Brazil", "Argentina", "Portugal", "Spain"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the capital of France?",
+        "options": ["Paris", "London", "Berlin", "Rome"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What's the largest planet in our solar system?",
+        "options": ["Earth", "Mars", "Jupiter", "Venus"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Who painted the Mona Lisa?",
+        "options": ["Leonardo da Vinci", "Vincent van Gogh", "Pablo Picasso", "Michelangelo"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What's the largest mammal on Earth?",
+        "options": ["Elephant", "Blue Whale", "Giraffe", "Lion"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What gas do humans exhale when breathing?",
+        "options": ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the largest organ in the human body?",
+        "options": ["Heart", "Liver", "Brain", "Skin"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Who wrote the 'Harry Potter' book series?",
+        "options": ["J.K. Rowling", "Stephen King", "George Orwell", "Agatha Christie"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What's the smallest planet in our solar system?",
+        "options": ["Earth", "Mars", "Mercury", "Venus"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is 6 multiplied by 7?",
+        "options": ["36", "42", "48", "54"],
+        "correctAnswer": 1
+      }
+    ]
+  }

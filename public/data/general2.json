@@ -1,0 +1,63 @@
+{
+    "id": "general2",
+    "name": "General 2",
+    "description": "Easy general knowledge questions.",
+    "icon": "🌍",
+    "color": "purple",
+    "category": "General",
+    "tags": ["culture", "history", "geography", "science"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "Who is known as the 'Father of Modern Physics'?",
+        "options": ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Stephen Hawking"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the chemical symbol for oxygen?",
+        "options": ["O2", "Ox", "Oxg", "Oz"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which gas do plants absorb from the atmosphere during photosynthesis?",
+        "options": ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which gas makes up the majority of Earth's atmosphere?",
+        "options": ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the largest ocean in the world?",
+        "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What is the capital of Canada?",
+        "options": ["Toronto", "Montreal", "Vancouver", "Ottawa"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What is the largest bone in the human body?",
+        "options": ["Femur", "Radius", "Tibia", "Humerus"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the capital of Australia?",
+        "options": ["Sydney", "Melbourne", "Canberra", "Brisbane"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the largest desert in the world?",
+        "options": ["Gobi Desert", "Sahara Desert", "Mojave Desert", "Atacama Desert"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the largest continent in the world?",
+        "options": ["Africa", "North America", "Asia", "Europe"],
+        "correctAnswer": 2
+      }
+    ]
+  }

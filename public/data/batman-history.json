@@ -1,0 +1,126 @@
+{
+  "id": "batman-history",
+  "name": "Batman History",
+  "description": "Test your knowledge on the dark knight's enduring legacy and evolution through the decades.",
+  "color": "indigo",
+  "category": "General",
+  "tags": [
+    "superheroes",
+    "dc comics",
+    "batman"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "In which comic book did Batman first appear?",
+      "options": [
+        "Action Comics #1",
+        "Detective Comics #27",
+        "Sensation Comics #1",
+        "All-Star Comics #3"
+      ],
+      "correctAnswer": 1,
+      "explain": "Batman made his debut in Detective Comics #27, published in May 1939."
+    },
+    {
+      "question": "Who is officially credited as the creator of Batman, alongside Bill Finger?",
+      "options": [
+        "Jerry Siegel",
+        "Joe Shuster",
+        "Stan Lee",
+        "Bob Kane"
+      ],
+      "correctAnswer": 3,
+      "explain": "Bob Kane is officially credited as Batman's creator, though Bill Finger's contributions were significant and later acknowledged."
+    },
+    {
+      "question": "What is the name of the fictional city protected by Batman?",
+      "options": [
+        "Gotham City",
+        "Metropolis",
+        "Star City",
+        "Central City"
+      ],
+      "correctAnswer": 0,
+      "explain": "Gotham City is the dark, crime-ridden metropolis that Batman dedicates his life to protecting."
+    },
+    {
+      "question": "What tragic event in Bruce Wayne's childhood led him to become Batman?",
+      "options": [
+        "He was bitten by a radioactive bat",
+        "His parents were murdered",
+        "He was exiled from his home planet",
+        "He gained powers from a magic ring"
+      ],
+      "correctAnswer": 1,
+      "explain": "The murder of his parents, Thomas and Martha Wayne, in Crime Alley motivated Bruce to fight crime as Batman."
+    },
+    {
+      "question": "Who was the first individual to adopt the mantle of Robin, Batman's sidekick?",
+      "options": [
+        "Jason Todd",
+        "Tim Drake",
+        "Dick Grayson",
+        "Damian Wayne"
+      ],
+      "correctAnswer": 2,
+      "explain": "Dick Grayson, a former circus acrobat, became the first Robin and later the hero Nightwing."
+    },
+    {
+      "question": "Who is widely considered Batman's most iconic arch-nemesis?",
+      "options": [
+        "The Joker",
+        "Lex Luthor",
+        "Two-Face",
+        "Riddler"
+      ],
+      "correctAnswer": 0,
+      "explain": "The Joker is Batman's chaotic, psychopathic archenemy, known for his clown-like appearance and murderous humor."
+    },
+    {
+      "question": "What is Batman's secret identity?",
+      "options": [
+        "Bruce Wayne",
+        "Clark Kent",
+        "Tony Stark",
+        "Peter Parker"
+      ],
+      "correctAnswer": 0,
+      "explain": "Bruce Wayne is the billionaire industrialist and philanthropist who secretly operates as Batman."
+    },
+    {
+      "question": "Which Gotham City official typically uses the Bat-Signal to summon Batman?",
+      "options": [
+        "The Mayor",
+        "Commissioner Gordon",
+        "Harvey Dent",
+        "Lucius Fox"
+      ],
+      "correctAnswer": 1,
+      "explain": "Commissioner James Gordon uses the Bat-Signal, a powerful spotlight with a bat emblem, to alert Batman to emergencies."
+    },
+    {
+      "question": "What is the name of Batman's iconic customized armored car?",
+      "options": [
+        "The Batmobile",
+        "The Batwing",
+        "The Batcycle",
+        "The Bat-Tank"
+      ],
+      "correctAnswer": 0,
+      "explain": "The Batmobile is Batman's primary mode of transport, a heavily modified, high-performance vehicle."
+    },
+    {
+      "question": "What is the name of the multinational conglomerate owned by Bruce Wayne?",
+      "options": [
+        "LexCorp",
+        "Wayne Enterprises",
+        "Stark Industries",
+        "Oscorp"
+      ],
+      "correctAnswer": 1,
+      "explain": "Wayne Enterprises is the conglomerate owned by Bruce Wayne, which he uses as a cover for his Batman activities and to fund his crime-fighting."
+    }
+  ]
+}
