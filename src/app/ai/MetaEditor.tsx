@@ -16,7 +16,7 @@ interface MetaEditorProps {
 }
 
 const fieldClass =
-  'w-full px-4 py-2.5 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white'
+  'w-full px-4 py-2.5 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white'
 const labelClass = 'block mb-1.5 text-sm font-semibold text-stone-700 dark:text-stone-200'
 
 export default function MetaEditor({ quiz, onSave, onCancel }: MetaEditorProps) {
@@ -115,7 +115,7 @@ export default function MetaEditor({ quiz, onSave, onCancel }: MetaEditorProps) 
         <button
           type="button"
           onClick={handleSave}
-          className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-purple-600 rounded-lg hover:bg-purple-700 active:bg-purple-800"
+          className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-plum-600 rounded-lg hover:bg-plum-700 active:bg-plum-800"
         >
           <FaCheck /> Save changes
         </button>

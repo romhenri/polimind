@@ -1,0 +1,127 @@
+{
+  "id": "statistics",
+  "name": "Intro to Statistics",
+  "description": "Test your basic knowledge of fundamental statistical principles and their applications.",
+  "color": "amber",
+  "category": "Math",
+  "tags": [
+    "statistics",
+    "data",
+    "analysis",
+    "probability"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the primary purpose of statistics?",
+      "options": [
+        "To collect, analyze, interpret, present, and organize data",
+        "To study the properties of numbers and mathematical structures",
+        "To develop new programming languages and algorithms",
+        "To conduct experiments in chemistry and physics"
+      ],
+      "correctAnswer": 0,
+      "explain": "Statistics is fundamentally about the systematic handling and interpretation of data to extract meaningful insights."
+    },
+    {
+      "question": "What is the main difference between a population and a sample in statistics?",
+      "options": [
+        "A population is always smaller than a sample",
+        "A sample includes all members of a group, while a population is a subset",
+        "A population represents the entire group of interest, while a sample is a representative subset",
+        "They are interchangeable terms used to describe any collection of data"
+      ],
+      "correctAnswer": 2,
+      "explain": "A population encompasses all individuals or items of interest, whereas a sample is a smaller, manageable subset taken from that population for study."
+    },
+    {
+      "question": "Which of the following is an example of descriptive statistics?",
+      "options": [
+        "Predicting the outcome of a future election based on a survey",
+        "Calculating the average age of students in a specific class",
+        "Estimating the average income of all citizens in a country from a household survey",
+        "Determining if a new medical treatment is effective for the general public"
+      ],
+      "correctAnswer": 1,
+      "explain": "Descriptive statistics involve summarizing and describing the characteristics of a dataset, such as calculating an average for a specific group."
+    },
+    {
+      "question": "Inferential statistics primarily deals with:",
+      "options": [
+        "Summarizing data using graphs and tables",
+        "Making predictions or generalizations about a population based on a sample",
+        "Organizing raw data into meaningful categories without drawing conclusions",
+        "Calculating exact values for every member of an entire population"
+      ],
+      "correctAnswer": 1,
+      "explain": "Inferential statistics uses data from a sample to draw conclusions or make predictions about a larger, unobserved population."
+    },
+    {
+      "question": "A variable that can take on a finite or countably infinite number of values, typically obtained by counting, is called a:",
+      "options": [
+        "Continuous variable",
+        "Qualitative variable",
+        "Discrete variable",
+        "Nominal variable"
+      ],
+      "correctAnswer": 2,
+      "explain": "Discrete variables have distinct, separate values, often whole numbers that result from counting."
+    },
+    {
+      "question": "Which type of variable categorizes data without any intrinsic order or ranking?",
+      "options": [
+        "Ordinal variable",
+        "Nominal variable",
+        "Ratio variable",
+        "Interval variable"
+      ],
+      "correctAnswer": 1,
+      "explain": "Nominal variables are used for labels or names to categorize data without any quantitative value or specific order."
+    },
+    {
+      "question": "What does the 'mean' represent in a dataset?",
+      "options": [
+        "The middle value when the data is arranged in order",
+        "The most frequently occurring value in the dataset",
+        "The sum of all values divided by the number of values",
+        "The difference between the highest and lowest values in the dataset"
+      ],
+      "correctAnswer": 2,
+      "explain": "The mean is the arithmetic average, calculated by adding all data points and dividing by the count of those points."
+    },
+    {
+      "question": "The 'median' of a arranged dataset in ascending or descending order defined as:",
+      "options": [
+        "The average of the highest and lowest values",
+        "The value that appears most often in the dataset",
+        "The middle value in the dataset",
+        "The square root of the dataset's variance"
+      ],
+      "correctAnswer": 2,
+      "explain": "The median is the central value of an ordered dataset, dividing it into two equal halves, with half the values above it and half below."
+    },
+    {
+      "question": "What does the 'mode' signify in a dataset?",
+      "options": [
+        "The sum of all data points",
+        "The value that occurs with the highest frequency",
+        "The value exactly in the center of the dataset",
+        "The total spread or range of the dataset"
+      ],
+      "correctAnswer": 1,
+      "explain": "The mode is the value that appears most frequently in a dataset, indicating the most common observation."
+    },
+    {
+      "question": "If a researcher surveys 200 high school students to understand the study habits of all high school students in a city, the 200 students constitute a:",
+      "options": [
+        "Population",
+        "Parameter",
+        "Statistic",
+        "Sample"
+      ],
+      "correctAnswer": 3,
+      "explain": "A sample is a subset of the population chosen for study, representing the larger group from which it was drawn."
+    }
+  ]
+}

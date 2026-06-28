@@ -149,7 +149,7 @@ export default function AiQuizRunner({ quiz, onExit }: AiQuizRunnerProps) {
           <button
             type="button"
             onClick={onExit}
-            className="inline-flex items-center gap-2 font-semibold text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300"
+            className="inline-flex items-center gap-2 font-semibold text-plum-600 dark:text-plum-400 hover:text-plum-700 dark:hover:text-plum-300"
           >
             <FaArrowLeft /> Back to generator
           </button>
@@ -170,7 +170,7 @@ export default function AiQuizRunner({ quiz, onExit }: AiQuizRunnerProps) {
         <button
           type="button"
           onClick={onExit}
-          className="items-center hidden gap-2 mb-2 font-semibold sm:inline-flex sm:mb-4 text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300"
+          className="items-center hidden gap-2 mb-2 font-semibold sm:inline-flex sm:mb-4 text-plum-600 dark:text-plum-400 hover:text-plum-700 dark:hover:text-plum-300"
         >
           <FaArrowLeft /> Back
         </button>
@@ -181,7 +181,7 @@ export default function AiQuizRunner({ quiz, onExit }: AiQuizRunnerProps) {
           </h1>
           {totalAnswered > 0 && (
             <div className="text-right">
-              <div className="text-xl font-bold text-purple-600 dark:text-purple-400 sm:text-3xl">{currentPercentage}%</div>
+              <div className="text-xl font-bold text-plum-600 dark:text-plum-400 sm:text-3xl">{currentPercentage}%</div>
               <div className="text-xs text-stone-500 dark:text-stone-400 sm:text-sm">{correctAnswers}/{totalAnswered} correct</div>
             </div>
           )}
@@ -202,7 +202,7 @@ export default function AiQuizRunner({ quiz, onExit }: AiQuizRunnerProps) {
 
       <div className="mt-4 sm:mt-6">
         <div className="h-2 overflow-hidden rounded-full sm:h-3 bg-stone-200 dark:bg-stone-700">
-          <div className="h-full transition-all duration-500 bg-purple-500" style={{ width: `${progress}%` }} />
+          <div className="h-full transition-all duration-500 bg-plum-500" style={{ width: `${progress}%` }} />
         </div>
         <div className="hidden mt-1 text-xs text-center text-stone-600 dark:text-stone-400 sm:mt-2 sm:text-sm sm:block">
           Question {quizState.currentQuestionIndex + 1} of {questions.length}

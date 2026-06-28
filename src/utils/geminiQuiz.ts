@@ -70,6 +70,7 @@ function buildPrompt(subject: string, count: number): string {
     '    - "correctAnswer": the 0-based index (0 to 3) of the correct option.',
     '    - "explain": one short sentence explaining why the answer is correct.',
     '- Exactly one option is correct, and vary the position of the correct answer across questions.',
+    '- Do NOT make the correct option the longest one; keep all options similar in length so length is not a clue.',
     '- Write everything in English (id too). Output only the JSON object, with no extra text.',
     '',
     `Subject: ${subject}`,
@@ -112,6 +113,7 @@ export function buildCopyPrompt(subject: string, count: number): string {
     `- "questions": exactly ${count} items, each with exactly 4 plausible options.`,
     '- "correctAnswer": 0-based index (0 to 3) of the correct option; exactly one option is correct.',
     '- Vary the position of the correct answer across questions.',
+    '- Do NOT make the correct option the longest one; keep all options similar in length so length is not a clue.',
     '- Write everything in English (including "id"). Output ONLY the JSON object.',
     '',
     `Subject: ${subjectLine}`,
@@ -119,7 +121,7 @@ export function buildCopyPrompt(subject: string, count: number): string {
   ].join('\n')
 }
 
-function buildQuestionPrompt(quiz: QuizMetadata, index: number, instructions?: string): string {
+function buildQuestionPrompt(quiz: QuizMetadata, index: number): string {
   const current = quiz.questions[index]
   const others = quiz.questions
     .filter((_, i) => i !== index)
@@ -138,6 +140,7 @@ function buildQuestionPrompt(quiz: QuizMetadata, index: number, instructions?: s
     '- "correctAnswer": the 0-based index (0 to 3) of the correct option.',
     '- "explain": one short sentence explaining why the answer is correct.',
     '- Exactly one option is correct.',
+    '- Do NOT make the correct option the longest one; keep all options similar in length so length is not a clue.',
     '- The question must fit the quiz subject and difficulty.',
     '- It must NOT duplicate any of the existing questions listed below.',
     '- Write everything in English. Output only the JSON object, with no extra text.',
@@ -146,9 +149,34 @@ function buildQuestionPrompt(quiz: QuizMetadata, index: number, instructions?: s
     others || '(none)',
     '',
     `Question being replaced: ${current?.question ?? '(none)'}`,
-    instructions?.trim()
-      ? `\nFollow these additional instructions for the new question: ${instructions.trim()}`
-      : '',
+  ]
+    .filter(Boolean)
+    .join('\n')
+}
+
+function buildEditPrompt(question: OptionsQuestion, instructions: string): string {
+  const options = question.options.map((opt, i) => `  ${i}. ${opt}`).join('\n')
+  return [
+    'You are editing a single multiple-choice question.',
+    'Apply the instructions below to the question and return the updated question as a single JSON object.',
+    'Work ONLY with the question provided — do not invent a broader quiz, topic or surrounding context.',
+    '',
+    `Instructions: ${instructions.trim()}`,
+    '',
+    'Current question:',
+    `- question: ${question.question}`,
+    '- options:',
+    options,
+    `- correctAnswer (0-based index): ${question.correctAnswer}`,
+    question.explain ? `- explain: ${question.explain}` : '',
+    '',
+    'Rules:',
+    '- Keep the same JSON shape: "question", "options", "correctAnswer", "explain".',
+    '- "options": exactly 4 plausible answer strings.',
+    '- "correctAnswer": the 0-based index (0 to 3) of the correct option; exactly one is correct.',
+    '- "explain": one short sentence explaining why the answer is correct.',
+    '- Preserve anything the instructions do not ask to change.',
+    '- Output only the JSON object, with no extra text.',
   ]
     .filter(Boolean)
     .join('\n')
@@ -228,6 +256,20 @@ function normalizeQuiz(raw: unknown, fallbackSubject: string): QuizMetadata {
     type: 'options',
     questions,
   }
+}
+
+export function parseQuizJson(text: string): QuizMetadata {
+  const trimmed = text.trim()
+  if (!trimmed) {
+    throw new Error('Paste or upload a quiz JSON first.')
+  }
+  let parsed: unknown
+  try {
+    parsed = JSON.parse(trimmed)
+  } catch {
+    throw new Error('Invalid JSON: check for missing commas, quotes or brackets.')
+  }
+  return normalizeQuiz(parsed, 'imported-quiz')
 }
 
 export function quizToDataFile(quiz: QuizMetadata): Record<string, unknown> {
@@ -320,7 +362,11 @@ export async function regenerateQuestion(
   index: number,
   instructions?: string
 ): Promise<RegeneratedQuestion> {
-  const prompt = buildQuestionPrompt(quiz, index, instructions)
+  const trimmedInstructions = instructions?.trim()
+  const current = quiz.questions[index]
+  const prompt = trimmedInstructions && current && 'options' in current
+    ? buildEditPrompt(current, trimmedInstructions)
+    : buildQuestionPrompt(quiz, index)
   const { result, model } = await withModelFallback(async (model) => {
     const parsed = await callGemini(apiKey, model, prompt, QUESTION_SCHEMA)
     const question = normalizeQuestion(parsed)

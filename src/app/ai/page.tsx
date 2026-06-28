@@ -11,10 +11,12 @@ import {
   FaPen,
   FaCopy,
   FaCheck,
+  FaFileImport,
+  FaUpload,
 } from 'react-icons/fa'
 import { FaWandMagicSparkles } from 'react-icons/fa6'
-import { QuizMetadata } from '@/types/quiz'
-import { generateQuiz, regenerateQuestion, quizToDataFile, buildCopyPrompt } from '@/utils/geminiQuiz'
+import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
+import { generateQuiz, regenerateQuestion, quizToDataFile, buildCopyPrompt, parseQuizJson } from '@/utils/geminiQuiz'
 import AiQuizRunner from './AiQuizRunner'
 import MetaEditor from './MetaEditor'
 import QuestionList from './QuestionList'
@@ -31,10 +33,13 @@ export default function AiPage() {
   const [quiz, setQuiz] = useState<QuizMetadata | null>(null)
   const [usedModel, setUsedModel] = useState('')
   const [view, setView] = useState<'form' | 'quiz'>('form')
+  const [activeTab, setActiveTab] = useState<'generate' | 'edit'>('generate')
   const [editing, setEditing] = useState(false)
   const [regeneratingIndex, setRegeneratingIndex] = useState<number | null>(null)
   const [regenError, setRegenError] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
+  const [importJson, setImportJson] = useState('')
+  const [importError, setImportError] = useState<string | null>(null)
 
   useEffect(() => {
     const stored = localStorage.getItem(API_KEY_STORAGE)
@@ -69,6 +74,7 @@ export default function AiPage() {
       const result = await generateQuiz(apiKey.trim(), subject.trim(), count)
       setQuiz(result.quiz)
       setUsedModel(result.model)
+      setActiveTab('edit')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong while generating the quiz.')
     } finally {
@@ -76,9 +82,38 @@ export default function AiPage() {
     }
   }
 
+  const handleImportJson = () => {
+    setImportError(null)
+    try {
+      const imported = parseQuizJson(importJson)
+      setQuiz(imported)
+      setUsedModel('')
+      setEditing(false)
+      setActiveTab('edit')
+    } catch (err) {
+      setImportError(err instanceof Error ? err.message : 'Could not import this JSON.')
+    }
+  }
+
+  const handleImportFile = (file: File) => {
+    const reader = new FileReader()
+    reader.onload = () => setImportJson(typeof reader.result === 'string' ? reader.result : '')
+    reader.onerror = () => setImportError('Could not read the selected file.')
+    reader.readAsText(file)
+  }
+
   const handleSaveMeta = (meta: Partial<QuizMetadata>) => {
     setQuiz((prev) => (prev ? { ...prev, ...meta } : prev))
     setEditing(false)
+  }
+
+  const handleUpdateQuestion = (index: number, question: OptionsQuestion) => {
+    setQuiz((prev) => {
+      if (!prev) return prev
+      const questions = [...prev.questions]
+      questions[index] = question
+      return { ...prev, questions }
+    })
   }
 
   const handleRegenerateQuestion = async (index: number, instructions?: string) => {
@@ -119,14 +154,40 @@ export default function AiPage() {
     <div className="max-w-3xl mx-auto animate-fade-in">
       <div className="mb-6 text-center">
         <h1 className="mt-4 mb-2 text-3xl font-bold tracking-wide font-display sm:text-4xl md:text-5xl">
-          Polimind<span className="text-purple-600 dark:text-purple-400">.ai</span>
+          Polimind<span className="text-plum-600 dark:text-plum-400">.ai</span>
         </h1>
         <p className="text-base text-stone-600 dark:text-stone-300 sm:text-lg md:text-xl">
           Generate a custom quiz with Gemini and start playing instantly.
         </p>
       </div>
 
-      <div className="p-6 bg-white border-2 rounded-xl border-purple-200 dark:bg-stone-900 dark:border-purple-900/60">
+      <div className="grid grid-cols-2 gap-2 p-1 mb-6 border-2 rounded-xl border-plum-200 bg-plum-50/50 dark:border-plum-900/60 dark:bg-stone-900">
+        <button
+          type="button"
+          onClick={() => setActiveTab('generate')}
+          className={`flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold transition-colors rounded-lg ${
+            activeTab === 'generate'
+              ? 'bg-plum-600 text-white'
+              : 'text-plum-700 hover:bg-plum-100 dark:text-plum-300 dark:hover:bg-stone-800'
+          }`}
+        >
+          <FaWandMagicSparkles /> 1. Generate
+        </button>
+        <button
+          type="button"
+          onClick={() => quiz && setActiveTab('edit')}
+          disabled={!quiz}
+          className={`flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold transition-colors rounded-lg disabled:cursor-not-allowed disabled:opacity-50 ${
+            activeTab === 'edit'
+              ? 'bg-plum-600 text-white'
+              : 'text-plum-700 hover:bg-plum-100 dark:text-plum-300 dark:hover:bg-stone-800'
+          }`}
+        >
+          <FaPen /> 2. Edit
+        </button>
+      </div>
+
+      <div className={`p-6 bg-white border-2 rounded-xl border-plum-200 dark:bg-stone-900 dark:border-plum-900/60 ${activeTab === 'generate' ? '' : 'hidden'}`}>
         <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
           Gemini API key
         </label>
@@ -138,7 +199,7 @@ export default function AiPage() {
             onChange={(e) => setApiKey(e.target.value)}
             placeholder="Paste your Gemini API key"
             autoComplete="off"
-            className="w-full py-3 pl-12 pr-12 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+            className="w-full py-3 pl-12 pr-12 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
           />
           <button
             type="button"
@@ -155,7 +216,7 @@ export default function AiPage() {
             href="https://aistudio.google.com/apikey"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-purple-600 dark:text-purple-400 hover:underline"
+            className="font-semibold text-plum-600 dark:text-plum-400 hover:underline"
           >
             Google AI Studio
           </a>
@@ -170,7 +231,7 @@ export default function AiPage() {
           onChange={(e) => setSubject(e.target.value)}
           rows={3}
           placeholder="e.g. The fall of the Roman Empire, React hooks, basics of organic chemistry..."
-          className="w-full px-4 py-3 mb-2 text-sm border-2 rounded-lg resize-none border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+          className="w-full px-4 py-3 mb-2 text-sm border-2 rounded-lg resize-none border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
         />
         <p className="mb-5 text-xs text-stone-500 dark:text-stone-400">
           polimind automatically adds the formatting instructions so the output works as a playable quiz.
@@ -186,7 +247,7 @@ export default function AiPage() {
             max={20}
             value={count}
             onChange={(e) => setCount(Math.max(4, Math.min(20, Number(e.target.value) || 10)))}
-            className="w-full px-4 py-3 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+            className="w-full px-4 py-3 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
           />
         </div>
 
@@ -196,7 +257,7 @@ export default function AiPage() {
             onClick={handleCopyPrompt}
             disabled={!canCopy}
             title="Copy a ready-to-use prompt to paste into any AI chat"
-            className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-purple-700 border-purple-500 hover:bg-purple-50 dark:text-purple-300 dark:border-purple-400 dark:hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-plum-700 border-plum-500 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-400 dark:hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {copied ? (
               <>
@@ -212,7 +273,7 @@ export default function AiPage() {
             type="button"
             onClick={handleGenerate}
             disabled={!canGenerate}
-            className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-purple-600 rounded-lg hover:bg-purple-700 active:bg-purple-800 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-plum-600 rounded-lg hover:bg-plum-700 active:bg-plum-800 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? (
               <>
@@ -233,21 +294,74 @@ export default function AiPage() {
         )}
       </div>
 
-      {quiz && (
-        <div className="p-6 mt-6 bg-white border-2 rounded-xl border-purple-200 dark:bg-stone-900 dark:border-purple-900/60 animate-fade-in">
+      <div className={`p-6 mt-6 bg-white border-2 rounded-xl border-plum-200 dark:bg-stone-900 dark:border-plum-900/60 ${activeTab === 'generate' ? '' : 'hidden'}`}>
+        <div className="flex items-center gap-2 mb-2">
+          <FaFileImport className="text-plum-500" aria-hidden />
+          <h2 className="text-lg font-semibold text-stone-800 dark:text-white">
+            Import existing JSON
+          </h2>
+        </div>
+        <p className="mb-4 text-xs text-stone-500 dark:text-stone-400">
+          Already have a quiz JSON? Paste it or upload a file to edit it directly — it&apos;s validated before importing.
+        </p>
+
+        <textarea
+          value={importJson}
+          onChange={(e) => {
+            setImportJson(e.target.value)
+            if (importError) setImportError(null)
+          }}
+          rows={6}
+          placeholder='{ "id": "my-quiz", "name": "...", "questions": [ ... ] }'
+          className="w-full px-4 py-3 mb-3 font-mono text-xs border-2 rounded-lg resize-y border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+        />
+
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <label className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg cursor-pointer text-plum-700 border-plum-500 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-400 dark:hover:bg-stone-800">
+            <FaUpload /> Upload file
+            <input
+              type="file"
+              accept="application/json,.json"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0]
+                if (file) handleImportFile(file)
+                e.target.value = ''
+              }}
+            />
+          </label>
+          <button
+            type="button"
+            onClick={handleImportJson}
+            disabled={importJson.trim() === ''}
+            className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-plum-600 rounded-lg hover:bg-plum-700 active:bg-plum-800 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <FaFileImport /> Import &amp; edit
+          </button>
+        </div>
+
+        {importError && (
+          <div className="p-3 mt-4 text-sm border-2 rounded-lg text-red-700 bg-red-50 border-red-200 dark:text-red-300 dark:bg-red-950/40 dark:border-red-800">
+            {importError}
+          </div>
+        )}
+      </div>
+
+      {quiz && activeTab === 'edit' && (
+        <div className="p-6 bg-white border-2 rounded-xl border-plum-200 dark:bg-stone-900 dark:border-plum-900/60 animate-fade-in">
           <div className="flex items-start justify-between gap-3 mb-4">
             <h2 className="text-2xl font-bold tracking-wide font-display text-stone-800 dark:text-white sm:text-3xl">
               {quiz.name}
             </h2>
             <div className="flex items-center flex-shrink-0 gap-3">
-              <span className="text-sm font-semibold text-purple-600 dark:text-purple-400">
+              <span className="text-sm font-semibold text-plum-600 dark:text-plum-400">
                 {quiz.questions.length} questions
               </span>
               {!editing && (
                 <button
                   type="button"
                   onClick={() => setEditing(true)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold transition-colors border-2 rounded-lg text-purple-700 border-purple-300 hover:bg-purple-50 dark:text-purple-300 dark:border-purple-800 dark:hover:bg-stone-800"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold transition-colors border-2 rounded-lg text-plum-700 border-plum-300 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-800 dark:hover:bg-stone-800"
                 >
                   <FaPen /> Edit
                 </button>
@@ -274,13 +388,14 @@ export default function AiPage() {
                 regeneratingIndex={regeneratingIndex}
                 error={regenError}
                 onRegenerate={handleRegenerateQuestion}
+                onUpdateQuestion={handleUpdateQuestion}
               />
 
               <details className="mt-5 group">
-                <summary className="text-sm font-semibold cursor-pointer select-none text-purple-700 dark:text-purple-300 hover:underline">
+                <summary className="text-sm font-semibold cursor-pointer select-none text-plum-700 dark:text-plum-300 hover:underline">
                   View raw JSON
                 </summary>
-                <pre className="p-4 mt-3 overflow-auto text-xs leading-relaxed border-2 rounded-lg max-h-72 border-purple-100 bg-purple-50/50 text-stone-700 dark:border-purple-900/40 dark:bg-stone-800 dark:text-stone-200">
+                <pre className="p-4 mt-3 overflow-auto text-xs leading-relaxed border-2 rounded-lg max-h-72 border-plum-100 bg-plum-50/50 text-stone-700 dark:border-plum-900/40 dark:bg-stone-800 dark:text-stone-200">
                   {jsonPreview}
                 </pre>
               </details>
@@ -289,14 +404,14 @@ export default function AiPage() {
                 <button
                   type="button"
                   onClick={handleDownload}
-                  className="flex items-center justify-center gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-purple-700 border-purple-500 hover:bg-purple-50 dark:text-purple-300 dark:border-purple-400 dark:hover:bg-stone-800"
+                  className="flex items-center justify-center gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-plum-700 border-plum-500 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-400 dark:hover:bg-stone-800"
                 >
                   <FaDownload /> Download JSON
                 </button>
                 <button
                   type="button"
                   onClick={() => setView('quiz')}
-                  className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-purple-600 rounded-lg hover:bg-purple-700 active:bg-purple-800"
+                  className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-plum-600 rounded-lg hover:bg-plum-700 active:bg-plum-800"
                 >
                   <FaPlay /> Start quiz
                 </button>
