@@ -1,0 +1,127 @@
+{
+  "id": "ml-fundamentals-3",
+  "name": "Machine Learning Fundamentals III",
+  "description": "Master advanced model evaluation, hyperparameter optimization, and complex data preprocessing pitfalls.",
+  "color": "lime",
+  "category": "Data",
+  "tags": [
+    "ml",
+    "ai",
+    "data science",
+    "models"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "Which evaluation metric is most appropriate for a highly imbalanced classification task where false positives are extremely costly?",
+      "options": [
+        "ROC-AUC",
+        "Precision",
+        "Recall",
+        "Accuracy"
+      ],
+      "correctAnswer": 1,
+      "explain": "Precision focuses on minimizing false positives by measuring the ratio of true positives to all predicted positives."
+    },
+    {
+      "question": "What is a major limitation of using standard Grid Search for hyperparameter tuning on complex models?",
+      "options": [
+        "It always fails to find the global optimum parameters.",
+        "It scales poorly as the number of hyperparameters increases.",
+        "It introduces target data leakage during the search phase.",
+        "It restricts the model to evaluating only linear parameters."
+      ],
+      "correctAnswer": 1,
+      "explain": "Grid Search evaluates every possible combination of parameters, making it computationally expensive and slow for large search spaces."
+    },
+    {
+      "question": "How does Bayesian Optimization improve upon Random Search for hyperparameter tuning?",
+      "options": [
+        "It runs all parameter evaluations in parallel pipelines.",
+        "It uses past evaluation results to choose the next parameters.",
+        "It eliminates the need to use a validation dataset entirely.",
+        "It simplifies the model architecture to speed up execution."
+      ],
+      "correctAnswer": 1,
+      "explain": "Bayesian Optimization builds a probabilistic model of the objective function to select the most promising hyperparameters sequentially."
+    },
+    {
+      "question": "What type of data leakage occurs when a time-series model uses future information to predict past events?",
+      "options": [
+        "Target leakage",
+        "Temporal leakage",
+        "Feature scaling leakage",
+        "Distributional leakage"
+      ],
+      "correctAnswer": 1,
+      "explain": "Temporal leakage happens when data from the future inadvertently leaks into the training data of a time-dependent model."
+    },
+    {
+      "question": "Which cross-validation strategy should be strictly used when evaluating time-series forecasting models?",
+      "options": [
+        "Stratified K-Fold Cross-Validation",
+        "Time Series Split (Rolling Window)",
+        "Repeated Random Subsampling",
+        "Leave-One-Out Cross-Validation"
+      ],
+      "correctAnswer": 1,
+      "explain": "Time series splits respect the temporal order of data, ensuring the model is never trained on future data to predict the past."
+    },
+    {
+      "question": "What is the primary effect of adding an L1 regularization term (Lasso) to a linear modeling process?",
+      "options": [
+        "It forces the model weights to scale exponentially.",
+        "It drives coefficients to zero, performing feature selection.",
+        "It eliminates the need to normalize numerical features.",
+        "It increases the model sensitivity to high-frequency noise."
+      ],
+      "correctAnswer": 1,
+      "explain": "L1 regularization penalizes the absolute magnitude of coefficients, which can shrink unimportant feature weights exactly to zero."
+    },
+    {
+      "question": "In the context of tree-based models, what does the 'feature importance' metric typically measure?",
+      "options": [
+        "The exact linear correlation with the target.",
+        "The total reduction in criterion brought by a feature.",
+        "The storage size required to compress the feature.",
+        "The percentage of missing values within that feature."
+      ],
+      "correctAnswer": 1,
+      "explain": "Feature importance in tree models calculates how much each feature decreases the impurity or splits the nodes effectively across all trees."
+    },
+    {
+      "question": "Why is it dangerous to compute the mean and variance on the entire dataset before splitting into train/test sets?",
+      "options": [
+        "It causes an immediate categorical encoding error.",
+        "It leaks test set statistics into the training process.",
+        "It artificially reduces the dimensionality of features.",
+        "It changes the target labels from discrete to continuous."
+      ],
+      "correctAnswer": 1,
+      "explain": "Calculating preprocessing statistics on the whole dataset introduces information from the test set into training, causing data leakage."
+    },
+    {
+      "question": "What is a key benefit of using Stratified K-Fold over standard K-Fold cross-validation?",
+      "options": [
+        "It completes the training phase in half the time.",
+        "It preserves the percentage of samples for each class.",
+        "It generates synthetic rows to balance out the data.",
+        "It automatically optimizes the model learning rate."
+      ],
+      "correctAnswer": 1,
+      "explain": "Stratification ensures that each fold contains approximately the same percentage of target class labels as the complete dataset."
+    },
+    {
+      "question": "What does the 'early stopping' technique monitor to prevent overfitting during XGBoost training?",
+      "options": [
+        "The training dataset loss trend.",
+        "The validation dataset metric trend.",
+        "The total number of features used.",
+        "The execution time per iteration."
+      ],
+      "correctAnswer": 1,
+      "explain": "Early stopping halts training when the performance on a separate validation dataset stops improving after a set number of rounds."
+    }
+  ]
+}

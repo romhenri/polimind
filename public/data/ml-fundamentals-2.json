@@ -1,0 +1,127 @@
+{
+  "id": "ml-fundamentals-2",
+  "name": "Machine Learning Fundamentals II",
+  "description": "Deepen your knowledge of data preprocessing, validation strategies, and advanced ensemble models.",
+  "color": "lime",
+  "category": "Data",
+  "tags": [
+    "ml",
+    "ai",
+    "data science",
+    "models"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is a primary consequence of leaving missing values untreated in datasets for most ML algorithms?",
+      "options": [
+        "The model will automatically overfit the data.",
+        "The algorithm will fail or throw a runtime error.",
+        "The feature distribution shifts to a normal curve.",
+        "The training execution speed increases significantly."
+      ],
+      "correctAnswer": 1,
+      "explain": "Most standard machine learning libraries cannot handle missing inputs and will throw errors during training."
+    },
+    {
+      "question": "Which imputation method fills missing numerical data with the most frequent value in that column?",
+      "options": [
+        "Mean imputation",
+        "Median imputation",
+        "Mode imputation",
+        "Zero imputation"
+      ],
+      "correctAnswer": 2,
+      "explain": "Mode imputation replaces missing data points with the most frequent value present in the feature."
+    },
+    {
+      "question": "What is a major disadvantage of using One-Hot Encoding on high-cardinality categorical features?",
+      "options": [
+        "It introduces severe data leakage issues.",
+        "It drastically increases feature dimensionality.",
+        "It forces the model to use linear structures.",
+        "It eliminates important target variable signals."
+      ],
+      "correctAnswer": 1,
+      "explain": "One-hot encoding creates a new binary column for every unique category, leading to a very sparse, high-dimensional matrix."
+    },
+    {
+      "question": "When applying Target Encoding to a categorical variable, what risk must you actively mitigate?",
+      "options": [
+        "Underfitting",
+        "Data leakage",
+        "Vanishing gradients",
+        "Sparsity errors"
+      ],
+      "correctAnswer": 1,
+      "explain": "Target encoding uses information from the target variable to encode features, which can easily cause data leakage if not cross-validated."
+    },
+    {
+      "question": "What is the primary utility of using a Pipeline in a machine learning workflow?",
+      "options": [
+        "To automatically tune hyperparameters.",
+        "To enforce the exact same sequence of transformations.",
+        "To compress the final model file size.",
+        "To convert unsupervised tasks into supervised ones."
+      ],
+      "correctAnswer": 1,
+      "explain": "Pipelines bundle preprocessing and modeling steps together, ensuring identical data transformations during training and testing."
+    },
+    {
+      "question": "How does using a Pipeline help prevent data leakage during cross-validation?",
+      "options": [
+        "It fits transformers only on the training folds.",
+        "It removes all categorical features automatically.",
+        "It duplicates the validation target variables.",
+        "It normalizes the entire dataset beforehand."
+      ],
+      "correctAnswer": 0,
+      "explain": "Pipelines ensure preprocessing parameters are calculated strictly within each training fold, keeping validation folds isolated."
+    },
+    {
+      "question": "What core machine learning technique does XGBoost utilize?",
+      "options": [
+        "Deep stacking",
+        "Bagging ensembles",
+        "Gradient boosting",
+        "Feature scaling"
+      ],
+      "correctAnswer": 2,
+      "explain": "XGBoost stands for Extreme Gradient Boosting, which sequentially trains trees to correct the errors of previous trees."
+    },
+    {
+      "question": "Which strategy does XGBoost natively use to handle missing values during training?",
+      "options": [
+        "It drops rows containing any missing values.",
+        "It learns the optimal default direction for them.",
+        "It replaces them with the mean of the column.",
+        "It stops execution and requests manual imputation."
+      ],
+      "correctAnswer": 1,
+      "explain": "XGBoost automatically learns whether missing values should go into the left or right child node based on training loss."
+    },
+    {
+      "question": "Which of the following scenarios is a textbook example of data leakage?",
+      "options": [
+        "Including target statistics from the test set in training.",
+        "Using a random seed to shuffle data before a split.",
+        "Training a model with highly correlated input features.",
+        "Removing outliers from the training set before fitting."
+      ],
+      "correctAnswer": 0,
+      "explain": "Data leakage occurs when information from outside the training dataset is inadvertently used to train the model."
+    },
+    {
+      "question": "What is the primary goal of performing K-Fold Cross-Validation?",
+      "options": [
+        "To compress the dataset for faster execution.",
+        "To get a stable estimate of model performance.",
+        "To completely eliminate the need for tuning parameters.",
+        "To generate synthetic features for small datasets."
+      ],
+      "correctAnswer": 1,
+      "explain": "K-Fold cross-validation reduces evaluation variance by averaging performance across multiple distinct data splits."
+    }
+  ]
+}

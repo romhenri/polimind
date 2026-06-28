@@ -1,0 +1,127 @@
+{
+  "id": "ml-fundamentals",
+  "name": "Machine Learning Fundamentals",
+  "description": "Test your understanding of core machine learning concepts, from model basics to performance tuning.",
+  "color": "lime",
+  "category": "Data",
+  "tags": [
+    "ml",
+    "ai",
+    "data science",
+    "models"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the primary purpose of a machine learning model?",
+      "options": [
+        "To store large datasets",
+        "To execute predefined rules",
+        "To learn patterns from data",
+        "To display data visually"
+      ],
+      "correctAnswer": 2,
+      "explain": "Machine learning models are designed to find and learn patterns within data to make predictions or decisions."
+    },
+    {
+      "question": "Why is it crucial to split data into training and testing sets?",
+      "options": [
+        "To speed up model training",
+        "To prevent data leakage",
+        "To evaluate model generalization",
+        "To increase data volume"
+      ],
+      "correctAnswer": 2,
+      "explain": "Splitting data allows us to assess how well the model performs on unseen data, indicating its generalization capability."
+    },
+    {
+      "question": "Which issue occurs when a model performs poorly on both training and test data?",
+      "options": [
+        "Overfitting",
+        "Bias-variance tradeoff",
+        "Underfitting",
+        "Data imbalance"
+      ],
+      "correctAnswer": 2,
+      "explain": "Underfitting happens when a model is too simple to capture the underlying patterns, leading to poor performance."
+    },
+    {
+      "question": "What does 'accuracy' represent in a classification model?",
+      "options": [
+        "The model's speed",
+        "Proportion of correct predictions",
+        "The complexity of the model",
+        "Total number of features used"
+      ],
+      "correctAnswer": 1,
+      "explain": "Accuracy measures the ratio of correctly predicted instances to the total number of instances in the dataset."
+    },
+    {
+      "question": "Which of the following best describes a Random Forest model?",
+      "options": [
+        "A single decision tree",
+        "A linear regression algorithm",
+        "An ensemble of decision trees",
+        "A neural network with many layers"
+      ],
+      "correctAnswer": 2,
+      "explain": "A Random Forest is an ensemble learning method that builds multiple decision trees and merges their predictions."
+    },
+    {
+      "question": "What is a common technique used for hyperparameter tuning?",
+      "options": [
+        "Feature scaling",
+        "Data normalization",
+        "Grid search",
+        "Gradient descent"
+      ],
+      "correctAnswer": 2,
+      "explain": "Grid search is a widely used method for hyperparameter tuning, systematically searching through predefined values."
+    },
+    {
+      "question": "What is a common symptom of an overfitted model?",
+      "options": [
+        "Low performance on training data",
+        "High bias, low variance",
+        "Excellent performance on training data but poor on test data",
+        "Consistent performance on all datasets"
+      ],
+      "correctAnswer": 2,
+      "explain": "An overfitted model learns the training data too well, failing to generalize to new, unseen data."
+    },
+    {
+      "question": "In supervised learning, what does the model learn from?",
+      "options": [
+        "Unlabeled data only",
+        "Data with no features",
+        "Labeled data (input-output pairs)",
+        "Randomly generated data"
+      ],
+      "correctAnswer": 2,
+      "explain": "Supervised learning models learn from datasets where each input is paired with a corresponding correct output."
+    },
+    {
+      "question": "For a regression task, which metric is commonly used to evaluate model performance?",
+      "options": [
+        "Precision",
+        "Recall",
+        "F1-score",
+        "Mean Squared Error"
+      ],
+      "correctAnswer": 3,
+      "explain": "Mean Squared Error (MSE) measures the average of the squared differences between predicted and actual values in regression."
+    },
+    {
+      "question": "What is the main benefit of using k-fold cross-validation?",
+      "options": [
+        "Reduces training time",
+        "Requires less data",
+        "Robust estimate of performance",
+        "Simplifies model architecture"
+      ],
+      "correctAnswer": 2,
+      "explain": "K-fold cross-validation provides a more reliable estimate of a model's performance by using multiple different data subsets."
+    }
+  ]
+}
