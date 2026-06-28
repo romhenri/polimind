@@ -1,0 +1,58 @@
+{
+    "id": "git2",
+    "name": "Git Commands 2",
+    "description": "Test your knowledge on basic Git workflow and version control concepts.",
+    "icon": "🌿",
+    "color": "orange",
+    "category": "Programming",
+    "tags": ["git", "terminal", "cli"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "Which command is used to create a new branch named 'feature-login' and switch to it immediately?",
+        "options": ["git branch feature-login", "git checkout -b feature-login", "git switch feature-login", "git move -b feature-login"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How do you combine the history of 'feature-branch' into your current active branch?",
+        "options": ["git combine feature-branch", "git join feature-branch", "git merge feature-branch", "git fetch feature-branch"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which command downloads updates from a remote repository but does NOT integrate them into your local work?",
+        "options": ["git pull", "git fetch", "git download", "git update"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In the context of GitHub/GitLab, what is a 'Pull Request' (or Merge Request)?",
+        "options": [
+          "A command to force download all files from a server.",
+          "A request to delete a branch after finishing a task.",
+          "A proposed set of changes to a repository that can be reviewed before merging.",
+          "A specialized script to automate git commits."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What happens when Git cannot automatically decide how to combine changes during a merge?",
+        "options": ["A merge conflict occurs", "Git deletes the conflicting file", "The repository is corrupted", "The commit is automatically canceled"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which command is used to upload your local branch commits to a remote repository?",
+        "options": ["git upload", "git send", "git push", "git commit --remote"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How do you delete a local branch named 'old-feature' after it has been merged?",
+        "options": ["git branch -d old-feature", "git branch -rm old-feature", "git delete old-feature", "git checkout --delete old-feature"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which command integrates the latest changes from the remote 'main' branch into your current branch?",
+        "options": ["git pull origin main", "git push main", "git remote add main", "git sync main"],
+        "correctAnswer": 0
+      }
+    ]
+  }

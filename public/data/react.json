@@ -1,0 +1,113 @@
+{
+  "id": "react",
+  "name": "React 1",
+  "description": "Evaluate your mastery of React and its concepts",
+  "icon": "⚛️",
+  "color": "blue",
+  "category": "Programming",
+  "tags": ["react", "javascript", "web"],
+  "hardness": "easy",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "What is JSX?",
+      "options": [
+        "A syntax extension for JavaScript",
+        "A CSS framework",
+        "A testing library",
+        "A database"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Which hook is used to manage state in functional components?",
+      "options": [
+        "useEffect",
+        "useState",
+        "useContext",
+        "useReducer"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "How do you pass data from a parent to a child component?",
+      "options": [
+        "Using state",
+        "Using props",
+        "Using context",
+        "Using refs"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "What does useEffect do?",
+      "options": [
+        "Manages state",
+        "Performs side effects",
+        "Creates contexts",
+        "Renders components"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "What is a controlled component?",
+      "options": [
+        "A component that doesn't accept props",
+        "A component whose value is controlled by React state",
+        "A class component",
+        "A component that uses refs"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "What is the correct way to update state?",
+      "options": [
+        "state = newValue",
+        "this.state = newValue",
+        "setState(newValue)",
+        "updateState(newValue)"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "What are React Hooks?",
+      "options": [
+        "Special functions to use React features in functional components",
+        "Lifecycle methods",
+        "Class components",
+        "Special props"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Which hook replaces componentDidMount?",
+      "options": [
+        "useState",
+        "useEffect with empty dependency array",
+        "useContext",
+        "useMemo"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "What is the Virtual DOM?",
+      "options": [
+        "An in-memory copy of the real DOM",
+        "A database",
+        "A virtual server",
+        "A type of component"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "How do you optimize re-renders in React?",
+      "options": [
+        "Using React.memo",
+        "Using useMemo and useCallback",
+        "Using shouldComponentUpdate",
+        "All of the above"
+      ],
+      "correctAnswer": 3
+    }
+  ]
+}

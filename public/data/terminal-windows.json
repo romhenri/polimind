@@ -1,0 +1,63 @@
+{
+    "id": "terminal-windows",
+    "name": "Windows Terminal",
+    "description": "Questions about the Windows Terminal.",
+    "icon": "💻",
+    "color": "blue",
+    "category": "Programming",
+    "tags": ["windows", "os", "terminal", "cli"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "Which shell is the default in Windows Terminal?",
+        "options": ["Bash", "PowerShell", "CMD", "Zsh"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How can you run a batch file in Windows Terminal?",
+        "options": ["Enter its name in the terminal", "Use the 'run' command", "Type 'batch' before the file name", "Double-click the file in File Explorer"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which Windows Terminal command is used to list files in a directory?",
+        "options": ["ls", "dir", "show", "list"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which Windows Terminal command is used to remove a file or directory?",
+        "options": ["delete", "del", "remove", "rmdir"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which command clears the terminal screen in Windows Terminal?",
+        "options": ["clear", "cls", "clr", "clean"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the default file extension for batch files in Windows?",
+        "options": [".bat", ".cmd", ".batch", ".exe"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which Windows Terminal command is used to create a new directory?",
+        "options": ["mkdir", "newdir", "create", "mkdir -p"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the primary scripting language used in Windows batch files?",
+        "options": ["Python", "JavaScript", "VBScript", "Batch scripting"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Which command in Windows Terminal is used to display the contents of a text file?",
+        "options": ["edit", "type", "more", "write"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What Windows Terminal command is used to edit a text file?",
+        "options": ["edit", "notepad", "vim", "nano"],
+        "correctAnswer": 1
+      }
+    ]
+  }

@@ -1,0 +1,134 @@
+{
+"id": "datapath-microarchitecture",
+"name": "Data Path",
+"description": "A study of the microarchitecture, the data path, internal registers, the ALU, buses, and the timing of the execution subcycles.",
+"icon": "🛣️",
+"color": "purple",
+"category": "Computing",
+"tags": ["architecture", "datapath", "microarchitecture", "hardware"],
+"hardness": "hard",
+"seq": "8",
+"lang": "en",
+"questions": [
+  {
+    "question": "What is the main composition of the Data Path in the described microarchitecture?",
+    "options": [
+      "Only the main memory and the integrated disk and video controllers.",
+      "The ALU (Arithmetic Logic Unit), a shifter, and 32-bit internal registers (such as PC, SP, and MDR).",
+      "The control store (ROM) and the MPC register.",
+      "L1, L2, and L3 caches and the external system buses on the motherboard."
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "In the example machine's Data Path, which structure provides the right input (input B) to the ALU?",
+    "options": [
+      "The H register.",
+      "The C bus.",
+      "The B bus, which can be loaded from one of nine different sources.",
+      "Main memory directly through the MAR register."
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which register is connected exclusively to the left input (input A) of the ALU in the data path?",
+    "options": [
+      "The H register.",
+      "The PC register.",
+      "The TOS register.",
+      "The MBR register."
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Is it possible to read from and write to the same register within a single clock cycle in this data path?",
+    "options": [
+      "No, attempting to read and write in the same cycle produces electrical garbage due to a short circuit.",
+      "Yes, because the read onto the B bus happens at the start of the cycle and the write from the C bus happens near the end of the cycle.",
+      "Yes, because the processor has multiple independent data paths (superscalar architecture).",
+      "No, the IJVM virtual machine strictly forbids reading and writing 32-bit registers simultaneously."
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "How can the time of a data path cycle be implicitly divided, and when does it start?",
+    "options": [
+      "It starts on the rising edge of the clock and is divided into 2 subcycles (fetch and execute).",
+      "It starts on the falling edge of the clock and is divided into 4 subcycles: signal settling, loading the B bus, ALU/shifter operation, and propagation on the C bus.",
+      "It starts with the read of ROM memory and has no subcycles, being one continuous and uninterrupted flow.",
+      "It starts with the operating system interrupt and is divided into micro, nano, and pico cycles."
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "At what exact moment are the results processed and propagated through the C bus actually stored (written) into the destination registers?",
+    "options": [
+      "At the exact start of the pulse, right on the falling edge of the clock.",
+      "Immediately after the ALU finishes the calculation, regardless of the clock oscillation.",
+      "Near the end of the cycle, triggered by the rising edge of the clock pulse.",
+      "Only on the next clock cycle, after the read confirmation of the MIR register."
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What is the function of the control line that acts on the shifter right after the ALU in the data path?",
+    "options": [
+      "It converts the 32-bit data to 8 bits so it fits into the MBR.",
+      "It allows shifting the ALU output left (SLL8) by 1 byte or right (SRA1) by 1 bit.",
+      "It mandatorily performs the mathematical operation of division by 3.",
+      "It halts execution of the microprogram if the ALU encounters an invalid opcode."
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "To access memory, the machine has two different ports. Which registers control the 32-bit, word-addressable port?",
+    "options": [
+      "PC and MBR.",
+      "LV and SP.",
+      "MAR and MDR.",
+      "CPP and TOS."
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The 8-bit (byte-addressable) memory port has a restriction and a main purpose in the data path. What are they?",
+    "options": [
+      "It can read and write generic user data to the hard disk.",
+      "It can only read data from memory and is used mainly by the PC register to fetch the executable program (sequence of bytes) into the MBR.",
+      "It writes local variables directly onto the stack to facilitate recursion.",
+      "It transfers data exclusively between the C bus and the H register, bypassing the ALU."
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "At the interface of the 8-bit register (MBR) with the 32-bit B bus, there are two conversion options supported by the data path. What are they?",
+    "options": [
+      "Multiplication by 4 (for addresses) or division by 4.",
+      "Logical bit inversion (NOT) or a continuous circular left shift.",
+      "Sign extension (copying the leftmost bit) or zero-filling the upper 24 bits (unsigned value).",
+      "Direct storage in the H register or direct reverse sending to the C bus."
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What does a 'light (white) arrow' located beneath a register indicate in the schematic diagram of the data path?",
+    "options": [
+      "That the register is being overwritten with new data coming from the C bus.",
+      "That the register is connected autonomously and directly to main memory.",
+      "A control signal that enables that register's output to supply data to the B bus.",
+      "An exclusive falling-edge clock signal to reset that electrical component."
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "question": "To ensure that operations on the data path do not cause physical or logical problems (electrical garbage), what fundamental rule is applied to the B bus?",
+    "options": [
+      "The B bus must be reset to 0xFFFFFFFF at each new subcycle.",
+      "More than one register must never be enabled at a time as a source to drive the B bus.",
+      "The ALU will ignore the B bus data unless it receives a permission signal from main memory.",
+      "All registers must be copied to the B bus simultaneously and the ALU will do the filtering."
+    ],
+    "correctAnswer": 1
+  }
+]
+}

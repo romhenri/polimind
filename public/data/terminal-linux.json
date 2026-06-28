@@ -1,0 +1,63 @@
+{
+    "id": "terminal-linux",
+    "name": "Linux Terminal",
+    "description": "Easy Linux terminal questions.",
+    "icon": "🐧",
+    "color": "gray",
+    "category": "Programming",
+    "tags": ["linux", "os", "terminal", "cli"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What command is used to display the current working directory in Linux?",
+        "options": ["pwd", "ls", "cd", "dir"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which command is used to create a new directory in Linux?",
+        "options": ["rd", "mkdir", "touch", "newdir"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What command is used to list files and directories in a directory in Linux?",
+        "options": ["dir", "ls", "cd", "list"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How do you remove a file in Linux?",
+        "options": ["delete", "erase", "rm", "remove"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which command is used to change the permissions of a file in Linux?",
+        "options": ["chmod", "chown", "change", "perm"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which command is used to display the manual page for a Linux command?",
+        "options": ["help", "man", "info", "command"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What command is used to search for files and directories in Linux?",
+        "options": ["search", "find", "locate", "grep"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which command is used to compress files and directories in Linux?",
+        "options": ["tar", "zip", "compress", "gzip"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What command is used to edit a text file in the terminal in Linux?",
+        "options": ["notepad", "edit", "nano", "word"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which command is used to switch to the superuser (root) account in Linux?",
+        "options": ["root", "superuser", "su", "admin"],
+        "correctAnswer": 2
+      }
+    ]
+  }

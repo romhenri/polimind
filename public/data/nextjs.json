@@ -1,0 +1,113 @@
+{
+  "id": "nextjs",
+  "name": "Next.js",
+  "description": "Challenge yourself with Next.js questions",
+  "icon": "▲",
+  "color": "gray",
+  "category": "Programming",
+  "tags": ["nextjs", "react", "javascript", "ssr", "web"],
+  "hardness": "easy",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "What is Next.js?",
+      "options": [
+        "A utility-first CSS library",
+        "A distributed NoSQL database",
+        "A React framework for production",
+        "A low-level language for web"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "What is the main benefit of Server-Side Rendering (SSR)?",
+      "options": [
+        "Better SEO and initial performance",
+        "Reduced bundle size and codebase",
+        "Simplified local development flow",
+        "Elimination of the backend server"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "How do you create a route in Next.js 13+ with App Router?",
+      "options": [
+        "Adding a file inside the /routes folder",
+        "Implementing hooks from react-router-dom",
+        "Updating the routes in next.config.js",
+        "Creating a folder in /app with page.tsx"
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "What is getServerSideProps?",
+      "options": [
+        "A built-in React hook for state",
+        "A function for server-side fetching",
+        "A higher-order layout component",
+        "A method for class-based components"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "What is the difference between SSR and SSG?",
+      "options": [
+        "Both methods are identical in performance",
+        "SSG is notably slower than SSR methods",
+        "SSR builds on request, SSG at build time",
+        "SSR is strictly for development environments"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "How do you optimize images in Next.js?",
+      "options": [
+        "Using the standard HTML <img> element",
+        "Applying specialized CSS-in-JS rules",
+        "Using the Next.js Image component",
+        "Manually resizing assets via CLI tools"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "What are Server Components in Next.js 13+?",
+      "options": [
+        "Components for direct database access",
+        "Components that run only on the server",
+        "Specific components for REST API logic",
+        "Legacy components for backward support"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "How do you create an API Route in Next.js?",
+      "options": [
+        "Declaring a JSON file inside /api",
+        "Installing and configuring Express.js",
+        "Using the fetch API inside the client",
+        "Creating a route.ts file in /app"
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "What is the layout.tsx file?",
+      "options": [
+        "A shared layout structure between pages",
+        "A global stylesheet for the application",
+        "A configuration file for the compiler",
+        "A component that defines dynamic routes"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Which command creates a new Next.js project?",
+      "options": [
+        "npm create next-app-template",
+        "npm install next react-dom",
+        "npx create-next-app@latest",
+        "next generate new-project"
+      ],
+      "correctAnswer": 2
+    }
+  ]
+}

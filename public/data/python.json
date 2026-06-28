@@ -1,0 +1,63 @@
+{
+    "id": "python",
+    "name": "Python 1",
+    "description": "Easy Python questions.",
+    "icon": "🐍",
+    "color": "blue",
+    "category": "Programming",
+    "tags": ["programming", "python", "language"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What does the 'print' function do in Python?",
+        "options": ["Add two numbers", "Display text on the screen", "Create a new variable", "Read a file"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which keyword is used to define a function in Python?",
+        "options": ["func", "define", "function", "def"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Which data type is used to store a decimal number in Python?",
+        "options": ["int", "float", "string", "boolean"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How do you comment a single line of code in Python?",
+        "options": ["// This is a comment", "/* This is a comment */", "# This is a comment", "%% This is a comment"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which loop is used to iterate through a sequence in Python?",
+        "options": ["if", "for", "while", "switch"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the result of '2**3' in Python?",
+        "options": ["6", "9", "8", "16"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "In Python, how do you check the number of elements in a list?",
+        "options": ["count()", "elements()", "length()", "len()"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "How do you define an empty dictionary in Python?",
+        "options": ["empty_dict()", "{}", "dict()", "null_dict()"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which operator is used for exponentiation in Python?",
+        "options": ["+", "-", "*", "**"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Which keyword is used to exit a loop prematurely in Python?",
+        "options": ["stop", "break", "exit", "end"],
+        "correctAnswer": 1
+      }
+    ]
+  }

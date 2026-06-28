@@ -1,0 +1,113 @@
+{
+    "id": "react2",
+    "name": "React 2",
+    "description": "Evaluate your mastery of React and its concepts",
+    "icon": "⚛️",
+    "color": "blue",
+    "category": "Programming",
+    "tags": ["react", "javascript", "web"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What is the primary purpose of the useMemo hook?",
+        "options": [
+          "Synchronizing a component with an external system",
+          "Triggering a re-render when a specific value changes",
+          "Memoizing the result of an expensive calculation",
+          "Managing complex state logic via a reducer function"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How does the useContext hook behave when a provider value updates?",
+        "options": [
+          "It triggers a re-render for all consuming components",
+          "It updates the global state without re-rendering",
+          "It only updates components using the useReducer hook",
+          "It requires a manual page refresh to show changes"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the role of the 'key' prop in React lists?",
+        "options": [
+          "To provide a unique identifier for CSS styling rules",
+          "To help React identify which items changed or moved",
+          "To ensure that all list items have a specific index",
+          "To allow direct access to the underlying DOM node"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What happens when you call a state setter function?",
+        "options": [
+          "The current function execution is immediately stopped",
+          "The browser DOM is replaced by a new static string",
+          "The component is scheduled for a future re-render",
+          "The state object is mutated directly in the memory"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the main use case for the useRef hook?",
+        "options": [
+          "Persisting values between renders without re-rendering",
+          "Storing data that must trigger a UI update on change",
+          "Fetching data from an API during the mounting phase",
+          "Defining a global context for the entire application"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which statement about React Fragments is correct?",
+        "options": [
+          "They add an extra <div> node to the final DOM tree",
+          "They are used to group elements without adding nodes",
+          "They prevent child components from being re-rendered",
+          "They are only available in class-based components"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is a 'Higher-Order Component' (HOC)?",
+        "options": [
+          "A component that renders another component as a child",
+          "A function that takes a component and returns a new one",
+          "A specialized hook for managing high-level application state",
+          "A method to increase the priority of a rendering task"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How do you handle errors in a React component tree?",
+        "options": [
+          "Wrapping the entire component in a try-catch block",
+          "Using the useError hook to capture internal exceptions",
+          "Implementing an Error Boundary using class components",
+          "Setting a global variable to track the error status"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the purpose of the useCallback hook?",
+        "options": [
+          "To cache a function definition between re-renders",
+          "To execute a function after the layout is painted",
+          "To transform a standard function into a React hook",
+          "To prevent a function from being called too many times"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which hook is best for complex state transitions?",
+        "options": [
+          "useState",
+          "useMemo",
+          "useContext",
+          "useReducer"
+        ],
+        "correctAnswer": 3
+      }
+    ]
+  }

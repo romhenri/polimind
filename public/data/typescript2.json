@@ -1,0 +1,113 @@
+{
+  "id": "typescript2",
+  "name": "TypeScript 2",
+  "description": "Evaluate your TypeScript knowledge",
+  "icon": "📘",
+  "color": "blue",
+  "category": "Programming",
+  "tags": ["typescript", "javascript", "types", "language", "web"],
+  "hardness": "easy",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "What is a Tuple in TypeScript?",
+      "options": [
+        "A list of infinite numbers",
+        "An array with a fixed number of elements and specific types at each position",
+        "A type of function",
+        "A way to merge two objects"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Which keyword is used to create a set of named constants?",
+      "options": [
+        "constant",
+        "set",
+        "enum",
+        "group"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "How do you define a function that does not return any value?",
+      "options": [
+        "function myFunc(): null",
+        "function myFunc(): undefined",
+        "function myFunc(): empty",
+        "function myFunc(): void"
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "What does the 'readonly' modifier do in an interface?",
+      "options": [
+        "It makes the property invisible",
+        "It prevents the property from being modified after initialization",
+        "It makes the property optional",
+        "It forces the property to be a string"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Which utility type makes all properties of an existing type optional?",
+      "options": [
+        "Partial<T>",
+        "Omit<T>",
+        "Pick<T>",
+        "Required<T>"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What is the purpose of the 'unknown' type compared to 'any'?",
+      "options": [
+        "There is no difference",
+        "It is only for numbers",
+        "It is safer because it requires type checking before performing operations",
+        "It is used for variables that will never have a value"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "How do you define an Intersection Type?",
+      "options": [
+        "type AB = A | B;",
+        "type AB = A & B;",
+        "type AB = A + B;",
+        "type AB = intersect(A, B);"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "What is the 'never' type used for?",
+      "options": [
+        "For variables that are null",
+        "For functions that always return true",
+        "For values that should never occur, such as a function that always throws an error",
+        "To delete a type"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "Which utility type creates a new type by choosing specific keys from another type?",
+      "options": [
+        "Exclude<T>",
+        "Extract<T>",
+        "Pick<T>",
+        "Select<T>"
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "Which operator is used for 'Type Guarding' to check if a property exists in an object?",
+      "options": [
+        "exists",
+        "has",
+        "in",
+        "inside"
+      ],
+      "correctAnswer": 2
+    }
+  ]
+}

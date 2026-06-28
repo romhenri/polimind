@@ -1,0 +1,238 @@
+[
+  {
+    "id": "greedy-algorithms",
+    "name": "Algoritmos Gulosos",
+    "description": "Estudo do paradigma de Algoritmos Gulosos, suas características, aplicação no Problema da Mochila, no Caixeiro Viajante e em Árvores Geradoras Mínimas.",
+    "icon": "🍔",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "optimization",
+      "greedy"
+    ],
+    "hardness": "medium",
+    "seq": "7",
+    "lang": "pt",
+    "questions": [
+      {
+        "question": "A que classe de problemas os Algoritmos Gulosos são tipicamente aplicados?",
+        "options": [
+          "Problemas de ordenação de dados e buscas binárias de alta complexidade.",
+          "Problemas de sintaxe e compilação de código fonte em linguagens de alto nível.",
+          "Problemas de otimização, onde existem diversas soluções e busca-se a melhor segundo uma função objetivo.",
+          "Problemas de decisão estrita, onde a única resposta possível é 'sim' ou 'não'."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Qual é a principal característica da tomada de decisão de um algoritmo guloso durante a construção de uma solução?",
+        "options": [
+          "Ele avalia todas as ramificações possíveis da árvore de decisão antes de fazer a primeira escolha, garantindo perfeição.",
+          "Ele constrói a solução passo a passo, sempre escolhendo o candidato mais promissor no instante atual sem se 'arrepender' de decisões anteriores.",
+          "Ele divide o problema central em subproblemas idênticos e resolve todos recursivamente antes de decidir.",
+          "Ele seleciona os candidatos aleatoriamente e aplica um processo de filtragem ao final da execução."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "É correto afirmar que um algoritmo guloso sempre encontra a solução ótima para qualquer problema computacional?",
+        "options": [
+          "Sim, a natureza exaustiva do algoritmo guloso garante que o melhor resultado possível sempre seja alcançado.",
+          "Não, algoritmos gulosos são propositalmente desenhados para encontrar a pior solução e testar os limites do sistema.",
+          "Não, devido ao aspecto 'míope' das decisões locais, algoritmos gulosos são geralmente sub-ótimos e podem não levar à solução ótima global.",
+          "Sim, contanto que o número de variáveis do problema não exceda a capacidade de memória do computador."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Se os algoritmos gulosos nem sempre garantem a solução ótima, qual é a principal vantagem que justifica o seu uso na prática?",
+        "options": [
+          "Eles são imunes a falhas de hardware durante a execução do código.",
+          "São a única forma matemática de modelar problemas complexos na área de grafos e rotas.",
+          "Eles não utilizam matrizes, economizando 100% do espaço de memória secundária.",
+          "Apesar de sub-ótimos, em geral, eles são algoritmos muito eficientes em termos de tempo computacional e mais fáceis de implementar do que outras alternativas."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Ao aplicar a estratégia gulosa de selecionar o item com 'maior valor por quilo' no Problema da Mochila Inteira (0-1), qual é o resultado esperado?",
+        "options": [
+          "O algoritmo pode não garantir a solução ótima, tornando-se ineficaz para encontrar o maior lucro quando os itens não podem ser particionados.",
+          "O algoritmo sempre retornará a solução perfeita, pois a proporção de valor por peso é a métrica definitiva para a mochila inteira.",
+          "O algoritmo falhará e travará, pois a matemática não permite dividir inteiros de forma exata.",
+          "O algoritmo encontrará a pior combinação possível, lotando a mochila com itens sem valor."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Para qual variante do Problema da Mochila o uso de um algoritmo guloso garante comprovadamente (com prova teórica) a descoberta da solução ótima?",
+        "options": [
+          "O Problema da Mochila com Capacidade Infinita.",
+          "O Problema da Mochila Fracionária, pois é possível adicionar a maior quantidade possível da fração do item mais valioso disponível.",
+          "O Problema da Mochila Criptográfica (itens ocultos).",
+          "O Problema da Mochila de Divisão de Pesos Negativos."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "No Problema do Caixeiro Viajante (TSP), algoritmos gulosos costumam ser chamados de 'construtivos'. Como funciona o algoritmo guloso do 'Vizinho mais próximo'?",
+        "options": [
+          "O caixeiro viaja aleatoriamente entre todas as cidades e guarda a rota que teve a menor duração média.",
+          "O algoritmo avalia inicialmente a cidade mais distante e percorre o caminho reverso para economizar combustível.",
+          "Inicia-se com uma solução parcial de uma cidade e, a cada iteração, escolhe-se e adiciona-se à solução a cidade mais próxima de onde o caixeiro está atualmente.",
+          "Cria-se uma matriz de adjacência nula que é preenchida iterativamente pelas distâncias mais longas."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Na abordagem gulosa da 'Inserção mais barata' para o Problema do Caixeiro Viajante, como a solução parcial inicial é estabelecida?",
+        "options": [
+          "O algoritmo começa calculando os limites de todas as arestas periféricas simultaneamente.",
+          "A solução começa com metade das cidades já listadas em ordem alfabética.",
+          "Sorteia-se uma única cidade central e todas as outras são inseridas formando estrelas em sua volta.",
+          "Inicia-se com uma solução parcial contendo um ciclo de 3 cidades, sendo uma ideia interessante selecionar aquelas que estão mais distantes entre si."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "O Algoritmo de Kruskal é uma abordagem gulosa para encontrar a Árvore Geradora Mínima. Qual é o critério principal usado por Kruskal a cada iteração?",
+        "options": [
+          "Adicionar a aresta de maior valor possível para maximizar o espaçamento da rede final criada.",
+          "Escolher a aresta segura de menor valor disponível, garantindo que esta nova aresta não crie um ciclo na solução atual.",
+          "Selecionar sempre as arestas que se conectam exclusivamente aos vértices de peso ímpar.",
+          "Remover as arestas mais baratas e preservar as mais pesadas para formar a espinha dorsal do grafo."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Tanto o Algoritmo de Prim quanto o de Kruskal são gulosos e solucionam a Árvore Geradora Mínima de forma ótima. Qual característica de construção difere o algoritmo de Prim do de Kruskal?",
+        "options": [
+          "No Prim, as decisões gulosas são revertidas caso um ciclo seja detectado na última etapa do processamento.",
+          "Diferente de Kruskal, no Algoritmo de Prim todas as arestas da solução corrente sempre formam uma única árvore que vai 'crescendo' até cobrir todos os vértices.",
+          "O Prim não lida com grafos ponderados, apenas com grafos simples sem pesos definidos nas arestas.",
+          "O Prim constrói a árvore utilizando uma abordagem top-down estrita, descartando o uso de prioridades em fila."
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  },
+  {
+    "id": "greedy-algorithms",
+    "name": "Greedy Algorithms",
+    "description": "Study of the Greedy Algorithms paradigm, its characteristics, application to the Knapsack Problem, the Traveling Salesperson Problem, and Minimum Spanning Trees.",
+    "icon": "🍔",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "optimization",
+      "greedy"
+    ],
+    "hardness": "medium",
+    "seq": "7",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "To which class of problems are Greedy Algorithms typically applied?",
+        "options": [
+          "Data sorting problems and high-complexity binary searches.",
+          "Syntax and source code compilation problems in high-level languages.",
+          "Optimization problems, where multiple solutions exist and the best one is sought according to an objective function.",
+          "Strict decision problems, where the only possible answer is 'yes' or 'no'."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the primary characteristic of decision-making in a greedy algorithm during the construction of a solution?",
+        "options": [
+          "It evaluates all possible branches of the decision tree before making the first choice, guaranteeing perfection.",
+          "It builds the solution step by step, always choosing the most promising candidate at the current moment without 'regretting' previous decisions.",
+          "It divides the core problem into identical subproblems and solves them all recursively before deciding.",
+          "It selects candidates randomly and applies a filtering process at the end of execution."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Is it correct to state that a greedy algorithm always finds the optimal solution for any computational problem?",
+        "options": [
+          "Yes, the exhaustive nature of the greedy algorithm ensures that the best possible result is always achieved.",
+          "No, greedy algorithms are purposely designed to find the worst solution and test system limits.",
+          "No, due to the 'shortsighted' aspect of local decisions, greedy algorithms are generally sub-optimal and may not lead to the global optimal solution.",
+          "Yes, as long as the number of variables in the problem does not exceed the computer's memory capacity."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "If greedy algorithms do not always guarantee the optimal solution, what is the main advantage that justifies their use in practice?",
+        "options": [
+          "They are immune to hardware failures during code execution.",
+          "They are the only mathematical way to model complex problems in the area of graphs and routing.",
+          "They do not use matrices, saving 100% of secondary memory space.",
+          "Although sub-optimal in general, they are highly efficient in terms of computational time and easier to implement than other alternatives."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "When applying the greedy strategy of selecting the item with the 'highest value per kilogram' in the 0-1 Knapsack Problem, what is the expected result?",
+        "options": [
+          "The algorithm may not guarantee the optimal solution, making it ineffective for finding the highest profit when items cannot be partitioned.",
+          "The algorithm will always return the perfect solution, as the ratio of value to weight is the definitive metric for the integer knapsack.",
+          "The algorithm will fail and crash, because mathematics does not allow dividing integers exactly.",
+          "The algorithm will find the worst possible combination, filling the knapsack with worthless items."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "For which variant of the Knapsack Problem does the use of a greedy algorithm provably (with theoretical proof) guarantee finding the optimal solution?",
+        "options": [
+          "The Knapsack Problem with Infinite Capacity.",
+          "The Fractional Knapsack Problem, because it is possible to add the maximum possible amount of the fraction of the most valuable item available.",
+          "The Cryptographic Knapsack Problem (hidden items).",
+          "The Negative Weight Division Knapsack Problem."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In the Traveling Salesperson Problem (TSP), greedy algorithms are often called 'constructive'. How does the 'Nearest Neighbor' greedy algorithm work?",
+        "options": [
+          "The salesperson travels randomly among all cities and keeps the route that had the shortest average duration.",
+          "The algorithm initially evaluates the farthest city and travels the reverse path to save fuel.",
+          "It starts with a partial solution of one city and, at each iteration, chooses and adds to the solution the city closest to where the salesperson currently is.",
+          "A null adjacency matrix is created and iteratively filled with the longest distances."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "In the 'Cheapest Insertion' greedy approach for the Traveling Salesperson Problem, how is the initial partial solution established?",
+        "options": [
+          "The algorithm starts by calculating the bounds of all peripheral edges simultaneously.",
+          "The solution starts with half of the cities already listed in alphabetical order.",
+          "A single central city is drawn randomly and all others are inserted forming stars around it.",
+          "It starts with a partial solution containing a cycle of 3 cities, where a reliable strategy is to select those that are farthest from each other."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Kruskal's Algorithm is a greedy approach to find the Minimum Spanning Tree. What is the primary criterion used by Kruskal at each iteration?",
+        "options": [
+          "Add the edge with the highest possible value to maximize the spacing of the final network created.",
+          "Choose the safe edge with the lowest available value, ensuring that this new edge does not create a cycle in the current solution.",
+          "Always select edges that connect exclusively to odd-weight vertices.",
+          "Remove the cheapest edges and preserve the heaviest ones to form the backbone of the graph."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Both Prim's and Kruskal's Algorithms are greedy and optimally solve the Minimum Spanning Tree problem. What construction characteristic differentiates Prim's algorithm from Kruskal's?",
+        "options": [
+          "In Prim's, greedy decisions are reversed if a cycle is detected in the last stage of processing.",
+          "Unlike Kruskal's, in Prim's Algorithm all edges of the current solution always form a single tree that 'grows' until it covers all vertices.",
+          "Prim's does not handle weighted graphs, only simple graphs without weights defined on the edges.",
+          "Prim's builds the tree using a strict top-down approach, discarding the use of priority queues."
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  }
+]

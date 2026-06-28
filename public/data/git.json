@@ -1,0 +1,43 @@
+{
+    "id": "git",
+    "name": "Git Commands 1",
+    "description": "Test your knowledge on basic Git workflow and version control concepts.",
+    "icon": "🌿",
+    "color": "orange",
+    "category": "Programming",
+    "tags": ["git", "terminal", "cli"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "Which command is used to create a new, empty Git repository in the current directory?",
+        "options": ["git start", "git create", "git init", "git new"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How do you add a specific file named 'index.html' to the staging area?",
+        "options": ["git add index.html", "git stage index.html", "git commit index.html", "git push index.html"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which command is used to record the changes from the staging area to the repository history?",
+        "options": ["git save", "git record", "git upload", "git commit"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "How do you check the current state of your working directory and staging area?",
+        "options": ["git check", "git status", "git log", "git diff"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which command is used to download an existing repository from a remote URL to your local machine?",
+        "options": ["git download", "git copy", "git pull", "git clone"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What is the command to view the commit history of the current branch?",
+        "options": ["git log", "git history", "git show", "git list"],
+        "correctAnswer": 0
+      }
+    ]
+  }

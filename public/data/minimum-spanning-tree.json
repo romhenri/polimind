@@ -1,0 +1,280 @@
+[
+  {
+    "id": "minimum-spanning-tree",
+    "name": "Árvore Geradora Mínima",
+    "description": "Estudo do Problema da Árvore Geradora Mínima, estruturas de dados envolvidas e o funcionamento dos algoritmos gulosos de Kruskal e Prim.",
+    "icon": "🌳",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "graphs",
+      "mst",
+      "greedy"
+    ],
+    "hardness": "hard",
+    "seq": "9",
+    "lang": "pt",
+    "questions": [
+      {
+        "question": "Qual é o objetivo principal ao buscar uma Árvore Geradora Mínima em um grafo não-orientado ponderado?",
+        "options": [
+          "Encontrar o caminho mais curto entre dois vértices iniciais pré-definidos.",
+          "Minimizar a soma dos pesos das arestas (custo) de um subgrafo gerador acíclico que conecta todos os vértices.",
+          "Criar um ciclo hamiltoniano fechado que passe por todos os vértices com a menor distância total possível.",
+          "Maximizar o número de arestas do subgrafo garantindo uma conexão cíclica entre todas as pontas."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Qual dos seguintes cenários práticos pode ser modelado de forma eficiente utilizando o Problema da Árvore Geradora Mínima?",
+        "options": [
+          "Calcular a probabilidade de falha em uma rede de servidores de alta disponibilidade.",
+          "Ajudar um caixeiro viajante a visitar todas as capitais de um país com a menor distância, retornando ao ponto de origem.",
+          "Criar uma nova malha ferroviária que conecte todas as capitais de cada estado gastando o mínimo possível e sem ciclos na malha.",
+          "Organizar a alocação de tarefas dentro de um processador para evitar gargalos na CPU."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Dado que a busca pela Árvore Geradora Mínima é um problema de otimização, quais são os dois algoritmos clássicos de estratégia gulosa utilizados para resolvê-lo?",
+        "options": [
+          "Algoritmo de Prim e Algoritmo de Kruskal.",
+          "Algoritmo de Dijkstra e Algoritmo de Bellman-Ford.",
+          "Busca em Largura (BFS) e Busca em Profundidade (DFS).",
+          "Algoritmo Vizinho Mais Próximo e Algoritmo de Inserção Mais Barata."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Como o Algoritmo de Kruskal inicializa a sua estrutura antes de começar a adicionar arestas na solução?",
+        "options": [
+          "Inicia com uma única árvore e vai adicionando o vértice vizinho mais próximo.",
+          "Inicia com um ciclo de três vértices e preenche o interior progressivamente.",
+          "Inicializa as distâncias de todos os vértices como infinito, exceto a do nó raiz que recebe 0.",
+          "Considere inicialmente uma floresta formada por árvores simples, contendo um único vértice do grafo original em cada árvore."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "A cada iteração, o Algoritmo de Kruskal insere uma 'aresta segura' na solução atual. O que define uma aresta como segura nesse contexto?",
+        "options": [
+          "Ela deve possuir o maior valor possível para evitar repetições tardias.",
+          "Ela é a aresta de menor valor disponível que não cria um ciclo na solução corrente.",
+          "Ela é obrigatoriamente a aresta adjacente à última que foi incluída na árvore.",
+          "Ela deve conectar exclusivamente vértices que já possuam ciclos independentes."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Para verificar e garantir de forma eficiente que a adição de uma aresta não criará um ciclo (isto é, se os vértices pertencem ou não à mesma árvore), qual estrutura de dados o Algoritmo de Kruskal utiliza?",
+        "options": [
+          "Fila de Prioridade (Min-Heap).",
+          "Tabelas Hash com encadeamento aberto.",
+          "Conjuntos Disjuntos (Disjoint Sets / Union-Find).",
+          "Árvores de Busca Binária Balanceada (AVL)."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Ao implementar Conjuntos Disjuntos com representação por árvores (florestas), quais duas heurísticas evitam o desbalanceamento grave e reduzem imensamente a complexidade para O(a(n)) nas funções union e findSet?",
+        "options": [
+          "Busca Gulosa e Inserção Mais Barata.",
+          "Backtracking Recursivo e Divisão de Subproblemas.",
+          "Union by Rank (união pelo rank da raiz) e Path Compression (compressão de caminho durante a busca da raiz).",
+          "Subestrutura Ótima e Superposição de Problemas."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Se implementarmos o Algoritmo de Kruskal ordenando as arestas de forma eficiente (ex: MergeSort ou QuickSort) e usando Conjuntos Disjuntos com heurísticas adequadas, qual será a sua complexidade assintótica de tempo resultante?",
+        "options": [
+          "O(V^2), pois avalia cada vértice contra todos os outros vértices sucessivamente.",
+          "O(2^V), já que necessita listar todas as combinações possíveis de arestas antes de decidir.",
+          "O(E + V), porque ele apenas varre as arestas sem necessidade de ordenação real.",
+          "O(E log E) ou de forma equivalente O(E log V), dominada basicamente pelo custo da ordenação inicial das arestas."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Diferentemente do algoritmo de Kruskal, que evolui mesclando várias árvores (florestas), como se dá o processo de construção da solução no Algoritmo de Prim?",
+        "options": [
+          "Todas as arestas da solução corrente formam sempre uma única árvore, que começa num vértice raiz arbitrário e vai 'crescendo' até cobrir todos os vértices.",
+          "Ele cria duas árvores paralelas pelas bordas do grafo que se encontram obrigatoriamente no centro.",
+          "Ele tenta ligar os vértices de maior valor primeiro, podando arestas pesadas a cada loop negativo.",
+          "Ele funciona exclusivamente criando ciclos independentes e depois rompendo as conexões mais pesadas."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "No Algoritmo de Prim, cada vértice que ainda não entrou na solução possui uma propriedade chamada 'chave' (key). O que essa 'chave' indica a cada iteração?",
+        "options": [
+          "Uma estimativa da aresta de menor custo capaz de ligar este vértice aos nós que já estão presentes na árvore da solução.",
+          "O grau de adjacência (número de conexões totais) do vértice no grafo original.",
+          "O custo exato do caminho deste vértice até o vértice raiz escolhido no início.",
+          "Um contador de quantas vezes o algoritmo tentou inserir o nó sem sucesso."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "O Algoritmo de Prim precisa selecionar constantemente o vértice com o menor valor de chave e removê-lo do conjunto dos não visitados (operação EXTRACT_MIN). Para que o algoritmo possua alta eficiência, qual estrutura costuma armazenar esse conjunto (Q)?",
+        "options": [
+          "Fila de Prioridade, usualmente implementada com um Heap Binário Mínimo ou Heap de Fibonacci.",
+          "Matriz de Adjacência simples.",
+          "Uma Pilha (Stack) puramente estruturada em LIFO.",
+          "Lista Circular Duplamente Encadeada."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Como a escolha da estrutura de dados afeta drasticamente a complexidade do Algoritmo de Prim?",
+        "options": [
+          "Não afeta; sendo um algoritmo guloso, a complexidade é travada matematicamente sempre em O(V^3).",
+          "O uso de Listas de Adjacência inviabiliza o Prim, obrigando o uso de Heap de Fibonacci que custa O(V!).",
+          "A Matriz de Adjacência alcança custo constante O(1), enquanto a fila de prioridade degrada para O(V^2).",
+          "O uso de uma Matriz de Adjacência causa uma complexidade lenta de O(V^2), enquanto o uso de Listas de Adjacência combinadas com um Heap Binário melhora o desempenho geral para O(A log V)."
+        ],
+        "correctAnswer": 3
+      }
+    ]
+  },
+  {
+    "id": "minimum-spanning-tree",
+    "name": "Minimum Spanning Tree",
+    "description": "Study of the Minimum Spanning Tree Problem, the data structures involved, and the mechanics of Kruskal's and Prim's greedy algorithms.",
+    "icon": "🌳",
+    "color": "green",
+    "category": "Computing",
+    "tags": [
+      "algorithms",
+      "graphs",
+      "mst",
+      "greedy"
+    ],
+    "hardness": "hard",
+    "seq": "9",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What is the primary objective when looking for a Minimum Spanning Tree in a weighted undirected graph?",
+        "options": [
+          "To find the shortest path between two pre-defined starting vertices.",
+          "To minimize the sum of the edge weights (cost) of an acyclic spanning subgraph that connects all vertices.",
+          "To create a closed Hamiltonian cycle that passes through all vertices with the shortest possible total distance.",
+          "To maximize the number of edges in the subgraph while ensuring a cyclic connection among all ends."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which of the following practical scenarios can be efficiently modeled using the Minimum Spanning Tree Problem?",
+        "options": [
+          "Calculating the probability of failure in a high-availability server network.",
+          "Helping a traveling salesperson visit all capitals of a country with the shortest distance, returning to the starting point.",
+          "Creating a new railway network that connects all state capitals spending as little as possible and without cycles in the track layout.",
+          "Organizing task allocation within a processor to avoid CPU bottlenecks."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Given that finding the Minimum Spanning Tree is an optimization problem, what are the two classic greedy strategy algorithms used to solve it?",
+        "options": [
+          "Prim's Algorithm and Kruskal's Algorithm.",
+          "Dijkstra's Algorithm and Bellman-Ford Algorithm.",
+          "Breadth-First Search (BFS) and Depth-First Search (DFS).",
+          "Nearest Neighbor Algorithm and Cheapest Insertion Algorithm."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "How does Kruskal's Algorithm initialize its structure before starting to add edges to the solution?",
+        "options": [
+          "It starts with a single tree and progressively adds the nearest neighbor vertex.",
+          "It starts with a three-vertex cycle and fills the interior step by step.",
+          "It initializes the distances of all vertices to infinity, except for the root node which receives 0.",
+          "It initially considers a forest consisting of simple trees, containing a single vertex of the original graph in each tree."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "At each iteration, Kruskal's Algorithm inserts a 'safe edge' into the current solution. What defines an edge as safe in this context?",
+        "options": [
+          "It must possess the highest possible value to prevent late repetitions.",
+          "It is the lowest-value available edge that does not create a cycle in the current solution.",
+          "It must strictly be adjacent to the last edge that was included in the tree.",
+          "It must exclusively connect vertices that already possess independent cycles."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "To efficiently verify and ensure that adding an edge will not create a cycle (i.e., whether the vertices belong to the same tree or not), which data structure does Kruskal's Algorithm use?",
+        "options": [
+          "Priority Queue (Min-Heap).",
+          "Hash Tables with open chaining.",
+          "Disjoint Sets (Union-Find).",
+          "Balanced Binary Search Trees (AVL)."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "When implementing Disjoint Sets with tree representation (forests), which two heuristics avoid severe unbalancing and immensely reduce complexity to O(a(n)) in the union and findSet functions?",
+        "options": [
+          "Greedy Search and Cheapest Insertion.",
+          "Recursive Backtracking and Subproblem Division.",
+          "Union by Rank (union by the root's rank) and Path Compression (compressing paths during the root search).",
+          "Optimal Substructure and Overlapping Subproblems."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "If we implement Kruskal's Algorithm by efficiently sorting the edges (e.g., MergeSort or QuickSort) and using Disjoint Sets with appropriate heuristics, what will be its resulting asymptotic time complexity?",
+        "options": [
+          "O(V^2), since it evaluates each vertex against all other vertices successively.",
+          "O(2^V), as it needs to list all possible edge combinations before deciding.",
+          "O(E + V), because it just scans the edges without any real sorting required.",
+          "O(E log E) or equivalently O(E log V), dominated primarily by the initial edge-sorting cost."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Unlike Kruskal's algorithm, which evolves by merging multiple trees (forests), how does the solution construction process take place in Prim's Algorithm?",
+        "options": [
+          "All edges of the current solution always form a single tree, which starts at an arbitrary root vertex and grows until it spans all vertices.",
+          "It creates two parallel trees from the graph edges that strictly meet at the center.",
+          "It tries to link highest-value vertices first, pruning heavy edges at each negative loop.",
+          "It functions exclusively by creating independent cycles and then breaking the heaviest connections."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "In Prim's Algorithm, each vertex that has not yet entered the solution has a property called 'key'. What does this 'key' indicate at each iteration?",
+        "options": [
+          "An estimate of the lowest-cost edge capable of linking this vertex to the nodes already present in the solution tree.",
+          "The degree of adjacency (total number of connections) of the vertex in the original graph.",
+          "The exact path cost from this vertex to the root vertex chosen at the start.",
+          "A counter of how many times the algorithm attempted to insert the node unsuccessfully."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Prim's Algorithm needs to constantly select the vertex with the lowest key value and remove it from the set of unvisited nodes (EXTRACT_MIN operation). For the algorithm to have high efficiency, which structure usually stores this set (Q)?",
+        "options": [
+          "Priority Queue, usually implemented with a Binary Min-Heap or Fibonacci Heap.",
+          "Simple Adjacency Matrix.",
+          "A Stack purely structured in LIFO.",
+          "Circular Doubly Linked List."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "How does the choice of data structure drastically affect the complexity of Prim's Algorithm?",
+        "options": [
+          "It does not affect it; being a greedy algorithm, the complexity is mathematically locked at O(V^3).",
+          "The use of Adjacency Lists makes Prim unviable, forcing the use of a Fibonacci Heap which costs O(V!).",
+          "The Adjacency Matrix achieves O(1) constant cost, while the priority queue degrades to O(V^2).",
+          "Using an Adjacency Matrix causes a slow complexity of O(V^2), whereas using Adjacency Lists combined with a Binary Heap improves overall performance to O(E log V)."
+        ],
+        "correctAnswer": 3
+      }
+    ]
+  }
+]

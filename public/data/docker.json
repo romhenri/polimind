@@ -1,0 +1,78 @@
+{
+    "id": "docker",
+    "name": "Docker Essentials",
+    "description": "Test your knowledge on core Docker commands and container concepts.",
+    "icon": "🐳",
+    "color": "blue",
+    "category": "Programming",
+    "tags": ["docker", "devops", "terminal", "cli"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "Which command is used to create an image from a Dockerfile?",
+        "options": ["docker run", "docker build", "docker create", "docker commit"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How do you start a container and interact with its shell immediately?",
+        "options": ["docker start -i", "docker run -it", "docker open -t", "docker execute -s"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which command allows you to view the standard output (logs) of a container?",
+        "options": ["docker cat", "docker show", "docker logs", "docker output"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the flag used to run a container in the background (detached mode)?",
+        "options": ["-b", "-bg", "-s", "-d"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Which command is used to run a new process (like /bin/bash) inside a running container?",
+        "options": ["docker exec -it", "docker attach", "docker connect", "docker shell"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "How do you list all containers, including those that are currently stopped?",
+        "options": ["docker ps", "docker ls -a", "docker ps -a", "docker container list"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which instruction in a Dockerfile specifies the base image for the build?",
+        "options": ["ROOT", "FROM", "BASE", "START"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which command is used to remove a specific Docker image from your local machine?",
+        "options": ["docker rm", "docker rmi", "docker delete", "docker image del"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How do you map host port 8080 to container port 80?",
+        "options": ["-p 8080:80", "-p 80:8080", "-port 8080", "-link 8080:80"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which command removes all unused containers, networks, and dangling images?",
+        "options": ["docker clean", "docker system prune", "docker purge all", "docker reset"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In a Dockerfile, which instruction sets the default command to be executed when the container starts?",
+        "options": ["RUN", "EXEC", "CMD", "START"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which of the following best describes the fundamental purpose of a Docker Volume?",
+        "options": [
+          "It increases the read and write speed of the container's internal file system.",
+          "It provides a way to persist data independently of the container's lifecycle.",
+          "It allows multiple images to share the same read-only layers during the build.",
+          "It acts as a virtual memory extension for containers running heavy processes."
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  }

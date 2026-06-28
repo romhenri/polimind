@@ -1,0 +1,63 @@
+{
+    "id": "javascript",
+    "name": "JavaScript 1",
+    "description": "Easy Javascript questions.",
+    "icon": "📜",
+    "color": "yellow",
+    "category": "Programming",
+    "tags": ["javascript", "language", "web"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What is JavaScript primarily used for?",
+        "options": ["Making coffee", "Styling web pages", "Adding interactivity to websites", "Sending emails"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How do you declare a variable in JavaScript?",
+        "options": ["var", "let", "const", "All of the above"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What is the file extension for JavaScript files?",
+        "options": [".html", ".js", ".css", ".json"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How do you write a single-line comment in JavaScript?",
+        "options": ["// This is a comment", "/* This is a comment */", "# This is a comment", "' This is a comment"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which of the following is not a JavaScript data type?",
+        "options": ["Number", "Boolean", "String", "Float"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What is the purpose of the 'if' statement in JavaScript?",
+        "options": ["To repeat code", "To define functions", "To make conditions", "To create loops"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How do you access the first element of an array in JavaScript?",
+        "options": ["array[0]", "array.first()", "array.first", "array.firstElement()"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the purpose of the 'for' loop in JavaScript?",
+        "options": ["To create a function", "To declare variables", "To iterate over a sequence of values", "To style HTML elements"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which operator is used for strict equality in JavaScript?",
+        "options": ["==", "===", "=", "!="],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What method is used to add a new element to the end of an array in JavaScript?",
+        "options": ["push()", "append()", "add()", "insert()"],
+        "correctAnswer": 0
+      }
+    ]
+  }

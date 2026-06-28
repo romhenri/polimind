@@ -1,0 +1,78 @@
+{
+    "id": "javascript2",
+    "name": "JavaScript 2",
+    "description": "Easy Javascript questions.",
+    "icon": "📜",
+    "color": "yellow",
+    "category": "Programming",
+    "tags": ["javascript", "types", "language", "web"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What does the acronym 'JS' stand for in JavaScript?",
+        "options": ["Java Syntax", "JavaScript", "JScript", "JustScript"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the correct way to declare a variable in JavaScript?",
+        "options": [
+          "variable x = 10;",
+          "let x = 10;",
+          "var x == 10;",
+          "x := 10;"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How do you convert a string to a number in JavaScript?",
+        "options": [
+          "Number()",
+          "toString()",
+          "String()",
+          "parseInt() or parseFloat()"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What does the 'return' statement do in a JavaScript function?",
+        "options": ["It prints a message to the console", "It terminates the function and returns a value", "It starts a loop", "It defines a new function"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which function is used to print content to the console in JavaScript?",
+        "options": ["print()", "log()", "display()", "console.log()"],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What does 'NaN' stand for in JavaScript?",
+        "options": ["Not a Number", "Negative And Null", "No Action Needed", "New Assignment"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "How do you declare a function in JavaScript?",
+        "options": ["func myFunction() { }", "function = myFunction() { }", "function myFunction() { }", "myFunction() { }"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which data type represents whole numbers in JavaScript?",
+        "options": ["Float", "String", "Boolean", "Integer"],
+        "correctAnswer": 3
+      },
+      {
+          "question": "What is the output of: console.log(2 + '2')?",
+          "options": [
+            "4",
+            "22",
+            "NaN",
+            "Error"
+          ],
+          "correctAnswer": 1
+        },
+      {
+        "question": "Which operator is used to compare two values for equality in JavaScript?",
+        "options": ["==", "=", "!=", "!=="],
+        "correctAnswer": 0
+      }
+    ]
+  }

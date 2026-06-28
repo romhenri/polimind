@@ -1,0 +1,113 @@
+{
+  "id": "dhcp-protocol",
+  "name": "DHCP Protocol (Dynamic Host Configuration Protocol)",
+  "description": "Advanced quiz on dynamic IP allocation, DORA messages, UDP and encapsulation.",
+  "icon": "🌐",
+  "color": "blue",
+  "category": "Computing",
+  "tags": ["networks", "dhcp", "ip", "network-layer", "transport"],
+  "hardness": "medium",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "In network architecture, what is the main goal of how the DHCP protocol works?",
+      "options": [
+        "The protocol resolves textual website names into their respective logical cloud IPs.",
+        "The protocol converts ranges of private IPs into a routable public IP for the exact exit.",
+        "The protocol dynamically allocates IP addresses to hosts arriving on the local network.",
+        "The protocol ensures strict sequential delivery by handling frames at the link layer."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "How is a DHCP message structurally and sequentially encapsulated to travel across the local link?",
+      "options": [
+        "It goes down encapsulated inside UDP, which goes inside IP, and finally into the Ethernet frame.",
+        "It goes down encapsulated in the pure TCP mesh, reaching the physical layer as photons.",
+        "It is strictly divided into reserved circuits before reaching the IP core of the network.",
+        "It travels without encapsulation because the client's address is still completely null."
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "What is the exact sequence of messages exchanged in the classic IP allocation process by DHCP?",
+      "options": [
+        "Offer, Discover, Request, and the exact Acknowledgement (ACK).",
+        "Request, Acknowledgement (ACK), Discover, and Offer.",
+        "Acknowledgement (ACK), Discover, Offer, and the Request.",
+        "Discover, Offer, Request, and the exact Acknowledgement (ACK)."
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "Besides the allocated IP address, what other vital information can DHCP send to the host?",
+      "options": [
+        "The exact physical route to web servers, plus the session key for the IP traffic.",
+        "The first-hop router address, the DNS server IP and the local subnet mask.",
+        "The Wi-Fi network's WPA2 encryption key, along with the domain's local routing table.",
+        "Only and exclusively the TCP port number, because routers fill in the IP at the link."
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "Why does a newly connected client send the first DHCP messages in 'Broadcast' mode?",
+      "options": [
+        "Because the physical layer requires radio communication to reach all local antennas.",
+        "Because it has no IP of its own and does not know the official IP address of the DHCP server.",
+        "Because it wants to notify all hosts on the network that it will monopolize the router signal.",
+        "Because the link protocol needs to validate transmissions before delegating the port."
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "What is the server's reaction when it receives a DHCP Request asking for an IP that is already in use?",
+      "options": [
+        "The server retransmits a DHCPDecline, silencing the intruding client for a few minutes.",
+        "The router physically disconnects the new computer so as not to cause congestion.",
+        "The server issues a DHCPNAK requiring the client to restart the process at discovery.",
+        "The system provisionally reserves an IPv6 address to prevent the failure."
+      ],
+      "correctAnswer": 2
+    },
+    {
+      "question": "What does the concept that the DHCP protocol works based on IP 'leases' mean?",
+      "options": [
+        "It means the IP is granted for a limited time and can be renewed by the host.",
+        "It means the local provider charges a special fee for each established connection.",
+        "It means the IP address will be bound forever to that exact physical MAC card.",
+        "It means routers hold all datagrams in a buffer until that lease ends."
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "question": "Looking at the transport structure of a DHCP message, which logical ports are used?",
+      "options": [
+        "The requests use web ports such as port 80 for the exit and port 443 on arrival.",
+        "The protocol demands ports above 1024 to avoid blind router blocking.",
+        "The DHCP message uses no transport port, operating exclusively at the IP link.",
+        "Communication occurs natively through the standard use of port 67 and also port 68."
+      ],
+      "correctAnswer": 3
+    },
+    {
+      "question": "What is the exact and main purpose of the 'Transaction ID' field in the network's DHCP messages?",
+      "options": [
+        "To actively store the whole amount of data transferred during the usage period.",
+        "To securely and uniquely link the server's response to the exact initial request.",
+        "To encrypt the information using a heavy protocol on fiber routers at the edges.",
+        "To precisely define the best path to be taken on the packet's journey through the ISP."
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "question": "In the classic home network scenario, where is the DHCP server usually housed?",
+      "options": [
+        "It runs entirely on a remote server hosted by the ISP within the global DNS system.",
+        "It comes integrated and co-located inside the access router that serves the network.",
+        "It is actively embedded in all of the host's terminals, acting in a hidden mode.",
+        "It is virtually split across the LAN's various Ethernet hardware switches."
+      ],
+      "correctAnswer": 1
+    }
+  ]
+}

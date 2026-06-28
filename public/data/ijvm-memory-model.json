@@ -1,0 +1,114 @@
+{
+    "id": "ijvm-memory-model",
+    "name": "IJVM Memory Model",
+    "description": "Test your knowledge of the IJVM virtual machine memory model, including memory areas, stacks, control registers, and access to local variables.",
+    "icon": "🧠",
+    "color": "purple",
+    "category": "Computing",
+    "tags": ["architecture", "memory", "ijvm", "stack", "virtual-machine"],
+    "hardness": "medium",
+    "seq": "9",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "The IJVM memory model is divided into four main areas. What are they?",
+        "options": [
+          "L1 and L2 caches, Main Memory, and Magnetic Disk.",
+          "CPU Registers, Data Buses, Control Store, and the ALU.",
+          "Constant Pool, Local Variable Frame, Operand Stack, and Method Area.",
+          "Opcode Read Area, Exception Stack, Dynamic Heap Area, and Thread Set."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "In the IJVM, what is the main characteristic of the memory area known as the 'Constant Pool'?",
+        "options": [
+          "It is dynamically allocated on each invocation of a new method and stores temporary variables.",
+          "It cannot be written by an IJVM program; it consists of constants, strings, and pointers to other areas. It is accessed by the CPP register.",
+          "It is treated exclusively as a byte array and contains the code of the running program.",
+          "It stores the operand stack used to perform mathematical operations such as addition and subtraction."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "The CPP, LV, and SP registers are memory pointers. How does the addressing of the PC register differ from these three in the IJVM model?",
+        "options": [
+          "The PC points to primary cache memory, while the others point to static RAM.",
+          "The PC holds a byte address (offset by number of bytes), while CPP, LV, and SP are word pointers (offset by words).",
+          "The PC is an absolute 64-bit hardware pointer, while the others are virtual registers of the operating system.",
+          "There is no difference; all are incremented by bytes to avoid memory misalignment in the ALU."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Whenever a method is called (invoked), a memory area is reserved for its local variables. Where and how is that method's 'Operand Stack' allocated?",
+        "options": [
+          "It is allocated at the absolute end of RAM, growing from top to bottom.",
+          "It is grouped inside the Constant Pool and accessed only via direct addressing.",
+          "The operand stack space is allocated directly above the local variable frame and grows toward higher addresses.",
+          "It shares the exact same space as the local variables, overwriting them whenever an addition is performed."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How are the LV and SP registers used in the context of the local variable frame and the stack?",
+        "options": [
+          "Both always point to the start of the method area to fetch the next IJVM instruction.",
+          "LV points to the top of the operand stack, and SP points to the base (start) of the local variable frame.",
+          "LV points to the base of the local variables (and parameters) of the active procedure, while SP points to the top word of the operand stack.",
+          "They hold the exact values of mathematical variables, rather than acting as memory addressing pointers."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What happens to the LV and SP registers and to memory allocation when a procedure 'A' calls a procedure 'B'?",
+        "options": [
+          "The execution process fails if the variables exceed 256 bytes of absolute memory.",
+          "The memory for A's variables is permanently erased to save bus space.",
+          "B's local variables are stored at fixed addresses at the base of RAM (addresses 0 to 100).",
+          "B's variables are stored on the stack, on top of A's variables. LV is adjusted to point to B's new variables."
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Besides the local variable frame, what is the main use of the 'Operand Stack' pointed to by SP?",
+        "options": [
+          "To store exclusively the return address of the IRETURN instruction.",
+          "To manage permanent hard disk storage.",
+          "To hold operands during the evaluation of an arithmetic expression (e.g., pop two words, add them, and push the result).",
+          "To keep the record of memory access security permissions of the JVM."
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "In the described IJVM implementation, in which geometric direction of memory (addresses) do the stacks grow when new words are pushed?",
+        "options": [
+          "They grow upward, toward higher memory addresses.",
+          "They grow downward, toward lower addresses (close to 0).",
+          "They grow sideways, invading the neighboring L1 cache blocks.",
+          "They do not grow, having a rigid and inflexible size locked by the compiler."
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the function of the memory region called the 'Method Area'?",
+        "options": [
+          "To hold static and global variables freely accessible between different methods.",
+          "To contain the executable program (text), composed of a byte array that holds the instructions (opcodes) fetched by the PC.",
+          "To act as a temporary input/output (I/O) buffer for secure peripheral devices.",
+          "To keep constant pointers and fixed text strings that are never modified during execution."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "When a method returns (terminated using the IRETURN instruction), what happens to the memory that was being used by its local variable frame?",
+        "options": [
+          "The operating system enters an interrupt to permanently write the final data to the hard disk.",
+          "That memory is backed up to the Constant Pool and the CPP pointer is updated.",
+          "The area is cleared by actively filling every byte with zeros and the MAR register is reset.",
+          "The memory used by the local variables is freed, and the stack returns to its previous state (restoring the caller's old PC and LV pointer values)."
+        ],
+        "correctAnswer": 3
+      }
+    ]
+  }

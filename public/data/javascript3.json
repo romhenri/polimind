@@ -1,0 +1,68 @@
+{
+    "id": "javascript3",
+    "name": "JavaScript 3",
+    "description": "Medium Javascript questions.",
+    "icon": "📜",
+    "color": "yellow",
+    "category": "Programming",
+    "tags": ["javascript", "types", "language", "web"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "What is a JavaScript closure?",
+        "options": ["A function that is closed for modifications", "A function that has access to its outer function's variables after execution", "A function that can only be used once", "A feature for error handling"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Explain the concept of 'hoisting' in JavaScript.",
+        "options": ["Lifting heavy objects", "Hiding variables from global scope", "Automatic moving of declarations to the top of their scope", "Creating animations"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the difference between 'null' and 'undefined'?",
+        "options": ["They are the same", "'null' is intentional absence, 'undefined' means variable declared but not assigned", "'undefined' is null, 'null' is undefined", "'null' is for numbers, 'undefined' for strings"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the purpose of 'Array.prototype.forEach()'?",
+        "options": ["Create a new array", "Iterate over elements and execute a function", "Sort elements", "Remove elements"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is event delegation?",
+        "options": ["Delegating events to a library", "Handling events via a common ancestor element", "Preventing events from propagating", "Delegating code execution"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is 'async/await' in JavaScript?",
+        "options": ["Writing asynchronous code that looks synchronous", "A deprecated feature", "Used for debugging", "Identical to synchronous code"],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What is the 'this' keyword?",
+        "options": ["Refers to the current time", "Always refers to the global object", "Refers to the current object or context", "Has no specific purpose"],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which method is used to iterate over array elements?",
+        "options": [
+          "for",
+          "forEach()",
+          "map()",
+          "All of the above"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What is a JavaScript 'constructor' function?",
+        "options": ["Used to destruct objects", "Used to create instances and set initial state", "Used to convert numbers", "Used to create random numbers"],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What does the 'typeof' operator return?",
+        "options": ["The type of a variable", "The value of a variable", "The length of a string", "A boolean"],
+        "correctAnswer": 0
+      }
+    ]
+  }
