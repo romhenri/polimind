@@ -7,36 +7,51 @@
   "icon": "algorithms",
   "terms": [
     {
-      "term": "Big O Notation",
-      "definition": "A notation describing the upper bound of an algorithm's running time or space as input size grows."
+      "groupName": "Analysis",
+      "group": [
+        {
+          "term": "Big O Notation",
+          "definition": "A notation describing the upper bound of an algorithm's running time or space as input size grows."
+        },
+        {
+          "term": "Time Complexity",
+          "definition": "A measure of how the number of operations an algorithm performs grows with input size."
+        }
+      ]
     },
     {
-      "term": "Recursion",
-      "definition": "A technique where a function solves a problem by calling itself on smaller subproblems."
+      "groupName": "Design Paradigms",
+      "group": [
+        {
+          "term": "Divide and Conquer",
+          "definition": "A strategy that breaks a problem into subproblems, solves them independently, and combines the results."
+        },
+        {
+          "term": "Greedy Algorithm",
+          "definition": "An approach that makes the locally optimal choice at each step, hoping to reach a global optimum."
+        },
+        {
+          "term": "Dynamic Programming",
+          "definition": "Solving problems by storing the results of overlapping subproblems to avoid recomputation."
+        }
+      ]
     },
     {
-      "term": "Divide and Conquer",
-      "definition": "A strategy that breaks a problem into subproblems, solves them independently, and combines the results."
-    },
-    {
-      "term": "Greedy Algorithm",
-      "definition": "An approach that makes the locally optimal choice at each step, hoping to reach a global optimum."
-    },
-    {
-      "term": "Dynamic Programming",
-      "definition": "Solving problems by storing the results of overlapping subproblems to avoid recomputation."
-    },
-    {
-      "term": "Time Complexity",
-      "definition": "A measure of how the number of operations an algorithm performs grows with input size."
-    },
-    {
-      "term": "Binary Search",
-      "definition": "An efficient O(log n) search that repeatedly halves a sorted range to locate a target value."
-    },
-    {
-      "term": "Graph Traversal",
-      "definition": "Systematically visiting the nodes of a graph, commonly via breadth-first or depth-first search."
+      "groupName": "Techniques",
+      "group": [
+        {
+          "term": "Recursion",
+          "definition": "A technique where a function solves a problem by calling itself on smaller subproblems."
+        },
+        {
+          "term": "Binary Search",
+          "definition": "An efficient O(log n) search that repeatedly halves a sorted range to locate a target value."
+        },
+        {
+          "term": "Graph Traversal",
+          "definition": "Systematically visiting the nodes of a graph, commonly via breadth-first or depth-first search."
+        }
+      ]
     }
   ]
 }

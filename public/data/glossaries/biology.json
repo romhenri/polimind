@@ -7,32 +7,47 @@
   "icon": "biology",
   "terms": [
     {
-      "term": "Cell",
-      "definition": "The basic structural and functional unit of all living organisms."
+      "groupName": "Cells & Molecules",
+      "group": [
+        {
+          "term": "Cell",
+          "definition": "The basic structural and functional unit of all living organisms."
+        },
+        {
+          "term": "DNA",
+          "definition": "The molecule that carries the genetic instructions used in growth, development and reproduction."
+        },
+        {
+          "term": "Protein",
+          "definition": "A large molecule built from amino acids that performs most functions within living cells."
+        }
+      ]
     },
     {
-      "term": "DNA",
-      "definition": "The molecule that carries the genetic instructions used in growth, development and reproduction."
+      "groupName": "Processes",
+      "group": [
+        {
+          "term": "Mitosis",
+          "definition": "The process of cell division that produces two identical daughter cells from one parent cell."
+        },
+        {
+          "term": "Photosynthesis",
+          "definition": "The process by which plants convert light energy, water and carbon dioxide into glucose and oxygen."
+        },
+        {
+          "term": "Homeostasis",
+          "definition": "The maintenance of a stable internal environment despite changes in external conditions."
+        }
+      ]
     },
     {
-      "term": "Mitosis",
-      "definition": "The process of cell division that produces two identical daughter cells from one parent cell."
-    },
-    {
-      "term": "Photosynthesis",
-      "definition": "The process by which plants convert light energy, water and carbon dioxide into glucose and oxygen."
-    },
-    {
-      "term": "Ecosystem",
-      "definition": "A community of living organisms interacting with each other and their physical environment."
-    },
-    {
-      "term": "Homeostasis",
-      "definition": "The maintenance of a stable internal environment despite changes in external conditions."
-    },
-    {
-      "term": "Protein",
-      "definition": "A large molecule built from amino acids that performs most functions within living cells."
+      "groupName": "Systems & Ecology",
+      "group": [
+        {
+          "term": "Ecosystem",
+          "definition": "A community of living organisms interacting with each other and their physical environment."
+        }
+      ]
     }
   ]
 }

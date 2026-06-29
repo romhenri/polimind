@@ -1,4 +1,38 @@
-import type { Glossary, GlossaryMeta } from '@/types/glossary'
+import type { Glossary, GlossaryGroup, GlossaryMeta } from '@/types/glossary'
+
+function normalizeGroups(raw: unknown): GlossaryGroup[] {
+  if (!Array.isArray(raw)) return []
+  const groups: GlossaryGroup[] = []
+
+  for (const entry of raw) {
+    if (entry && Array.isArray(entry.group)) {
+      groups.push({
+        groupName: typeof entry.groupName === 'string' ? entry.groupName : null,
+        group: entry.group
+          .filter((t: unknown): t is { term: string; definition?: string } =>
+            !!t && typeof (t as { term?: unknown }).term === 'string'
+          )
+          .map((t: { term: string; definition?: string }) => ({
+            term: t.term,
+            definition: t.definition ?? '',
+          })),
+      })
+    } else if (entry && typeof entry.term === 'string') {
+      let last = groups[groups.length - 1]
+      if (!last || last.groupName !== null) {
+        last = { groupName: null, group: [] }
+        groups.push(last)
+      }
+      last.group.push({ term: entry.term, definition: entry.definition ?? '' })
+    }
+  }
+
+  return groups
+}
+
+function termCount(groups: GlossaryGroup[]): number {
+  return groups.reduce((sum, g) => sum + g.group.length, 0)
+}
 
 export async function fetchGlossary(slug: string): Promise<Glossary | null> {
   try {
@@ -12,7 +46,7 @@ export async function fetchGlossary(slug: string): Promise<Glossary | null> {
       category: data.category ?? 'General',
       color: data.color ?? 'gray',
       icon: data.icon ?? '',
-      terms: Array.isArray(data.terms) ? data.terms : [],
+      groups: normalizeGroups(data.terms),
     }
   } catch {
     return null
@@ -27,7 +61,7 @@ export async function loadGlossaries(): Promise<GlossaryMeta[]> {
     const loaded = await Promise.all(slugs.map(fetchGlossary))
     return loaded
       .filter((g): g is Glossary => g !== null)
-      .map(({ terms, ...meta }) => ({ ...meta, termCount: terms.length }))
+      .map(({ groups, ...meta }) => ({ ...meta, termCount: termCount(groups) }))
   } catch {
     return []
   }

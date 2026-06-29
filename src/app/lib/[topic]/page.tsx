@@ -53,6 +53,7 @@ export default function GlossaryDetailPage({
 
   const bgColor = getColor(glossary.color)
   const Icon = getGlossaryIcon(glossary.id, glossary.category)
+  let termIndex = 0
 
   return (
     <div className="animate-fade-in" style={{ '--qc': bgColor } as CSSProperties}>
@@ -82,9 +83,30 @@ export default function GlossaryDetailPage({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {glossary.terms.map((term, index) => (
-          <TermCard key={term.term} term={term} bgColor={bgColor} index={index} />
+      <div className="space-y-8">
+        {glossary.groups.map((group, groupIndex) => (
+          <section key={group.groupName ?? `group-${groupIndex}`}>
+            {group.groupName && (
+              <h2 className="flex items-center gap-3 mb-4 text-xs font-bold tracking-widest uppercase quiz-accent">
+                <span
+                  className="inline-block w-6 h-0.5 rounded-full"
+                  style={{ backgroundColor: bgColor }}
+                  aria-hidden
+                />
+                {group.groupName}
+              </h2>
+            )}
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {group.group.map((term) => (
+                <TermCard
+                  key={term.term}
+                  term={term}
+                  bgColor={bgColor}
+                  index={termIndex++}
+                />
+              ))}
+            </div>
+          </section>
         ))}
       </div>
     </div>

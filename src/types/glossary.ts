@@ -3,6 +3,11 @@ export interface GlossaryTerm {
   definition: string
 }
 
+export interface GlossaryGroup {
+  groupName: string | null
+  group: GlossaryTerm[]
+}
+
 export interface Glossary {
   id: string
   name: string
@@ -10,7 +15,7 @@ export interface Glossary {
   category: string
   color: string
   icon: string
-  terms: GlossaryTerm[]
+  groups: GlossaryGroup[]
 }
 
 export interface GlossaryMeta {

@@ -7,32 +7,113 @@
   "icon": "dinosaurs",
   "terms": [
     {
-      "term": "Mesozoic Era",
-      "definition": "The geological era from about 252 to 66 million years ago, often called the Age of Dinosaurs."
+      "groupName": "Eras",
+      "group": [
+        {
+          "term": "Mesozoic Era",
+          "definition": "The geological era from about 252 to 66 million years ago, often called the Age of Dinosaurs. It is divided into three periods: the Triassic, the Jurassic and the Cretaceous."
+        },
+        {
+          "term": "Triassic",
+          "definition": "The first Mesozoic period (252–201 million years ago), when the earliest dinosaurs appeared."
+        },
+        {
+          "term": "Jurassic",
+          "definition": "The middle Mesozoic period (201–145 million years ago), dominated by giant sauropods and early theropods."
+        },
+        {
+          "term": "Cretaceous",
+          "definition": "The final Mesozoic period (145–66 million years ago), ending with the mass extinction of non-avian dinosaurs."
+        }
+      ]
     },
     {
-      "term": "Theropod",
-      "definition": "A group of mostly carnivorous, bipedal dinosaurs that includes Tyrannosaurus and modern birds."
+      "groupName": "Orders",
+      "group": [
+        {
+          "term": "Saurischia",
+          "definition": "The 'lizard-hipped' order of dinosaurs, grouping the theropods and the long-necked sauropodomorphs."
+        },
+        {
+          "term": "Ornithischia",
+          "definition": "The 'bird-hipped' order of dinosaurs, made up entirely of herbivores such as Triceratops and Stegosaurus."
+        }
+      ]
     },
     {
-      "term": "Sauropod",
-      "definition": "A group of huge, long-necked herbivorous dinosaurs such as Brachiosaurus and Diplodocus."
+      "groupName": "Suborder",
+      "group": [
+        {
+          "term": "Theropoda",
+          "definition": "A suborder of mostly carnivorous, bipedal saurischians that includes Tyrannosaurus and modern birds."
+        },
+        {
+          "term": "Sauropodomorpha",
+          "definition": "A suborder of huge, long-necked herbivorous saurischians such as Brachiosaurus and Diplodocus."
+        },
+        {
+          "term": "Ornithopoda",
+          "definition": "A suborder of herbivorous ornithischians, including Iguanodon and the duck-billed hadrosaurs."
+        }
+      ]
     },
     {
-      "term": "Herbivore",
-      "definition": "A dinosaur that fed primarily on plants, often equipped with grinding or cropping teeth."
+      "groupName": "Family",
+      "group": [
+        {
+          "term": "Tyrannosauridae",
+          "definition": "A family of large, powerful carnivorous theropods, most famously Tyrannosaurus rex."
+        },
+        {
+          "term": "Diplodocidae",
+          "definition": "A family of extremely long, slender sauropods such as Diplodocus and Apatosaurus."
+        },
+        {
+          "term": "Ceratopsidae",
+          "definition": "A family of horned, frilled herbivorous dinosaurs that includes Triceratops."
+        },
+        {
+          "term": "Stegosauridae",
+          "definition": "A family of plated, spike-tailed herbivorous dinosaurs, most famously Stegosaurus."
+        },
+        {
+          "term": "Brachiosauridae",
+          "definition": "A family of giant, long-necked sauropods with longer front legs and high shoulders, such as Brachiosaurus."
+        },
+        {
+          "term": "Spinosauridae",
+          "definition": "A family of large, semi-aquatic theropods with crocodile-like snouts and sail-backed bodies, such as Spinosaurus."
+        },
+        {
+          "term": "Ankylosauridae",
+          "definition": "A family of heavily armored herbivores with bony plates and a clubbed tail, such as Ankylosaurus."
+        },
+        {
+          "term": "Dromaeosauridae",
+          "definition": "A family of small, agile feathered theropods with a sickle-shaped claw, including Velociraptor and Deinonychus."
+        },
+        {
+          "term": "Hadrosauridae",
+          "definition": "A family of duck-billed herbivores, often with elaborate head crests, such as Parasaurolophus and Edmontosaurus."
+        }
+      ]
     },
     {
-      "term": "Fossil",
-      "definition": "The preserved remains or traces of ancient organisms, such as bones, eggs or footprints."
-    },
-    {
-      "term": "Paleontologist",
-      "definition": "A scientist who studies fossils to understand the history of life on Earth."
-    },
-    {
-      "term": "Extinction",
-      "definition": "The dying out of a species; a mass extinction ended the non-avian dinosaurs 66 million years ago."
+      "groupName": "Paleontology",
+      "group": [
+        {
+          "term": "Fossil",
+          "definition": "The preserved remains or traces of ancient organisms, such as bones, eggs or footprints."
+        },
+        {
+          "term": "Paleontologist",
+          "definition": "A scientist who studies fossils to understand the history of life on Earth."
+        },
+        {
+          "term": "Taxonomy",
+          "definition": "The science of naming and classifying organisms into ranked groups such as order, suborder, family, genus and species."
+        }
+      ]
     }
   ]
 }
