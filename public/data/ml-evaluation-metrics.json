@@ -1,0 +1,127 @@
+{
+  "id": "ml-evaluation-metrics",
+  "name": "Machine Learning Evaluation Metrics",
+  "description": "Test your mastery of classification and regression metrics, from precision to ROC-AUC.",
+  "color": "blue",
+  "category": "Data",
+  "tags": [
+    "ml",
+    "metrics",
+    "evaluation",
+    "data science"
+  ],
+  "hardness": "medium",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What does a False Positive represent in a binary confusion matrix?",
+      "options": [
+        "A negative instance correctly predicted as negative.",
+        "A negative instance incorrectly predicted as positive.",
+        "A positive instance correctly predicted as positive.",
+        "A positive instance incorrectly predicted as negative."
+      ],
+      "correctAnswer": 1,
+      "explain": "A False Positive occurs when the actual class is negative, but the model incorrectly predicts it as positive."
+    },
+    {
+      "question": "Which metric is calculated as the harmonic mean of Precision and Recall?",
+      "options": [
+        "Accuracy",
+        "F1-Score",
+        "ROC-AUC",
+        "Log Loss"
+      ],
+      "correctAnswer": 1,
+      "explain": "The F1-Score balances both precision and recall by computing their harmonic mean."
+    },
+    {
+      "question": "Why can Accuracy be a misleading metric for highly imbalanced datasets?",
+      "options": [
+        "It focuses exclusively on the minority class variance.",
+        "It can yield a high score by simply predicting the majority class.",
+        "It requires an equal number of continuous features to execute.",
+        "It changes values depending on the classification threshold chosen."
+      ],
+      "correctAnswer": 1,
+      "explain": "If 99% of the data belongs to one class, a naive model predicting only that class achieves 99% accuracy."
+    },
+    {
+      "question": "Which metric should be maximized when the cost of a False Negative is extremely high, such as in medical diagnoses?",
+      "options": [
+        "Precision",
+        "Recall",
+        "Specificity",
+        "Accuracy"
+      ],
+      "correctAnswer": 1,
+      "explain": "Recall measures the proportion of actual positives correctly identified, minimizing dangerous false negatives."
+    },
+    {
+      "question": "What two quantities are plotted against each other on an ROC curve?",
+      "options": [
+        "Precision and Recall",
+        "True Positive Rate and False Positive Rate",
+        "True Positive Rate and True Negative Rate",
+        "Predicted Values and Actual Values"
+      ],
+      "correctAnswer": 1,
+      "explain": "The ROC curve plots the True Positive Rate against the False Positive Rate across various threshold settings."
+    },
+    {
+      "question": "What does an ROC-AUC score of 0.5 indicate about a classification model?",
+      "options": [
+        "The model possesses perfect classification capability.",
+        "The model performs no better than random guessing.",
+        "The model predicts only the negative class instances.",
+        "The model contains an equal balance of features."
+      ],
+      "correctAnswer": 1,
+      "explain": "An AUC of 0.5 means the model has no discriminative ability, performing identically to a random coin flip."
+    },
+    {
+      "question": "If a model has high Precision but low Recall, what can be inferred about its behavior?",
+      "options": [
+        "It outputs many positive predictions, catching most true positives.",
+        "Its positive predictions are highly reliable, but it misses many true positives.",
+        "It performs flawlessly on negative classes but fails on positive ones.",
+        "It predicts every single sample in the dataset as positive."
+      ],
+      "correctAnswer": 1,
+      "explain": "High precision means when it claims an instance is positive, it is usually right; low recall means it fails to find many actual positives."
+    },
+    {
+      "question": "Which evaluation metric heavily penalizes confident but incorrect classification predictions?",
+      "options": [
+        "F1-Score",
+        "Log Loss (Cross-Entropy)",
+        "Mean Absolute Error",
+        "Cohen's Kappa"
+      ],
+      "correctAnswer": 1,
+      "explain": "Log Loss evaluates the predicted probabilities, penalizing wrong answers more severely when the model is confident."
+    },
+    {
+      "question": "In regression tasks, how does Root Mean Squared Error (RMSE) differ fundamentally from Mean Absolute Error (MAE)?",
+      "options": [
+        "RMSE eliminates the scale of the target variable entirely.",
+        "RMSE penalizes larger prediction errors more severely.",
+        "RMSE ignores outliers present within the validation fold.",
+        "RMSE always yields a lower numerical value than MAE."
+      ],
+      "correctAnswer": 1,
+      "explain": "Because RMSE squares the errors before averaging them, it gives disproportionately high weight to large errors."
+    },
+    {
+      "question": "Which mathematical components form the denominators for the Precision and Recall formulas, respectively?",
+      "options": [
+      "Precision uses (TP + FN); Recall uses (TP + FP).",
+      "Precision uses (TP + FP); Recall uses (TP + FN).",
+      "Precision uses (TN + FP); Recall uses (TN + FN).",
+      "Precision uses (TP + TN); Recall uses (FP + FN)."
+      ],
+      "correctAnswer": 1,
+      "explain": "Precision is calculated as TP divided by all predicted positives (TP + FP), whereas Recall is TP divided by all actual positives (TP + FN)."
+    }
+  ]
+}
