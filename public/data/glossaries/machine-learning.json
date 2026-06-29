@@ -1,0 +1,42 @@
+{
+  "id": "machine-learning",
+  "name": "Machine Learning",
+  "description": "Core concepts behind models that learn patterns from data.",
+  "category": "Computing",
+  "color": "lime",
+  "icon": "machine-learning",
+  "terms": [
+    {
+      "term": "Overfitting",
+      "definition": "When a model learns the training data too closely, including its noise, and fails to generalize to new data."
+    },
+    {
+      "term": "Underfitting",
+      "definition": "When a model is too simple to capture the underlying structure of the data, performing poorly on both training and test sets."
+    },
+    {
+      "term": "Feature",
+      "definition": "An individual measurable property of the data used as input to a model, such as a column in a dataset."
+    },
+    {
+      "term": "Label",
+      "definition": "The target value a supervised model learns to predict, provided alongside the features during training."
+    },
+    {
+      "term": "Gradient Descent",
+      "definition": "An optimization algorithm that iteratively adjusts model parameters to minimize a loss function."
+    },
+    {
+      "term": "Regularization",
+      "definition": "Techniques that penalize model complexity to reduce overfitting, such as L1 and L2 penalties."
+    },
+    {
+      "term": "Cross-Validation",
+      "definition": "A method of splitting data into multiple folds to evaluate a model's performance more reliably."
+    },
+    {
+      "term": "Hyperparameter",
+      "definition": "A configuration set before training, like learning rate or tree depth, that controls how a model learns."
+    }
+  ]
+}

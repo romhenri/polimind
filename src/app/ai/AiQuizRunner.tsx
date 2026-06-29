@@ -166,7 +166,7 @@ export default function AiQuizRunner({ quiz, onExit }: AiQuizRunnerProps) {
 
   return (
     <div className="max-w-4xl mx-auto animate-fade-in">
-      <div className="mb-3 sm:mb-6 md:mb-8">
+      <div className="mb-3 sm:mb-6 md:mb-6">
         <button
           type="button"
           onClick={onExit}
@@ -176,7 +176,7 @@ export default function AiQuizRunner({ quiz, onExit }: AiQuizRunnerProps) {
         </button>
 
         <div className="flex items-center justify-between my-2 sm:mb-4">
-          <h1 className="font-display text-2xl font-bold tracking-wide text-stone-800 dark:text-white sm:text-3xl md:text-4xl">
+          <h1 className="text-2xl font-bold tracking-wide font-display text-stone-800 dark:text-white sm:text-3xl md:text-4xl">
             {quiz.name}
           </h1>
           {totalAnswered > 0 && (

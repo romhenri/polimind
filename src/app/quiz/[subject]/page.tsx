@@ -223,7 +223,7 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
 
   return (
     <div className="max-w-4xl mx-auto animate-fade-in">
-      <div className="mb-3 sm:mb-6 md:mb-8">
+      <div className="6">
         <Link
           href="/"
           className="items-center hidden gap-2 mb-2 font-semibold sm:inline-flex sm:mb-4 text-clay-600 dark:text-clay-400 hover:text-clay-700 dark:hover:text-clay-300"
@@ -232,7 +232,7 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
         </Link>
 
         <div className="flex items-center justify-between my-2 sm:mb-4">
-          <h1 className="font-display text-2xl font-bold tracking-wide text-stone-800 dark:text-white sm:text-3xl md:text-4xl">
+          <h1 className="text-2xl font-bold tracking-wide font-display text-stone-800 dark:text-white sm:text-3xl md:text-4xl">
             {formatSubject(resolvedParams.subject)}
           </h1>
           {totalAnswered > 0 && (

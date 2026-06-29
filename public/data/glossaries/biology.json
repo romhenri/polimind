@@ -1,0 +1,38 @@
+{
+  "id": "biology",
+  "name": "Biology",
+  "description": "Essential vocabulary for cells, life and living systems.",
+  "category": "Science",
+  "color": "emerald",
+  "icon": "biology",
+  "terms": [
+    {
+      "term": "Cell",
+      "definition": "The basic structural and functional unit of all living organisms."
+    },
+    {
+      "term": "DNA",
+      "definition": "The molecule that carries the genetic instructions used in growth, development and reproduction."
+    },
+    {
+      "term": "Mitosis",
+      "definition": "The process of cell division that produces two identical daughter cells from one parent cell."
+    },
+    {
+      "term": "Photosynthesis",
+      "definition": "The process by which plants convert light energy, water and carbon dioxide into glucose and oxygen."
+    },
+    {
+      "term": "Ecosystem",
+      "definition": "A community of living organisms interacting with each other and their physical environment."
+    },
+    {
+      "term": "Homeostasis",
+      "definition": "The maintenance of a stable internal environment despite changes in external conditions."
+    },
+    {
+      "term": "Protein",
+      "definition": "A large molecule built from amino acids that performs most functions within living cells."
+    }
+  ]
+}

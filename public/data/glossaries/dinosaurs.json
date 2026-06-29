@@ -1,0 +1,38 @@
+{
+  "id": "dinosaurs",
+  "name": "Dinosaurs",
+  "description": "Paleontology terms about the giants that once ruled the Earth.",
+  "category": "Science",
+  "color": "green",
+  "icon": "dinosaurs",
+  "terms": [
+    {
+      "term": "Mesozoic Era",
+      "definition": "The geological era from about 252 to 66 million years ago, often called the Age of Dinosaurs."
+    },
+    {
+      "term": "Theropod",
+      "definition": "A group of mostly carnivorous, bipedal dinosaurs that includes Tyrannosaurus and modern birds."
+    },
+    {
+      "term": "Sauropod",
+      "definition": "A group of huge, long-necked herbivorous dinosaurs such as Brachiosaurus and Diplodocus."
+    },
+    {
+      "term": "Herbivore",
+      "definition": "A dinosaur that fed primarily on plants, often equipped with grinding or cropping teeth."
+    },
+    {
+      "term": "Fossil",
+      "definition": "The preserved remains or traces of ancient organisms, such as bones, eggs or footprints."
+    },
+    {
+      "term": "Paleontologist",
+      "definition": "A scientist who studies fossils to understand the history of life on Earth."
+    },
+    {
+      "term": "Extinction",
+      "definition": "The dying out of a species; a mass extinction ended the non-avian dinosaurs 66 million years ago."
+    }
+  ]
+}
