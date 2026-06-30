@@ -1,0 +1,126 @@
+{
+  "id": "probability-theory",
+  "name": "Probability Theory",
+  "description": "Test your understanding of conditional probability, Bayes' theorem, intersections, and complements.",
+  "color": "amber",
+  "category": "Math",
+  "tags": [
+    "probability",
+    "bayes-theorem",
+    "statistics"
+  ],
+  "hardness": "medium",
+  "type": "options",
+  "questions": [
+    {
+      "question": "If events A and B are independent, what is the probability of their intersection, P(A and B)?",
+      "options": [
+        "The sum of P(A) and P(B)",
+        "The product of P(A) and P(B)",
+        "The quotient of P(A) by P(B)",
+        "The difference of P(A) and P(B)"
+      ],
+      "correctAnswer": 1,
+      "explain": "For independent events, the probability of both occurring together is the product of their individual probabilities."
+    },
+    {
+      "question": "What does the complement of event A, denoted as A', represent in a sample space?",
+      "options": [
+        "All outcomes that are not in event A",
+        "All outcomes that are identical to A",
+        "The subset of outcomes that maximize A",
+        "The empty set containing no outcomes"
+      ],
+      "correctAnswer": 0,
+      "explain": "The complement of an event consists of all possible outcomes in the sample space that do not belong to that event."
+    },
+    {
+      "question": "If P(A) = 0.4, what is the probability of the complement of A?",
+      "options": [
+        "0.40",
+        "0.16",
+        "0.50",
+        "0.60"
+      ],
+      "correctAnswer": 3,
+      "explain": "The probability of a complement is calculated by subtracting the event's probability from 1."
+    },
+    {
+      "question": "How is the conditional probability P(A|B) defined, assuming P(B) is greater than zero?",
+      "options": [
+        "P(A and B) divided by P(B)",
+        "P(A and B) divided by P(A)",
+        "P(A or B) multiplied by P(B)",
+        "P(A or B) subtracted from P(A)"
+      ],
+      "correctAnswer": 0,
+      "explain": "Conditional probability measures the probability of A occurring given that B has occurred, which scales the intersection by the condition's probability."
+    },
+    {
+      "question": "Which formula correctly expresses Bayes' Theorem?",
+      "options": [
+        "P(A|B) = P(B|A) * P(A) + P(B)",
+        "P(A|B) = P(B|A) * P(A) / P(B)",
+        "P(A|B) = P(B|A) * P(B) / P(A)",
+        "P(A|B) = P(B|A) * P(A) - P(B)"
+      ],
+      "correctAnswer": 1,
+      "explain": "Bayes' Theorem relates conditional and marginal probabilities of stochastic events using this exact ratio."
+    },
+    {
+      "question": "If P(A) = 0.3, P(B) = 0.4, and P(A and B) = 0.12, what can be concluded about events A and B?",
+      "options": [
+        "They are mutually exclusive events",
+        "They are completely dependent events",
+        "They are strictly independent events",
+        "They are perfectly complementary events"
+      ],
+      "correctAnswer": 2,
+      "explain": "Because the product of P(A) and P(B) equals P(A and B), the two events satisfy the condition for independence."
+    },
+    {
+      "question": "If two events A and B are mutually exclusive, what is the probability of their intersection?",
+      "options": [
+        "0.0",
+        "0.5",
+        "1.0",
+        "0.2"
+      ],
+      "correctAnswer": 0,
+      "explain": "Mutually exclusive events cannot occur at the same time, meaning their intersection contains no outcomes."
+    },
+    {
+      "question": "A test for a disease has a 90% true positive rate. If 1% of the population has the disease, what component of Bayes' theorem represents the 1%?",
+      "options": [
+        "The posterior probability",
+        "The marginal likelihood",
+        "The prior probability",
+        "The standard condition"
+      ],
+      "correctAnswer": 2,
+      "explain": "The base rate of the disease in the population before seeing test results is known as the prior probability."
+    },
+    {
+      "question": "Given P(A) = 0.7 and P(B|A) = 0.5, find the probability of the intersection P(A and B).",
+      "options": [
+        "0.20",
+        "0.35",
+        "0.75",
+        "0.12"
+      ],
+      "correctAnswer": 1,
+      "explain": "Using the general multiplication rule, P(A and B) is equal to P(A) multiplied by P(B|A)."
+    },
+    {
+      "question": "The total probability rule is often used to calculate which part of Bayes' Theorem?",
+      "options": [
+        "The prior probability in the numerator",
+        "The entire ratio value on the left side",
+        "The likelihood function in the numerator",
+        "The denominator or marginal probability"
+      ],
+      "correctAnswer": 3,
+      "explain": "The denominator P(B) is often computed using the law of total probability across all disjoint cases of A."
+    }
+  ]
+}

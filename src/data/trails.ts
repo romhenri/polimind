@@ -1,5 +1,5 @@
 import type { IconType } from 'react-icons'
-import { FaNetworkWired, FaEarthAmericas, FaGlobe, FaGears, FaDna } from 'react-icons/fa6'
+import { FaNetworkWired, FaEarthAmericas, FaGlobe, FaGears, FaDna, FaLayerGroup, FaChartColumn } from 'react-icons/fa6'
 import { FaFistRaised } from 'react-icons/fa'
 import { TbBinaryTree, TbMath } from 'react-icons/tb'
 import { GiDinosaurRex } from 'react-icons/gi'
@@ -31,6 +31,14 @@ export const TRAILS: Trail[] = [
       'sorting-algorithms2',
       'sorting-algorithms3',
     ],
+  },
+  {
+    id: 'data-structures',
+    name: 'Data Structures',
+    description: 'Lists, stacks, queues, linked lists and deques — the building blocks of code.',
+    icon: FaLayerGroup,
+    color: 'emerald',
+    quizzes: ['data-structures-list', 'data-structures-list-2'],
   },
   {
     id: 'networks',
@@ -113,6 +121,14 @@ export const TRAILS: Trail[] = [
       'calculus-derivatives',
       'calculus-integrals',
     ],
+  },
+  {
+    id: 'statistics-probability',
+    name: 'Statistics & Probability',
+    description: 'Distributions, conditional probability, Bayes and the math of uncertainty.',
+    icon: FaChartColumn,
+    color: 'sky',
+    quizzes: ['statistics', 'probability-theory'],
   },
   {
     id: 'biology',
