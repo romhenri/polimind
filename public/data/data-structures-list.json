@@ -1,0 +1,127 @@
+{
+  "id": "data-structures-list",
+  "name": "List Data Structures",
+  "description": "Test your knowledge on the core concepts of lists, stacks, and queues, essential building blocks in computer science.",
+  "color": "emerald",
+  "category": "Computing",
+  "tags": [
+    "data structures",
+    "stack",
+    "queue",
+    "list"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "Which data structure allows elements to be stored contiguously or non-contiguously and accessed by index or reference?",
+      "options": [
+        "Stack",
+        "Queue",
+        "List",
+        "Tree"
+      ],
+      "correctAnswer": 2,
+      "explain": "A list is a flexible data structure that can store elements either contiguously (like an array-based list) or non-contiguously (like a linked list)."
+    },
+    {
+      "question": "What principle governs the order in which elements are added to and removed from a stack?",
+      "options": [
+        "Last-In-First-Out",
+        "First-In-First-Out",
+        "Random Access",
+        "Indexed Access"
+      ],
+      "correctAnswer": 0,
+      "explain": "A stack operates on the Last-In-First-Out (LIFO) principle, meaning the last element added is the first one to be removed."
+    },
+    {
+      "question": "Which principle describes the behavior of a queue, where the first element added is the first one to be removed?",
+      "options": [
+        "Last-In-First-Out",
+        "First-In-First-Out",
+        "Random Access",
+        "Priority Access"
+      ],
+      "correctAnswer": 1,
+      "explain": "A queue follows the First-In-First-Out (FIFO) principle, similar to people waiting in a line."
+    },
+    {
+      "question": "What is the operation called when an element is added to the top of a stack?",
+      "options": [
+        "Dequeue",
+        "Enqueue",
+        "Pop",
+        "Push"
+      ],
+      "correctAnswer": 3,
+      "explain": "The 'push' operation adds an element to the top of a stack."
+    },
+    {
+      "question": "Which operation removes an element from the front of a queue?",
+      "options": [
+        "Push",
+        "Pop",
+        "Enqueue",
+        "Dequeue"
+      ],
+      "correctAnswer": 3,
+      "explain": "The 'dequeue' operation removes an element from the front of a queue."
+    },
+    {
+      "question": "Which feature distinguishes a dynamic list from a static array?",
+      "options": [
+        "Ability to resize",
+        "Faster data retrieval",
+        "Fixed memory footprint",
+        "Elements are sorted"
+      ],
+      "correctAnswer": 0,
+      "explain": "Dynamic lists can adjust their capacity during program execution, unlike static arrays which have a fixed size."
+    },
+    {
+      "question": "In which programming context is a stack commonly used?",
+      "options": [
+        "Printer spooling",
+        "Network packet routing",
+        "Managing function calls",
+        "Database transaction logs"
+      ],
+      "correctAnswer": 2,
+      "explain": "Function calls and their local variables are typically managed using a call stack in most programming languages."
+    },
+    {
+      "question": "A queue is best suited for which of the following real-world applications?",
+      "options": [
+        "Reversing a string",
+        "Processing tasks in order",
+        "Undo/Redo functionality",
+        "Storing browser history"
+      ],
+      "correctAnswer": 1,
+      "explain": "Queues are ideal for scenarios where tasks need to be processed in the order they were received, like print queues or task scheduling."
+    },
+    {
+      "question": "What does the acronym LIFO stand for in the context of data structures?",
+      "options": [
+        "Last In Fast Out",
+        "Low Interest Fund Options",
+        "List Item First Order",
+        "Last-In-First-Out"
+      ],
+      "correctAnswer": 3,
+      "explain": "LIFO is an abbreviation for Last-In-First-Out, which describes the behavior of a stack."
+    },
+    {
+      "question": "In data structures, what does FIFO represent?",
+      "options": [
+        "First-In-First-Out",
+        "Fast Input Flexible Output",
+        "First Item Final Order",
+        "Fixed Index First Option"
+      ],
+      "correctAnswer": 0,
+      "explain": "FIFO stands for First-In-First-Out, characteristic of a queue where elements are processed in insertion order."
+    }
+  ]
+}

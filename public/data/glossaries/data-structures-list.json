@@ -1,0 +1,140 @@
+{
+  "id": "data-structures-list",
+  "name": "List Data Structures",
+  "description": "The core concepts behind lists, stacks, and queues — essential building blocks of computer science.",
+  "category": "Computing",
+  "color": "emerald",
+  "icon": "data-structures-list",
+  "terms": [
+    {
+      "groupName": "Foundations",
+      "group": [
+        {
+          "term": "List",
+          "definition": "A flexible data structure that stores elements either contiguously (an **Array**) or non-contiguously (a **Linked List**), accessed by index or reference."
+        },
+        {
+          "term": "Array",
+          "definition": "A contiguous block of memory holding elements of the same type, offering fast O(1) **Index** access but a **Static** size."
+        },
+        {
+          "term": "Linked List",
+          "definition": "A **List** whose elements (**Node**s) are linked by references, allowing easy insertion and removal without contiguous memory."
+        },
+        {
+          "term": "Node",
+          "definition": "A single unit in a **Linked List** holding a value and a reference to the next element."
+        },
+        {
+          "term": "Index",
+          "definition": "The numeric position used to access an element directly within an **Array** or array-based **List**."
+        }
+      ]
+    },
+    {
+      "groupName": "Stack",
+      "group": [
+        {
+          "term": "Stack",
+          "definition": "A **List** that follows the **LIFO** principle, where the last element added is the first removed; used to manage function **Call Stack**s."
+        },
+        {
+          "term": "LIFO",
+          "definition": "Last-In-First-Out — the ordering rule of a **Stack**, where the most recently added element leaves first."
+        },
+        {
+          "term": "Push",
+          "definition": "The operation that adds an element to the top of a **Stack**."
+        },
+        {
+          "term": "Pop",
+          "definition": "The operation that removes the top element from a **Stack**, the counterpart of **Push**."
+        },
+        {
+          "term": "Call Stack",
+          "definition": "A **Stack** used by programs to track active function calls and their local variables."
+        }
+      ]
+    },
+    {
+      "groupName": "Queue",
+      "group": [
+        {
+          "term": "Queue",
+          "definition": "A **List** that follows the **FIFO** principle, where the first element added is the first removed; ideal for processing tasks in order."
+        },
+        {
+          "term": "FIFO",
+          "definition": "First-In-First-Out — the ordering rule of a **Queue**, like people waiting in a line."
+        },
+        {
+          "term": "Enqueue",
+          "definition": "The operation that adds an element to the back of a **Queue**."
+        },
+        {
+          "term": "Dequeue",
+          "definition": "The operation that removes an element from the front of a **Queue**, the counterpart of **Enqueue**."
+        },
+        {
+          "term": "Deque",
+          "definition": "A double-ended **Queue** allowing efficient insertion and removal at both the front and the rear, so it can serve as either a **Stack** (**LIFO**) or a **Queue** (**FIFO**)."
+        }
+      ]
+    },
+    {
+      "groupName": "Sizing",
+      "group": [
+        {
+          "term": "Static",
+          "definition": "A fixed-size structure, like a plain **Array**, whose capacity is set at creation and cannot change."
+        },
+        {
+          "term": "Dynamic",
+          "definition": "A resizable structure, like a dynamic **List**, that can grow or shrink during program execution unlike a **Static** array."
+        }
+      ]
+    },
+    {
+      "groupName": "Linked List Variants",
+      "group": [
+        {
+          "term": "Head",
+          "definition": "The first **Node** of a **Linked List**, the entry point from which traversal begins."
+        },
+        {
+          "term": "Tail",
+          "definition": "The last **Node** of a **Linked List**; in a **Singly Linked List** its next reference is null."
+        },
+        {
+          "term": "Singly Linked List",
+          "definition": "A **Linked List** where each **Node** points only to the next one, so it can be traversed in a single direction and reaching an **Index** takes O(n)."
+        },
+        {
+          "term": "Doubly Linked List",
+          "definition": "A **Linked List** whose **Node**s store references to both the next and previous elements, enabling bidirectional traversal and O(1) deletion of a known node."
+        },
+        {
+          "term": "Circular Linked List",
+          "definition": "A **Linked List** whose **Tail** links back to the **Head**, forming a continuous loop; well suited to cyclical processes like **Round-Robin Scheduling**."
+        },
+        {
+          "term": "Round-Robin Scheduling",
+          "definition": "A CPU scheduling strategy that cycles through processes in fixed time slices, naturally modeled with a **Circular Linked List**."
+        }
+      ]
+    },
+    {
+      "groupName": "Composition",
+      "group": [
+        {
+          "term": "Homogeneous List",
+          "definition": "A **List** that stores elements of a single shared data type, like a typed **Array**."
+        },
+        {
+          "term": "Heterogeneous List",
+          "definition": "A **List** that holds elements of different data types at once, often implemented by storing references to a common base class or interface."
+        }
+      ]
+    }
+  ]
+}

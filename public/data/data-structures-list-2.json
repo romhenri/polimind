@@ -1,0 +1,127 @@
+{
+  "id": "data-structures-list-2",
+  "name": "List Data Structures 2",
+  "description": "Test your knowledge on linked lists, circular lists, heterogeneous lists, and double-ended queues.",
+  "color": "emerald",
+  "category": "Computing",
+  "tags": [
+    "data structures",
+    "linked list",
+    "deque",
+    "list"
+  ],
+  "hardness": "medium",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What distinguishes a doubly linked list from a singly linked list?",
+      "options": [
+        "Each node contains two data fields instead of one.",
+        "Nodes are allocated in a contiguous block of memory.",
+        "Each node stores pointers to both the next and previous nodes.",
+        "It can only be traversed from the tail to the head node."
+      ],
+      "correctAnswer": 2,
+      "explain": "Nodes in a doubly linked list maintain pointers to both the next and the previous elements, allowing bidirectional traversal."
+    },
+    {
+      "question": "In a standard circular singly linked list, where does the pointer of the last node point to?",
+      "options": [
+        "The head node of the list",
+        "A null or empty reference",
+        "The middle node of the list",
+        "Back to the last node itself"
+      ],
+      "correctAnswer": 0,
+      "explain": "In a circular linked list, the last node's next pointer links back to the first node, forming a continuous loop."
+    },
+    {
+      "question": "What is a major advantage of using a doubly linked list over a singly linked list?",
+      "options": [
+        "It consumes significantly less memory space per node.",
+        "It allows for efficient node deletion when given only the target node pointer.",
+        "It provides faster random access to items via their integer index.",
+        "It guarantees that data elements remain ordered automatically."
+      ],
+      "correctAnswer": 1,
+      "explain": "Since a node in a doubly linked list knows its predecessor, it can be unlinked in O(1) time without traversing from the head."
+    },
+    {
+      "question": "Which term best describes a list data structure that can store elements of completely different data types concurrently?",
+      "options": [
+        "Homogeneous list",
+        "Heterogeneous list",
+        "Dynamic array list",
+        "Circular array list"
+      ],
+      "correctAnswer": 1,
+      "explain": "A heterogeneous list is designed to hold objects or values of diverse data types within the same collection."
+    },
+    {
+      "question": "What is a primary characteristic of a double-ended queue (Deque)?",
+      "options": [
+        "Elements are strictly restricted to insertion at the front and removal from the rear.",
+        "Elements can only be inserted or removed from the exact middle of the structure.",
+        "Elements can be efficiently inserted and removed from both the front and the rear.",
+        "Elements are automatically sorted in ascending order upon every new insertion."
+      ],
+      "correctAnswer": 2,
+      "explain": "A deque permits insertion and deletion operations at both ends, combining features of stacks and queues."
+    },
+    {
+      "question": "Which operation is typically inefficient in a standard singly linked list compared to an array?",
+      "options": [
+        "Inserting an element right at the beginning",
+        "Deleting the first node of the structure",
+        "Accessing an element at an arbitrary index",
+        "Traversing through the entire collection"
+      ],
+      "correctAnswer": 2,
+      "explain": "Arrays provide O(1) random access via indexing, whereas a singly linked list requires O(n) sequential traversal to reach a specific index."
+    },
+    {
+      "question": "In a circular doubly linked list, what does the 'previous' pointer of the head node point to?",
+      "options": [
+        "The tail node of the list",
+        "A null pointer reference",
+        "The head node itself",
+        "The second node in line"
+      ],
+      "correctAnswer": 0,
+      "explain": "To complete the circular structure, the head node's previous pointer links directly to the final node of the collection."
+    },
+    {
+      "question": "How are heterogeneous lists typically implemented in strongly-typed object-oriented programming languages?",
+      "options": [
+        "By enforcing fixed primitive allocations inside uniform arrays.",
+        "By storing pointers or references to a common base class or interface.",
+        "By duplicating the entire underlying list structure for every data type.",
+        "By completely avoiding the use of pointers or dynamic memory references."
+      ],
+      "correctAnswer": 1,
+      "explain": "Using polymorphism with a base class (like Object) or an interface allows a list to store diverse object types references uniformly."
+    },
+    {
+      "question": "What is a common real-world application for a circular linked list structure?",
+      "options": [
+        "Implementing a deep undo/redo mechanism in applications",
+        "Managing active execution time slots in round-robin CPU scheduling",
+        "Parsing complex algebraic formulas using operator precedence",
+        "Storing key-value pairs inside a standard hash map bucket"
+      ],
+      "correctAnswer": 1,
+      "explain": "Circular linked lists naturally model cyclical processes, making them perfect for round-robin scheduling algorithms."
+    },
+    {
+      "question": "Which of the following data structures can be used directly as an efficient implementation provider for both a Stack and a Queue?",
+      "options": [
+        "Singly Linked List",
+        "Heterogeneous List",
+        "Double-ended Queue",
+        "Static Matrix List"
+      ],
+      "correctAnswer": 2,
+      "explain": "Because a double-ended queue supports additions and removals at both ends, it can easily replicate stack (LIFO) or queue (FIFO) behaviors."
+    }
+  ]
+}
