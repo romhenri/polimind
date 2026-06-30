@@ -11,11 +11,11 @@
       "group": [
         {
           "term": "Big O Notation",
-          "definition": "A notation describing the upper bound of an algorithm's running time or space as input size grows."
+          "definition": "A notation describing the upper bound of an algorithm's running time or space as input size grows; the most common way to express **Time Complexity**."
         },
         {
           "term": "Time Complexity",
-          "definition": "A measure of how the number of operations an algorithm performs grows with input size."
+          "definition": "A measure of how the number of operations an algorithm performs grows with input size, usually expressed with **Big O Notation**."
         }
       ]
     },
@@ -24,15 +24,15 @@
       "group": [
         {
           "term": "Divide and Conquer",
-          "definition": "A strategy that breaks a problem into subproblems, solves them independently, and combines the results."
+          "definition": "A strategy that breaks a problem into subproblems, solves them independently, and combines the results, often implemented with **Recursion**."
         },
         {
           "term": "Greedy Algorithm",
-          "definition": "An approach that makes the locally optimal choice at each step, hoping to reach a global optimum."
+          "definition": "An approach that makes the locally optimal choice at each step; unlike **Dynamic Programming**, it never reconsiders earlier choices."
         },
         {
           "term": "Dynamic Programming",
-          "definition": "Solving problems by storing the results of overlapping subproblems to avoid recomputation."
+          "definition": "Solving problems by storing the results of overlapping subproblems to avoid the repeated work of plain **Recursion**."
         }
       ]
     },
@@ -41,11 +41,11 @@
       "group": [
         {
           "term": "Recursion",
-          "definition": "A technique where a function solves a problem by calling itself on smaller subproblems."
+          "definition": "A technique where a function solves a problem by calling itself on smaller subproblems, central to **Divide and Conquer**."
         },
         {
           "term": "Binary Search",
-          "definition": "An efficient O(log n) search that repeatedly halves a sorted range to locate a target value."
+          "definition": "An efficient O(log n) **Divide and Conquer** search that repeatedly halves a sorted range to locate a target value."
         },
         {
           "term": "Graph Traversal",

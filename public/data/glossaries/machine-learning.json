@@ -2,7 +2,7 @@
   "id": "machine-learning",
   "name": "Machine Learning",
   "description": "Core concepts behind models that learn patterns from data.",
-  "category": "Computing",
+  "category": "Data",
   "color": "lime",
   "icon": "machine-learning",
   "terms": [
@@ -11,11 +11,11 @@
       "group": [
         {
           "term": "Feature",
-          "definition": "An individual measurable property of the data used as input to a model, such as a column in a dataset."
+          "definition": "An individual measurable property of the data used as input to a model, such as a column in a dataset, often paired with a **Label** in supervised learning."
         },
         {
           "term": "Label",
-          "definition": "The target value a supervised model learns to predict, provided alongside the features during training."
+          "definition": "The target value a supervised model learns to predict, provided alongside the **Feature**s during training."
         }
       ]
     },
@@ -24,11 +24,11 @@
       "group": [
         {
           "term": "Overfitting",
-          "definition": "When a model learns the training data too closely, including its noise, and fails to generalize to new data."
+          "definition": "When a model learns the training data too closely, including its noise, and fails to generalize to new data — the opposite of **Underfitting**."
         },
         {
           "term": "Underfitting",
-          "definition": "When a model is too simple to capture the underlying structure of the data, performing poorly on both training and test sets."
+          "definition": "When a model is too simple to capture the underlying structure of the data, performing poorly on both training and test sets — the opposite of **Overfitting**."
         }
       ]
     },
@@ -37,15 +37,15 @@
       "group": [
         {
           "term": "Gradient Descent",
-          "definition": "An optimization algorithm that iteratively adjusts model parameters to minimize a loss function."
+          "definition": "An optimization algorithm that iteratively adjusts model parameters to minimize a loss function, using a step size set by a **Hyperparameter** called the learning rate."
         },
         {
           "term": "Regularization",
-          "definition": "Techniques that penalize model complexity to reduce overfitting, such as L1 and L2 penalties."
+          "definition": "Techniques that penalize model complexity to reduce **Overfitting**, such as L1 and L2 penalties."
         },
         {
           "term": "Hyperparameter",
-          "definition": "A configuration set before training, like learning rate or tree depth, that controls how a model learns."
+          "definition": "A configuration set before training, like the learning rate used in **Gradient Descent** or tree depth, that controls how a model learns."
         }
       ]
     },
@@ -54,7 +54,7 @@
       "group": [
         {
           "term": "Cross-Validation",
-          "definition": "A method of splitting data into multiple folds to evaluate a model's performance more reliably."
+          "definition": "A method of splitting data into multiple folds to evaluate a model's performance more reliably and detect **Overfitting**."
         }
       ]
     }

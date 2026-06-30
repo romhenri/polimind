@@ -11,11 +11,11 @@
       "group": [
         {
           "term": "IP Address",
-          "definition": "A numerical label assigned to each device on a network, used to identify and route data to it."
+          "definition": "A numerical label assigned to each device on a network, used to identify it and route **Packet**s to the right destination."
         },
         {
           "term": "DNS",
-          "definition": "The system that translates human-readable domain names into IP addresses."
+          "definition": "The system that translates human-readable domain names into **IP Address**es."
         }
       ]
     },
@@ -24,11 +24,11 @@
       "group": [
         {
           "term": "TCP",
-          "definition": "A connection-oriented transport protocol that guarantees reliable, ordered delivery of data."
+          "definition": "A connection-oriented transport protocol that, unlike **UDP**, guarantees reliable, ordered delivery of data."
         },
         {
           "term": "UDP",
-          "definition": "A lightweight, connectionless transport protocol that prioritizes speed over guaranteed delivery."
+          "definition": "A lightweight, connectionless transport protocol that prioritizes speed over the guaranteed delivery offered by **TCP**."
         }
       ]
     },
@@ -37,11 +37,11 @@
       "group": [
         {
           "term": "Packet",
-          "definition": "A formatted unit of data carried across a network, containing a header and payload."
+          "definition": "A formatted unit of data carried across a network, containing a header and payload, forwarded by a **Router**."
         },
         {
           "term": "Router",
-          "definition": "A device that forwards data packets between networks, directing traffic toward its destination."
+          "definition": "A device that forwards data **Packet**s between networks, directing traffic toward its destination."
         }
       ]
     },
@@ -50,11 +50,11 @@
       "group": [
         {
           "term": "Latency",
-          "definition": "The time it takes for data to travel from source to destination across a network."
+          "definition": "The time it takes for data to travel from source to destination across a network, not to be confused with **Bandwidth**."
         },
         {
           "term": "Bandwidth",
-          "definition": "The maximum rate at which data can be transferred over a network connection."
+          "definition": "The maximum rate at which data can be transferred over a network connection, distinct from **Latency**."
         }
       ]
     }

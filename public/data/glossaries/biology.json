@@ -11,15 +11,15 @@
       "group": [
         {
           "term": "Cell",
-          "definition": "The basic structural and functional unit of all living organisms."
+          "definition": "The basic structural and functional unit of all living organisms; each one carries **DNA** and produces **Protein**s."
         },
         {
           "term": "DNA",
-          "definition": "The molecule that carries the genetic instructions used in growth, development and reproduction."
+          "definition": "The molecule that carries the genetic instructions used to build **Protein**s and guide growth, development and reproduction."
         },
         {
           "term": "Protein",
-          "definition": "A large molecule built from amino acids that performs most functions within living cells."
+          "definition": "A large molecule built from amino acids that performs most functions within living **Cell**s."
         }
       ]
     },
@@ -28,15 +28,15 @@
       "group": [
         {
           "term": "Mitosis",
-          "definition": "The process of cell division that produces two identical daughter cells from one parent cell."
+          "definition": "The process of cell division that produces two identical daughter **Cell**s from one parent cell."
         },
         {
           "term": "Photosynthesis",
-          "definition": "The process by which plants convert light energy, water and carbon dioxide into glucose and oxygen."
+          "definition": "The process by which plant **Cell**s convert light energy, water and carbon dioxide into glucose and oxygen."
         },
         {
           "term": "Homeostasis",
-          "definition": "The maintenance of a stable internal environment despite changes in external conditions."
+          "definition": "The maintenance of a stable internal environment within an organism despite changes in external conditions."
         }
       ]
     },

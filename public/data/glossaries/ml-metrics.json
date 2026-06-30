@@ -1,0 +1,86 @@
+{
+  "id": "ml-metrics",
+  "name": "ML Metrics",
+  "description": "How model performance is measured for classification and regression.",
+  "category": "Data",
+  "color": "cyan",
+  "icon": "ml-metrics",
+  "terms": [
+    {
+      "groupName": "Confusion Matrix",
+      "group": [
+        {
+          "term": "Confusion Matrix",
+          "definition": "A table comparing predicted and actual classes, built from **True Positive**, **False Positive**, **False Negative** and **True Negative** counts."
+        },
+        {
+          "term": "True Positive",
+          "definition": "A positive case that the model correctly predicted as positive."
+        },
+        {
+          "term": "False Positive",
+          "definition": "A negative case the model incorrectly predicted as positive — a 'false alarm' that lowers **Precision**."
+        },
+        {
+          "term": "False Negative",
+          "definition": "A positive case the model incorrectly predicted as negative — a 'miss' that lowers **Recall**."
+        },
+        {
+          "term": "True Negative",
+          "definition": "A negative case that the model correctly predicted as negative."
+        }
+      ]
+    },
+    {
+      "groupName": "Classification Metrics",
+      "group": [
+        {
+          "term": "Accuracy",
+          "definition": "The fraction of all predictions that are correct; can be misleading on imbalanced datasets, where **Precision** and **Recall** matter more."
+        },
+        {
+          "term": "Precision",
+          "definition": "Of all cases predicted positive, the fraction that are truly positive — hurt by every **False Positive**."
+        },
+        {
+          "term": "Recall",
+          "definition": "Of all actual positive cases, the fraction the model correctly finds — hurt by every **False Negative**."
+        },
+        {
+          "term": "F1 Score",
+          "definition": "The harmonic mean of **Precision** and **Recall**, balancing the two into a single number."
+        }
+      ]
+    },
+    {
+      "groupName": "Ranking & Probability",
+      "group": [
+        {
+          "term": "ROC Curve",
+          "definition": "A plot of the true positive rate against the false positive rate across all classification thresholds."
+        },
+        {
+          "term": "ROC-AUC",
+          "definition": "The area under the **ROC Curve**; 1.0 is a perfect classifier and 0.5 is no better than random guessing."
+        },
+        {
+          "term": "Log Loss",
+          "definition": "A metric that heavily penalizes confident but incorrect probability predictions."
+        }
+      ]
+    },
+    {
+      "groupName": "Regression Metrics",
+      "group": [
+        {
+          "term": "MAE",
+          "definition": "Mean Absolute Error — the average absolute difference between predicted and actual values."
+        },
+        {
+          "term": "RMSE",
+          "definition": "Root Mean Squared Error — like **MAE**, but it squares errors first, so large mistakes are penalized far more heavily."
+        }
+      ]
+    }
+  ]
+}

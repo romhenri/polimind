@@ -11,19 +11,19 @@
       "group": [
         {
           "term": "Mesozoic Era",
-          "definition": "The geological era from about 252 to 66 million years ago, often called the Age of Dinosaurs. It is divided into three periods: the Triassic, the Jurassic and the Cretaceous."
+          "definition": "The geological era from about 252 to 66 million years ago, often called the Age of Dinosaurs. It is divided into three periods: the **Triassic**, the **Jurassic** and the **Cretaceous**."
         },
         {
           "term": "Triassic",
-          "definition": "The first Mesozoic period (252–201 million years ago), when the earliest dinosaurs appeared."
+          "definition": "The first period of the **Mesozoic Era** (252–201 million years ago), when the earliest dinosaurs appeared."
         },
         {
           "term": "Jurassic",
-          "definition": "The middle Mesozoic period (201–145 million years ago), dominated by giant sauropods and early theropods."
+          "definition": "The middle period of the **Mesozoic Era** (201–145 million years ago), dominated by giant sauropods and early theropods."
         },
         {
           "term": "Cretaceous",
-          "definition": "The final Mesozoic period (145–66 million years ago), ending with the mass extinction of non-avian dinosaurs."
+          "definition": "The final period of the **Mesozoic Era** (145–66 million years ago), ending with the mass extinction of non-avian dinosaurs."
         }
       ]
     },
@@ -32,11 +32,11 @@
       "group": [
         {
           "term": "Saurischia",
-          "definition": "The 'lizard-hipped' order of dinosaurs, grouping the theropods and the long-necked sauropodomorphs."
+          "definition": "The 'lizard-hipped' order of dinosaurs, grouping the **Theropoda** and the long-necked **Sauropodomorpha**."
         },
         {
           "term": "Ornithischia",
-          "definition": "The 'bird-hipped' order of dinosaurs, made up entirely of herbivores such as Triceratops and Stegosaurus."
+          "definition": "The 'bird-hipped' order of dinosaurs, made up entirely of herbivores such as the **Ornithopoda**."
         }
       ]
     },
@@ -45,15 +45,15 @@
       "group": [
         {
           "term": "Theropoda",
-          "definition": "A suborder of mostly carnivorous, bipedal saurischians that includes Tyrannosaurus and modern birds."
+          "definition": "A suborder of mostly carnivorous, bipedal **Saurischia** that includes the **Tyrannosauridae** and modern birds."
         },
         {
           "term": "Sauropodomorpha",
-          "definition": "A suborder of huge, long-necked herbivorous saurischians such as Brachiosaurus and Diplodocus."
+          "definition": "A suborder of huge, long-necked herbivorous **Saurischia** such as the **Diplodocidae** and **Brachiosauridae**."
         },
         {
           "term": "Ornithopoda",
-          "definition": "A suborder of herbivorous ornithischians, including Iguanodon and the duck-billed hadrosaurs."
+          "definition": "A suborder of herbivorous **Ornithischia**, including Iguanodon and the duck-billed **Hadrosauridae**."
         }
       ]
     },
@@ -62,39 +62,39 @@
       "group": [
         {
           "term": "Tyrannosauridae",
-          "definition": "A family of large, powerful carnivorous theropods, most famously Tyrannosaurus rex."
+          "definition": "A family of large, powerful carnivorous **Theropoda**, most famously Tyrannosaurus rex."
         },
         {
           "term": "Diplodocidae",
-          "definition": "A family of extremely long, slender sauropods such as Diplodocus and Apatosaurus."
+          "definition": "A family of extremely long, slender **Sauropodomorpha** such as Diplodocus and Apatosaurus."
         },
         {
           "term": "Ceratopsidae",
-          "definition": "A family of horned, frilled herbivorous dinosaurs that includes Triceratops."
+          "definition": "A family of horned, frilled herbivorous **Ornithischia** that includes Triceratops."
         },
         {
           "term": "Stegosauridae",
-          "definition": "A family of plated, spike-tailed herbivorous dinosaurs, most famously Stegosaurus."
+          "definition": "A family of plated, spike-tailed herbivorous **Ornithischia**, most famously Stegosaurus."
         },
         {
           "term": "Brachiosauridae",
-          "definition": "A family of giant, long-necked sauropods with longer front legs and high shoulders, such as Brachiosaurus."
+          "definition": "A family of giant **Sauropodomorpha** with longer front legs and high shoulders, such as Brachiosaurus."
         },
         {
           "term": "Spinosauridae",
-          "definition": "A family of large, semi-aquatic theropods with crocodile-like snouts and sail-backed bodies, such as Spinosaurus."
+          "definition": "A family of large, semi-aquatic **Theropoda** with crocodile-like snouts and sail-backed bodies, such as Spinosaurus."
         },
         {
           "term": "Ankylosauridae",
-          "definition": "A family of heavily armored herbivores with bony plates and a clubbed tail, such as Ankylosaurus."
+          "definition": "A family of heavily armored herbivorous **Ornithischia** with bony plates and a clubbed tail, such as Ankylosaurus."
         },
         {
           "term": "Dromaeosauridae",
-          "definition": "A family of small, agile feathered theropods with a sickle-shaped claw, including Velociraptor and Deinonychus."
+          "definition": "A family of small, agile feathered **Theropoda** with a sickle-shaped claw, including Velociraptor and Deinonychus."
         },
         {
           "term": "Hadrosauridae",
-          "definition": "A family of duck-billed herbivores, often with elaborate head crests, such as Parasaurolophus and Edmontosaurus."
+          "definition": "A family of duck-billed herbivorous **Ornithopoda**, often with elaborate head crests, such as Parasaurolophus."
         }
       ]
     },
@@ -107,7 +107,7 @@
         },
         {
           "term": "Paleontologist",
-          "definition": "A scientist who studies fossils to understand the history of life on Earth."
+          "definition": "A scientist who studies **Fossil**s to understand the history of life on Earth."
         },
         {
           "term": "Taxonomy",
