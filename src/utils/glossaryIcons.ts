@@ -7,13 +7,17 @@ import {
   FaFlask,
   FaMicrochip,
   FaCode,
+  FaChartLine,
+  FaLayerGroup,
 } from 'react-icons/fa6'
 import { TbBinaryTree, TbMath } from 'react-icons/tb'
 import { GiDinosaurRex } from 'react-icons/gi'
 
 const ICON_BY_ID: Record<string, IconType> = {
   'machine-learning': FaBrain,
+  'ml-metrics': FaChartLine,
   algorithms: TbBinaryTree,
+  'data-structures-list': FaLayerGroup,
   networks: FaNetworkWired,
   biology: FaDna,
   dinosaurs: GiDinosaurRex,
@@ -24,6 +28,7 @@ const ICON_BY_CATEGORY: Record<string, IconType> = {
   Programming: FaCode,
   Math: TbMath,
   Science: FaFlask,
+  Data: FaChartLine,
 }
 
 export function getGlossaryIcon(id: string, category?: string): IconType {

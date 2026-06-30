@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import RichText from '@/components/RichText'
 import type { GlossaryTerm } from '@/types/glossary'
 
 interface TermCardProps {
@@ -26,7 +27,7 @@ export default function TermCard({ term, bgColor, index }: TermCardProps) {
         </h3>
       </div>
       <p className="font-medium text-stone-700 dark:text-stone-200">
-        {term.definition}
+        <RichText>{term.definition}</RichText>
       </p>
     </div>
   )
