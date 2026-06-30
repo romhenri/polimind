@@ -25,29 +25,31 @@ export default function Header() {
           </Link>
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/lib"
-              className="inline-flex items-center justify-center p-3 transition-colors rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 cursor-pointer"
-              aria-label="Browse the library"
-            >
-              <IoLibrary className="text-lg text-clay-500 sm:text-xl" />
-            </Link>
+            <div className="items-center hidden gap-3 md:flex">
+              <Link
+                href="/lib"
+                className="inline-flex items-center justify-center p-3 transition-colors rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 cursor-pointer"
+                aria-label="Browse the library"
+              >
+                <IoLibrary className="text-lg text-clay-500 sm:text-xl" />
+              </Link>
 
-            <Link
-              href="/trails"
-              className="inline-flex items-center justify-center p-3 transition-colors rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 cursor-pointer"
-              aria-label="Browse learning trails"
-            >
-              <IoMdMap className="text-lg text-clay-500 sm:text-xl" />
-            </Link>
+              <Link
+                href="/trails"
+                className="inline-flex items-center justify-center p-3 transition-colors rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 cursor-pointer"
+                aria-label="Browse learning trails"
+              >
+                <IoMdMap className="text-lg text-clay-500 sm:text-xl" />
+              </Link>
 
-            <Link
-              href="/ai"
-              className="inline-flex items-center justify-center p-3 transition-colors rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 cursor-pointer"
-              aria-label="Open AI quiz generator"
-            >
-              <SiGooglegemini className="text-lg text-clay-500 sm:text-xl" />
-            </Link>
+              <Link
+                href="/ai"
+                className="inline-flex items-center justify-center p-3 transition-colors rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 cursor-pointer"
+                aria-label="Open AI quiz generator"
+              >
+                <SiGooglegemini className="text-lg text-clay-500 sm:text-xl" />
+              </Link>
+            </div>
 
             <button
               onClick={() => setIsProfileOpen(true)}

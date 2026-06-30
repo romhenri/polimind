@@ -3,6 +3,7 @@ import { Inter, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
 import 'katex/dist/katex.min.css'
 import Header from '@/components/Header'
+import BottomNav from '@/components/BottomNav'
 import FooterOnRoot from '@/components/FooterOnRoot'
 import ProfileModal from '@/components/ProfileModal'
 import { QuizModeProvider } from '@/contexts/QuizModeContext'
@@ -34,10 +35,11 @@ export default function RootLayout({
             <ProfileProvider>
               <div className="flex min-h-[100svh] flex-col bg-marble dark:bg-stone-950">
                 <Header />
-                <main className="container max-w-6xl flex-grow px-4 py-2 md:py-8 mx-auto overflow-x-hidden">
+                <main className="container max-w-6xl flex-grow px-4 py-2 pb-24 md:py-8 md:pb-8 mx-auto overflow-x-hidden">
                   {children}
                 </main>
                 <FooterOnRoot />
+                <BottomNav />
                 <ProfileModal />
               </div>
             </ProfileProvider>
