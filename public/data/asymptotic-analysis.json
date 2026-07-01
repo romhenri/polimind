@@ -4,7 +4,7 @@
     "name": "Análise Assintótica",
     "description": "Estudo da complexidade computacional, notações assintóticas (Big-Oh, Theta, Omega) e análise do tempo de execução de algoritmos.",
     "icon": "📈",
-    "color": "green",
+    "color": "teal",
     "category": "Computing",
     "tags": [
       "algorithms"
@@ -120,7 +120,7 @@
     "name": "Asymptotic Analysis",
     "description": "Study of computational complexity, asymptotic notations (Big-Oh, Theta, Omega), and algorithm runtime analysis.",
     "icon": "📈",
-    "color": "green",
+    "color": "teal",
     "category": "Computing",
     "tags": [
       "algorithms"

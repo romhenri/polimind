@@ -1,13 +1,14 @@
 import type { IconType } from 'react-icons'
 import { FaNetworkWired, FaEarthAmericas, FaGlobe, FaGears, FaDna, FaLayerGroup, FaChartColumn } from 'react-icons/fa6'
 import { FaFistRaised } from 'react-icons/fa'
-import { TbBinaryTree, TbMath } from 'react-icons/tb'
+import { TbBinaryTree, TbMath, TbBrain } from 'react-icons/tb'
 import { GiDinosaurRex } from 'react-icons/gi'
 
 export interface Trail {
   id: string
   name: string
   description: string
+  category: string
   icon: IconType
   color: string
   quizzes: string[]
@@ -18,6 +19,7 @@ export const TRAILS: Trail[] = [
     id: 'algorithms',
     name: 'Algorithms',
     description: 'Recurrence, complexity, sorting, graphs and greedy strategies.',
+    category: 'Computing',
     icon: TbBinaryTree,
     color: 'teal',
     quizzes: [
@@ -36,14 +38,25 @@ export const TRAILS: Trail[] = [
     id: 'data-structures',
     name: 'Data Structures',
     description: 'Lists, stacks, queues, linked lists and deques — the building blocks of code.',
+    category: 'Computing',
     icon: FaLayerGroup,
     color: 'emerald',
     quizzes: ['data-structures-list', 'data-structures-list-2'],
   },
   {
+    id: 'machine-learning',
+    name: 'Machine Learning',
+    description: 'Fundamentals, models and the metrics that measure how well they learn.',
+    category: 'Data',
+    icon: TbBrain,
+    color: 'lime',
+    quizzes: ['ml-fundamentals', 'ml-fundamentals-2', 'ml-evaluation-metrics'],
+  },
+  {
     id: 'networks',
     name: 'Networks',
     description: 'Protocols, IP, transport and the layers that move your data.',
+    category: 'Computing',
     icon: FaNetworkWired,
     color: 'blue',
     quizzes: [
@@ -66,6 +79,7 @@ export const TRAILS: Trail[] = [
     id: 'general',
     name: 'General',
     description: 'Mixed culture, history and trivia to keep you sharp.',
+    category: 'General',
     icon: FaEarthAmericas,
     color: 'amber',
     quizzes: ['general1', 'general2', 'general3', 'general4'],
@@ -74,6 +88,7 @@ export const TRAILS: Trail[] = [
     id: 'revolutions',
     name: 'Revolutions',
     description: 'The upheavals that reshaped society — from industry to the streets.',
+    category: 'History',
     icon: FaFistRaised,
     color: 'red',
     quizzes: ['french-revolution', 'industrial-revolution'],
@@ -82,6 +97,7 @@ export const TRAILS: Trail[] = [
     id: 'web-dev',
     name: 'Web Dev',
     description: 'JavaScript, TypeScript, React, Next.js and the web platform.',
+    category: 'Programming',
     icon: FaGlobe,
     color: 'violet',
     quizzes: [
@@ -104,6 +120,7 @@ export const TRAILS: Trail[] = [
     id: 'devops',
     name: 'DevOps',
     description: 'Version control, containers and the command line that ship software.',
+    category: 'Programming',
     icon: FaGears,
     color: 'indigo',
     quizzes: ['git', 'git2', 'docker', 'terminal-linux', 'terminal-windows'],
@@ -112,6 +129,7 @@ export const TRAILS: Trail[] = [
     id: 'math',
     name: 'Math',
     description: 'Powers, fractions, algebra, derivatives and integrals.',
+    category: 'Math',
     icon: TbMath,
     color: 'orange',
     quizzes: [
@@ -126,14 +144,16 @@ export const TRAILS: Trail[] = [
     id: 'statistics-probability',
     name: 'Statistics & Probability',
     description: 'Distributions, conditional probability, Bayes and the math of uncertainty.',
+    category: 'Math',
     icon: FaChartColumn,
-    color: 'sky',
+    color: 'amber',
     quizzes: ['statistics', 'probability-theory'],
   },
   {
     id: 'biology',
     name: 'Biology',
     description: 'Cells, the human body and the ecosystems that connect all life.',
+    category: 'Science',
     icon: FaDna,
     color: 'emerald',
     quizzes: ['cytology', 'ecology', 'human-physiology'],
@@ -142,6 +162,7 @@ export const TRAILS: Trail[] = [
     id: 'dinosaur',
     name: 'Dinosaur',
     description: 'Paleontology and the giants that once ruled the Earth.',
+    category: 'Science',
     icon: GiDinosaurRex,
     color: 'green',
     quizzes: ['dinosaurs', 'dinosaurs2', 'dinosaurs3'],

@@ -3,7 +3,7 @@
   "name": "General 4",
   "description": "Various questions about general culture",
   "icon": "🌍",
-  "color": "purple",
+  "color": "amber",
   "category": "General",
   "tags": ["culture", "history", "geography", "science"],
   "hardness": "easy",

@@ -4,7 +4,7 @@
     "name": "Recorrência Algorítmica",
     "description": "Estudo de recorrências e métodos de resolução: Iteração, Substituição, Árvore de Recursão e Teorema Mestre.",
     "icon": "🔄",
-    "color": "green",
+    "color": "teal",
     "category": "Computing",
     "tags": [
       "algorithms",
@@ -121,7 +121,7 @@
     "name": "Algorithmic Recurrence",
     "description": "Study of recurrences and resolution methods: Iteration, Substitution, Recursion Tree, and Master Theorem.",
     "icon": "🔄",
-    "color": "green",
+    "color": "teal",
     "category": "Computing",
     "tags": [
       "algorithms",

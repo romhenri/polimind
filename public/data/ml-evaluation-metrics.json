@@ -2,7 +2,7 @@
   "id": "ml-evaluation-metrics",
   "name": "Machine Learning Evaluation Metrics",
   "description": "Test your mastery of classification and regression metrics, from precision to ROC-AUC.",
-  "color": "blue",
+  "color": "lime",
   "category": "Data",
   "tags": [
     "ml",

@@ -3,7 +3,7 @@
   "name": "ML Metrics",
   "description": "How model performance is measured for classification and regression.",
   "category": "Data",
-  "color": "cyan",
+  "color": "lime",
   "icon": "ml-metrics",
   "terms": [
     {

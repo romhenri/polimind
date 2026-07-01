@@ -4,7 +4,7 @@
     "name": "Algoritmo de Dijkstra",
     "description": "Estudo do funcionamento, princípios e aplicação do Algoritmo de Dijkstra para encontrar caminhos de custo mínimo em grafos.",
     "icon": "🗺️",
-    "color": "green",
+    "color": "teal",
     "category": "Computing",
     "tags": [
       "algorithms",
@@ -123,7 +123,7 @@
     "name": "Dijkstra's Algorithm",
     "description": "Study of the mechanics, principles, and application of Dijkstra's Algorithm to find minimum-cost paths in graphs.",
     "icon": "🗺️",
-    "color": "green",
+    "color": "teal",
     "category": "Computing",
     "tags": [
       "algorithms",

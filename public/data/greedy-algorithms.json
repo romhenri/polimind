@@ -4,7 +4,7 @@
     "name": "Algoritmos Gulosos",
     "description": "Estudo do paradigma de Algoritmos Gulosos, suas características, aplicação no Problema da Mochila, no Caixeiro Viajante e em Árvores Geradoras Mínimas.",
     "icon": "🍔",
-    "color": "green",
+    "color": "teal",
     "category": "Computing",
     "tags": [
       "algorithms",
@@ -122,7 +122,7 @@
     "name": "Greedy Algorithms",
     "description": "Study of the Greedy Algorithms paradigm, its characteristics, application to the Knapsack Problem, the Traveling Salesperson Problem, and Minimum Spanning Trees.",
     "icon": "🍔",
-    "color": "green",
+    "color": "teal",
     "category": "Computing",
     "tags": [
       "algorithms",

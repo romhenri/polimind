@@ -4,7 +4,7 @@
     "name": "Análise de Algoritmos",
     "description": "Análise de algoritmos, problemas computacionais, modelo RAM e complexidade assintótica.",
     "icon": "🧮",
-    "color": "green",
+    "color": "teal",
     "category": "Computing",
     "tags": [
       "algorithms"
@@ -120,7 +120,7 @@
     "name": "Analysis of Algorithms",
     "description": "Analysis of algorithms, computational problems, RAM model, and asymptotic complexity.",
     "icon": "🧮",
-    "color": "green",
+    "color": "teal",
     "category": "Computing",
     "tags": [
       "algorithms"

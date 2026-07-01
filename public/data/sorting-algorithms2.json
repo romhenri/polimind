@@ -4,7 +4,7 @@
     "name": "Algoritmos de Ordenação 2",
     "description": "Análise de algoritmos de ordenação, avaliação de melhor e pior caso, e ordenação em tempo linear sem comparações.",
     "icon": "📊",
-    "color": "green",
+    "color": "teal",
     "category": "Computing",
     "tags": [
       "algorithms",
@@ -122,7 +122,7 @@
     "name": "Sorting Algorithms 2",
     "description": "Analysis of sorting algorithms, best and worst-case evaluation, and non-comparison linear-time sorting.",
     "icon": "📊",
-    "color": "green",
+    "color": "teal",
     "category": "Computing",
     "tags": [
       "algorithms",

@@ -3,7 +3,7 @@
     "name": "General 2",
     "description": "Easy general knowledge questions.",
     "icon": "🌍",
-    "color": "purple",
+    "color": "amber",
     "category": "General",
     "tags": ["culture", "history", "geography", "science"],
     "hardness": "easy",
