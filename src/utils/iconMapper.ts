@@ -82,7 +82,7 @@ const ICON_BY_ID: Record<string, IconType> = {
   general2: FaEarthAmericas,
   general3: FaEarthAmericas,
   general4: FaEarthAmericas,
-  history1: FaScroll,
+  'american-history-1': FaScroll,
   'ancient-greece': FaLandmark,
   wwi: FaMedal,
   wwii: FaMedal,

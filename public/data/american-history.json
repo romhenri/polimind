@@ -1,0 +1,73 @@
+{
+    "id": "american-history",
+    "name": "American History",
+    "description": "Explore the founding, expansion, and defining moments that shaped the United States, from Columbus to the Cold War.",
+    "icon": "📜",
+    "color": "red",
+    "category": "History",
+    "tags": ["united states"],
+    "hardness": "easy",
+    "lang": "en",
+    "questions": [
+      {
+        "question": "Who was the first President of the United States?",
+        "options": ["Thomas Jefferson", "Benjamin Franklin", "George Washington", "John Adams"],
+        "correctAnswer": 2,
+        "explain": "George Washington was unanimously elected as the first President and served from 1789 to 1797."
+      },
+      {
+        "question": "In which year did Christopher Columbus first arrive in the Americas?",
+        "options": ["1492", "1620", "1776", "1812"],
+        "correctAnswer": 0,
+        "explain": "Columbus reached the Caribbean in 1492 while seeking a western sea route to Asia."
+      },
+      {
+        "question": "Who wrote the 'Declaration of Independence' of the United States?",
+        "options": ["George Washington", "John Adams", "Alexander Hamilton", "Thomas Jefferson"],
+        "correctAnswer": 3,
+        "explain": "Thomas Jefferson was the principal author of the Declaration, adopted on July 4, 1776."
+      },
+      {
+        "question": "What war was fought between the North and South of the United States from 1861 to 1865?",
+        "options": ["The Revolutionary War", "The Civil War", "The War of 1812", "The Mexican-American War"],
+        "correctAnswer": 1,
+        "explain": "The Civil War pitted the Union against the Confederacy, largely over slavery and states' rights."
+      },
+      {
+        "question": "From which country did the United States buy the Louisiana Territory in 1803?",
+        "options": ["Spain", "Britain", "France", "Mexico"],
+        "correctAnswer": 2,
+        "explain": "The Louisiana Purchase from Napoleon's France roughly doubled the size of the young nation."
+      },
+      {
+        "question": "Which U.S. President was in office during the Cuban Missile Crisis?",
+        "options": ["Richard Nixon", "Dwight Eisenhower", "Lyndon B. Johnson", "John F. Kennedy"],
+        "correctAnswer": 3,
+        "explain": "John F. Kennedy managed the 1962 standoff with the Soviet Union over missiles in Cuba."
+      },
+      {
+        "question": "What was the name of the ship that brought the Pilgrims to America in 1620?",
+        "options": ["Santa Maria", "Mayflower", "Nina", "Endeavour"],
+        "correctAnswer": 1,
+        "explain": "The Mayflower carried the Pilgrims to Plymouth, where they founded one of the first English colonies."
+      },
+      {
+        "question": "The Boston Tea Party was a protest against taxes imposed by which country?",
+        "options": ["Britain", "France", "Spain", "Netherlands"],
+        "correctAnswer": 0,
+        "explain": "Colonists dumped British tea into Boston Harbor in 1773 to protest taxation without representation."
+      },
+      {
+        "question": "In which city was the Declaration of Independence signed in 1776?",
+        "options": ["New York", "Boston", "Philadelphia", "Washington, D.C."],
+        "correctAnswer": 2,
+        "explain": "The Second Continental Congress met and signed the Declaration in Philadelphia's Independence Hall."
+      },
+      {
+        "question": "Which explorer's name was given to the American continents?",
+        "options": ["Christopher Columbus", "Amerigo Vespucci", "Ferdinand Magellan", "Vasco da Gama"],
+        "correctAnswer": 1,
+        "explain": "The continents were named after Amerigo Vespucci, who recognized the lands as a 'New World'."
+      }
+    ]
+  }

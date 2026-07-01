@@ -1,0 +1,124 @@
+{
+  "id": "brazil-history",
+  "name": "Brazilian History",
+  "description": "Explore the major historical events, economic cycles, and political transformations that shaped Brazil.",
+  "color": "green",
+  "category": "History",
+  "tags": [
+    "brazilß"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "Which European nation first colonized Brazil after arriving in the territory?",
+      "options": [
+        "Spain",
+        "France",
+        "Portugal",
+        "England"
+      ],
+      "correctAnswer": 2,
+      "explain": "Portugal officially claimed and colonized Brazil following the arrival of Pedro Álvares Cabral."
+    },
+    {
+      "question": "What was the primary economic resource exploited by the Portuguese during the first decades after their arrival?",
+      "options": [
+        "Sugar cane",
+        "Gold nuggets",
+        "Brazilwood",
+        "Coffee beans"
+      ],
+      "correctAnswer": 2,
+      "explain": "Brazilwood was heavily extracted for its valuable red dye, marking the first major economic cycle."
+    },
+    {
+      "question": "To govern and develop the vast territory, the Portuguese Crown initially divided colonial Brazil into what administrative system?",
+      "options": [
+        "Royal provinces",
+        "Hereditary captaincies",
+        "Federal states",
+        "Viceroyalties"
+      ],
+      "correctAnswer": 1,
+      "explain": "The land was divided into hereditary captaincies granted to Portuguese nobles to fund development."
+    },
+    {
+      "question": "Which major economic cycle replaced brazilwood and led to the massive expansion of African enslavement in the Northeast?",
+      "options": [
+        "The sugar cycle",
+        "The gold rush",
+        "The rubber boom",
+        "The coffee boom"
+      ],
+      "correctAnswer": 0,
+      "explain": "Sugar cane cultivation became the dominant economic driver, relying heavily on enslaved labor."
+    },
+    {
+      "question": "What was the largest and most famous community of escaped enslaved people (quilombo) in colonial Brazil?",
+      "options": [
+        "Canudos",
+        "Palmares",
+        "Sabinada",
+        "Confederação"
+      ],
+      "correctAnswer": 1,
+      "explain": "Quilombo dos Palmares resisted colonial authorities for decades as a major symbol of freedom."
+    },
+    {
+      "question": "The massive discovery of gold in the late colonial period shifted Brazil's economic and political center to which region?",
+      "options": [
+        "Southeast region",
+        "Northeast region",
+        "Northern territory",
+        "Southern frontier"
+      ],
+      "correctAnswer": 0,
+      "explain": "The gold rush shifted wealth and focus southward, eventually leading to Rio de Janeiro becoming the capital."
+    },
+    {
+      "question": "What major European event prompted the Portuguese royal family to flee to Brazil, transforming Rio de Janeiro into the seat of the empire?",
+      "options": [
+        "The French Revolution",
+        "The Napoleonic Wars",
+        "The Industrial Age",
+        "The Spanish Armada"
+      ],
+      "correctAnswer": 1,
+      "explain": "The invasion of Portugal by Napoleon's troops forced the royal court to relocate to Brazil."
+    },
+    {
+      "question": "Who declared Brazil's independence from Portugal and became the nation's first Emperor?",
+      "options": [
+        "Dom Pedro I",
+        "Deodoro da Fonseca",
+        "Getúlio Vargas",
+        "Dom Pedro II"
+      ],
+      "correctAnswer": 0,
+      "explain": "Dom Pedro I declared independence with the famous Cry of Ipiranga and ruled the First Empire."
+    },
+    {
+      "question": "What was the name of the legislative act signed by Princess Isabel that officially abolished slavery in Brazil?",
+      "options": [
+        "Lei Áurea",
+        "Lei do Ventre Livre",
+        "Lei dos Sexagenários",
+        "Lei Eusébio de Queirós"
+      ],
+      "correctAnswer": 0,
+      "explain": "The Lei Áurea (Golden Law) ended legal slavery in Brazil, making it the last nation in the Western Hemisphere to do so."
+    },
+    {
+      "question": "What form of government was established in Brazil immediately following the overthrow of Emperor Dom Pedro II?",
+      "options": [
+        "Constitutional monarchy",
+        "Military dictatorship",
+        "Federal republic",
+        "Parliamentary state"
+      ],
+      "correctAnswer": 2,
+      "explain": "The coup d'état led by Marshal Deodoro da Fonseca abolished the monarchy and proclaimed a republic."
+    }
+  ]
+}
