@@ -2,7 +2,7 @@ import type { IconType } from 'react-icons'
 import { FaNetworkWired, FaEarthAmericas, FaGlobe, FaGears, FaDna, FaLayerGroup, FaChartColumn } from 'react-icons/fa6'
 import { FaFistRaised } from 'react-icons/fa'
 import { TbBinaryTree, TbMath, TbBrain } from 'react-icons/tb'
-import { GiDinosaurRex } from 'react-icons/gi'
+import { GiDinosaurRex, GiGreekTemple } from 'react-icons/gi'
 
 export interface Trail {
   id: string
@@ -83,6 +83,20 @@ export const TRAILS: Trail[] = [
     icon: FaEarthAmericas,
     color: 'amber',
     quizzes: ['general1', 'general2', 'general3', 'general4'],
+  },
+  {
+    id: 'greece',
+    name: 'Greece',
+    description: 'Ancient Greek culture, society and the gods, heroes and monsters of its mythology.',
+    category: 'History',
+    icon: GiGreekTemple,
+    color: 'blue',
+    quizzes: [
+      'ancient-greece',
+      'greek-mythology',
+      'greek-mythology-2',
+      'greek-mythology-3',
+    ],
   },
   {
     id: 'revolutions',

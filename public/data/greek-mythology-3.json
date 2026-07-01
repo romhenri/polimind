@@ -1,0 +1,126 @@
+{
+  "id": "greek-mythology-3",
+  "name": "Greek Mythology 3",
+  "description": "Expand your knowledge with deeper myths, lesser-known figures, and divine lineages.",
+  "color": "blue",
+  "category": "History",
+  "tags": [
+    "mythology",
+    "greece",
+    "gods"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "Which Titan was condemned to hold up the celestial heavens for eternity?",
+      "options": [
+        "Prometheus",
+        "Atlas",
+        "Cronus",
+        "Hyperion"
+      ],
+      "correctAnswer": 1,
+      "explain": "Atlas was punished by Zeus after the Titanomachy to hold the sky apart from earth."
+    },
+    {
+      "question": "Who is the Greek goddess of witchcraft, magic, crossroads, and ghosts?",
+      "options": [
+        "Hecate",
+        "Circe",
+        "Calypso",
+        "Medea"
+      ],
+      "correctAnswer": 0,
+      "explain": "Hecate is an ancient chthonic deity associated with sorcery and torches at night."
+    },
+    {
+      "question": "What is the name of the ferryman who transports dead souls across the river Styx?",
+      "options": [
+        "Thanatos",
+        "Hypnos",
+        "Charon",
+        "Cerberus"
+      ],
+      "correctAnswer": 2,
+      "explain": "Charon requires a coin payment to row the deceased into the realm of Hades."
+    },
+    {
+      "question": "Which hero successfully slayed the Chimera with the help of Pegasus?",
+      "options": [
+        "Perseus",
+        "Theseus",
+        "Jason",
+        "Bellerophon"
+      ],
+      "correctAnswer": 3,
+      "explain": "Bellerophon killed the fire-breathing Chimera using a lead-tipped spear from above."
+    },
+    {
+      "question": "Who was the wife of Hades and queen of the underworld for part of the year?",
+      "options": [
+        "Persephone",
+        "Demeter",
+        "Amphitrite",
+        "Leto"
+      ],
+      "correctAnswer": 0,
+      "explain": "Persephone eats pomegranate seeds which binds her to return to Hades every winter."
+    },
+    {
+      "question": "Which of these figures opened a box that released all evils into the human world?",
+      "options": [
+        "Psyche",
+        "Pandora",
+        "Helen",
+        "Cassandra"
+      ],
+      "correctAnswer": 1,
+      "explain": "Pandora was the first human woman created by the gods, endowed with curiosity."
+    },
+    {
+      "question": "Who is the god of wine, theater, and religious ecstasy, born from Zeus's thigh?",
+      "options": [
+        "Apollo",
+        "Dionysus",
+        "Hermes",
+        "Pan"
+      ],
+      "correctAnswer": 1,
+      "explain": "Dionysus was saved by Zeus after his mother Semele died from seeing Zeus's true form."
+    },
+    {
+      "question": "What is the name of the multi-headed serpent defeated by Heracles as his second labor?",
+      "options": [
+        "Lernean Hydra",
+        "Nemean Lion",
+        "Minotaur",
+        "Echidna"
+      ],
+      "correctAnswer": 0,
+      "explain": "The Hydra grew two heads back for every single head that Heracles cut off."
+    },
+    {
+      "question": "Which Greek god was thrown off Mount Olympus by his mother due to his deformity?",
+      "options": [
+        "Ares",
+        "Hephaestus",
+        "Hades",
+        "Hermes"
+      ],
+      "correctAnswer": 1,
+      "explain": "Hera cast Hephaestus down to earth because he was born small and disabled."
+    },
+    {
+      "question": "Who led the Argonauts on the quest to retrieve the legendary Golden Fleece?",
+      "options": [
+        "Theseus",
+        "Achilles",
+        "Odysseus",
+        "Jason"
+      ],
+      "correctAnswer": 3,
+      "explain": "Jason captained the ship Argo to Colchis to reclaim his rightful inheritance."
+    }
+  ]
+}

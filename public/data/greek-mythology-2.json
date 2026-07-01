@@ -1,0 +1,126 @@
+{
+  "id": "greek-mythology-2",
+  "name": "Greek Mythology 2",
+  "description": "Step up your knowledge with famous punishments, iconic monsters, and the forces of destiny.",
+  "color": "blue",
+  "category": "History",
+  "tags": [
+    "mythology",
+    "greece",
+    "gods"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What happens to anyone who looks directly into the eyes of the Gorgon Medusa?",
+      "options": [
+        "They turn to stone",
+        "They fall asleep",
+        "They go blind",
+        "They lose memory"
+      ],
+      "correctAnswer": 0,
+      "explain": "Medusa has snakes for hair and a gaze so terrifying it petrifies onlookers."
+    },
+    {
+      "question": "What eternal punishment was given to Sisyphus in the underworld?",
+      "options": [
+        "Chained to a rock",
+        "Rolling a boulder up a hill",
+        "Standing in water he cannot drink",
+        "Spinning on a wheel of fire"
+      ],
+      "correctAnswer": 1,
+      "explain": "Sisyphus must push a massive rock up a hill, only for it to roll back down every time."
+    },
+    {
+      "question": "Which element did the Titan Prometheus steal from the gods to give to humanity?",
+      "options": [
+        "Water",
+        "Fire",
+        "Gold",
+        "Iron"
+      ],
+      "correctAnswer": 1,
+      "explain": "Prometheus stole fire from Mount Olympus, enabling human civilization and progress."
+    },
+    {
+      "question": "What is the primary role of the Three Fates, also known as the Moirai?",
+      "options": [
+        "Judging dead souls",
+        "Guarding the underworld",
+        "Weaving human destiny",
+        "Punishing criminals"
+      ],
+      "correctAnswer": 2,
+      "explain": "The Three Fates control the metaphorical thread of life for every mortal."
+    },
+    {
+      "question": "Who managed to slay Medusa by using a reflective shield to avoid her direct gaze?",
+      "options": [
+        "Theseus",
+        "Jason",
+        "Heracles",
+        "Perseus"
+      ],
+      "correctAnswer": 3,
+      "explain": "Perseus used a polished bronze shield given by Athena to see Medusa safely."
+    },
+    {
+      "question": "Why did Zeus punish Prometheus by chaining him to a mountain rock?",
+      "options": [
+        "For stealing fire",
+        "For killing a titan",
+        "For tricking Poseidon",
+        "For trying to rule"
+      ],
+      "correctAnswer": 0,
+      "explain": "Zeus was furious that Prometheus gave divine fire to mortals without permission."
+    },
+    {
+      "question": "Which of the Three Fates is responsible for cutting the thread of human life?",
+      "options": [
+        "Clotho",
+        "Lachesis",
+        "Atropos",
+        "Nemesis"
+      ],
+      "correctAnswer": 2,
+      "explain": "Atropos chooses the mechanism of death and cuts the thread with her shears."
+    },
+    {
+      "question": "What creature did Sisyphus famously trick and chain up to temporarily stop human death?",
+      "options": [
+        "Thanatos",
+        "Hades",
+        "Cerberus",
+        "Charon"
+      ],
+      "correctAnswer": 0,
+      "explain": "Sisyphus trapped Thanatos, the personification of death, so no humans could die."
+    },
+    {
+      "question": "What monster did Theseus defeat inside the Labyrinth of Crete?",
+      "options": [
+        "Hydra",
+        "Minotaur",
+        "Cyclops",
+        "Medusa"
+      ],
+      "correctAnswer": 1,
+      "explain": "Theseus navigated the maze and killed the half-man, half-bull creature."
+    },
+    {
+      "question": "Which Greek hero was dipped in the River Styx by his mother to become nearly invincible?",
+      "options": [
+        "Odysseus",
+        "Achilles",
+        "Perseus",
+        "Bellerophon"
+      ],
+      "correctAnswer": 1,
+      "explain": "Achilles became invulnerable everywhere except for his heel, where his mother held him."
+    }
+  ]
+}

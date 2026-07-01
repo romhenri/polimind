@@ -1,0 +1,180 @@
+{
+  "id": "greek-mythology",
+  "name": "Greek Mythology",
+  "description": "The gods, heroes and monsters that shaped the myths of ancient Greece.",
+  "category": "History",
+  "color": "blue",
+  "icon": "greek-mythology",
+  "terms": [
+    {
+      "groupName": "Olympians",
+      "group": [
+        {
+          "term": "Zeus",
+          "definition": "King of the gods and lord of the sky and thunder, ruling the other **Olympians** from **Mount Olympus**."
+        },
+        {
+          "term": "Hera",
+          "definition": "Wife and sister of **Zeus**, queen of the gods and goddess of marriage; she cast **Hephaestus** from Olympus."
+        },
+        {
+          "term": "Poseidon",
+          "definition": "God of the sea and earthquakes, brother of **Zeus** and **Hades**, wielding a three-pronged trident."
+        },
+        {
+          "term": "Athena",
+          "definition": "Goddess of wisdom, warfare and craft, and patron of Athens; she lent **Perseus** a reflective shield against **Medusa**."
+        },
+        {
+          "term": "Apollo",
+          "definition": "God of the sun, music, prophecy and healing, and twin brother of **Artemis**."
+        },
+        {
+          "term": "Artemis",
+          "definition": "Goddess of the hunt, wild animals and the moon, daughter of **Zeus** and twin of **Apollo**."
+        },
+        {
+          "term": "Aphrodite",
+          "definition": "Goddess of love, beauty and desire, born from sea foam and wed to **Hephaestus**."
+        },
+        {
+          "term": "Hermes",
+          "definition": "Messenger of the gods, wearing winged sandals; he guides souls toward the **Underworld**."
+        },
+        {
+          "term": "Ares",
+          "definition": "God of war and violent conflict, son of **Zeus** and **Hera**."
+        },
+        {
+          "term": "Hephaestus",
+          "definition": "God of fire, blacksmiths and craftsmanship; cast from Olympus by **Hera** for his deformity."
+        },
+        {
+          "term": "Dionysus",
+          "definition": "God of wine, theatre and religious ecstasy, born from the thigh of **Zeus** after his mother Semele died."
+        }
+      ]
+    },
+    {
+      "groupName": "The Underworld",
+      "group": [
+        {
+          "term": "Hades",
+          "definition": "Brother of **Zeus** and ruler of the **Underworld**, the realm of the dead that bears his name."
+        },
+        {
+          "term": "Persephone",
+          "definition": "Wife of **Hades** and queen of the **Underworld**; eating pomegranate seeds binds her to return there each winter."
+        },
+        {
+          "term": "Charon",
+          "definition": "The ferryman who rows the dead across the river **Styx** in exchange for a coin."
+        },
+        {
+          "term": "Thanatos",
+          "definition": "The personification of death, once tricked and chained by **Sisyphus** so that no mortal could die."
+        },
+        {
+          "term": "Styx",
+          "definition": "The river bordering the **Underworld**; **Achilles** was dipped in it to become nearly invulnerable."
+        }
+      ]
+    },
+    {
+      "groupName": "Titans & Primordials",
+      "group": [
+        {
+          "term": "Prometheus",
+          "definition": "The Titan who stole fire from Olympus for humanity and was chained to a rock by **Zeus** as punishment."
+        },
+        {
+          "term": "Atlas",
+          "definition": "The Titan condemned by **Zeus** to hold up the heavens for eternity after the Titanomachy."
+        },
+        {
+          "term": "Hecate",
+          "definition": "Goddess of witchcraft, magic, crossroads and ghosts, an ancient chthonic deity of the night."
+        },
+        {
+          "term": "The Moirai",
+          "definition": "The Three Fates who weave every mortal's destiny; **Atropos** cuts the thread of life to end it."
+        }
+      ]
+    },
+    {
+      "groupName": "Heroes",
+      "group": [
+        {
+          "term": "Heracles",
+          "definition": "Hero who performed twelve labours as penance, including slaying the **Lernean Hydra**."
+        },
+        {
+          "term": "Perseus",
+          "definition": "Hero who beheaded **Medusa** by watching her reflection in a shield from **Athena**."
+        },
+        {
+          "term": "Theseus",
+          "definition": "Hero who entered the **Labyrinth** of Crete and killed the **Minotaur**."
+        },
+        {
+          "term": "Achilles",
+          "definition": "Near-invincible hero of the Trojan War, vulnerable only at the heel by which his mother dipped him in the **Styx**."
+        },
+        {
+          "term": "Bellerophon",
+          "definition": "Hero who slew the fire-breathing Chimera with the aid of the winged horse **Pegasus**."
+        },
+        {
+          "term": "Jason",
+          "definition": "Captain of the Argonauts who led the quest aboard the Argo to retrieve the Golden Fleece."
+        }
+      ]
+    },
+    {
+      "groupName": "Monsters & Creatures",
+      "group": [
+        {
+          "term": "Medusa",
+          "definition": "A Gorgon with snakes for hair whose gaze turns onlookers to stone; slain by **Perseus**."
+        },
+        {
+          "term": "Minotaur",
+          "definition": "A creature with the head of a bull and body of a man, kept in the **Labyrinth** and killed by **Theseus**."
+        },
+        {
+          "term": "Pegasus",
+          "definition": "The winged horse born from the blood of **Medusa**, later ridden by **Bellerophon**."
+        },
+        {
+          "term": "Lernean Hydra",
+          "definition": "A multi-headed serpent that grew two heads for each one cut off, defeated by **Heracles** as his second labour."
+        },
+        {
+          "term": "Cerberus",
+          "definition": "The multi-headed hound that guards the gates of the **Underworld** ruled by **Hades**."
+        }
+      ]
+    },
+    {
+      "groupName": "Places & Concepts",
+      "group": [
+        {
+          "term": "Mount Olympus",
+          "definition": "The highest mountain in Greece and home of the **Olympians**, ruled by **Zeus**."
+        },
+        {
+          "term": "The Underworld",
+          "definition": "The subterranean realm of the dead ruled by **Hades**, reached by crossing the river **Styx**."
+        },
+        {
+          "term": "The Labyrinth",
+          "definition": "The maze on Crete designed by Daedalus to contain the **Minotaur**."
+        },
+        {
+          "term": "Pandora's Box",
+          "definition": "The jar opened by Pandora, the first mortal woman, releasing all evils into the human world."
+        }
+      ]
+    }
+  ]
+}

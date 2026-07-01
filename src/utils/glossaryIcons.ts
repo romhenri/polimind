@@ -11,7 +11,7 @@ import {
   FaLayerGroup,
 } from 'react-icons/fa6'
 import { TbBinaryTree, TbMath } from 'react-icons/tb'
-import { GiDinosaurRex } from 'react-icons/gi'
+import { GiDinosaurRex, GiGreekTemple } from 'react-icons/gi'
 
 const ICON_BY_ID: Record<string, IconType> = {
   'machine-learning': FaBrain,
@@ -21,6 +21,7 @@ const ICON_BY_ID: Record<string, IconType> = {
   networks: FaNetworkWired,
   biology: FaDna,
   dinosaurs: GiDinosaurRex,
+  'greek-mythology': GiGreekTemple,
 }
 
 const ICON_BY_CATEGORY: Record<string, IconType> = {

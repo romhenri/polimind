@@ -24,15 +24,15 @@
       "explain": "Socrates is widely recognized for laying the foundation of Western philosophy through his method of questioning."
     },
     {
-      "question": "What is the name of the king of the gods in Greek mythology, ruling from Mount Olympus?",
+      "question": "What was the name of the exclusive male social gathering featuring wine, music, and lively conversation?",
       "options": [
-        "Hades",
-        "Zeus",
-        "Apollo",
-        "Poseidon"
+        "Agoge",
+        "Ecclesia",
+        "Symposium",
+        "Gymnasium"
       ],
-      "correctAnswer": 1,
-      "explain": "Zeus was the king of the Olympian gods and the god of the sky and thunder."
+      "correctAnswer": 2,
+      "explain": "The symposium was a key social institution where Greek men gathered to drink, debate, and enjoy entertainment."
     },
     {
       "question": "What were the two main types of Greek drama?",
@@ -90,15 +90,15 @@
       "explain": "Democracy, meaning 'rule by the people', was developed in Athens around the 5th century BCE."
     },
     {
-      "question": "What famous Greek sculptor is known for works like \"Discobolus\" (Discus Thrower)?",
+      "question": "What was the central public space in a Greek city used as a marketplace and place for social gathering?",
       "options": [
-        "Phidias",
-        "Myron",
-        "Polykleitos",
-        "Praxiteles"
+        "The Acropolis",
+        "The Agora",
+        "The Stoa",
+        "The Necropolis"
       ],
       "correctAnswer": 1,
-      "explain": "Myron was an Athenian sculptor from the mid-5th century BC, famous for his bronze sculptures, including the Discobolus."
+      "explain": "The agora was the heart of civic life in ancient Greek cities, serving as a hub for commerce, politics, and daily social interaction."
     },
     {
       "question": "What was the name of the oracle who delivered prophecies at Delphi?",

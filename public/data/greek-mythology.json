@@ -1,0 +1,126 @@
+{
+  "id": "greek-mythology",
+  "name": "Greek Mythology",
+  "description": "Test your fundamental knowledge of the primary gods and essential myths of ancient Greece.",
+  "color": "blue",
+  "category": "History",
+  "tags": [
+    "mythology",
+    "greece",
+    "gods"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "Who is the ruler of the Olympian gods and the god of the sky?",
+      "options": [
+        "Poseidon",
+        "Zeus",
+        "Hades",
+        "Apollo"
+      ],
+      "correctAnswer": 1,
+      "explain": "Zeus is the supreme deity in Greek mythology who rules from Mount Olympus."
+    },
+    {
+      "question": "Which Greek goddess is associated with wisdom, warfare, and handicraft?",
+      "options": [
+        "Athena",
+        "Aphrodite",
+        "Artemis",
+        "Hera"
+      ],
+      "correctAnswer": 0,
+      "explain": "Athena is the patron goddess of Athens, representing wisdom and strategic battle."
+    },
+    {
+      "question": "Who is the god of the sea and earthquakes, known for carrying a trident?",
+      "options": [
+        "Ares",
+        "Hermes",
+        "Poseidon",
+        "Dionysus"
+      ],
+      "correctAnswer": 2,
+      "explain": "Poseidon controls the oceans and is symbolized by his powerful three-pronged spear."
+    },
+    {
+      "question": "Which twin deity is the goddess of the hunt, wild animals, and the moon?",
+      "options": [
+        "Demeter",
+        "Artemis",
+        "Hestia",
+        "Persephone"
+      ],
+      "correctAnswer": 1,
+      "explain": "Artemis is the daughter of Zeus and Leto, and the twin sister of Apollo."
+    },
+    {
+      "question": "Who is the ruler of the underworld and the dead in Greek myths?",
+      "options": [
+        "Hades",
+        "Chronos",
+        "Thanatos",
+        "Hephaestus"
+      ],
+      "correctAnswer": 0,
+      "explain": "Hades rules the subterranean realm of the dead which also bears his name."
+    },
+    {
+      "question": "What is the name of the winged horse born from the blood of Medusa?",
+      "options": [
+        "Chiron",
+        "Minotaur",
+        "Cerberus",
+        "Pegasus"
+      ],
+      "correctAnswer": 3,
+      "explain": "Pegasus is the famous stallion capable of flight captured by Bellerophon."
+    },
+    {
+      "question": "Which Greek hero performed twelve legendary labors as penance?",
+      "options": [
+        "Achilles",
+        "Heracles",
+        "Perseus",
+        "Theseus"
+      ],
+      "correctAnswer": 1,
+      "explain": "Heracles carried out the twelve labors under the orders of King Eurystheus."
+    },
+    {
+      "question": "Who is the goddess of love, beauty, and desire, born from sea foam?",
+      "options": [
+        "Aphrodite",
+        "Hera",
+        "Nemesis",
+        "Iris"
+      ],
+      "correctAnswer": 0,
+      "explain": "Aphrodite represents love and physical beauty, married to Hephaestus."
+    },
+    {
+      "question": "What creature has the head of a bull and the body of a man?",
+      "options": [
+        "Centaur",
+        "Satyr",
+        "Minotaur",
+        "Sphinx"
+      ],
+      "correctAnswer": 2,
+      "explain": "The Minotaur lived inside the Labyrinth designed by Daedalus in Crete."
+    },
+    {
+      "question": "Who is the messenger of the gods, recognizable by his winged sandals?",
+      "options": [
+        "Apollo",
+        "Ares",
+        "Hephaestus",
+        "Hermes"
+      ],
+      "correctAnswer": 3,
+      "explain": "Hermes guides souls to the underworld and delivers divine messages swiftly."
+    }
+  ]
+}
