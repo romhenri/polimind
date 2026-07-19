@@ -16,16 +16,19 @@ import {
 } from 'react-icons/fa'
 import { FaWandMagicSparkles } from 'react-icons/fa6'
 import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
-import { generateQuiz, regenerateQuestion, quizToDataFile, buildCopyPrompt, parseQuizJson } from '@/utils/geminiQuiz'
+import { generateQuiz, regenerateQuestion, quizToDataFile, buildCopyPrompt, parseQuizJson } from '@/utils/aiQuiz'
 import AiQuizRunner from './AiQuizRunner'
 import MetaEditor from './MetaEditor'
 import QuestionList from './QuestionList'
 
-const API_KEY_STORAGE = 'polimind.geminiKey'
+const OPENROUTER_KEY_STORAGE = 'polimind.openRouterKey'
+const GEMINI_KEY_STORAGE = 'polimind.geminiKey'
 
 export default function AiPage() {
-  const [apiKey, setApiKey] = useState('')
-  const [showKey, setShowKey] = useState(false)
+  const [openRouterKey, setOpenRouterKey] = useState('')
+  const [geminiKey, setGeminiKey] = useState('')
+  const [showOpenRouterKey, setShowOpenRouterKey] = useState(false)
+  const [showGeminiKey, setShowGeminiKey] = useState(false)
   const [subject, setSubject] = useState('')
   const [count, setCount] = useState(10)
   const [loading, setLoading] = useState(false)
@@ -42,14 +45,17 @@ export default function AiPage() {
   const [importError, setImportError] = useState<string | null>(null)
 
   useEffect(() => {
-    const stored = localStorage.getItem(API_KEY_STORAGE)
-    if (stored) setApiKey(stored)
+    const storedOpenRouterKey = localStorage.getItem(OPENROUTER_KEY_STORAGE)
+    const storedGeminiKey = localStorage.getItem(GEMINI_KEY_STORAGE)
+    if (storedOpenRouterKey) setOpenRouterKey(storedOpenRouterKey)
+    if (storedGeminiKey) setGeminiKey(storedGeminiKey)
   }, [])
 
   const dataFile = useMemo(() => (quiz ? quizToDataFile(quiz) : null), [quiz])
   const jsonPreview = useMemo(() => (dataFile ? JSON.stringify(dataFile, null, 2) : ''), [dataFile])
 
-  const canGenerate = apiKey.trim() !== '' && subject.trim() !== '' && !loading
+  const hasAiKey = openRouterKey.trim() !== '' || geminiKey.trim() !== ''
+  const canGenerate = hasAiKey && subject.trim() !== '' && !loading
   const canCopy = subject.trim() !== ''
 
   const handleCopyPrompt = async () => {
@@ -69,9 +75,14 @@ export default function AiPage() {
     setError(null)
     setQuiz(null)
     setEditing(false)
-    localStorage.setItem(API_KEY_STORAGE, apiKey.trim())
+    localStorage.setItem(OPENROUTER_KEY_STORAGE, openRouterKey.trim())
+    localStorage.setItem(GEMINI_KEY_STORAGE, geminiKey.trim())
     try {
-      const result = await generateQuiz(apiKey.trim(), subject.trim(), count)
+      const result = await generateQuiz(
+        { openRouterKey: openRouterKey.trim(), geminiKey: geminiKey.trim() },
+        subject.trim(),
+        count
+      )
       setQuiz(result.quiz)
       setUsedModel(result.model)
       setActiveTab('edit')
@@ -121,7 +132,12 @@ export default function AiPage() {
     setRegeneratingIndex(index)
     setRegenError(null)
     try {
-      const result = await regenerateQuestion(apiKey.trim(), quiz, index, instructions)
+      const result = await regenerateQuestion(
+        { openRouterKey: openRouterKey.trim(), geminiKey: geminiKey.trim() },
+        quiz,
+        index,
+        instructions
+      )
       setQuiz((prev) => {
         if (!prev) return prev
         const questions = [...prev.questions]
@@ -157,7 +173,7 @@ export default function AiPage() {
           Polimind<span className="text-plum-600 dark:text-plum-400">.ai</span>
         </h1>
         <p className="text-base text-stone-600 dark:text-stone-300 sm:text-lg md:text-xl">
-          Generate a custom quiz with Gemini and start playing instantly.
+          Generate a custom quiz with AI and start playing instantly.
         </p>
       </div>
 
@@ -189,39 +205,81 @@ export default function AiPage() {
 
       <div className={`p-6 bg-white border-2 rounded-xl border-plum-200 dark:bg-stone-900 dark:border-plum-900/60 ${activeTab === 'generate' ? '' : 'hidden'}`}>
         <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
-          Gemini API key
+          OpenRouter API key
         </label>
         <div className="relative mb-1">
           <FaKey className="absolute -translate-y-1/2 pointer-events-none text-stone-400 left-4 top-1/2" aria-hidden />
           <input
-            type={showKey ? 'text' : 'password'}
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-            placeholder="Paste your Gemini API key"
+            type={showOpenRouterKey ? 'text' : 'password'}
+            value={openRouterKey}
+            onChange={(e) => setOpenRouterKey(e.target.value)}
+            placeholder="Paste your OpenRouter API key"
             autoComplete="off"
             className="w-full py-3 pl-12 pr-12 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
           />
           <button
             type="button"
-            onClick={() => setShowKey((v) => !v)}
+            onClick={() => setShowOpenRouterKey((v) => !v)}
             className="absolute flex items-center justify-center -translate-y-1/2 rounded-md text-stone-400 right-2 top-1/2 h-9 w-9 hover:text-stone-700 dark:hover:text-stone-200"
-            aria-label={showKey ? 'Hide API key' : 'Show API key'}
+            aria-label={showOpenRouterKey ? 'Hide OpenRouter API key' : 'Show OpenRouter API key'}
           >
-            {showKey ? <FaEyeSlash /> : <FaEye />}
+            {showOpenRouterKey ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
         <p className="mb-5 text-xs text-stone-500 dark:text-stone-400">
           Stored only in this browser. Get one at{' '}
           <a
-            href="https://aistudio.google.com/apikey"
+            href="https://openrouter.ai/keys"
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold text-plum-600 dark:text-plum-400 hover:underline"
           >
-            Google AI Studio
+            openrouter.ai/keys
           </a>
           .
         </p>
+
+        <details className="mb-5 group">
+          <summary className="text-sm font-semibold cursor-pointer select-none text-stone-600 dark:text-stone-300 hover:underline">
+            Gemini fallback (optional)
+          </summary>
+          <div className="pt-4">
+            <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
+              Gemini API key
+            </label>
+            <div className="relative mb-1">
+              <FaKey className="absolute -translate-y-1/2 pointer-events-none text-stone-400 left-4 top-1/2" aria-hidden />
+              <input
+                type={showGeminiKey ? 'text' : 'password'}
+                value={geminiKey}
+                onChange={(e) => setGeminiKey(e.target.value)}
+                placeholder="Paste your Gemini API key"
+                autoComplete="off"
+                className="w-full py-3 pl-12 pr-12 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+              />
+              <button
+                type="button"
+                onClick={() => setShowGeminiKey((v) => !v)}
+                className="absolute flex items-center justify-center -translate-y-1/2 rounded-md text-stone-400 right-2 top-1/2 h-9 w-9 hover:text-stone-700 dark:hover:text-stone-200"
+                aria-label={showGeminiKey ? 'Hide Gemini API key' : 'Show Gemini API key'}
+              >
+                {showGeminiKey ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+            <p className="text-xs text-stone-500 dark:text-stone-400">
+              Used only if OpenRouter fails. Get one at{' '}
+              <a
+                href="https://aistudio.google.com/apikey"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-plum-600 dark:text-plum-400 hover:underline"
+              >
+                Google AI Studio
+              </a>
+              .
+            </p>
+          </div>
+        </details>
 
         <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
           Quiz subject

@@ -2,7 +2,10 @@ import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
 import { AVAILABLE_COLORS } from '@/utils/colorMapper'
 import { formatSubject } from '@/utils/formatSubject'
 
+const OPENROUTER_BASE = 'https://openrouter.ai/api/v1/chat/completions'
 const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models'
+
+export const OPENROUTER_MODELS = ['openrouter/free']
 
 export const GEMINI_MODELS = [
   'gemini-2.5-flash',
@@ -11,7 +14,12 @@ export const GEMINI_MODELS = [
   'gemini-2.0-flash-lite',
 ]
 
-class GeminiError extends Error {
+export interface AiKeys {
+  openRouterKey: string
+  geminiKey: string
+}
+
+class AiProviderError extends Error {
   retryable: boolean
   constructor(message: string, retryable: boolean) {
     super(message)
@@ -191,6 +199,19 @@ export function slugify(value: string): string {
   return slug || 'ai-quiz'
 }
 
+function parseOpenRouterError(status: number, body: string): string {
+  try {
+    const parsed = JSON.parse(body)
+    const message = parsed?.error?.message
+    if (typeof message === 'string' && message.trim()) return message
+  } catch {
+    // ignore non-JSON error bodies
+  }
+  if (status === 401 || status === 403) return 'Invalid OpenRouter API key or request rejected.'
+  if (status === 429) return 'Rate limit reached. Wait a moment and try again.'
+  return `OpenRouter request failed (status ${status}).`
+}
+
 function parseGeminiError(status: number, body: string): string {
   try {
     const parsed = JSON.parse(body)
@@ -199,7 +220,7 @@ function parseGeminiError(status: number, body: string): string {
   } catch {
     // ignore non-JSON error bodies
   }
-  if (status === 400 || status === 403) return 'Invalid API key or request rejected by Gemini.'
+  if (status === 400 || status === 403) return 'Invalid Gemini API key or request rejected.'
   if (status === 429) return 'Rate limit reached. Wait a moment and try again.'
   return `Gemini request failed (status ${status}).`
 }
@@ -296,7 +317,66 @@ export interface RegeneratedQuestion {
   model: string
 }
 
-async function callGemini(apiKey: string, model: string, prompt: string, schema: object): Promise<unknown> {
+function parseJsonContent(text: string, provider: string): unknown {
+  try {
+    return JSON.parse(text)
+  } catch {
+    throw new AiProviderError(`${provider} returned malformed JSON.`, true)
+  }
+}
+
+async function callOpenRouter(
+  apiKey: string,
+  model: string,
+  prompt: string,
+  schema: object
+): Promise<{ parsed: unknown; model: string }> {
+  const response = await fetch(OPENROUTER_BASE, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+      'HTTP-Referer': typeof window !== 'undefined' ? window.location.origin : 'https://polimind.app',
+      'X-Title': 'Polimind',
+    },
+    body: JSON.stringify({
+      model,
+      messages: [{ role: 'user', content: prompt }],
+      response_format: {
+        type: 'json_schema',
+        json_schema: {
+          name: 'quiz_response',
+          strict: true,
+          schema,
+        },
+      },
+      temperature: 0.8,
+    }),
+  })
+
+  if (!response.ok) {
+    const retryable = response.status === 404 || response.status === 429 || response.status >= 500
+    throw new AiProviderError(parseOpenRouterError(response.status, await response.text()), retryable)
+  }
+
+  const payload = await response.json()
+  const text = payload?.choices?.[0]?.message?.content
+  if (typeof text !== 'string' || !text.trim()) {
+    throw new AiProviderError('OpenRouter returned an empty response.', true)
+  }
+
+  return {
+    parsed: parseJsonContent(text, 'OpenRouter'),
+    model: typeof payload.model === 'string' ? payload.model : model,
+  }
+}
+
+async function callGemini(
+  apiKey: string,
+  model: string,
+  prompt: string,
+  schema: object
+): Promise<{ parsed: unknown; model: string }> {
   const response = await fetch(`${GEMINI_BASE}/${model}:generateContent?key=${encodeURIComponent(apiKey)}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -312,52 +392,104 @@ async function callGemini(apiKey: string, model: string, prompt: string, schema:
 
   if (!response.ok) {
     const retryable = response.status === 404 || response.status === 429 || response.status >= 500
-    throw new GeminiError(parseGeminiError(response.status, await response.text()), retryable)
+    throw new AiProviderError(parseGeminiError(response.status, await response.text()), retryable)
   }
 
   const payload = await response.json()
   const text = payload?.candidates?.[0]?.content?.parts?.[0]?.text
   if (typeof text !== 'string' || !text.trim()) {
-    throw new GeminiError('Gemini returned an empty response.', true)
+    throw new AiProviderError('Gemini returned an empty response.', true)
   }
 
-  try {
-    return JSON.parse(text)
-  } catch {
-    throw new GeminiError('Gemini returned malformed JSON.', true)
+  return {
+    parsed: parseJsonContent(text, 'Gemini'),
+    model,
   }
 }
 
-async function withModelFallback<T>(run: (model: string) => Promise<T>): Promise<{ result: T; model: string }> {
+async function withModelFallback<T>(
+  models: string[],
+  provider: string,
+  run: (model: string) => Promise<{ result: T; model: string }>
+): Promise<{ result: T; model: string }> {
   let lastError: Error | null = null
 
-  for (const model of GEMINI_MODELS) {
+  for (const model of models) {
     try {
-      const result = await run(model)
-      return { result, model }
+      return await run(model)
     } catch (err) {
-      if (err instanceof GeminiError && !err.retryable) throw err
+      if (err instanceof AiProviderError && !err.retryable) throw err
       lastError = err instanceof Error ? err : new Error('Unknown error.')
     }
   }
 
   throw new Error(
     lastError
-      ? `All available models failed. Last error: ${lastError.message}`
-      : 'All Gemini models are unavailable right now. Try again later.'
+      ? `All ${provider} models failed. Last error: ${lastError.message}`
+      : `All ${provider} models are unavailable right now. Try again later.`
   )
 }
 
-export async function generateQuiz(apiKey: string, subject: string, count: number): Promise<GeneratedQuiz> {
-  const { result, model } = await withModelFallback(async (model) => {
-    const parsed = await callGemini(apiKey, model, buildPrompt(subject, count), RESPONSE_SCHEMA)
-    return normalizeQuiz(parsed, subject)
+async function withAiFallback<T>(
+  keys: AiKeys,
+  run: {
+    openRouter: (model: string) => Promise<{ result: T; model: string }>
+    gemini: (model: string) => Promise<{ result: T; model: string }>
+  }
+): Promise<{ result: T; model: string }> {
+  const openRouterKey = keys.openRouterKey.trim()
+  const geminiKey = keys.geminiKey.trim()
+
+  if (!openRouterKey && !geminiKey) {
+    throw new Error('Add an OpenRouter API key to generate, or a Gemini key as fallback.')
+  }
+
+  let lastError: Error | null = null
+
+  if (openRouterKey) {
+    try {
+      return await withModelFallback(OPENROUTER_MODELS, 'OpenRouter', (model) => run.openRouter(model))
+    } catch (err) {
+      lastError = err instanceof Error ? err : new Error('Unknown error.')
+      if (!geminiKey) throw lastError
+    }
+  }
+
+  if (geminiKey) {
+    try {
+      const { result, model } = await withModelFallback(GEMINI_MODELS, 'Gemini', (model) => run.gemini(model))
+      return {
+        result,
+        model: openRouterKey ? `${model} (Gemini fallback)` : model,
+      }
+    } catch (err) {
+      lastError = err instanceof Error ? err : new Error('Unknown error.')
+    }
+  }
+
+  throw new Error(
+    lastError
+      ? `All providers failed. Last error: ${lastError.message}`
+      : 'All AI providers are unavailable right now. Try again later.'
+  )
+}
+
+export async function generateQuiz(keys: AiKeys, subject: string, count: number): Promise<GeneratedQuiz> {
+  const { result, model } = await withAiFallback(keys, {
+    openRouter: async (model) => {
+      const { parsed, model: usedModel } = await callOpenRouter(keys.openRouterKey.trim(), model, buildPrompt(subject, count), RESPONSE_SCHEMA)
+      return { result: normalizeQuiz(parsed, subject), model: usedModel }
+    },
+    gemini: async (model) => {
+      const { parsed, model: usedModel } = await callGemini(keys.geminiKey.trim(), model, buildPrompt(subject, count), RESPONSE_SCHEMA)
+      return { result: normalizeQuiz(parsed, subject), model: usedModel }
+    },
   })
   return { quiz: result, model }
 }
 
 export async function regenerateQuestion(
-  apiKey: string,
+  keys: AiKeys,
   quiz: QuizMetadata,
   index: number,
   instructions?: string
@@ -367,11 +499,20 @@ export async function regenerateQuestion(
   const prompt = trimmedInstructions && current && 'options' in current
     ? buildEditPrompt(current, trimmedInstructions)
     : buildQuestionPrompt(quiz, index)
-  const { result, model } = await withModelFallback(async (model) => {
-    const parsed = await callGemini(apiKey, model, prompt, QUESTION_SCHEMA)
-    const question = normalizeQuestion(parsed)
-    if (!question) throw new GeminiError('Gemini returned an invalid question.', true)
-    return question
+
+  const { result, model } = await withAiFallback(keys, {
+    openRouter: async (model) => {
+      const { parsed, model: usedModel } = await callOpenRouter(keys.openRouterKey.trim(), model, prompt, QUESTION_SCHEMA)
+      const question = normalizeQuestion(parsed)
+      if (!question) throw new AiProviderError('OpenRouter returned an invalid question.', true)
+      return { result: question, model: usedModel }
+    },
+    gemini: async (model) => {
+      const { parsed, model: usedModel } = await callGemini(keys.geminiKey.trim(), model, prompt, QUESTION_SCHEMA)
+      const question = normalizeQuestion(parsed)
+      if (!question) throw new AiProviderError('Gemini returned an invalid question.', true)
+      return { result: question, model: usedModel }
+    },
   })
   return { question: result, model }
 }

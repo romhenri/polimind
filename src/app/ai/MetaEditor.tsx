@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { FaCheck, FaTimes } from 'react-icons/fa'
 import { QuizMetadata } from '@/types/quiz'
 import { AVAILABLE_COLORS, getColor } from '@/utils/colorMapper'
-import { slugify } from '@/utils/geminiQuiz'
+import { slugify } from '@/utils/aiQuiz'
 
 const COLOR_KEYS = Object.keys(AVAILABLE_COLORS)
 const HARDNESS_VALUES = ['easy', 'medium', 'hard'] as const
