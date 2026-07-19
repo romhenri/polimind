@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   FaKey,
   FaEye,
@@ -13,10 +13,13 @@ import {
   FaCheck,
   FaFileImport,
   FaUpload,
+  FaStop,
+  FaSlidersH,
 } from 'react-icons/fa'
 import { FaWandMagicSparkles } from 'react-icons/fa6'
 import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
-import { generateQuiz, regenerateQuestion, quizToDataFile, buildCopyPrompt, parseQuizJson } from '@/utils/aiQuiz'
+import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, parseQuizJson } from '@/utils/aiQuiz'
+import type { StreamCallbacks } from '@/utils/aiQuiz'
 import AiQuizRunner from './AiQuizRunner'
 import MetaEditor from './MetaEditor'
 import QuestionList from './QuestionList'
@@ -36,13 +39,16 @@ export default function AiPage() {
   const [quiz, setQuiz] = useState<QuizMetadata | null>(null)
   const [usedModel, setUsedModel] = useState('')
   const [view, setView] = useState<'form' | 'quiz'>('form')
-  const [activeTab, setActiveTab] = useState<'generate' | 'edit'>('generate')
-  const [editing, setEditing] = useState(false)
+  const [activeTab, setActiveTab] = useState<'generate' | 'meta' | 'edit'>('generate')
   const [regeneratingIndex, setRegeneratingIndex] = useState<number | null>(null)
   const [regenError, setRegenError] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
   const [importJson, setImportJson] = useState('')
   const [importError, setImportError] = useState<string | null>(null)
+  const [streamProgress, setStreamProgress] = useState<{ current: number; total: number } | null>(null)
+  const [streamingQuestions, setStreamingQuestions] = useState<OptionsQuestion[]>([])
+  const [streamMeta, setStreamMeta] = useState<Partial<QuizMetadata> | null>(null)
+  const abortRef = useRef<AbortController | null>(null)
 
   useEffect(() => {
     const storedOpenRouterKey = localStorage.getItem(OPENROUTER_KEY_STORAGE)
@@ -69,27 +75,76 @@ export default function AiPage() {
     }
   }
 
+  const handleCancel = () => {
+    abortRef.current?.abort()
+    abortRef.current = null
+    setLoading(false)
+    setStreamProgress(null)
+    setStreamingQuestions([])
+    setStreamMeta(null)
+  }
+
   const handleGenerate = async () => {
     if (!canGenerate) return
     setLoading(true)
     setError(null)
     setQuiz(null)
-    setEditing(false)
+    setStreamProgress({ current: 0, total: count })
+    setStreamingQuestions([])
+    setStreamMeta(null)
     localStorage.setItem(OPENROUTER_KEY_STORAGE, openRouterKey.trim())
     localStorage.setItem(GEMINI_KEY_STORAGE, geminiKey.trim())
+    const controller = new AbortController()
+    abortRef.current = controller
+
+    const callbacks: StreamCallbacks = {
+      onMeta: (meta) => {
+        setStreamMeta(meta)
+      },
+      onQuestion: (question, index) => {
+        setStreamingQuestions((prev) => [...prev, question])
+        setStreamProgress((prev) => prev ? { ...prev, current: index + 1 } : null)
+      },
+      onDone: (result) => {
+        setQuiz(result.quiz)
+        setUsedModel(result.model)
+        setActiveTab('edit')
+        setStreamProgress(null)
+        setStreamingQuestions([])
+        setStreamMeta(null)
+        setLoading(false)
+        abortRef.current = null
+      },
+      onError: (err) => {
+        setError(err.message)
+        setStreamProgress(null)
+        setStreamingQuestions([])
+        setStreamMeta(null)
+        setLoading(false)
+        abortRef.current = null
+      },
+    }
+
     try {
-      const result = await generateQuiz(
+      await generateQuizStream(
         { openRouterKey: openRouterKey.trim(), geminiKey: geminiKey.trim() },
         subject.trim(),
-        count
+        count,
+        callbacks,
+        controller.signal
       )
-      setQuiz(result.quiz)
-      setUsedModel(result.model)
-      setActiveTab('edit')
     } catch (err) {
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        // User cancelled — already cleaned up in handleCancel
+        return
+      }
       setError(err instanceof Error ? err.message : 'Something went wrong while generating the quiz.')
     } finally {
       setLoading(false)
+      setStreamProgress(null)
+      setStreamingQuestions([])
+      setStreamMeta(null)
+      abortRef.current = null
     }
   }
 
@@ -115,7 +170,7 @@ export default function AiPage() {
 
   const handleSaveMeta = (meta: Partial<QuizMetadata>) => {
     setQuiz((prev) => (prev ? { ...prev, ...meta } : prev))
-    setEditing(false)
+    setActiveTab('edit')
   }
 
   const handleUpdateQuestion = (index: number, question: OptionsQuestion) => {
@@ -177,7 +232,7 @@ export default function AiPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-2 p-1 mb-6 border-2 rounded-xl border-plum-200 bg-plum-50/50 dark:border-plum-900/60 dark:bg-stone-900">
+      <div className="grid grid-cols-3 gap-2 p-1 mb-6 border-2 rounded-xl border-plum-200 bg-plum-50/50 dark:border-plum-900/60 dark:bg-stone-900">
         <button
           type="button"
           onClick={() => setActiveTab('generate')}
@@ -191,6 +246,18 @@ export default function AiPage() {
         </button>
         <button
           type="button"
+          onClick={() => quiz && setActiveTab('meta')}
+          disabled={!quiz}
+          className={`flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold transition-colors rounded-lg disabled:cursor-not-allowed disabled:opacity-50 ${
+            activeTab === 'meta'
+              ? 'bg-plum-600 text-white'
+              : 'text-plum-700 hover:bg-plum-100 dark:text-plum-300 dark:hover:bg-stone-800'
+          }`}
+        >
+          <FaSlidersH /> 2. Meta Edit
+        </button>
+        <button
+          type="button"
           onClick={() => quiz && setActiveTab('edit')}
           disabled={!quiz}
           className={`flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold transition-colors rounded-lg disabled:cursor-not-allowed disabled:opacity-50 ${
@@ -199,7 +266,7 @@ export default function AiPage() {
               : 'text-plum-700 hover:bg-plum-100 dark:text-plum-300 dark:hover:bg-stone-800'
           }`}
         >
-          <FaPen /> 2. Edit
+          <FaPen /> 3. Edit
         </button>
       </div>
 
@@ -327,23 +394,89 @@ export default function AiPage() {
               </>
             )}
           </button>
-          <button
-            type="button"
-            onClick={handleGenerate}
-            disabled={!canGenerate}
-            className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-plum-600 rounded-lg hover:bg-plum-700 active:bg-plum-800 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            {loading ? (
-              <>
-                <FaSpinner className="animate-spin" /> Generating...
-              </>
-            ) : (
-              <>
-                <FaWandMagicSparkles /> Generate quiz
-              </>
-            )}
-          </button>
+          {loading ? (
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-red-600 rounded-lg hover:bg-red-700 active:bg-red-800"
+            >
+              <FaStop /> Cancel
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={handleGenerate}
+              disabled={!canGenerate}
+              className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-plum-600 rounded-lg hover:bg-plum-700 active:bg-plum-800 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <FaWandMagicSparkles /> Generate quiz
+            </button>
+          )}
         </div>
+
+        {loading && streamProgress && (
+          <div className="mt-4 animate-fade-in">
+            <div className="flex items-center gap-3 mb-2">
+              <FaSpinner className="animate-spin text-plum-500" />
+              <span className="text-sm font-semibold text-stone-700 dark:text-stone-200">
+                {streamProgress.current === 0
+                  ? 'Starting generation...'
+                  : `Building question ${streamProgress.current} of ${streamProgress.total}...`}
+              </span>
+            </div>
+            <div className="h-2.5 overflow-hidden rounded-full bg-stone-200 dark:bg-stone-700">
+              <div
+                className="h-full transition-all duration-500 ease-out rounded-full bg-gradient-to-r from-plum-500 to-plum-400"
+                style={{ width: `${Math.max(2, (streamProgress.current / streamProgress.total) * 100)}%` }}
+              />
+            </div>
+
+            {streamMeta?.name && (
+              <p className="mt-3 text-sm font-semibold text-stone-800 dark:text-white">
+                {streamMeta.name}
+              </p>
+            )}
+            {streamMeta?.description && (
+              <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">
+                {streamMeta.description}
+              </p>
+            )}
+
+            {streamingQuestions.length > 0 && (
+              <div className="mt-4 space-y-2">
+                {streamingQuestions.map((q, i) => (
+                  <div
+                    key={i}
+                    className="p-3 border-2 rounded-lg animate-fade-in border-plum-100 bg-plum-50/40 dark:border-plum-900/40 dark:bg-stone-800/60"
+                  >
+                    <p className="text-sm font-semibold text-stone-800 dark:text-stone-100">
+                      <span className="text-plum-600 dark:text-plum-400">{i + 1}.</span> {q.question}
+                    </p>
+                    <ul className="mt-2 space-y-1">
+                      {q.options.map((option, oi) => (
+                        <li
+                          key={oi}
+                          className={`flex items-start gap-2 text-xs ${
+                            oi === q.correctAnswer
+                              ? 'font-semibold text-green-700 dark:text-green-400'
+                              : 'text-stone-500 dark:text-stone-400'
+                          }`}
+                        >
+                          {oi === q.correctAnswer ? (
+                            <FaCheck className="flex-shrink-0 mt-0.5 text-green-600 dark:text-green-400" />
+                          ) : (
+                            <span className="flex-shrink-0 w-3" aria-hidden />
+                          )}
+                          {option}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
 
         {error && (
           <div className="p-3 mt-4 text-sm border-2 rounded-lg text-red-700 bg-red-50 border-red-200 dark:text-red-300 dark:bg-red-950/40 dark:border-red-800">
@@ -405,26 +538,13 @@ export default function AiPage() {
         )}
       </div>
 
-      {quiz && activeTab === 'edit' && (
+      {quiz && activeTab === 'meta' && (
         <div className="p-6 bg-white border-2 rounded-xl border-plum-200 dark:bg-stone-900 dark:border-plum-900/60 animate-fade-in">
-          <div className="flex items-start justify-between gap-3 mb-4">
-            <h2 className="text-2xl font-bold tracking-wide font-display text-stone-800 dark:text-white sm:text-3xl">
-              {quiz.name}
+          <div className="flex items-center gap-2 mb-4">
+            <FaSlidersH className="text-plum-500" aria-hidden />
+            <h2 className="text-xl font-bold tracking-wide font-display text-stone-800 dark:text-white sm:text-2xl">
+              Quiz Metadata
             </h2>
-            <div className="flex items-center flex-shrink-0 gap-3">
-              <span className="text-sm font-semibold text-plum-600 dark:text-plum-400">
-                {quiz.questions.length} questions
-              </span>
-              {!editing && (
-                <button
-                  type="button"
-                  onClick={() => setEditing(true)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold transition-colors border-2 rounded-lg text-plum-700 border-plum-300 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-800 dark:hover:bg-stone-800"
-                >
-                  <FaPen /> Edit
-                </button>
-              )}
-            </div>
           </div>
 
           {usedModel && (
@@ -433,49 +553,64 @@ export default function AiPage() {
             </p>
           )}
 
-          {editing ? (
-            <MetaEditor quiz={quiz} onSave={handleSaveMeta} onCancel={() => setEditing(false)} />
-          ) : (
-            <>
-              {quiz.description && (
-                <p className="mb-4 text-sm text-stone-600 dark:text-stone-300">{quiz.description}</p>
-              )}
+          <MetaEditor quiz={quiz} onSave={handleSaveMeta} onCancel={() => setActiveTab('edit')} />
+        </div>
+      )}
 
-              <QuestionList
-                quiz={quiz}
-                regeneratingIndex={regeneratingIndex}
-                error={regenError}
-                onRegenerate={handleRegenerateQuestion}
-                onUpdateQuestion={handleUpdateQuestion}
-              />
+      {quiz && activeTab === 'edit' && (
+        <div className="p-6 bg-white border-2 rounded-xl border-plum-200 dark:bg-stone-900 dark:border-plum-900/60 animate-fade-in">
+          <div className="flex items-start justify-between gap-3 mb-4">
+            <h2 className="text-2xl font-bold tracking-wide font-display text-stone-800 dark:text-white sm:text-3xl">
+              {quiz.name}
+            </h2>
+            <span className="flex-shrink-0 text-sm font-semibold text-plum-600 dark:text-plum-400">
+              {quiz.questions.length} questions
+            </span>
+          </div>
 
-              <details className="mt-5 group">
-                <summary className="text-sm font-semibold cursor-pointer select-none text-plum-700 dark:text-plum-300 hover:underline">
-                  View raw JSON
-                </summary>
-                <pre className="p-4 mt-3 overflow-auto text-xs leading-relaxed border-2 rounded-lg max-h-72 border-plum-100 bg-plum-50/50 text-stone-700 dark:border-plum-900/40 dark:bg-stone-800 dark:text-stone-200">
-                  {jsonPreview}
-                </pre>
-              </details>
-
-              <div className="flex flex-col gap-3 mt-5 sm:flex-row">
-                <button
-                  type="button"
-                  onClick={handleDownload}
-                  className="flex items-center justify-center gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-plum-700 border-plum-500 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-400 dark:hover:bg-stone-800"
-                >
-                  <FaDownload /> Download JSON
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setView('quiz')}
-                  className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-plum-600 rounded-lg hover:bg-plum-700 active:bg-plum-800"
-                >
-                  <FaPlay /> Start quiz
-                </button>
-              </div>
-            </>
+          {usedModel && (
+            <p className="mb-4 text-xs text-stone-400 dark:text-stone-500">
+              Generated with {usedModel}
+            </p>
           )}
+
+          {quiz.description && (
+            <p className="mb-4 text-sm text-stone-600 dark:text-stone-300">{quiz.description}</p>
+          )}
+
+          <QuestionList
+            quiz={quiz}
+            regeneratingIndex={regeneratingIndex}
+            error={regenError}
+            onRegenerate={handleRegenerateQuestion}
+            onUpdateQuestion={handleUpdateQuestion}
+          />
+
+          <details className="mt-5 group">
+            <summary className="text-sm font-semibold cursor-pointer select-none text-plum-700 dark:text-plum-300 hover:underline">
+              View raw JSON
+            </summary>
+            <pre className="p-4 mt-3 overflow-auto text-xs leading-relaxed border-2 rounded-lg max-h-72 border-plum-100 bg-plum-50/50 text-stone-700 dark:border-plum-900/40 dark:bg-stone-800 dark:text-stone-200">
+              {jsonPreview}
+            </pre>
+          </details>
+
+          <div className="flex flex-col gap-3 mt-5 sm:flex-row">
+            <button
+              type="button"
+              onClick={handleDownload}
+              className="flex items-center justify-center gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-plum-700 border-plum-500 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-400 dark:hover:bg-stone-800"
+            >
+              <FaDownload /> Download JSON
+            </button>
+            <button
+              type="button"
+              onClick={() => setView('quiz')}
+              className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-plum-600 rounded-lg hover:bg-plum-700 active:bg-plum-800"
+            >
+              <FaPlay /> Start quiz
+            </button>
+          </div>
         </div>
       )}
     </div>

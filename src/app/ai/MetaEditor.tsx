@@ -119,13 +119,6 @@ export default function MetaEditor({ quiz, onSave, onCancel }: MetaEditorProps) 
         >
           <FaCheck /> Save changes
         </button>
-        <button
-          type="button"
-          onClick={onCancel}
-          className="flex items-center justify-center gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-stone-600 border-stone-300 hover:bg-stone-100 dark:text-stone-300 dark:border-stone-600 dark:hover:bg-stone-800"
-        >
-          <FaTimes /> Cancel
-        </button>
       </div>
     </div>
   )

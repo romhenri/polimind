@@ -148,6 +148,7 @@ function buildQuestionPrompt(quiz: QuizMetadata, index: number): string {
     '- "correctAnswer": the 0-based index (0 to 3) of the correct option.',
     '- "explain": one short sentence explaining why the answer is correct.',
     '- Exactly one option is correct.',
+    '- Just Content on Title. Do not put words as: quiz, fundamentals, test or basic on name',
     '- Do NOT make the correct option the longest one; keep all options similar in length so length is not a clue.',
     '- The question must fit the quiz subject and difficulty.',
     '- It must NOT duplicate any of the existing questions listed below.',
@@ -515,4 +516,301 @@ export async function regenerateQuestion(
     },
   })
   return { question: result, model }
+}
+
+// ---------------------------------------------------------------------------
+// Streaming quiz generation via OpenRouter SSE
+// ---------------------------------------------------------------------------
+
+export interface StreamCallbacks {
+  /** Fires when quiz metadata (name, description, etc.) is first detected. */
+  onMeta?: (partial: Partial<QuizMetadata>) => void
+  /** Fires each time a new complete question is extracted from the stream. */
+  onQuestion?: (question: OptionsQuestion, index: number) => void
+  /** Fires when streaming completes with the final validated quiz. */
+  onDone?: (result: GeneratedQuiz) => void
+  /** Fires on error (streaming or parsing). */
+  onError?: (error: Error) => void
+}
+
+/**
+ * Read an SSE response body line-by-line and yield each `data:` payload.
+ * Handles the `data: [DONE]` sentinel from the OpenAI-compatible API.
+ */
+async function* readSSEStream(
+  body: ReadableStream<Uint8Array>
+): AsyncGenerator<string> {
+  const reader = body.getReader()
+  const decoder = new TextDecoder()
+  let buffer = ''
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      buffer += decoder.decode(value, { stream: true })
+      const lines = buffer.split('\n')
+      buffer = lines.pop() ?? ''
+
+      for (const line of lines) {
+        const trimmed = line.trim()
+        if (!trimmed || trimmed.startsWith(':')) continue
+        if (trimmed.startsWith('data:')) {
+          const payload = trimmed.slice(5).trim()
+          if (payload === '[DONE]') return
+          yield payload
+        }
+      }
+    }
+  } finally {
+    reader.releaseLock()
+  }
+}
+
+/**
+ * Extract delta content text from an OpenAI-compatible SSE JSON payload.
+ */
+function extractDelta(json: string): string {
+  try {
+    const parsed = JSON.parse(json)
+    return parsed?.choices?.[0]?.delta?.content ?? ''
+  } catch {
+    return ''
+  }
+}
+
+/**
+ * Attempt to extract complete question objects from a growing JSON buffer.
+ * Returns an array of newly found questions (those beyond `alreadyFound`).
+ */
+function extractNewQuestions(
+  buffer: string,
+  alreadyFound: number
+): OptionsQuestion[] {
+  const results: OptionsQuestion[] = []
+
+  // Find all balanced {...} objects inside a "questions" array.
+  // We look for patterns like: { "question": "...", ... "explain": "..." }
+  const questionPattern = /\{\s*"question"\s*:\s*"(?:[^"\\]|\\.)*"\s*,\s*"options"\s*:\s*\[(?:[^\]]*)\]\s*,\s*"correctAnswer"\s*:\s*\d+\s*,\s*"explain"\s*:\s*"(?:[^"\\]|\\.)*"\s*\}/g
+  let match: RegExpExecArray | null
+  let count = 0
+
+  while ((match = questionPattern.exec(buffer)) !== null) {
+    count++
+    if (count <= alreadyFound) continue
+    try {
+      const parsed = JSON.parse(match[0])
+      const normalized = normalizeQuestion(parsed)
+      if (normalized) results.push(normalized)
+    } catch {
+      // Partial/malformed match — skip
+    }
+  }
+
+  return results
+}
+
+/**
+ * Attempt to extract quiz metadata fields from a partial JSON buffer.
+ */
+function extractPartialMeta(buffer: string): Partial<QuizMetadata> | null {
+  const meta: Partial<QuizMetadata> = {}
+  let found = false
+
+  const nameMatch = buffer.match(/"name"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+  if (nameMatch) { meta.name = nameMatch[1]; found = true }
+
+  const descMatch = buffer.match(/"description"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+  if (descMatch) { meta.description = descMatch[1]; found = true }
+
+  const colorMatch = buffer.match(/"color"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+  if (colorMatch && COLOR_KEYS.includes(colorMatch[1])) {
+    meta.color = colorMatch[1]; found = true
+  }
+
+  const categoryMatch = buffer.match(/"category"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+  if (categoryMatch) { meta.category = categoryMatch[1]; found = true }
+
+  const idMatch = buffer.match(/"id"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+  if (idMatch) { meta.id = idMatch[1]; found = true }
+
+  return found ? meta : null
+}
+
+/**
+ * Stream-generate a quiz via OpenRouter SSE.
+ *
+ * Calls OpenRouter with `stream: true`, reads SSE deltas, and incrementally
+ * extracts quiz metadata and question objects. Falls back to non-streaming
+ * `generateQuiz` when only a Gemini key is available or if streaming fails.
+ *
+ * @param keys - API keys
+ * @param subject - quiz subject
+ * @param count - number of questions
+ * @param callbacks - real-time progress callbacks
+ * @param signal - optional AbortSignal for cancellation
+ * @returns the final GeneratedQuiz (also delivered via onDone callback)
+ */
+export async function generateQuizStream(
+  keys: AiKeys,
+  subject: string,
+  count: number,
+  callbacks: StreamCallbacks,
+  signal?: AbortSignal
+): Promise<GeneratedQuiz> {
+  const openRouterKey = keys.openRouterKey.trim()
+  const geminiKey = keys.geminiKey.trim()
+
+  // If no OpenRouter key, fall back to non-streaming
+  if (!openRouterKey) {
+    const result = await generateQuiz(keys, subject, count)
+    // Fire all callbacks in sequence for consistency
+    if (callbacks.onMeta) {
+      callbacks.onMeta({
+        id: result.quiz.id,
+        name: result.quiz.name,
+        description: result.quiz.description,
+        color: result.quiz.color,
+        category: result.quiz.category,
+      })
+    }
+    const questions = result.quiz.questions as OptionsQuestion[]
+    for (let i = 0; i < questions.length; i++) {
+      callbacks.onQuestion?.(questions[i], i)
+    }
+    callbacks.onDone?.(result)
+    return result
+  }
+
+  // Try OpenRouter streaming
+  let lastStreamError: Error | null = null
+  for (const model of OPENROUTER_MODELS) {
+    try {
+      const response = await fetch(OPENROUTER_BASE, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${openRouterKey}`,
+          'HTTP-Referer': typeof window !== 'undefined' ? window.location.origin : 'https://polimind.app',
+          'X-Title': 'Polimind',
+        },
+        body: JSON.stringify({
+          model,
+          messages: [{ role: 'user', content: buildPrompt(subject, count) }],
+          stream: true,
+          temperature: 0.8,
+        }),
+        signal,
+      })
+
+      if (!response.ok) {
+        const retryable = response.status === 404 || response.status === 429 || response.status >= 500
+        const errMsg = parseOpenRouterError(response.status, await response.text())
+        if (!retryable) throw new Error(errMsg)
+        lastStreamError = new Error(errMsg)
+        continue
+      }
+
+      if (!response.body) {
+        throw new Error('OpenRouter returned no response body for streaming.')
+      }
+
+      // Read the SSE stream
+      let fullBuffer = ''
+      let emittedQuestions = 0
+      let metaEmitted = false
+      let usedModel = model
+
+      for await (const payload of readSSEStream(response.body)) {
+        if (signal?.aborted) throw new DOMException('Aborted', 'AbortError')
+
+        const delta = extractDelta(payload)
+        if (!delta) {
+          // Check if payload contains the model name
+          try {
+            const parsed = JSON.parse(payload)
+            if (typeof parsed?.model === 'string') usedModel = parsed.model
+          } catch { /* ignore */ }
+          continue
+        }
+
+        fullBuffer += delta
+
+        // Try to extract metadata once
+        if (!metaEmitted) {
+          const meta = extractPartialMeta(fullBuffer)
+          if (meta) {
+            metaEmitted = true
+            callbacks.onMeta?.(meta)
+          }
+        }
+
+        // Try to extract new questions
+        const newQuestions = extractNewQuestions(fullBuffer, emittedQuestions)
+        for (const q of newQuestions) {
+          callbacks.onQuestion?.(q, emittedQuestions)
+          emittedQuestions++
+        }
+      }
+
+      // Stream finished — parse the complete buffer for the final quiz
+      // Strip any markdown code fences the model may have wrapped around the JSON
+      let jsonText = fullBuffer.trim()
+      const fenceMatch = jsonText.match(/```(?:json)?\s*([\s\S]*?)```/)
+      if (fenceMatch) jsonText = fenceMatch[1].trim()
+
+      let parsed: unknown
+      try {
+        parsed = JSON.parse(jsonText)
+      } catch {
+        throw new Error('OpenRouter stream produced malformed JSON.')
+      }
+
+      const quiz = normalizeQuiz(parsed, subject)
+      const result: GeneratedQuiz = { quiz, model: usedModel }
+      callbacks.onDone?.(result)
+      return result
+
+    } catch (err) {
+      if (err instanceof DOMException && err.name === 'AbortError') throw err
+      lastStreamError = err instanceof Error ? err : new Error('Unknown streaming error.')
+    }
+  }
+
+  // OpenRouter streaming failed — try Gemini non-streaming fallback
+  if (geminiKey) {
+    try {
+      const { result: quiz, model } = await withModelFallback(GEMINI_MODELS, 'Gemini', async (m) => {
+        const { parsed, model: usedModel } = await callGemini(geminiKey, m, buildPrompt(subject, count), RESPONSE_SCHEMA)
+        return { result: normalizeQuiz(parsed, subject), model: usedModel }
+      })
+      const genResult: GeneratedQuiz = {
+        quiz,
+        model: openRouterKey ? `${model} (Gemini fallback)` : model,
+      }
+      // Fire callbacks for consistency
+      if (callbacks.onMeta) {
+        callbacks.onMeta({
+          id: quiz.id, name: quiz.name, description: quiz.description,
+          color: quiz.color, category: quiz.category,
+        })
+      }
+      const questions = quiz.questions as OptionsQuestion[]
+      for (let i = 0; i < questions.length; i++) {
+        callbacks.onQuestion?.(questions[i], i)
+      }
+      callbacks.onDone?.(genResult)
+      return genResult
+    } catch (err) {
+      lastStreamError = err instanceof Error ? err : new Error('Unknown error.')
+    }
+  }
+
+  const finalError = new Error(
+    lastStreamError
+      ? `All providers failed. Last error: ${lastStreamError.message}`
+      : 'All AI providers are unavailable right now. Try again later.'
+  )
+  callbacks.onError?.(finalError)
+  throw finalError
 }
