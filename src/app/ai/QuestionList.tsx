@@ -6,8 +6,8 @@ import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
 
 interface QuestionListProps {
   quiz: QuizMetadata
-  regeneratingIndex: number | null
-  error: string | null
+  regeneratingIndices: Set<number>
+  errors: Record<number, string>
   onRegenerate: (index: number, instructions?: string) => void
   onUpdateQuestion: (index: number, question: OptionsQuestion) => void
 }
@@ -21,53 +21,55 @@ interface DraftQuestion {
 
 export default function QuestionList({
   quiz,
-  regeneratingIndex,
-  error,
+  regeneratingIndices,
+  errors,
   onRegenerate,
   onUpdateQuestion,
 }: QuestionListProps) {
-  const [instructIndex, setInstructIndex] = useState<number | null>(null)
-  const [instructions, setInstructions] = useState('')
-  const [editIndex, setEditIndex] = useState<number | null>(null)
-  const [draft, setDraft] = useState<DraftQuestion | null>(null)
+  const [instructionDrafts, setInstructionDrafts] = useState<Record<number, string>>({})
+  const [drafts, setDrafts] = useState<Record<number, DraftQuestion>>({})
 
-  const busy = regeneratingIndex !== null
+  const openInstructions = (index: number) =>
+    setInstructionDrafts((prev) => ({ ...prev, [index]: '' }))
 
-  const openInstructions = (index: number) => {
-    setInstructIndex(index)
-    setInstructions('')
-  }
+  const closeInstructions = (index: number) =>
+    setInstructionDrafts((prev) => {
+      const next = { ...prev }
+      delete next[index]
+      return next
+    })
 
-  const closeInstructions = () => {
-    setInstructIndex(null)
-    setInstructions('')
-  }
+  const setInstructions = (index: number, value: string) =>
+    setInstructionDrafts((prev) => ({ ...prev, [index]: value }))
 
   const submitInstructions = (index: number) => {
-    onRegenerate(index, instructions.trim() || undefined)
-    closeInstructions()
+    onRegenerate(index, instructionDrafts[index]?.trim() || undefined)
+    closeInstructions(index)
   }
 
   const openEdit = (index: number) => {
     const q = quiz.questions[index]
     const options = 'options' in q ? [...q.options] : []
     const correctAnswer = 'correctAnswer' in q ? q.correctAnswer : 0
-    setEditIndex(index)
-    setDraft({
-      question: q.question,
-      options: options.length ? options : ['', '', '', ''],
-      correctAnswer,
-      explain: q.explain ?? '',
+    setDrafts((prev) => ({
+      ...prev,
+      [index]: {
+        question: q.question,
+        options: options.length ? options : ['', '', '', ''],
+        correctAnswer,
+        explain: q.explain ?? '',
+      },
+    }))
+  }
+
+  const closeEdit = (index: number) =>
+    setDrafts((prev) => {
+      const next = { ...prev }
+      delete next[index]
+      return next
     })
-  }
 
-  const closeEdit = () => {
-    setEditIndex(null)
-    setDraft(null)
-  }
-
-  const canSaveDraft =
-    draft !== null &&
+  const canSaveDraft = (draft: DraftQuestion) =>
     draft.question.trim() !== '' &&
     draft.options.length >= 2 &&
     draft.options.every((o) => o.trim() !== '') &&
@@ -75,7 +77,8 @@ export default function QuestionList({
     draft.correctAnswer < draft.options.length
 
   const saveEdit = (index: number) => {
-    if (!draft || !canSaveDraft) return
+    const draft = drafts[index]
+    if (!draft || !canSaveDraft(draft)) return
     const next: OptionsQuestion = {
       question: draft.question.trim(),
       options: draft.options.map((o) => o.trim()),
@@ -83,43 +86,48 @@ export default function QuestionList({
     }
     if (draft.explain.trim()) next.explain = draft.explain.trim()
     onUpdateQuestion(index, next)
-    closeEdit()
+    closeEdit(index)
   }
 
-  const updateDraft = (patch: Partial<DraftQuestion>) =>
-    setDraft((prev) => (prev ? { ...prev, ...patch } : prev))
+  const updateDraft = (index: number, patch: Partial<DraftQuestion>) =>
+    setDrafts((prev) => (prev[index] ? { ...prev, [index]: { ...prev[index], ...patch } } : prev))
 
-  const setOption = (i: number, value: string) =>
-    setDraft((prev) => {
-      if (!prev) return prev
-      const options = [...prev.options]
+  const setOption = (index: number, i: number, value: string) =>
+    setDrafts((prev) => {
+      const draft = prev[index]
+      if (!draft) return prev
+      const options = [...draft.options]
       options[i] = value
-      return { ...prev, options }
+      return { ...prev, [index]: { ...draft, options } }
     })
 
-  const addOption = () =>
-    setDraft((prev) => (prev ? { ...prev, options: [...prev.options, ''] } : prev))
+  const addOption = (index: number) =>
+    setDrafts((prev) =>
+      prev[index] ? { ...prev, [index]: { ...prev[index], options: [...prev[index].options, ''] } } : prev
+    )
 
-  const removeOption = (i: number) =>
-    setDraft((prev) => {
-      if (!prev || prev.options.length <= 2) return prev
-      const options = prev.options.filter((_, idx) => idx !== i)
-      let correctAnswer = prev.correctAnswer
+  const removeOption = (index: number, i: number) =>
+    setDrafts((prev) => {
+      const draft = prev[index]
+      if (!draft || draft.options.length <= 2) return prev
+      const options = draft.options.filter((_, idx) => idx !== i)
+      let correctAnswer = draft.correctAnswer
       if (i === correctAnswer) correctAnswer = 0
       else if (i < correctAnswer) correctAnswer -= 1
-      return { ...prev, options, correctAnswer }
+      return { ...prev, [index]: { ...draft, options, correctAnswer } }
     })
 
   return (
     <div className="space-y-3">
       {quiz.questions.map((q, index) => {
-        const isRegenerating = regeneratingIndex === index
-        const isInstructing = instructIndex === index
-        const isEditing = editIndex === index
+        const isRegenerating = regeneratingIndices.has(index)
+        const isInstructing = index in instructionDrafts
+        const draft = drafts[index]
+        const questionError = errors[index]
         const options = 'options' in q ? q.options : []
         const correctAnswer = 'correctAnswer' in q ? q.correctAnswer : -1
 
-        if (isEditing && draft) {
+        if (draft) {
           return (
             <div
               key={index}
@@ -130,7 +138,7 @@ export default function QuestionList({
               </label>
               <textarea
                 value={draft.question}
-                onChange={(e) => updateDraft({ question: e.target.value })}
+                onChange={(e) => updateDraft(index, { question: e.target.value })}
                 rows={2}
                 className="w-full px-3 py-2 mb-3 text-sm border-2 rounded-lg resize-none border-plum-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-plum-900/60 dark:bg-stone-800 dark:text-white"
               />
@@ -145,20 +153,20 @@ export default function QuestionList({
                       type="radio"
                       name={`correct-${index}`}
                       checked={draft.correctAnswer === i}
-                      onChange={() => updateDraft({ correctAnswer: i })}
+                      onChange={() => updateDraft(index, { correctAnswer: i })}
                       className="flex-shrink-0 w-4 h-4 accent-green-600"
                       aria-label={`Mark option ${i + 1} as correct`}
                     />
                     <input
                       type="text"
                       value={option}
-                      onChange={(e) => setOption(i, e.target.value)}
+                      onChange={(e) => setOption(index, i, e.target.value)}
                       placeholder={`Option ${i + 1}`}
                       className="flex-1 px-3 py-2 text-sm border-2 rounded-lg border-plum-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-plum-900/60 dark:bg-stone-800 dark:text-white"
                     />
                     <button
                       type="button"
-                      onClick={() => removeOption(i)}
+                      onClick={() => removeOption(index, i)}
                       disabled={draft.options.length <= 2}
                       className="flex-shrink-0 p-2 transition-colors rounded-lg text-stone-400 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-30"
                       aria-label={`Remove option ${i + 1}`}
@@ -171,7 +179,7 @@ export default function QuestionList({
 
               <button
                 type="button"
-                onClick={addOption}
+                onClick={() => addOption(index)}
                 className="inline-flex items-center gap-1.5 mt-2 text-xs font-semibold text-plum-700 dark:text-plum-300 hover:underline"
               >
                 <FaPlus /> Add option
@@ -182,7 +190,7 @@ export default function QuestionList({
               </label>
               <textarea
                 value={draft.explain}
-                onChange={(e) => updateDraft({ explain: e.target.value })}
+                onChange={(e) => updateDraft(index, { explain: e.target.value })}
                 rows={2}
                 placeholder="Why the correct answer is correct..."
                 className="w-full px-3 py-2 text-sm border-2 rounded-lg resize-none border-plum-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-plum-900/60 dark:bg-stone-800 dark:text-white"
@@ -192,14 +200,14 @@ export default function QuestionList({
                 <button
                   type="button"
                   onClick={() => saveEdit(index)}
-                  disabled={!canSaveDraft}
+                  disabled={!canSaveDraft(draft)}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold text-white transition-colors bg-plum-600 rounded-lg hover:bg-plum-700 active:bg-plum-800 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <FaCheck /> Save
                 </button>
                 <button
                   type="button"
-                  onClick={closeEdit}
+                  onClick={() => closeEdit(index)}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold transition-colors border-2 rounded-lg text-stone-600 border-stone-300 hover:bg-stone-100 dark:text-stone-300 dark:border-stone-600 dark:hover:bg-stone-800"
                 >
                   <FaTimes /> Cancel
@@ -248,8 +256,8 @@ export default function QuestionList({
             {isInstructing ? (
               <div className="mt-3">
                 <textarea
-                  value={instructions}
-                  onChange={(e) => setInstructions(e.target.value)}
+                  value={instructionDrafts[index]}
+                  onChange={(e) => setInstructions(index, e.target.value)}
                   rows={2}
                   autoFocus
                   placeholder="e.g. make it harder, focus on dates, avoid trick options..."
@@ -259,16 +267,15 @@ export default function QuestionList({
                   <button
                     type="button"
                     onClick={() => submitInstructions(index)}
-                    disabled={busy}
+                    disabled={isRegenerating}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold text-white transition-colors bg-plum-600 rounded-lg hover:bg-plum-700 active:bg-plum-800 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {isRegenerating ? <FaSpinner className="animate-spin" /> : <FaSyncAlt />} Regenerate
                   </button>
                   <button
                     type="button"
-                    onClick={closeInstructions}
-                    disabled={busy}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold transition-colors border-2 rounded-lg text-stone-600 border-stone-300 hover:bg-stone-100 dark:text-stone-300 dark:border-stone-600 dark:hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+                    onClick={() => closeInstructions(index)}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold transition-colors border-2 rounded-lg text-stone-600 border-stone-300 hover:bg-stone-100 dark:text-stone-300 dark:border-stone-600 dark:hover:bg-stone-800"
                   >
                     <FaTimes /> Cancel
                   </button>
@@ -279,46 +286,46 @@ export default function QuestionList({
                 <button
                   type="button"
                   onClick={() => onRegenerate(index)}
-                  disabled={busy}
+                  disabled={isRegenerating}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold transition-colors border-2 rounded-lg text-plum-700 border-plum-300 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-800 dark:hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {isRegenerating ? (
                     <>
-                      <FaSpinner className="animate-spin" /> Regenerating...
+                      <FaSpinner className="animate-spin" /> Regen...
                     </>
                   ) : (
                     <>
-                      <FaSyncAlt /> Regenerate
+                      <FaSyncAlt /> Regen
                     </>
                   )}
                 </button>
                 <button
                   type="button"
                   onClick={() => openInstructions(index)}
-                  disabled={busy}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold transition-colors border-2 rounded-lg text-stone-600 border-stone-300 hover:bg-stone-100 dark:text-stone-300 dark:border-stone-600 dark:hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+                  disabled={isRegenerating}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold transition-colors border-2 rounded-lg text-plum-700 border-plum-300 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-800 dark:hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  <FaPenFancy /> With instructions
+                  <FaPenFancy /> Request
                 </button>
                 <button
                   type="button"
                   onClick={() => openEdit(index)}
-                  disabled={busy}
+                  disabled={isRegenerating}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold transition-colors border-2 rounded-lg text-stone-600 border-stone-300 hover:bg-stone-100 dark:text-stone-300 dark:border-stone-600 dark:hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  <FaPen /> Edit manually
+                  <FaPen /> Edit
                 </button>
+              </div>
+            )}
+
+            {questionError && (
+              <div className="p-3 mt-3 text-sm border-2 rounded-lg text-red-700 bg-red-50 border-red-200 dark:text-red-300 dark:bg-red-950/40 dark:border-red-800">
+                {questionError}
               </div>
             )}
           </div>
         )
       })}
-
-      {error && (
-        <div className="p-3 text-sm border-2 rounded-lg text-red-700 bg-red-50 border-red-200 dark:text-red-300 dark:bg-red-950/40 dark:border-red-800">
-          {error}
-        </div>
-      )}
     </div>
   )
 }

@@ -14,9 +14,30 @@ export const GEMINI_MODELS = [
   'gemini-2.0-flash-lite',
 ]
 
-export interface AiKeys {
-  openRouterKey: string
-  geminiKey: string
+export type AiProvider = 'openrouter' | 'gemini'
+
+export interface AiSettings {
+  provider: AiProvider
+  apiKey: string
+  temperature: number
+}
+
+export const QUIZ_CATEGORIES = [
+  'General',
+  'History',
+  'Science',
+  'Programming',
+  'Computing',
+  'Math',
+  'Data',
+]
+
+function providerName(provider: AiProvider): string {
+  return provider === 'openrouter' ? 'OpenRouter' : 'Gemini'
+}
+
+function providerModels(provider: AiProvider): string[] {
+  return provider === 'openrouter' ? OPENROUTER_MODELS : GEMINI_MODELS
 }
 
 class AiProviderError extends Error {
@@ -59,7 +80,7 @@ const RESPONSE_SCHEMA = {
   required: ['id', 'name', 'description', 'color', 'category', 'tags', 'hardness', 'questions'],
 }
 
-function buildPrompt(subject: string, count: number): string {
+function buildPrompt(subject: string, count: number, category: string): string {
   return [
     'You are a quiz generator for "polimind", a learning platform.',
     'Generate one high-quality multiple-choice quiz as a single JSON object that follows the exact structure required by the platform.',
@@ -69,7 +90,7 @@ function buildPrompt(subject: string, count: number): string {
     '- "name": a concise, human-readable title.',
     '- "description": one engaging sentence describing the quiz.',
     `- "color": pick exactly ONE from this list: ${COLOR_KEYS.join(', ')}.`,
-    '- "category": a single broad subject area (e.g. History, Science, Programming, Math).',
+    `- "category": use exactly "${category}".`,
     '- "tags": 2 to 4 lowercase keywords.',
     `- "hardness": one of ${HARDNESS_VALUES.join(', ')}.`,
     `- "questions": exactly ${count} items. Each item has:`,
@@ -86,7 +107,7 @@ function buildPrompt(subject: string, count: number): string {
   ].join('\n')
 }
 
-export function buildCopyPrompt(subject: string, count: number): string {
+export function buildCopyPrompt(subject: string, count: number, category: string): string {
   const subjectLine = subject.trim() || '<describe your subject here>'
   return [
     'You are a quiz generator for "polimind", a learning platform.',
@@ -98,7 +119,7 @@ export function buildCopyPrompt(subject: string, count: number): string {
     '  "name": "Concise human-readable title",',
     '  "description": "One engaging sentence describing the quiz.",',
     `  "color": "one of: ${COLOR_KEYS.join(', ')}",`,
-    '  "category": "A single broad area (e.g. History, Science, Programming, Math)",',
+    `  "category": "${category}",`,
     '  "tags": ["two", "to", "four", "keywords"],',
     `  "hardness": "one of: ${HARDNESS_VALUES.join(', ')}",`,
     '  "type": "options",',
@@ -122,6 +143,7 @@ export function buildCopyPrompt(subject: string, count: number): string {
     '- "correctAnswer": 0-based index (0 to 3) of the correct option; exactly one option is correct.',
     '- Vary the position of the correct answer across questions.',
     '- Do NOT make the correct option the longest one; keep all options similar in length so length is not a clue.',
+    '- Just Content on Title. Do not put words as: quiz, fundamentals, test or any equivalent in the title.',
     '- Write everything in English (including "id"). Output ONLY the JSON object.',
     '',
     `Subject: ${subjectLine}`,
@@ -148,7 +170,6 @@ function buildQuestionPrompt(quiz: QuizMetadata, index: number): string {
     '- "correctAnswer": the 0-based index (0 to 3) of the correct option.',
     '- "explain": one short sentence explaining why the answer is correct.',
     '- Exactly one option is correct.',
-    '- Just Content on Title. Do not put words as: quiz, fundamentals, test or basic on name',
     '- Do NOT make the correct option the longest one; keep all options similar in length so length is not a clue.',
     '- The question must fit the quiz subject and difficulty.',
     '- It must NOT duplicate any of the existing questions listed below.',
@@ -330,7 +351,8 @@ async function callOpenRouter(
   apiKey: string,
   model: string,
   prompt: string,
-  schema: object
+  schema: object,
+  temperature: number
 ): Promise<{ parsed: unknown; model: string }> {
   const response = await fetch(OPENROUTER_BASE, {
     method: 'POST',
@@ -351,7 +373,7 @@ async function callOpenRouter(
           schema,
         },
       },
-      temperature: 0.8,
+      temperature,
     }),
   })
 
@@ -376,7 +398,8 @@ async function callGemini(
   apiKey: string,
   model: string,
   prompt: string,
-  schema: object
+  schema: object,
+  temperature: number
 ): Promise<{ parsed: unknown; model: string }> {
   const response = await fetch(`${GEMINI_BASE}/${model}:generateContent?key=${encodeURIComponent(apiKey)}`, {
     method: 'POST',
@@ -386,7 +409,7 @@ async function callGemini(
       generationConfig: {
         responseMimeType: 'application/json',
         responseSchema: schema,
-        temperature: 0.8,
+        temperature,
       },
     }),
   })
@@ -431,90 +454,67 @@ async function withModelFallback<T>(
   )
 }
 
-async function withAiFallback<T>(
-  keys: AiKeys,
-  run: {
-    openRouter: (model: string) => Promise<{ result: T; model: string }>
-    gemini: (model: string) => Promise<{ result: T; model: string }>
-  }
-): Promise<{ result: T; model: string }> {
-  const openRouterKey = keys.openRouterKey.trim()
-  const geminiKey = keys.geminiKey.trim()
-
-  if (!openRouterKey && !geminiKey) {
-    throw new Error('Add an OpenRouter API key to generate, or a Gemini key as fallback.')
-  }
-
-  let lastError: Error | null = null
-
-  if (openRouterKey) {
-    try {
-      return await withModelFallback(OPENROUTER_MODELS, 'OpenRouter', (model) => run.openRouter(model))
-    } catch (err) {
-      lastError = err instanceof Error ? err : new Error('Unknown error.')
-      if (!geminiKey) throw lastError
-    }
-  }
-
-  if (geminiKey) {
-    try {
-      const { result, model } = await withModelFallback(GEMINI_MODELS, 'Gemini', (model) => run.gemini(model))
-      return {
-        result,
-        model: openRouterKey ? `${model} (Gemini fallback)` : model,
-      }
-    } catch (err) {
-      lastError = err instanceof Error ? err : new Error('Unknown error.')
-    }
-  }
-
-  throw new Error(
-    lastError
-      ? `All providers failed. Last error: ${lastError.message}`
-      : 'All AI providers are unavailable right now. Try again later.'
-  )
+function callProvider(
+  settings: AiSettings,
+  model: string,
+  prompt: string,
+  schema: object
+): Promise<{ parsed: unknown; model: string }> {
+  return settings.provider === 'openrouter'
+    ? callOpenRouter(settings.apiKey, model, prompt, schema, settings.temperature)
+    : callGemini(settings.apiKey, model, prompt, schema, settings.temperature)
 }
 
-export async function generateQuiz(keys: AiKeys, subject: string, count: number): Promise<GeneratedQuiz> {
-  const { result, model } = await withAiFallback(keys, {
-    openRouter: async (model) => {
-      const { parsed, model: usedModel } = await callOpenRouter(keys.openRouterKey.trim(), model, buildPrompt(subject, count), RESPONSE_SCHEMA)
+function assertApiKey(settings: AiSettings): void {
+  if (!settings.apiKey.trim()) {
+    throw new Error(`Add your ${providerName(settings.provider)} API key first.`)
+  }
+}
+
+export async function generateQuiz(
+  settings: AiSettings,
+  subject: string,
+  count: number,
+  category: string
+): Promise<GeneratedQuiz> {
+  assertApiKey(settings)
+  const prompt = buildPrompt(subject, count, category)
+  const { result, model } = await withModelFallback(
+    providerModels(settings.provider),
+    providerName(settings.provider),
+    async (m) => {
+      const { parsed, model: usedModel } = await callProvider(settings, m, prompt, RESPONSE_SCHEMA)
       return { result: normalizeQuiz(parsed, subject), model: usedModel }
-    },
-    gemini: async (model) => {
-      const { parsed, model: usedModel } = await callGemini(keys.geminiKey.trim(), model, buildPrompt(subject, count), RESPONSE_SCHEMA)
-      return { result: normalizeQuiz(parsed, subject), model: usedModel }
-    },
-  })
-  return { quiz: result, model }
+    }
+  )
+  return { quiz: { ...result, category }, model }
 }
 
 export async function regenerateQuestion(
-  keys: AiKeys,
+  settings: AiSettings,
   quiz: QuizMetadata,
   index: number,
   instructions?: string
 ): Promise<RegeneratedQuestion> {
+  assertApiKey(settings)
   const trimmedInstructions = instructions?.trim()
   const current = quiz.questions[index]
   const prompt = trimmedInstructions && current && 'options' in current
     ? buildEditPrompt(current, trimmedInstructions)
     : buildQuestionPrompt(quiz, index)
 
-  const { result, model } = await withAiFallback(keys, {
-    openRouter: async (model) => {
-      const { parsed, model: usedModel } = await callOpenRouter(keys.openRouterKey.trim(), model, prompt, QUESTION_SCHEMA)
+  const { result, model } = await withModelFallback(
+    providerModels(settings.provider),
+    providerName(settings.provider),
+    async (m) => {
+      const { parsed, model: usedModel } = await callProvider(settings, m, prompt, QUESTION_SCHEMA)
       const question = normalizeQuestion(parsed)
-      if (!question) throw new AiProviderError('OpenRouter returned an invalid question.', true)
+      if (!question) {
+        throw new AiProviderError(`${providerName(settings.provider)} returned an invalid question.`, true)
+      }
       return { result: question, model: usedModel }
-    },
-    gemini: async (model) => {
-      const { parsed, model: usedModel } = await callGemini(keys.geminiKey.trim(), model, prompt, QUESTION_SCHEMA)
-      const question = normalizeQuestion(parsed)
-      if (!question) throw new AiProviderError('Gemini returned an invalid question.', true)
-      return { result: question, model: usedModel }
-    },
-  })
+    }
+  )
   return { question: result, model }
 }
 
@@ -638,51 +638,56 @@ function extractPartialMeta(buffer: string): Partial<QuizMetadata> | null {
 }
 
 /**
- * Stream-generate a quiz via OpenRouter SSE.
+ * Stream-generate a quiz.
  *
- * Calls OpenRouter with `stream: true`, reads SSE deltas, and incrementally
- * extracts quiz metadata and question objects. Falls back to non-streaming
- * `generateQuiz` when only a Gemini key is available or if streaming fails.
+ * With OpenRouter, calls the API with `stream: true`, reads SSE deltas, and
+ * incrementally extracts quiz metadata and question objects. With Gemini,
+ * runs the non-streaming `generateQuiz` and fires the same callbacks once.
  *
- * @param keys - API keys
+ * @param settings - provider, API key and temperature
  * @param subject - quiz subject
  * @param count - number of questions
+ * @param category - quiz category applied to the result
  * @param callbacks - real-time progress callbacks
  * @param signal - optional AbortSignal for cancellation
  * @returns the final GeneratedQuiz (also delivered via onDone callback)
  */
 export async function generateQuizStream(
-  keys: AiKeys,
+  settings: AiSettings,
   subject: string,
   count: number,
+  category: string,
   callbacks: StreamCallbacks,
   signal?: AbortSignal
 ): Promise<GeneratedQuiz> {
-  const openRouterKey = keys.openRouterKey.trim()
-  const geminiKey = keys.geminiKey.trim()
+  assertApiKey(settings)
 
-  // If no OpenRouter key, fall back to non-streaming
-  if (!openRouterKey) {
-    const result = await generateQuiz(keys, subject, count)
-    // Fire all callbacks in sequence for consistency
-    if (callbacks.onMeta) {
-      callbacks.onMeta({
-        id: result.quiz.id,
-        name: result.quiz.name,
-        description: result.quiz.description,
-        color: result.quiz.color,
-        category: result.quiz.category,
-      })
+  if (settings.provider === 'gemini') {
+    try {
+      const result = await generateQuiz(settings, subject, count, category)
+      if (callbacks.onMeta) {
+        callbacks.onMeta({
+          id: result.quiz.id,
+          name: result.quiz.name,
+          description: result.quiz.description,
+          color: result.quiz.color,
+          category: result.quiz.category,
+        })
+      }
+      const questions = result.quiz.questions as OptionsQuestion[]
+      for (let i = 0; i < questions.length; i++) {
+        callbacks.onQuestion?.(questions[i], i)
+      }
+      callbacks.onDone?.(result)
+      return result
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error('Unknown error.')
+      callbacks.onError?.(error)
+      throw error
     }
-    const questions = result.quiz.questions as OptionsQuestion[]
-    for (let i = 0; i < questions.length; i++) {
-      callbacks.onQuestion?.(questions[i], i)
-    }
-    callbacks.onDone?.(result)
-    return result
   }
 
-  // Try OpenRouter streaming
+  // OpenRouter streaming
   let lastStreamError: Error | null = null
   for (const model of OPENROUTER_MODELS) {
     try {
@@ -690,15 +695,15 @@ export async function generateQuizStream(
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${openRouterKey}`,
+          Authorization: `Bearer ${settings.apiKey.trim()}`,
           'HTTP-Referer': typeof window !== 'undefined' ? window.location.origin : 'https://polimind.app',
           'X-Title': 'Polimind',
         },
         body: JSON.stringify({
           model,
-          messages: [{ role: 'user', content: buildPrompt(subject, count) }],
+          messages: [{ role: 'user', content: buildPrompt(subject, count, category) }],
           stream: true,
-          temperature: 0.8,
+          temperature: settings.temperature,
         }),
         signal,
       })
@@ -766,7 +771,7 @@ export async function generateQuizStream(
         throw new Error('OpenRouter stream produced malformed JSON.')
       }
 
-      const quiz = normalizeQuiz(parsed, subject)
+      const quiz = { ...normalizeQuiz(parsed, subject), category }
       const result: GeneratedQuiz = { quiz, model: usedModel }
       callbacks.onDone?.(result)
       return result
@@ -777,39 +782,10 @@ export async function generateQuizStream(
     }
   }
 
-  // OpenRouter streaming failed — try Gemini non-streaming fallback
-  if (geminiKey) {
-    try {
-      const { result: quiz, model } = await withModelFallback(GEMINI_MODELS, 'Gemini', async (m) => {
-        const { parsed, model: usedModel } = await callGemini(geminiKey, m, buildPrompt(subject, count), RESPONSE_SCHEMA)
-        return { result: normalizeQuiz(parsed, subject), model: usedModel }
-      })
-      const genResult: GeneratedQuiz = {
-        quiz,
-        model: openRouterKey ? `${model} (Gemini fallback)` : model,
-      }
-      // Fire callbacks for consistency
-      if (callbacks.onMeta) {
-        callbacks.onMeta({
-          id: quiz.id, name: quiz.name, description: quiz.description,
-          color: quiz.color, category: quiz.category,
-        })
-      }
-      const questions = quiz.questions as OptionsQuestion[]
-      for (let i = 0; i < questions.length; i++) {
-        callbacks.onQuestion?.(questions[i], i)
-      }
-      callbacks.onDone?.(genResult)
-      return genResult
-    } catch (err) {
-      lastStreamError = err instanceof Error ? err : new Error('Unknown error.')
-    }
-  }
-
   const finalError = new Error(
     lastStreamError
-      ? `All providers failed. Last error: ${lastStreamError.message}`
-      : 'All AI providers are unavailable right now. Try again later.'
+      ? `OpenRouter failed. Last error: ${lastStreamError.message}`
+      : 'OpenRouter is unavailable right now. Try again later.'
   )
   callbacks.onError?.(finalError)
   throw finalError

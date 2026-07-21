@@ -15,23 +15,27 @@ import {
   FaUpload,
   FaStop,
   FaSlidersH,
+  FaInfoCircle,
 } from 'react-icons/fa'
 import { FaWandMagicSparkles } from 'react-icons/fa6'
 import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
-import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, parseQuizJson } from '@/utils/aiQuiz'
-import type { StreamCallbacks } from '@/utils/aiQuiz'
+import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, parseQuizJson, QUIZ_CATEGORIES } from '@/utils/aiQuiz'
+import type { StreamCallbacks, AiProvider, AiSettings } from '@/utils/aiQuiz'
 import AiQuizRunner from './AiQuizRunner'
 import MetaEditor from './MetaEditor'
 import QuestionList from './QuestionList'
 
 const OPENROUTER_KEY_STORAGE = 'polimind.openRouterKey'
 const GEMINI_KEY_STORAGE = 'polimind.geminiKey'
+const PROVIDER_STORAGE = 'polimind.aiProvider'
 
 export default function AiPage() {
+  const [provider, setProvider] = useState<AiProvider>('openrouter')
   const [openRouterKey, setOpenRouterKey] = useState('')
   const [geminiKey, setGeminiKey] = useState('')
-  const [showOpenRouterKey, setShowOpenRouterKey] = useState(false)
-  const [showGeminiKey, setShowGeminiKey] = useState(false)
+  const [showApiKey, setShowApiKey] = useState(false)
+  const [temperature, setTemperature] = useState('0.8')
+  const [category, setCategory] = useState('General')
   const [subject, setSubject] = useState('')
   const [count, setCount] = useState(10)
   const [loading, setLoading] = useState(false)
@@ -40,8 +44,8 @@ export default function AiPage() {
   const [usedModel, setUsedModel] = useState('')
   const [view, setView] = useState<'form' | 'quiz'>('form')
   const [activeTab, setActiveTab] = useState<'generate' | 'meta' | 'edit'>('generate')
-  const [regeneratingIndex, setRegeneratingIndex] = useState<number | null>(null)
-  const [regenError, setRegenError] = useState<string | null>(null)
+  const [regeneratingIndices, setRegeneratingIndices] = useState<Set<number>>(new Set())
+  const [regenErrors, setRegenErrors] = useState<Record<number, string>>({})
   const [copied, setCopied] = useState(false)
   const [importJson, setImportJson] = useState('')
   const [importError, setImportError] = useState<string | null>(null)
@@ -53,21 +57,35 @@ export default function AiPage() {
   useEffect(() => {
     const storedOpenRouterKey = localStorage.getItem(OPENROUTER_KEY_STORAGE)
     const storedGeminiKey = localStorage.getItem(GEMINI_KEY_STORAGE)
+    const storedProvider = localStorage.getItem(PROVIDER_STORAGE)
     if (storedOpenRouterKey) setOpenRouterKey(storedOpenRouterKey)
     if (storedGeminiKey) setGeminiKey(storedGeminiKey)
+    if (storedProvider === 'openrouter' || storedProvider === 'gemini') setProvider(storedProvider)
   }, [])
 
   const dataFile = useMemo(() => (quiz ? quizToDataFile(quiz) : null), [quiz])
   const jsonPreview = useMemo(() => (dataFile ? JSON.stringify(dataFile, null, 2) : ''), [dataFile])
 
-  const hasAiKey = openRouterKey.trim() !== '' || geminiKey.trim() !== ''
-  const canGenerate = hasAiKey && subject.trim() !== '' && !loading
+  const activeKey = provider === 'openrouter' ? openRouterKey : geminiKey
+  const setActiveKey = provider === 'openrouter' ? setOpenRouterKey : setGeminiKey
+  const providerLabel = provider === 'openrouter' ? 'OpenRouter' : 'Gemini'
+  const parsedTemperature = parseFloat(temperature)
+  const effectiveTemperature = Number.isFinite(parsedTemperature)
+    ? Math.max(0, Math.min(2, parsedTemperature))
+    : 0.8
+  const canGenerate = activeKey.trim() !== '' && subject.trim() !== '' && !loading
   const canCopy = subject.trim() !== ''
+
+  const buildSettings = (): AiSettings => ({
+    provider,
+    apiKey: activeKey.trim(),
+    temperature: effectiveTemperature,
+  })
 
   const handleCopyPrompt = async () => {
     if (!canCopy) return
     try {
-      await navigator.clipboard.writeText(buildCopyPrompt(subject.trim(), count))
+      await navigator.clipboard.writeText(buildCopyPrompt(subject.trim(), count, category))
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
@@ -94,6 +112,7 @@ export default function AiPage() {
     setStreamMeta(null)
     localStorage.setItem(OPENROUTER_KEY_STORAGE, openRouterKey.trim())
     localStorage.setItem(GEMINI_KEY_STORAGE, geminiKey.trim())
+    localStorage.setItem(PROVIDER_STORAGE, provider)
     const controller = new AbortController()
     abortRef.current = controller
 
@@ -127,9 +146,10 @@ export default function AiPage() {
 
     try {
       await generateQuizStream(
-        { openRouterKey: openRouterKey.trim(), geminiKey: geminiKey.trim() },
+        buildSettings(),
         subject.trim(),
         count,
+        category,
         callbacks,
         controller.signal
       )
@@ -154,7 +174,6 @@ export default function AiPage() {
       const imported = parseQuizJson(importJson)
       setQuiz(imported)
       setUsedModel('')
-      setEditing(false)
       setActiveTab('edit')
     } catch (err) {
       setImportError(err instanceof Error ? err.message : 'Could not import this JSON.')
@@ -183,16 +202,16 @@ export default function AiPage() {
   }
 
   const handleRegenerateQuestion = async (index: number, instructions?: string) => {
-    if (!quiz || regeneratingIndex !== null) return
-    setRegeneratingIndex(index)
-    setRegenError(null)
+    if (!quiz || regeneratingIndices.has(index)) return
+    setRegeneratingIndices((prev) => new Set(prev).add(index))
+    setRegenErrors((prev) => {
+      if (!(index in prev)) return prev
+      const next = { ...prev }
+      delete next[index]
+      return next
+    })
     try {
-      const result = await regenerateQuestion(
-        { openRouterKey: openRouterKey.trim(), geminiKey: geminiKey.trim() },
-        quiz,
-        index,
-        instructions
-      )
+      const result = await regenerateQuestion(buildSettings(), quiz, index, instructions)
       setQuiz((prev) => {
         if (!prev) return prev
         const questions = [...prev.questions]
@@ -200,9 +219,16 @@ export default function AiPage() {
         return { ...prev, questions }
       })
     } catch (err) {
-      setRegenError(err instanceof Error ? err.message : 'Failed to regenerate the question.')
+      setRegenErrors((prev) => ({
+        ...prev,
+        [index]: err instanceof Error ? err.message : 'Failed to regenerate the question.',
+      }))
     } finally {
-      setRegeneratingIndex(null)
+      setRegeneratingIndices((prev) => {
+        const next = new Set(prev)
+        next.delete(index)
+        return next
+      })
     }
   }
 
@@ -271,82 +297,124 @@ export default function AiPage() {
       </div>
 
       <div className={`p-6 bg-white border-2 rounded-xl border-plum-200 dark:bg-stone-900 dark:border-plum-900/60 ${activeTab === 'generate' ? '' : 'hidden'}`}>
+        <div className="grid gap-4 mb-5 sm:grid-cols-2">
+          <div>
+            <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
+              Model provider
+            </label>
+            <select
+              value={provider}
+              onChange={(e) => setProvider(e.target.value as AiProvider)}
+              className="w-full px-4 py-3 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+            >
+              <option value="openrouter">OpenRouter</option>
+              <option value="gemini">Gemini</option>
+            </select>
+          </div>
+          <div>
+            <div className="flex items-center gap-1.5 mb-2">
+              <label className="text-sm font-semibold text-stone-700 dark:text-stone-200">
+                Temperature
+              </label>
+              <span className="relative group" tabIndex={0} aria-label="What is temperature?">
+                <FaInfoCircle className="text-sm cursor-help text-stone-400 group-hover:text-plum-600 group-focus:text-plum-600 dark:group-hover:text-plum-400 dark:group-focus:text-plum-400" />
+                <span className="absolute left-0 z-10 hidden w-64 p-3 mb-2 text-xs font-normal border-2 rounded-lg bottom-full group-hover:block group-focus:block border-stone-200 bg-white text-stone-600 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300">
+                  Controls how random the model&apos;s output is. Lower values (0–0.5) give
+                  focused, predictable questions; higher values (1–2) give more varied and
+                  creative ones, but with a higher chance of odd or off-topic results. 0.8 is
+                  a good balance.
+                </span>
+              </span>
+            </div>
+            <input
+              type="number"
+              min={0}
+              max={2}
+              step={0.1}
+              value={temperature}
+              onChange={(e) => setTemperature(e.target.value)}
+              className="w-full px-4 py-3 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+            />
+          </div>
+        </div>
+
         <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
-          OpenRouter API key
+          {providerLabel} API key
         </label>
         <div className="relative mb-1">
           <FaKey className="absolute -translate-y-1/2 pointer-events-none text-stone-400 left-4 top-1/2" aria-hidden />
           <input
-            type={showOpenRouterKey ? 'text' : 'password'}
-            value={openRouterKey}
-            onChange={(e) => setOpenRouterKey(e.target.value)}
-            placeholder="Paste your OpenRouter API key"
+            type={showApiKey ? 'text' : 'password'}
+            value={activeKey}
+            onChange={(e) => setActiveKey(e.target.value)}
+            placeholder={`Paste your ${providerLabel} API key`}
             autoComplete="off"
             className="w-full py-3 pl-12 pr-12 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
           />
           <button
             type="button"
-            onClick={() => setShowOpenRouterKey((v) => !v)}
+            onClick={() => setShowApiKey((v) => !v)}
             className="absolute flex items-center justify-center -translate-y-1/2 rounded-md text-stone-400 right-2 top-1/2 h-9 w-9 hover:text-stone-700 dark:hover:text-stone-200"
-            aria-label={showOpenRouterKey ? 'Hide OpenRouter API key' : 'Show OpenRouter API key'}
+            aria-label={showApiKey ? `Hide ${providerLabel} API key` : `Show ${providerLabel} API key`}
           >
-            {showOpenRouterKey ? <FaEyeSlash /> : <FaEye />}
+            {showApiKey ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
         <p className="mb-5 text-xs text-stone-500 dark:text-stone-400">
           Stored only in this browser. Get one at{' '}
-          <a
-            href="https://openrouter.ai/keys"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-plum-600 dark:text-plum-400 hover:underline"
-          >
-            openrouter.ai/keys
-          </a>
+          {provider === 'openrouter' ? (
+            <a
+              href="https://openrouter.ai/keys"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-plum-600 dark:text-plum-400 hover:underline"
+            >
+              openrouter.ai/keys
+            </a>
+          ) : (
+            <a
+              href="https://aistudio.google.com/apikey"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-plum-600 dark:text-plum-400 hover:underline"
+            >
+              Google AI Studio
+            </a>
+          )}
           .
         </p>
 
-        <details className="mb-5 group">
-          <summary className="text-sm font-semibold cursor-pointer select-none text-stone-600 dark:text-stone-300 hover:underline">
-            Gemini fallback (optional)
-          </summary>
-          <div className="pt-4">
+        <div className="grid gap-4 mb-5 sm:grid-cols-2">
+          <div>
             <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
-              Gemini API key
+              Category
             </label>
-            <div className="relative mb-1">
-              <FaKey className="absolute -translate-y-1/2 pointer-events-none text-stone-400 left-4 top-1/2" aria-hidden />
-              <input
-                type={showGeminiKey ? 'text' : 'password'}
-                value={geminiKey}
-                onChange={(e) => setGeminiKey(e.target.value)}
-                placeholder="Paste your Gemini API key"
-                autoComplete="off"
-                className="w-full py-3 pl-12 pr-12 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-              />
-              <button
-                type="button"
-                onClick={() => setShowGeminiKey((v) => !v)}
-                className="absolute flex items-center justify-center -translate-y-1/2 rounded-md text-stone-400 right-2 top-1/2 h-9 w-9 hover:text-stone-700 dark:hover:text-stone-200"
-                aria-label={showGeminiKey ? 'Hide Gemini API key' : 'Show Gemini API key'}
-              >
-                {showGeminiKey ? <FaEyeSlash /> : <FaEye />}
-              </button>
-            </div>
-            <p className="text-xs text-stone-500 dark:text-stone-400">
-              Used only if OpenRouter fails. Get one at{' '}
-              <a
-                href="https://aistudio.google.com/apikey"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-plum-600 dark:text-plum-400 hover:underline"
-              >
-                Google AI Studio
-              </a>
-              .
-            </p>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="w-full px-4 py-3 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+            >
+              {QUIZ_CATEGORIES.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
           </div>
-        </details>
+          <div>
+            <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
+              Questions
+            </label>
+            <input
+              type="number"
+              min={4}
+              max={20}
+              value={count}
+              onChange={(e) => setCount(Math.max(4, Math.min(20, Number(e.target.value) || 10)))}
+              className="w-full px-4 py-3 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+            />
+          </div>
+        </div>
 
         <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
           Quiz subject
@@ -358,23 +426,9 @@ export default function AiPage() {
           placeholder="e.g. The fall of the Roman Empire, React hooks, basics of organic chemistry..."
           className="w-full px-4 py-3 mb-2 text-sm border-2 rounded-lg resize-none border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
         />
-        <p className="mb-5 text-xs text-stone-500 dark:text-stone-400">
+        <p className="mb-4 text-xs text-stone-500 dark:text-stone-400">
           polimind automatically adds the formatting instructions so the output works as a playable quiz.
         </p>
-
-        <div className="mb-4 sm:w-40">
-          <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
-            Questions
-          </label>
-          <input
-            type="number"
-            min={4}
-            max={20}
-            value={count}
-            onChange={(e) => setCount(Math.max(4, Math.min(20, Number(e.target.value) || 10)))}
-            className="w-full px-4 py-3 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-          />
-        </div>
 
         <div className="flex flex-col gap-3 sm:flex-row">
           <button
@@ -579,9 +633,10 @@ export default function AiPage() {
           )}
 
           <QuestionList
+            key={quiz.id}
             quiz={quiz}
-            regeneratingIndex={regeneratingIndex}
-            error={regenError}
+            regeneratingIndices={regeneratingIndices}
+            errors={regenErrors}
             onRegenerate={handleRegenerateQuestion}
             onUpdateQuestion={handleUpdateQuestion}
           />
