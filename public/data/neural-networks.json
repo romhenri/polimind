@@ -1,0 +1,126 @@
+{
+  "id": "neural-networks",
+  "name": "Neural Networks",
+  "description": "Core concepts and components of artificial neural networks.",
+  "color": "cyan",
+  "category": "Data",
+  "tags": [
+    "ai",
+    "machine-learning",
+    "deep-learning"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the primary purpose of an activation function in a neuron?",
+      "options": [
+        "To normalize the input data",
+        "To introduce non-linearity",
+        "To prevent overfitting",
+        "To calculate the error rate"
+      ],
+      "correctAnswer": 1,
+      "explain": "Activation functions allow the network to learn complex non-linear relationships in data."
+    },
+    {
+      "question": "Which component is responsible for adjusting weights during the training process?",
+      "options": [
+        "Activation function",
+        "Loss function",
+        "Optimizer",
+        "Input layer"
+      ],
+      "correctAnswer": 2,
+      "explain": "Optimizers like SGD or Adam update weights to minimize the loss function."
+    },
+    {
+      "question": "In a neural network, what does 'backpropagation' do?",
+      "options": [
+        "Initializes the weights randomly",
+        "Propagates errors backward to update weights",
+        "Adds more layers to the network",
+        "Classifies the final output"
+      ],
+      "correctAnswer": 1,
+      "explain": "Backpropagation calculates the gradient of the loss function with respect to weights using the chain rule."
+    },
+    {
+      "question": "Which function is commonly used in the output layer for multi-class classification?",
+      "options": [
+        "Sigmoid",
+        "ReLU",
+        "Softmax",
+        "Tanh"
+      ],
+      "correctAnswer": 2,
+      "explain": "Softmax turns logits into a probability distribution over multiple classes."
+    },
+    {
+      "question": "What is the main disadvantage of using the Sigmoid activation function in deep networks?",
+      "options": [
+        "It is computationally expensive",
+        "Vanishing gradient problem",
+        "It produces negative outputs",
+        "It is not continuous"
+      ],
+      "correctAnswer": 1,
+      "explain": "Sigmoid saturates at extreme values, leading to very small gradients during backpropagation."
+    },
+    {
+      "question": "What does a 'hidden layer' in a neural network perform?",
+      "options": [
+        "Direct mapping of inputs to outputs",
+        "Data cleaning and preprocessing",
+        "Feature extraction and transformation",
+        "Storing the final prediction"
+      ],
+      "correctAnswer": 2,
+      "explain": "Hidden layers transform input features into higher-level representations."
+    },
+    {
+      "question": "Which of these is a common technique to prevent overfitting in neural networks?",
+      "options": [
+        "Increasing the learning rate",
+        "Removing the activation function",
+        "Dropout",
+        "Decreasing the number of epochs"
+      ],
+      "correctAnswer": 2,
+      "explain": "Dropout randomly deactivates neurons during training to prevent co-adaptation."
+    },
+    {
+      "question": "What is the role of a 'Loss Function'?",
+      "options": [
+        "To measure the error between prediction and target",
+        "To determine the number of neurons needed",
+        "To speed up the training process",
+        "To initialize the weight values"
+      ],
+      "correctAnswer": 0,
+      "explain": "The loss function quantifies how well the model's prediction matches the actual label."
+    },
+    {
+      "question": "In the context of neural networks, what is an 'Epoch'?",
+      "options": [
+        "One single training sample",
+        "One full pass through the entire dataset",
+        "A single weight update step",
+        "The number of neurons in a layer"
+      ],
+      "correctAnswer": 1,
+      "explain": "An epoch represents one complete cycle through the training dataset."
+    },
+    {
+      "question": "What happens if the learning rate is set too high?",
+      "options": [
+        "The model trains very slowly",
+        "The model will always converge",
+        "The model may overshoot the minimum",
+        "The weights will all become zero"
+      ],
+      "correctAnswer": 2,
+      "explain": "A high learning rate can cause the optimizer to oscillate or diverge from the optimal solution."
+    }
+  ]
+}
