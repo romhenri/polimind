@@ -1,0 +1,125 @@
+{
+  "id": "nlp-basics",
+  "name": "NLP Basics",
+  "description": "Test your foundational knowledge of Natural Language Processing, including text preparation and linguistic analysis techniques.",
+  "color": "blue",
+  "category": "Data",
+  "tags": [
+    "ml",
+    "nlp"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the primary goal of tokenization in NLP?",
+      "options": [
+        "To analyze sentence structure",
+        "To segment text into units",
+        "To understand word meanings",
+        "To correct grammar mistakes"
+      ],
+      "correctAnswer": 1,
+      "explain": "Tokenization is the process of breaking a stream of text into smaller units called tokens, which can be words, phrases, or symbols."
+    },
+    {
+      "question": "Why are stop words typically removed in NLP preprocessing?",
+      "options": [
+        "To increase text length",
+        "To simplify document parsing",
+        "To reduce data noise for analysis",
+        "To improve text readability"
+      ],
+      "correctAnswer": 2,
+      "explain": "Removing stop words helps to reduce the dimensionality of the data and focus on more meaningful terms for analysis by eliminating common words that carry little semantic value."
+    },
+    {
+      "question": "What is the main benefit of converting text to lowercase during preprocessing?",
+      "options": [
+        "To enhance grammar checks",
+        "To normalize word forms",
+        "To speed up data storage",
+        "To identify proper nouns"
+      ],
+      "correctAnswer": 1,
+      "explain": "Lowercasing normalizes word forms, treating 'Word' and 'word' as the same token, which helps in consistent feature representation."
+    },
+    {
+      "question": "Which NLP technique reduces words to their base or root form, often resulting in non-dictionary words?",
+      "options": [
+        "Lemmatization",
+        "Tokenization",
+        "Stemming",
+        "Parsing"
+      ],
+      "correctAnswer": 2,
+      "explain": "Stemming is a heuristic process that chops off the ends of words to reduce them to a common base form, which might not be a valid word itself."
+    },
+    {
+      "question": "What is the main characteristic that distinguishes lemmatization from stemming?",
+      "options": [
+        "Its processing speed",
+        "Its handling of proper nouns",
+        "Its output of dictionary words",
+        "Its ignoring of punctuation"
+      ],
+      "correctAnswer": 2,
+      "explain": "Lemmatization aims to reduce words to their base or dictionary form (lemma), ensuring the resulting word is a grammatically valid word."
+    },
+    {
+      "question": "If 'am', 'are', and 'is' are all reduced to 'be', which NLP process was most likely used?",
+      "options": [
+        "Tokenization",
+        "Stemming",
+        "Lemmatization",
+        "Part-of-speech tagging"
+      ],
+      "correctAnswer": 2,
+      "explain": "Reducing different inflected forms of a verb to its base dictionary form ('be' for 'am', 'are', 'is') is a characteristic of lemmatization."
+    },
+    {
+      "question": "What does the Bag-of-Words (BoW) model primarily represent?",
+      "options": [
+        "The order of words",
+        "The frequency of words",
+        "The semantic meaning",
+        "The document structure"
+      ],
+      "correctAnswer": 1,
+      "explain": "The Bag-of-Words model represents a text document as an unordered collection of words, disregarding grammar and word order, but keeping track of word frequencies."
+    },
+    {
+      "question": "What does a 'bigram' refer to in the context of N-grams?",
+      "options": [
+        "A single word unit",
+        "Two consecutive words",
+        "Three related words",
+        "Any phrase length"
+      ],
+      "correctAnswer": 1,
+      "explain": "An N-gram is a contiguous sequence of N items from a given sample of text or speech. A bigram specifically refers to a sequence of two consecutive words."
+    },
+    {
+      "question": "What is the purpose of Part-of-Speech (POS) tagging in NLP?",
+      "options": [
+        "To identify sentence structure",
+        "To extract named entities",
+        "To classify words grammatically",
+        "To perform language translation"
+      ],
+      "correctAnswer": 2,
+      "explain": "POS tagging involves assigning a grammatical category (like noun, verb, adjective) to each word in a text."
+    },
+    {
+      "question": "Why is text vectorization a crucial step in many NLP tasks?",
+      "options": [
+        "To enhance text readability",
+        "To represent text numerically",
+        "To compress text files",
+        "To correct grammatical errors"
+      ],
+      "correctAnswer": 1,
+      "explain": "Most machine learning algorithms cannot directly process raw text, so text vectorization converts textual data into numerical vectors that models can understand."
+    }
+  ]
+}
