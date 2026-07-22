@@ -1,0 +1,128 @@
+{
+  "id": "attention-mechanisms",
+  "name": "Attention Mechanisms in Transformers",
+  "description": "Understanding of how attention mechanisms work in transformer models.",
+  "color": "blue",
+  "category": "computer_science",
+  "subcategory": "IA e Machine Learning",
+  "tags": [
+    "transformers",
+    "attention",
+    "nlp",
+    "ai"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the primary purpose of the attention mechanism in transformers?",
+      "options": [
+        "To reduce computational cost",
+        "To increase model size",
+        "To focus on relevant input parts",
+        "To replace feedforward layers"
+      ],
+      "correctAnswer": 2,
+      "explain": "It allows the model to dynamically focus on important words or features."
+    },
+    {
+      "question": "Which component of the attention mechanism calculates the relevance scores?",
+      "options": [
+        "Keys",
+        "Queries",
+        "Values",
+        "Softmax"
+      ],
+      "correctAnswer": 0,
+      "explain": "Keys are used to compute dot products with queries for relevance."
+    },
+    {
+      "question": "What does the softmax function do in attention?",
+      "options": [
+        "Scales input vectors",
+        "Encodes positional data",
+        "Aggregates values",
+        "Normalizes scores into probabilities"
+      ],
+      "correctAnswer": 3,
+      "explain": "It converts raw scores into a probability distribution across options."
+    },
+    {
+      "question": "How many queries does a transformer have in self-attention?",
+      "options": [
+        "One per layer",
+        "Equal to the number of keys",
+        "Fixed at 12",
+        "Variable per input"
+      ],
+      "correctAnswer": 1,
+      "explain": "Queries, keys, and values are typically the same in number for self-attention."
+    },
+    {
+      "question": "What is a key benefit of attention over RNNs?",
+      "options": [
+        "Reduces memory usage",
+        "Simplifies architecture",
+        "Enables parallel processing",
+        "Requires less data"
+      ],
+      "correctAnswer": 2,
+      "explain": "Attention allows processing all positions simultaneously, unlike RNNs' sequential processing."
+    },
+    {
+      "question": "Which part of attention determines the output for a word?",
+      "options": [
+        "Weighted sum of values",
+        "Queries",
+        "Keys",
+        "Values"
+      ],
+      "correctAnswer": 0,
+      "explain": "The output is computed as a weighted sum of value vectors based on attention scores."
+    },
+    {
+      "question": "What is the role of scaling in attention?",
+      "options": [
+        "Increases model depth",
+        "Encodes positional info",
+        "Reduces computation",
+        "Prevents large dot product values"
+      ],
+      "correctAnswer": 3,
+      "explain": "Scaling (e.g., dividing by sqrt(d_k)) stabilizes gradients during training."
+    },
+    {
+      "question": "In the self-attention mechanism, what is the primary function of the Query vector?",
+      "options": [
+        "To represent the word's current context.",
+        "To determine relevance with other tokens.",
+        "To supply the content for the output.",
+        "To capture sequential word order."
+      ],
+      "correctAnswer": 1,
+      "explain": "The Query vector is used to compare with Key vectors to calculate attention scores, thereby determining relevance between tokens."
+    },
+    {
+      "question": "What does residual connection do in transformers?",
+      "options": [
+        "Replaces attention layers",
+        "Normalizes activations",
+        "Adds input to output for gradient flow",
+        "Initializes weights"
+      ],
+      "correctAnswer": 2,
+      "explain": "It helps mitigate vanishing gradients by preserving input information."
+    },
+    {
+      "question": "What is the main advantage of self-attention?",
+      "options": [
+        "Captures long-range dependencies",
+        "Reduces sequence length",
+        "Increases speed",
+        "Simplifies training"
+      ],
+      "correctAnswer": 0,
+      "explain": "Each token can attend to all others, enabling modeling of context across the sequence."
+    }
+  ]
+}

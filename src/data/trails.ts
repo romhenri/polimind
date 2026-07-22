@@ -50,7 +50,14 @@ export const TRAILS: Trail[] = [
     category: 'computer_science',
     icon: TbBrain,
     color: 'lime',
-    quizzes: ['ml-fundamentals', 'ml-fundamentals-2', 'ml-evaluation-metrics'],
+    quizzes: [
+      'ml-fundamentals',
+      'ml-fundamentals-2',
+      'ml-evaluation-metrics',
+      'neural-networks',
+      'attention-mechanisms-in-transformers',
+      'nlp-basics',
+    ],
   },
   {
     id: 'networks',
