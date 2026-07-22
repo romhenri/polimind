@@ -3,7 +3,8 @@
   "name": "NLP Basics",
   "description": "Test your foundational knowledge of Natural Language Processing, including text preparation and linguistic analysis techniques.",
   "color": "blue",
-  "category": "Data",
+  "category": "computer_science",
+  "subcategory": "IA e Machine Learning",
   "tags": [
     "ml",
     "nlp"

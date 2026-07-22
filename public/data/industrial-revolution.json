@@ -3,7 +3,8 @@
   "name": "Industrial Revolution",
   "description": "Explore the profound changes that reshaped society, economy, and technology during the Industrial Revolution.",
   "color": "gray",
-  "category": "History",
+  "category": "history",
+  "subcategory": "História moderna",
   "tags": [
     "revolution",
     "economy",

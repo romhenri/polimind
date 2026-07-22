@@ -4,7 +4,7 @@
     "description": "Easy general knowledge questions.",
     "icon": "🌍",
     "color": "amber",
-    "category": "General",
+    "category": "general",
     "tags": ["culture", "history", "geography", "science"],
     "hardness": "easy",
     "lang": "en",

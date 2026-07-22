@@ -5,7 +5,8 @@
     "description": "Estudo de recorrências e métodos de resolução: Iteração, Substituição, Árvore de Recursão e Teorema Mestre.",
     "icon": "🔄",
     "color": "teal",
-    "category": "Computing",
+    "category": "computer_science",
+    "subcategory": "Algoritmos e Estruturas de dados",
     "tags": [
       "algorithms",
       "math"
@@ -122,7 +123,8 @@
     "description": "Study of recurrences and resolution methods: Iteration, Substitution, Recursion Tree, and Master Theorem.",
     "icon": "🔄",
     "color": "teal",
-    "category": "Computing",
+    "category": "computer_science",
+    "subcategory": "Algoritmos e Estruturas de dados",
     "tags": [
       "algorithms",
       "math"

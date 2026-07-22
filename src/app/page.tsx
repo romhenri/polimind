@@ -7,13 +7,17 @@ import { FaSearch, FaTimes } from "react-icons/fa";
 import { useQuizMode } from "@/contexts/QuizModeContext";
 import { QuizMetadata } from "@/types/quiz";
 import { parseQuizSeq } from "@/utils/quizSeq";
+import { CATEGORIES, getCategoryById } from "@/data/categories";
 
 export default function Home() {
   const { isDynamicMode } = useQuizMode();
   const [subjects, setSubjects] = useState<QuizMetadata[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedCategory, setSelectedCategory] = useState<string>(CATEGORIES[0].id);
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string>(
+    CATEGORIES[0].subcategories[0] ?? ""
+  );
 
   useEffect(() => {
     const loadSubjects = async () => {
@@ -38,6 +42,7 @@ export default function Home() {
               icon: data.icon,
               color: data.color,
               category: data.category,
+              subcategory: data.subcategory,
               questions: data.questions,
               tags: data.tags,
               hardness: data.hardness ?? "easy",
@@ -56,11 +61,10 @@ export default function Home() {
     loadSubjects();
   }, []);
 
-  // Extract unique categories
-  const categories = useMemo(() => {
-    const cats = Array.from(new Set(subjects.map((s) => s.category)));
-    return cats.sort();
-  }, [subjects]);
+  // Subcategories available for the selected category
+  const subcategories = useMemo(() => {
+    return getCategoryById(selectedCategory)?.subcategories ?? [];
+  }, [selectedCategory]);
 
   // Filter subjects based on search and filters
   const filteredSubjects = useMemo(() => {
@@ -72,19 +76,29 @@ export default function Home() {
         (subject.tags ?? []).some((tag) => tag.toLowerCase().includes(q));
 
       // Category filter
-      const matchesCategory =
-        selectedCategory === "all" || subject.category === selectedCategory;
+      const matchesCategory = subject.category === selectedCategory;
 
-      return matchesSearch && matchesCategory;
+      // Subcategory filter
+      const matchesSubcategory =
+        selectedSubcategory === "" || subject.subcategory === selectedSubcategory;
+
+      return matchesSearch && matchesCategory && matchesSubcategory;
     });
-  }, [subjects, searchQuery, selectedCategory]);
+  }, [subjects, searchQuery, selectedCategory, selectedSubcategory]);
+
+  const handleSelectCategory = (category: string) => {
+    setSelectedCategory(category);
+    setSelectedSubcategory(getCategoryById(category)?.subcategories[0] ?? "");
+  };
+
+  const handleSelectSubcategory = (subcategory: string) => {
+    setSelectedSubcategory(subcategory);
+  };
 
   const clearFilters = () => {
     setSearchQuery("");
-    setSelectedCategory("all");
+    handleSelectCategory(CATEGORIES[0].id);
   };
-
-  const hasActiveFilters = searchQuery !== "" || selectedCategory !== "all";
 
   return (
     <div className="animate-fade-in">
@@ -134,28 +148,37 @@ export default function Home() {
 
           {/* Category Tabs */}
           <div className="flex gap-6 px-4 -mx-4 overflow-x-auto border-b flex-nowrap border-stone-200 dark:border-stone-700 sm:mx-0 sm:px-0 sm:justify-center sm:overflow-visible">
-            <button
-              onClick={() => setSelectedCategory("all")}
-              className={`flex-shrink-0 border-b-2 px-1 pb-3 text-sm font-semibold transition-colors ${selectedCategory === "all"
-                ? "border-clay-500 text-clay-600 dark:text-clay-400"
-                : "border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200"
-                }`}
-            >
-              All
-            </button>
-            {categories.map((category) => (
+            {CATEGORIES.map((category) => (
               <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`flex-shrink-0 border-b-2 px-1 pb-3 text-sm font-semibold transition-colors ${selectedCategory === category
+                key={category.id}
+                onClick={() => handleSelectCategory(category.id)}
+                className={`flex-shrink-0 border-b-2 px-1 pb-3 text-sm font-semibold transition-colors ${selectedCategory === category.id
                   ? "border-clay-500 text-clay-600 dark:text-clay-400"
                   : "border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200"
                   }`}
               >
-                {category}
+                {category.label}
               </button>
             ))}
           </div>
+
+          {/* Subcategory Tabs */}
+          {subcategories.length > 0 && (
+            <div className="flex flex-wrap justify-center gap-2 px-4 -mx-4 sm:mx-0 sm:px-0">
+              {subcategories.map((subcategory) => (
+                <button
+                  key={subcategory}
+                  onClick={() => handleSelectSubcategory(subcategory)}
+                  className={`flex-shrink-0 rounded-md px-3 py-1.5 text-xs font-semibold transition-colors ${selectedSubcategory === subcategory
+                    ? "bg-clay-500 text-white"
+                    : "bg-black/[0.06] text-stone-600 hover:bg-black/[0.1] dark:bg-white/[0.06] dark:text-stone-300 dark:hover:bg-white/[0.1]"
+                    }`}
+                >
+                  {subcategory}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
@@ -192,10 +215,7 @@ export default function Home() {
                 questions: subject.questions.length,
               }}
               index={index}
-              onTagClick={(tag) => {
-                setSelectedCategory("all");
-                setSearchQuery(tag);
-              }}
+              onTagClick={(tag) => setSearchQuery(tag)}
             />
           ))}
         </div>

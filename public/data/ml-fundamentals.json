@@ -3,7 +3,8 @@
   "name": "Machine Learning Fundamentals",
   "description": "Test your understanding of core machine learning concepts, from model basics to performance tuning.",
   "color": "lime",
-  "category": "Data",
+  "category": "computer_science",
+  "subcategory": "IA e Machine Learning",
   "tags": [
     "ml",
     "ai",

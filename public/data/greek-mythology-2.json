@@ -3,7 +3,8 @@
   "name": "Greek Mythology 2",
   "description": "Step up your knowledge with famous punishments, iconic monsters, and the forces of destiny.",
   "color": "blue",
-  "category": "History",
+  "category": "history",
+  "subcategory": "Mitologia",
   "tags": [
     "mythology",
     "greece",

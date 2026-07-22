@@ -3,7 +3,8 @@
   "name": "Intro to Statistics",
   "description": "Test your basic knowledge of fundamental statistical principles and their applications.",
   "color": "amber",
-  "category": "Math",
+  "category": "mathematics",
+  "subcategory": "Estatística e Probabilidade",
   "tags": [
     "statistics",
     "data",

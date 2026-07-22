@@ -3,7 +3,8 @@
   "name": "Neural Networks",
   "description": "Core concepts and components of artificial neural networks.",
   "color": "cyan",
-  "category": "Data",
+  "category": "computer_science",
+  "subcategory": "IA e Machine Learning",
   "tags": [
     "ai",
     "machine-learning",

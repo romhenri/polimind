@@ -67,7 +67,7 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
           ? (preferPortuguese ? parsed[0] : (parsed[1] || parsed[0]))
           : parsed
         setQuestions(data.questions)
-        setCategory(data.category || 'General')
+        setCategory(data.category || 'general')
         const tags = Array.isArray(data.tags) ? data.tags : []
         setMathEnabled(
           tags.some((t: unknown) => String(t).toLowerCase() === 'math')

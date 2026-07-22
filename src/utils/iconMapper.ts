@@ -26,7 +26,6 @@ import {
   FaSuperscript,
   FaWindows,
   FaGlobe,
-  FaCode,
   FaScroll,
   FaFlask,
   FaBookOpen,
@@ -115,12 +114,11 @@ const ICON_BY_ID: Record<string, IconType> = {
 }
 
 const ICON_BY_CATEGORY: Record<string, IconType> = {
-  Computing: FaMicrochip,
-  Programming: FaCode,
-  Math: TbMath,
-  History: FaScroll,
-  Science: FaFlask,
-  General: FaEarthAmericas,
+  computer_science: FaMicrochip,
+  mathematics: TbMath,
+  history: FaScroll,
+  sciences: FaFlask,
+  general: FaEarthAmericas,
 }
 
 export function getQuizIcon(id: string, category?: string): IconType {

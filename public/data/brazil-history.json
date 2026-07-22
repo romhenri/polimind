@@ -3,7 +3,8 @@
   "name": "Brazilian History",
   "description": "Explore the major historical events, economic cycles, and political transformations that shaped Brazil.",
   "color": "green",
-  "category": "History",
+  "category": "history",
+  "subcategory": "História moderna",
   "tags": [
     "brazilß"
   ],

@@ -5,7 +5,8 @@
     "description": "Análise de algoritmos de ordenação, avaliação de melhor e pior caso, e ordenação em tempo linear sem comparações.",
     "icon": "📊",
     "color": "teal",
-    "category": "Computing",
+    "category": "computer_science",
+    "subcategory": "Algoritmos e Estruturas de dados",
     "tags": [
       "algorithms",
       "sorting"
@@ -123,7 +124,8 @@
     "description": "Analysis of sorting algorithms, best and worst-case evaluation, and non-comparison linear-time sorting.",
     "icon": "📊",
     "color": "teal",
-    "category": "Computing",
+    "category": "computer_science",
+    "subcategory": "Algoritmos e Estruturas de dados",
     "tags": [
       "algorithms",
       "sorting"

@@ -3,7 +3,8 @@
   "name": "Probability Theory",
   "description": "Test your understanding of conditional probability, Bayes' theorem, intersections, and complements.",
   "color": "amber",
-  "category": "Math",
+  "category": "mathematics",
+  "subcategory": "Estatística e Probabilidade",
   "tags": [
     "probability",
     "bayes-theorem",

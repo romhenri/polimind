@@ -5,6 +5,7 @@ import { FaCheck, FaTimes } from 'react-icons/fa'
 import { QuizMetadata } from '@/types/quiz'
 import { AVAILABLE_COLORS, getColor } from '@/utils/colorMapper'
 import { slugify } from '@/utils/aiQuiz'
+import { CATEGORIES, getCategoryById } from '@/data/categories'
 
 const COLOR_KEYS = Object.keys(AVAILABLE_COLORS)
 const HARDNESS_VALUES = ['easy', 'medium', 'hard'] as const
@@ -24,7 +25,10 @@ export default function MetaEditor({ quiz, onSave, onCancel }: MetaEditorProps) 
   const [name, setName] = useState(quiz.name)
   const [description, setDescription] = useState(quiz.description)
   const [color, setColor] = useState(quiz.color)
-  const [category, setCategory] = useState(quiz.category)
+  const [category, setCategory] = useState(
+    getCategoryById(quiz.category) ? quiz.category : CATEGORIES[0].id
+  )
+  const [subcategory, setSubcategory] = useState(quiz.subcategory ?? '')
   const [tags, setTags] = useState(quiz.tags.join(', '))
   const [hardness, setHardness] = useState<(typeof HARDNESS_VALUES)[number]>(
     HARDNESS_VALUES.includes(quiz.hardness as (typeof HARDNESS_VALUES)[number])
@@ -32,13 +36,24 @@ export default function MetaEditor({ quiz, onSave, onCancel }: MetaEditorProps) 
       : 'medium'
   )
 
+  const subcategories = getCategoryById(category)?.subcategories ?? []
+
+  const handleCategoryChange = (nextCategory: string) => {
+    setCategory(nextCategory)
+    const nextSubcategories = getCategoryById(nextCategory)?.subcategories ?? []
+    if (!nextSubcategories.includes(subcategory)) {
+      setSubcategory('')
+    }
+  }
+
   const handleSave = () => {
     onSave({
       id: slugify(id),
       name: name.trim() || quiz.name,
       description: description.trim(),
       color,
-      category: category.trim() || 'General',
+      category,
+      subcategory: subcategory || undefined,
       tags: tags
         .split(',')
         .map((tag) => tag.trim())
@@ -71,8 +86,35 @@ export default function MetaEditor({ quiz, onSave, onCancel }: MetaEditorProps) 
 
         <div>
           <label className={labelClass}>Category</label>
-          <input value={category} onChange={(e) => setCategory(e.target.value)} className={fieldClass} />
+          <select
+            value={category}
+            onChange={(e) => handleCategoryChange(e.target.value)}
+            className={fieldClass}
+          >
+            {CATEGORIES.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.label}
+              </option>
+            ))}
+          </select>
         </div>
+        {subcategories.length > 0 && (
+          <div>
+            <label className={labelClass}>Subcategory</label>
+            <select
+              value={subcategory}
+              onChange={(e) => setSubcategory(e.target.value)}
+              className={fieldClass}
+            >
+              <option value="">None</option>
+              {subcategories.map((sub) => (
+                <option key={sub} value={sub}>
+                  {sub}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
         <div>
           <label className={labelClass}>Color</label>
           <div className="flex items-center gap-2">

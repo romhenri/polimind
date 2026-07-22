@@ -1,6 +1,7 @@
 import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
 import { AVAILABLE_COLORS } from '@/utils/colorMapper'
 import { formatSubject } from '@/utils/formatSubject'
+import { CATEGORIES } from '@/data/categories'
 
 const OPENROUTER_BASE = 'https://openrouter.ai/api/v1/chat/completions'
 const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models'
@@ -22,15 +23,7 @@ export interface AiSettings {
   temperature: number
 }
 
-export const QUIZ_CATEGORIES = [
-  'General',
-  'History',
-  'Science',
-  'Programming',
-  'Computing',
-  'Math',
-  'Data',
-]
+export const QUIZ_CATEGORIES = CATEGORIES.map((c) => c.id)
 
 function providerName(provider: AiProvider): string {
   return provider === 'openrouter' ? 'OpenRouter' : 'Gemini'
@@ -293,7 +286,7 @@ function normalizeQuiz(raw: unknown, fallbackSubject: string): QuizMetadata {
     description: typeof data.description === 'string' ? data.description.trim() : '',
     icon: '',
     color,
-    category: typeof data.category === 'string' && data.category.trim() ? data.category.trim() : 'General',
+    category: typeof data.category === 'string' && data.category.trim() ? data.category.trim() : 'general',
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     hardness,
     type: 'options',
@@ -322,6 +315,7 @@ export function quizToDataFile(quiz: QuizMetadata): Record<string, unknown> {
     description: quiz.description,
     color: quiz.color,
     category: quiz.category,
+    ...(quiz.subcategory ? { subcategory: quiz.subcategory } : {}),
     tags: quiz.tags,
     hardness: quiz.hardness,
     type: quiz.type,

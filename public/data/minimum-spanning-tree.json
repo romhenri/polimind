@@ -5,7 +5,8 @@
     "description": "Estudo do Problema da Árvore Geradora Mínima, estruturas de dados envolvidas e o funcionamento dos algoritmos gulosos de Kruskal e Prim.",
     "icon": "🌳",
     "color": "teal",
-    "category": "Computing",
+    "category": "computer_science",
+    "subcategory": "Algoritmos e Estruturas de dados",
     "tags": [
       "algorithms",
       "graphs",
@@ -144,7 +145,8 @@
     "description": "Study of the Minimum Spanning Tree Problem, the data structures involved, and the mechanics of Kruskal's and Prim's greedy algorithms.",
     "icon": "🌳",
     "color": "teal",
-    "category": "Computing",
+    "category": "computer_science",
+    "subcategory": "Algoritmos e Estruturas de dados",
     "tags": [
       "algorithms",
       "graphs",

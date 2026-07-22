@@ -5,7 +5,8 @@
     "description": "Estudo da complexidade computacional, notações assintóticas (Big-Oh, Theta, Omega) e análise do tempo de execução de algoritmos.",
     "icon": "📈",
     "color": "teal",
-    "category": "Computing",
+    "category": "computer_science",
+    "subcategory": "Algoritmos e Estruturas de dados",
     "tags": [
       "algorithms"
     ],
@@ -121,7 +122,8 @@
     "description": "Study of computational complexity, asymptotic notations (Big-Oh, Theta, Omega), and algorithm runtime analysis.",
     "icon": "📈",
     "color": "teal",
-    "category": "Computing",
+    "category": "computer_science",
+    "subcategory": "Algoritmos e Estruturas de dados",
     "tags": [
       "algorithms"
     ],

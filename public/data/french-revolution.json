@@ -3,7 +3,8 @@
   "name": "French Revolution",
   "description": "Test your knowledge on the pivotal events, figures, and impacts of the French Revolution.",
   "color": "gray",
-  "category": "History",
+  "category": "history",
+  "subcategory": "História moderna",
   "tags": [
     "revolution",
     "economy",

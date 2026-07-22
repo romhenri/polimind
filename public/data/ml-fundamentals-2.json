@@ -3,7 +3,8 @@
   "name": "Machine Learning Fundamentals II",
   "description": "Deepen your knowledge of data preprocessing, validation strategies, and advanced ensemble models.",
   "color": "lime",
-  "category": "Data",
+  "category": "computer_science",
+  "subcategory": "IA e Machine Learning",
   "tags": [
     "ml",
     "ai",

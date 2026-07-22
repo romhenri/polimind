@@ -4,7 +4,7 @@
   "description": "Various questions about general culture",
   "icon": "🌍",
   "color": "amber",
-  "category": "General",
+  "category": "general",
   "tags": ["culture", "history", "geography", "science"],
   "hardness": "easy",
   "lang": "en",

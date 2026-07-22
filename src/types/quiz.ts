@@ -22,6 +22,7 @@ export interface QuizMetadata {
   icon: string
   color: string
   category: string
+  subcategory?: string
   tags: string[]
   questions: Question[]
   hardness?: 'easy' | 'medium' | 'hard'

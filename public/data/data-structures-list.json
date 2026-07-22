@@ -3,7 +3,8 @@
   "name": "List Data Structures",
   "description": "Test your knowledge on the core concepts of lists, stacks, and queues, essential building blocks in computer science.",
   "color": "emerald",
-  "category": "Computing",
+  "category": "computer_science",
+  "subcategory": "Algoritmos e Estruturas de dados",
   "tags": [
     "data structures",
     "stack",

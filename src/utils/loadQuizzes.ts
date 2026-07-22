@@ -5,6 +5,7 @@ export interface LoadedQuiz {
   icon: string
   color: string
   category: string
+  subcategory?: string
   questions: number
   tags: string[]
   hardness: 'easy' | 'medium' | 'hard'
@@ -22,7 +23,8 @@ async function fetchQuiz(slug: string): Promise<LoadedQuiz | null> {
       description: data.description ?? '',
       icon: data.icon ?? '',
       color: data.color ?? 'gray',
-      category: data.category ?? 'General',
+      category: data.category ?? 'general',
+      subcategory: typeof data.subcategory === 'string' ? data.subcategory : undefined,
       questions: Array.isArray(data.questions) ? data.questions.length : 0,
       tags: Array.isArray(data.tags) ? data.tags : [],
       hardness: data.hardness ?? 'easy',

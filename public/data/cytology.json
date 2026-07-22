@@ -3,7 +3,8 @@
   "name": "Cytology",
   "description": "Test your fundamental knowledge of cells, the basic units of life.",
   "color": "emerald",
-  "category": "Science",
+  "category": "sciences",
+  "subcategory": "Biologia",
   "tags": [
     "biology",
     "cytology",

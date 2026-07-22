@@ -3,7 +3,8 @@
   "name": "Greek Mythology 3",
   "description": "Expand your knowledge with deeper myths, lesser-known figures, and divine lineages.",
   "color": "blue",
-  "category": "History",
+  "category": "history",
+  "subcategory": "Mitologia",
   "tags": [
     "mythology",
     "greece",

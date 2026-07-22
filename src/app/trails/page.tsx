@@ -5,6 +5,7 @@ import TrailCard from '@/components/TrailCard'
 import { TRAILS } from '@/data/trails'
 import { loadQuizzesBySlugs, type LoadedQuiz } from '@/utils/loadQuizzes'
 import { useProfile } from '@/contexts/ProfileContext'
+import { getCategoryLabel } from '@/data/categories'
 
 export default function TrailsPage() {
   const { completedQuizzes } = useProfile()
@@ -94,7 +95,7 @@ export default function TrailsPage() {
                   : 'border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200'
                   }`}
               >
-                {category}
+                {getCategoryLabel(category)}
               </button>
             ))}
           </div>

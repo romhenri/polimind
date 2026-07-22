@@ -5,7 +5,8 @@
     "description": "Análise de algoritmos, problemas computacionais, modelo RAM e complexidade assintótica.",
     "icon": "🧮",
     "color": "teal",
-    "category": "Computing",
+    "category": "computer_science",
+    "subcategory": "Algoritmos e Estruturas de dados",
     "tags": [
       "algorithms"
     ],
@@ -121,7 +122,8 @@
     "description": "Analysis of algorithms, computational problems, RAM model, and asymptotic complexity.",
     "icon": "🧮",
     "color": "teal",
-    "category": "Computing",
+    "category": "computer_science",
+    "subcategory": "Algoritmos e Estruturas de dados",
     "tags": [
       "algorithms"
     ],

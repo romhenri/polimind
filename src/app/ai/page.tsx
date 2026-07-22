@@ -19,7 +19,8 @@ import {
 } from 'react-icons/fa'
 import { FaWandMagicSparkles } from 'react-icons/fa6'
 import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
-import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, parseQuizJson, QUIZ_CATEGORIES } from '@/utils/aiQuiz'
+import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, parseQuizJson } from '@/utils/aiQuiz'
+import { CATEGORIES } from '@/data/categories'
 import type { StreamCallbacks, AiProvider, AiSettings } from '@/utils/aiQuiz'
 import AiQuizRunner from './AiQuizRunner'
 import MetaEditor from './MetaEditor'
@@ -35,7 +36,7 @@ export default function AiPage() {
   const [geminiKey, setGeminiKey] = useState('')
   const [showApiKey, setShowApiKey] = useState(false)
   const [temperature, setTemperature] = useState('0.8')
-  const [category, setCategory] = useState('General')
+  const [category, setCategory] = useState('general')
   const [subject, setSubject] = useState('')
   const [count, setCount] = useState(10)
   const [loading, setLoading] = useState(false)
@@ -394,9 +395,9 @@ export default function AiPage() {
               onChange={(e) => setCategory(e.target.value)}
               className="w-full px-4 py-3 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
             >
-              {QUIZ_CATEGORIES.map((c) => (
-                <option key={c} value={c}>
-                  {c}
+              {CATEGORIES.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.label}
                 </option>
               ))}
             </select>

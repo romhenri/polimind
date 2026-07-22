@@ -3,7 +3,8 @@
   "name": "List Data Structures 2",
   "description": "Test your knowledge on linked lists, circular lists, heterogeneous lists, and double-ended queues.",
   "color": "emerald",
-  "category": "Computing",
+  "category": "computer_science",
+  "subcategory": "Algoritmos e Estruturas de dados",
   "tags": [
     "data structures",
     "linked list",
