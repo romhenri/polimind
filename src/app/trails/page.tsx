@@ -5,7 +5,7 @@ import TrailCard from '@/components/TrailCard'
 import { TRAILS } from '@/data/trails'
 import { loadQuizzesBySlugs, type LoadedQuiz } from '@/utils/loadQuizzes'
 import { useProfile } from '@/contexts/ProfileContext'
-import { getCategoryLabel } from '@/data/categories'
+import { CATEGORIES, getCategoryLabel } from '@/data/categories'
 
 export default function TrailsPage() {
   const { completedQuizzes } = useProfile()
@@ -29,8 +29,8 @@ export default function TrailsPage() {
   )
 
   const categories = useMemo(() => {
-    const cats = Array.from(new Set(TRAILS.map((t) => t.category)))
-    return cats.sort()
+    const present = new Set(TRAILS.map((t) => t.category))
+    return CATEGORIES.map((c) => c.id).filter((id) => present.has(id))
   }, [])
 
   const trailStats = useMemo(

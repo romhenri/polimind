@@ -2,7 +2,7 @@
   "id": "networks",
   "name": "Networks",
   "description": "Key terms behind the protocols and layers that move data.",
-  "category": "Computing",
+  "category": "computer_science",
   "color": "blue",
   "icon": "networks",
   "terms": [

@@ -2,7 +2,7 @@
   "id": "dinosaurs",
   "name": "Dinosaurs",
   "description": "Paleontology terms about the giants that once ruled the Earth.",
-  "category": "Science",
+  "category": "sciences",
   "color": "green",
   "icon": "dinosaurs",
   "terms": [

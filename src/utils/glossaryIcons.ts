@@ -6,9 +6,9 @@ import {
   FaBookOpen,
   FaFlask,
   FaMicrochip,
-  FaCode,
   FaChartLine,
   FaLayerGroup,
+  FaEye,
 } from 'react-icons/fa6'
 import { TbBinaryTree, TbMath } from 'react-icons/tb'
 import { GiDinosaurRex, GiGreekTemple } from 'react-icons/gi'
@@ -22,14 +22,13 @@ const ICON_BY_ID: Record<string, IconType> = {
   biology: FaDna,
   dinosaurs: GiDinosaurRex,
   'greek-mythology': GiGreekTemple,
+  'attention-mechanisms': FaEye,
 }
 
 const ICON_BY_CATEGORY: Record<string, IconType> = {
-  Computing: FaMicrochip,
-  Programming: FaCode,
-  Math: TbMath,
-  Science: FaFlask,
-  Data: FaChartLine,
+  computer_science: FaMicrochip,
+  mathematics: TbMath,
+  sciences: FaFlask,
 }
 
 export function getGlossaryIcon(id: string, category?: string): IconType {

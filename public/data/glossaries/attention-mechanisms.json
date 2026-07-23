@@ -1,0 +1,65 @@
+{
+  "id": "attention-mechanisms",
+  "name": "Attention Mechanisms in Transformers",
+  "description": "Core vocabulary behind how transformers focus on relevant parts of their input.",
+  "category": "computer_science",
+  "color": "blue",
+  "icon": "attention-mechanisms",
+  "terms": [
+    {
+      "groupName": "Self-Attention Basics",
+      "group": [
+        {
+          "term": "Self-Attention",
+          "definition": "A mechanism where each token in a sequence attends to every other token, letting the model capture long-range dependencies using **Query**, **Key**, and **Value** vectors."
+        },
+        {
+          "term": "Query",
+          "definition": "A vector representing what a token is looking for, compared against **Key** vectors to determine relevance between tokens."
+        },
+        {
+          "term": "Key",
+          "definition": "A vector representing what a token offers, dot-producted with **Query** vectors to compute **Attention Score**s."
+        },
+        {
+          "term": "Value",
+          "definition": "A vector holding a token's actual content, combined via a **Weighted Sum** to produce the attention output."
+        }
+      ]
+    },
+    {
+      "groupName": "Computing Attention",
+      "group": [
+        {
+          "term": "Attention Score",
+          "definition": "A raw relevance score from the dot product of **Query** and **Key** vectors, turned into probabilities by **Softmax**."
+        },
+        {
+          "term": "Scaling",
+          "definition": "Dividing **Attention Score**s by the square root of the key dimension before **Softmax**, preventing large values that destabilize gradients."
+        },
+        {
+          "term": "Softmax",
+          "definition": "A function that normalizes **Attention Score**s into a probability distribution summing to one across all positions."
+        },
+        {
+          "term": "Weighted Sum",
+          "definition": "The output for a token, computed by combining **Value** vectors according to the probabilities from **Softmax**."
+        }
+      ]
+    },
+    {
+      "groupName": "Architecture & Benefits",
+      "group": [
+        {
+          "term": "Parallel Processing",
+          "definition": "The ability of **Self-Attention** to process all sequence positions simultaneously, unlike the sequential computation of RNNs."
+        },
+        {
+          "term": "Residual Connection",
+          "definition": "A shortcut that adds a layer's input to its output, preserving information and easing gradient flow through deep transformer stacks."
+        }
+      ]
+    }
+  ]
+}

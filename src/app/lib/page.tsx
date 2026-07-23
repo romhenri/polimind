@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import GlossaryCard from '@/components/GlossaryCard'
 import { loadGlossaries } from '@/utils/loadGlossaries'
+import { CATEGORIES, getCategoryLabel } from '@/data/categories'
 import type { GlossaryMeta } from '@/types/glossary'
 
 export default function LibPage() {
@@ -20,8 +21,8 @@ export default function LibPage() {
   }, [])
 
   const categories = useMemo(() => {
-    const cats = Array.from(new Set(glossaries.map((g) => g.category)))
-    return cats.sort()
+    const present = new Set(glossaries.map((g) => g.category))
+    return CATEGORIES.map((c) => c.id).filter((id) => present.has(id))
   }, [glossaries])
 
   const filtered = useMemo(
@@ -64,7 +65,7 @@ export default function LibPage() {
                   : 'border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200'
                   }`}
               >
-                {category}
+                {getCategoryLabel(category)}
               </button>
             ))}
           </div>

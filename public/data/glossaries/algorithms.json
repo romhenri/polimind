@@ -2,7 +2,7 @@
   "id": "algorithms",
   "name": "Algorithms",
   "description": "Foundational ideas for analyzing and designing efficient algorithms.",
-  "category": "Computing",
+  "category": "computer_science",
   "color": "teal",
   "icon": "algorithms",
   "terms": [

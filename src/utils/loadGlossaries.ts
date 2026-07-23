@@ -43,7 +43,7 @@ export async function fetchGlossary(slug: string): Promise<Glossary | null> {
       id: data.id ?? slug,
       name: data.name ?? slug,
       description: data.description ?? '',
-      category: data.category ?? 'General',
+      category: data.category ?? 'general',
       color: data.color ?? 'gray',
       icon: data.icon ?? '',
       groups: normalizeGroups(data.terms),

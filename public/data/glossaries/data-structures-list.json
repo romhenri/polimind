@@ -2,7 +2,7 @@
   "id": "data-structures-list",
   "name": "List Data Structures",
   "description": "The core concepts behind lists, stacks, and queues — essential building blocks of computer science.",
-  "category": "Computing",
+  "category": "computer_science",
   "color": "emerald",
   "icon": "data-structures-list",
   "terms": [
