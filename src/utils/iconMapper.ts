@@ -29,6 +29,11 @@ import {
   FaScroll,
   FaFlask,
   FaBookOpen,
+  FaBrain,
+  FaEye,
+  FaBullseye,
+  FaComments,
+  FaRobot,
 } from 'react-icons/fa6'
 import {
   TbRoute,
@@ -37,6 +42,7 @@ import {
   TbMathFunction,
   TbMathIntegral,
   TbMath,
+  TbChartDots,
 } from 'react-icons/tb'
 import {
   SiCss3,
@@ -111,6 +117,14 @@ const ICON_BY_ID: Record<string, IconType> = {
   dinosaurs: GiDinosaurRex,
   dinosaurs2: GiDinosaurRex,
   dinosaurs3: GiDinosaurRex,
+  'attention-mechanisms': FaEye,
+  'ml-evaluation-metrics': FaBullseye,
+  'ml-fundamentals': TbChartDots,
+  'ml-fundamentals-2': TbChartDots,
+  'ml-fundamentals-3': TbChartDots,
+  'neural-networks': FaBrain,
+  'nlp-basics': FaComments,
+  'mcp-servers': FaRobot,
 }
 
 const ICON_BY_CATEGORY: Record<string, IconType> = {
