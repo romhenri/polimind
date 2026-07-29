@@ -3,6 +3,7 @@
   "name": "Biology",
   "description": "Essential vocabulary for cells, life and living systems.",
   "category": "sciences",
+  "subcategory": "Biology",
   "color": "emerald",
   "icon": "biology",
   "terms": [

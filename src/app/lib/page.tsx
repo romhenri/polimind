@@ -3,18 +3,23 @@
 import { useState, useEffect, useMemo } from 'react'
 import GlossaryCard from '@/components/GlossaryCard'
 import { loadGlossaries } from '@/utils/loadGlossaries'
-import { CATEGORIES, getCategoryLabel } from '@/data/categories'
+import { CATEGORIES, getCategoryById, getCategoryLabel } from '@/data/categories'
 import type { GlossaryMeta } from '@/types/glossary'
 
 export default function LibPage() {
   const [glossaries, setGlossaries] = useState<GlossaryMeta[]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedCategory, setSelectedCategory] = useState<string>('all')
+  const [selectedCategory, setSelectedCategory] = useState<string>(CATEGORIES[0].id)
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string>('all')
 
   useEffect(() => {
     const load = async () => {
       const data = await loadGlossaries()
       setGlossaries(data)
+      const firstPresent = CATEGORIES.map((c) => c.id).find((id) =>
+        data.some((g) => g.category === id)
+      )
+      if (firstPresent) setSelectedCategory(firstPresent)
       setLoading(false)
     }
     load()
@@ -25,13 +30,31 @@ export default function LibPage() {
     return CATEGORIES.map((c) => c.id).filter((id) => present.has(id))
   }, [glossaries])
 
+  const subcategories = useMemo(() => {
+    const present = new Set(
+      glossaries
+        .filter((g) => g.category === selectedCategory && g.subcategory)
+        .map((g) => g.subcategory as string)
+    )
+    return (getCategoryById(selectedCategory)?.subcategories ?? []).filter((s) =>
+      present.has(s)
+    )
+  }, [glossaries, selectedCategory])
+
   const filtered = useMemo(
     () =>
       glossaries.filter(
-        (g) => selectedCategory === 'all' || g.category === selectedCategory
+        (g) =>
+          g.category === selectedCategory &&
+          (selectedSubcategory === 'all' || g.subcategory === selectedSubcategory)
       ),
-    [glossaries, selectedCategory]
+    [glossaries, selectedCategory, selectedSubcategory]
   )
+
+  const handleSelectCategory = (category: string) => {
+    setSelectedCategory(category)
+    setSelectedSubcategory('all')
+  }
 
   return (
     <div className="animate-fade-in">
@@ -47,19 +70,10 @@ export default function LibPage() {
       {!loading && glossaries.length > 0 && (
         <div className="mb-6">
           <div className="flex gap-6 px-4 -mx-4 overflow-x-auto border-b flex-nowrap border-stone-200 dark:border-stone-700 sm:mx-0 sm:px-0 sm:justify-center sm:overflow-visible">
-            <button
-              onClick={() => setSelectedCategory('all')}
-              className={`flex-shrink-0 border-b-2 px-1 pb-3 text-sm font-semibold transition-colors ${selectedCategory === 'all'
-                ? 'border-clay-500 text-clay-600 dark:text-clay-400'
-                : 'border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200'
-                }`}
-            >
-              All
-            </button>
             {categories.map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => handleSelectCategory(category)}
                 className={`flex-shrink-0 border-b-2 px-1 pb-3 text-sm font-semibold transition-colors ${selectedCategory === category
                   ? 'border-clay-500 text-clay-600 dark:text-clay-400'
                   : 'border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200'
@@ -69,6 +83,23 @@ export default function LibPage() {
               </button>
             ))}
           </div>
+
+          {subcategories.length > 0 && (
+            <div className="flex flex-wrap justify-center gap-2 px-4 mt-4 -mx-4 sm:mx-0 sm:px-0">
+              {['all', ...subcategories].map((subcategory) => (
+                <button
+                  key={subcategory}
+                  onClick={() => setSelectedSubcategory(subcategory)}
+                  className={`flex-shrink-0 rounded-md px-3 py-1.5 text-xs font-semibold transition-colors ${selectedSubcategory === subcategory
+                    ? 'bg-black/[0.1] text-stone-800 dark:bg-white/[0.12] dark:text-stone-100'
+                    : 'text-stone-500 hover:bg-black/[0.06] dark:text-stone-400 dark:hover:bg-white/[0.06]'
+                    }`}
+                >
+                  {subcategory === 'all' ? 'All' : subcategory}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

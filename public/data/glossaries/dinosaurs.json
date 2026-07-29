@@ -3,6 +3,7 @@
   "name": "Dinosaurs",
   "description": "Paleontology terms about the giants that once ruled the Earth.",
   "category": "sciences",
+  "subcategory": "Paleontology",
   "color": "green",
   "icon": "dinosaurs",
   "terms": [

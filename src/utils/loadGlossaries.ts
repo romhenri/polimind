@@ -44,6 +44,7 @@ export async function fetchGlossary(slug: string): Promise<Glossary | null> {
       name: data.name ?? slug,
       description: data.description ?? '',
       category: data.category ?? 'general',
+      subcategory: typeof data.subcategory === 'string' ? data.subcategory : undefined,
       color: data.color ?? 'gray',
       icon: data.icon ?? '',
       groups: normalizeGroups(data.terms),

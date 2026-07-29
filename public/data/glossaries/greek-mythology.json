@@ -3,6 +3,7 @@
   "name": "Greek Mythology",
   "description": "The gods, heroes and monsters that shaped the myths of ancient Greece.",
   "category": "history",
+  "subcategory": "Mythology",
   "color": "blue",
   "icon": "greek-mythology",
   "terms": [

@@ -3,6 +3,7 @@
   "name": "Attention Mechanisms in Transformers",
   "description": "Core vocabulary behind how transformers focus on relevant parts of their input.",
   "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
   "color": "blue",
   "icon": "attention-mechanisms",
   "terms": [

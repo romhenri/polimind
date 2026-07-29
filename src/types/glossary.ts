@@ -13,6 +13,7 @@ export interface Glossary {
   name: string
   description: string
   category: string
+  subcategory?: string
   color: string
   icon: string
   groups: GlossaryGroup[]
@@ -23,6 +24,7 @@ export interface GlossaryMeta {
   name: string
   description: string
   category: string
+  subcategory?: string
   color: string
   icon: string
   termCount: number

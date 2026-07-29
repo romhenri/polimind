@@ -3,6 +3,7 @@
   "name": "Algorithms",
   "description": "Foundational ideas for analyzing and designing efficient algorithms.",
   "category": "computer_science",
+  "subcategory": "Algorithms & Data Structures",
   "color": "teal",
   "icon": "algorithms",
   "terms": [
