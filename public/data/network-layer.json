@@ -5,7 +5,7 @@
     "icon": "🌐",
     "color": "blue",
     "category": "computer_science",
-    "subcategory": "Redes",
+    "subcategory": "Networks",
     "tags": ["networks", "web", "protocols"],
     "hardness": "medium",
     "lang": "en",

@@ -1,10 +1,11 @@
 {
   "id": "ml-fundamentals-2",
   "name": "Machine Learning Fundamentals II",
+  "icon": "📚",
   "description": "Deepen your knowledge of data preprocessing, validation strategies, and advanced ensemble models.",
   "color": "lime",
   "category": "computer_science",
-  "subcategory": "IA e Machine Learning",
+  "subcategory": "AI & Machine Learning",
   "tags": [
     "ml",
     "ai",

@@ -1,10 +1,11 @@
 {
   "id": "attention-mechanisms",
   "name": "Attention Mechanisms in Transformers",
+  "icon": "👁️",
   "description": "Understanding of how attention mechanisms work in transformer models.",
   "color": "blue",
   "category": "computer_science",
-  "subcategory": "IA e Machine Learning",
+  "subcategory": "AI & Machine Learning",
   "tags": [
     "transformers",
     "attention",

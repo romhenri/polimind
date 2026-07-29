@@ -5,7 +5,7 @@
   "icon": "🌐",
   "color": "blue",
   "category": "computer_science",
-  "subcategory": "Redes",
+  "subcategory": "Networks",
   "tags": ["networks", "dhcp", "ip", "network-layer", "transport"],
   "hardness": "medium",
   "lang": "en",

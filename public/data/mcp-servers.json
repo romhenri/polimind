@@ -1,0 +1,130 @@
+{
+  "id": "mcp-servers",
+  "name": "MCP Servers",
+  "description": "Build and understand Model Context Protocol (MCP) servers — tools, resources, transports, and the client-server lifecycle.",
+  "icon": "🤖",
+  "color": "orange",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "tags": [
+    "mcp",
+    "model context protocol",
+    "servers",
+    "llm",
+    "tools"
+  ],
+  "hardness": "medium",
+  "lang": "en",
+  "questions": [
+    {
+      "question": "What does the acronym MCP stand for?",
+      "options": [
+        "Managed Compute Platform",
+        "Machine Control Program",
+        "Model Context Protocol",
+        "Multi-Client Proxy"
+      ],
+      "correctAnswer": 2,
+      "explain": "MCP is the Model Context Protocol, an open standard for connecting LLM applications to external tools, data, and prompts."
+    },
+    {
+      "question": "Which role does an AI assistant like Claude play when it connects to and consumes an MCP server?",
+      "options": [
+        "The MCP server",
+        "The MCP client",
+        "A shared resource",
+        "The tool registry"
+      ],
+      "correctAnswer": 1,
+      "explain": "The host application embeds an MCP client that opens connections to servers. Servers expose capabilities; the client consumes them."
+    },
+    {
+      "question": "What underlying message format does MCP use for its requests and responses?",
+      "options": [
+        "gRPC with Protobuf",
+        "JSON-RPC 2.0 messages",
+        "GraphQL over HTTP",
+        "SOAP with XML"
+      ],
+      "correctAnswer": 1,
+      "explain": "MCP is built on JSON-RPC 2.0, exchanging request, response, and notification messages between client and server."
+    },
+    {
+      "question": "Which MCP primitive is a model-invoked executable function that performs an action, like sending an email?",
+      "options": [
+        "Prompt",
+        "Resource",
+        "Sampling",
+        "Tool"
+      ],
+      "correctAnswer": 3,
+      "explain": "Tools are model-controlled executable functions. Resources are read-only data, and Prompts are reusable templates."
+    },
+    {
+      "question": "In MCP terminology, what best describes a 'Resource'?",
+      "options": [
+        "A function that mutates external state",
+        "A user-invoked command template",
+        "Read-only context identified by a URI",
+        "A streaming transport channel"
+      ],
+      "correctAnswer": 2,
+      "explain": "Resources provide read-only context (files, database rows, API responses) identified by a URI, meant to be loaded into the model's context."
+    },
+    {
+      "question": "Which transport is the standard choice for a local MCP server launched as a subprocess?",
+      "options": [
+        "stdio (stdin/stdout)",
+        "WebSocket channel",
+        "Raw TCP sockets",
+        "MQTT messaging"
+      ],
+      "correctAnswer": 0,
+      "explain": "Local servers commonly communicate over stdio: the host spawns the server process and exchanges JSON-RPC messages via stdin/stdout."
+    },
+    {
+      "question": "Which transport does MCP define for remote servers accessed over HTTP?",
+      "options": [
+        "FTP file transfer",
+        "SMTP mail transport",
+        "Streamable HTTP",
+        "Long-polling only"
+      ],
+      "correctAnswer": 2,
+      "explain": "Remote MCP servers use the Streamable HTTP transport, which can stream responses using Server-Sent Events (SSE). The older transport was HTTP+SSE."
+    },
+    {
+      "question": "What is the purpose of the MCP 'initialize' handshake during connection setup?",
+      "options": [
+        "Authenticate the user via OAuth",
+        "Negotiate version and capabilities",
+        "Compress the message payloads",
+        "Load-balance across servers"
+      ],
+      "correctAnswer": 1,
+      "explain": "The initialize request/response negotiates the protocol version and declares which capabilities (tools, resources, prompts, sampling) each side supports."
+    },
+    {
+      "question": "Which MCP feature lets a server ask the client's LLM to generate a completion on its behalf?",
+      "options": [
+        "Roots",
+        "Logging",
+        "Resources",
+        "Sampling"
+      ],
+      "correctAnswer": 3,
+      "explain": "Sampling allows a server to request an LLM completion through the client, enabling agentic behavior while keeping the model under the host's control."
+    },
+    {
+      "question": "How does an MCP server typically tell the client that its list of available tools changed at runtime?",
+      "options": [
+        "Send a list-changed notification",
+        "Close and reopen the connection",
+        "Restart the host application",
+        "The list is fixed at startup"
+      ],
+      "correctAnswer": 0,
+      "explain": "Servers that declare the listChanged capability send a notifications/tools/list_changed message, prompting the client to re-fetch the tool list."
+    }
+  ]
+}

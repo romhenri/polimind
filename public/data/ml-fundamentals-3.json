@@ -1,10 +1,11 @@
 {
   "id": "ml-fundamentals-3",
   "name": "Machine Learning Fundamentals III",
+  "icon": "🔬",
   "description": "Master advanced model evaluation, hyperparameter optimization, and complex data preprocessing pitfalls.",
   "color": "lime",
   "category": "computer_science",
-  "subcategory": "IA e Machine Learning",
+  "subcategory": "AI & Machine Learning",
   "tags": [
     "ml",
     "ai",
