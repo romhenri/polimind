@@ -1,0 +1,128 @@
+{
+  "id": "llm-evaluators",
+  "name": "LLM Evaluators",
+  "description": "Test your knowledge of how large language models are measured and assessed.",
+  "color": "indigo",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "tags": [
+    "llm",
+    "evaluation",
+    "nlp",
+    "benchmarking"
+  ],
+  "hardness": "medium",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the primary goal of LLM evaluation?",
+      "options": [
+        "To replace human evaluators entirely",
+        "To measure performance on given tasks",
+        "To increase the model's parameter count",
+        "To shorten the model's training time"
+      ],
+      "correctAnswer": 1,
+      "explain": "Evaluation aims to quantify how well a model performs on targeted tasks so developers can compare and improve models."
+    },
+    {
+      "question": "Which metric is commonly used to evaluate LLM-generated text fluency?",
+      "options": [
+        "BLEU score",
+        "F1 score",
+        "ROUGE score",
+        "Perplexity"
+      ],
+      "correctAnswer": 3,
+      "explain": "Perplexity measures how well a language model predicts the next token, reflecting the fluency of generated text."
+    },
+    {
+      "question": "What does the acronym BLEU stand for in NLP evaluation?",
+      "options": [
+        "Bilingual Language Evaluation Understudy",
+        "Basic Language Error Understanding",
+        "Automated Language Evaluation Understudy",
+        "Binary Linguistic Encoding Utility"
+      ],
+      "correctAnswer": 0,
+      "explain": "BLEU stands for Bilingual Language Evaluation Understudy, a metric for comparing machine-translated text to reference translations."
+    },
+    {
+      "question": "Which evaluation approach compares LLM outputs against human-generated references?",
+      "options": [
+        "Intrinsic perplexity evaluation",
+        "Reference-based evaluation",
+        "Zero-shot prompting evaluation",
+        "Ablation study evaluation"
+      ],
+      "correctAnswer": 1,
+      "explain": "Reference-based evaluation measures output quality by comparing generated text to a set of human-written reference texts."
+    },
+    {
+      "question": "What is task-specific evaluation in the context of LLMs?",
+      "options": [
+        "Evaluating the model on a narrow task",
+        "Testing only the model's architecture",
+        "Measuring hardware inference speed",
+        "Comparing training dataset sources"
+      ],
+      "correctAnswer": 0,
+      "explain": "Task-specific evaluation focuses on how well the LLM performs on one particular task such as summarization or question answering."
+    },
+    {
+      "question": "Which evaluation metric estimates how well an LLM’s probability predictions align with the true distribution of tokens in a dataset?",
+      "options": [
+        "Perplexity",
+        "BLEU score",
+        "ROUGE metric",
+        "Accuracy"
+      ],
+      "correctAnswer": 0,
+      "explain": "Perplexity measures how well the model predicts token probabilities."
+    },
+    {
+      "question": "What is a key limitation of using BLEU scores for LLM evaluation?",
+      "options": [
+        "It requires GPU acceleration to run",
+        "It only works with code generation tasks",
+        "It misses paraphrases with equivalent meaning",
+        "It cannot be computed without human annotators"
+      ],
+      "correctAnswer": 2,
+      "explain": "BLEU relies on exact n-gram matches to a reference, so it can penalize paraphrases that are semantically equivalent."
+    },
+    {
+      "question": "Which method evaluates an LLM by prompting it to judge its own outputs?",
+      "options": [
+        "Reinforcement learning from human feedback",
+        "Self-evaluation or LLM-as-a-judge",
+        "Adversarial testing",
+        "Parameter pruning"
+      ],
+      "correctAnswer": 1,
+      "explain": "LLM-as-a-judge is a method where a powerful model is used to score the outputs of another model, acting as an automated evaluator."
+    },
+    {
+      "question": "What does hallucination refer to in LLM evaluation?",
+      "options": [
+        "When the model states false facts confidently",
+        "When the model refuses to answer a valid prompt",
+        "When the model outputs code instead of prose",
+        "When the model responds more slowly than usual"
+      ],
+      "correctAnswer": 0,
+      "explain": "Hallucination occurs when the model produces information that sounds confident but is factually wrong or fabricated."
+    },
+    {
+      "question": "What evaluation metric quantifies the percentage of an LLM's factual statements that are supported by evidence from a trusted source?",
+      "options": [
+        "BLEU precision score",
+        "ROUGE-L overlap score",
+        "Groundedness score",
+        "Perplexity"
+      ],
+      "correctAnswer": 2,
+      "explain": "It measures factual consistency against a trusted source."
+    }
+  ]
+}
