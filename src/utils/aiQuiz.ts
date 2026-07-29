@@ -1,7 +1,7 @@
 import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
 import { AVAILABLE_COLORS } from '@/utils/colorMapper'
 import { formatSubject } from '@/utils/formatSubject'
-import { CATEGORIES } from '@/data/categories'
+import { CATEGORIES, getCategoryById } from '@/data/categories'
 
 const OPENROUTER_BASE = 'https://openrouter.ai/api/v1/chat/completions'
 const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models'
@@ -55,9 +55,12 @@ const QUESTION_SCHEMA = {
   required: ['question', 'options', 'correctAnswer', 'explain'],
 }
 
-const RESPONSE_SCHEMA = {
-  type: 'object',
-  properties: {
+function subcategoriesFor(category: string): string[] {
+  return getCategoryById(category)?.subcategories ?? []
+}
+
+function buildResponseSchema(subcategories: string[]): object {
+  const properties: Record<string, unknown> = {
     id: { type: 'string' },
     name: { type: 'string' },
     description: { type: 'string' },
@@ -69,11 +72,19 @@ const RESPONSE_SCHEMA = {
       type: 'array',
       items: QUESTION_SCHEMA,
     },
-  },
-  required: ['id', 'name', 'description', 'color', 'category', 'tags', 'hardness', 'questions'],
+  }
+  const required = ['id', 'name', 'description', 'color', 'category', 'tags', 'hardness', 'questions']
+
+  if (subcategories.length > 0) {
+    properties.subcategory = { type: 'string', enum: [...subcategories] }
+    required.push('subcategory')
+  }
+
+  return { type: 'object', properties, required }
 }
 
 function buildPrompt(subject: string, count: number, category: string): string {
+  const subcategories = subcategoriesFor(category)
   return [
     'You are a quiz generator for "polimind", a learning platform.',
     'Generate one high-quality multiple-choice quiz as a single JSON object that follows the exact structure required by the platform.',
@@ -84,6 +95,9 @@ function buildPrompt(subject: string, count: number, category: string): string {
     '- "description": one engaging sentence describing the quiz.',
     `- "color": pick exactly ONE from this list: ${COLOR_KEYS.join(', ')}.`,
     `- "category": use exactly "${category}".`,
+    subcategories.length > 0
+      ? `- "subcategory": pick exactly ONE from this list that best fits the subject: ${subcategories.join(', ')}.`
+      : '',
     '- "tags": 2 to 4 lowercase keywords.',
     `- "hardness": one of ${HARDNESS_VALUES.join(', ')}.`,
     `- "questions": exactly ${count} items. Each item has:`,
@@ -97,11 +111,14 @@ function buildPrompt(subject: string, count: number, category: string): string {
     '',
     `Subject: ${subject}`,
     `Number of questions: ${count}`,
-  ].join('\n')
+  ]
+    .filter(Boolean)
+    .join('\n')
 }
 
 export function buildCopyPrompt(subject: string, count: number, category: string): string {
   const subjectLine = subject.trim() || '<describe your subject here>'
+  const subcategories = subcategoriesFor(category)
   return [
     'You are a quiz generator for "polimind", a learning platform.',
     'Create one high-quality multiple-choice quiz about the subject below and return it as a SINGLE JSON object — no markdown, no code fences, no comments, no extra text.',
@@ -113,6 +130,7 @@ export function buildCopyPrompt(subject: string, count: number, category: string
     '  "description": "One engaging sentence describing the quiz.",',
     `  "color": "one of: ${COLOR_KEYS.join(', ')}",`,
     `  "category": "${category}",`,
+    subcategories.length > 0 ? `  "subcategory": "one of: ${subcategories.join(', ')}",` : '',
     '  "tags": ["two", "to", "four", "keywords"],',
     `  "hardness": "one of: ${HARDNESS_VALUES.join(', ')}",`,
     '  "type": "options",',
@@ -129,6 +147,9 @@ export function buildCopyPrompt(subject: string, count: number, category: string
     'Rules:',
     '- "id": lowercase kebab-case slug from the subject, only [a-z0-9-], no spaces.',
     `- "color": pick exactly ONE from: ${COLOR_KEYS.join(', ')}.`,
+    subcategories.length > 0
+      ? `- "subcategory": pick exactly ONE from this list that best fits the subject: ${subcategories.join(', ')}.`
+      : '',
     '- "tags": 2 to 4 lowercase keywords.',
     `- "hardness": exactly one of ${HARDNESS_VALUES.join(', ')}.`,
     '- "type": keep it as "options".',
@@ -141,7 +162,9 @@ export function buildCopyPrompt(subject: string, count: number, category: string
     '',
     `Subject: ${subjectLine}`,
     `Number of questions: ${count}`,
-  ].join('\n')
+  ]
+    .filter(Boolean)
+    .join('\n')
 }
 
 function buildQuestionPrompt(quiz: QuizMetadata, index: number): string {
@@ -279,6 +302,12 @@ function normalizeQuiz(raw: unknown, fallbackSubject: string): QuizMetadata {
   const hardness = HARDNESS_VALUES.includes(data.hardness as (typeof HARDNESS_VALUES)[number])
     ? (data.hardness as (typeof HARDNESS_VALUES)[number])
     : 'medium'
+  const category = typeof data.category === 'string' && data.category.trim() ? data.category.trim() : 'general'
+  const validSubcategories = subcategoriesFor(category)
+  const subcategory =
+    typeof data.subcategory === 'string' && validSubcategories.includes(data.subcategory.trim())
+      ? data.subcategory.trim()
+      : undefined
 
   return {
     id,
@@ -286,7 +315,8 @@ function normalizeQuiz(raw: unknown, fallbackSubject: string): QuizMetadata {
     description: typeof data.description === 'string' ? data.description.trim() : '',
     icon: '',
     color,
-    category: typeof data.category === 'string' && data.category.trim() ? data.category.trim() : 'general',
+    category,
+    ...(subcategory ? { subcategory } : {}),
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     hardness,
     type: 'options',
@@ -473,11 +503,12 @@ export async function generateQuiz(
 ): Promise<GeneratedQuiz> {
   assertApiKey(settings)
   const prompt = buildPrompt(subject, count, category)
+  const schema = buildResponseSchema(subcategoriesFor(category))
   const { result, model } = await withModelFallback(
     providerModels(settings.provider),
     providerName(settings.provider),
     async (m) => {
-      const { parsed, model: usedModel } = await callProvider(settings, m, prompt, RESPONSE_SCHEMA)
+      const { parsed, model: usedModel } = await callProvider(settings, m, prompt, schema)
       return { result: normalizeQuiz(parsed, subject), model: usedModel }
     }
   )
@@ -625,6 +656,9 @@ function extractPartialMeta(buffer: string): Partial<QuizMetadata> | null {
   const categoryMatch = buffer.match(/"category"\s*:\s*"((?:[^"\\]|\\.)*)"/);
   if (categoryMatch) { meta.category = categoryMatch[1]; found = true }
 
+  const subcategoryMatch = buffer.match(/"subcategory"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+  if (subcategoryMatch) { meta.subcategory = subcategoryMatch[1]; found = true }
+
   const idMatch = buffer.match(/"id"\s*:\s*"((?:[^"\\]|\\.)*)"/);
   if (idMatch) { meta.id = idMatch[1]; found = true }
 
@@ -666,6 +700,7 @@ export async function generateQuizStream(
           description: result.quiz.description,
           color: result.quiz.color,
           category: result.quiz.category,
+          subcategory: result.quiz.subcategory,
         })
       }
       const questions = result.quiz.questions as OptionsQuestion[]
