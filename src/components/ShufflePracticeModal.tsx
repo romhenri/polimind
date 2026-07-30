@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { FaTimes, FaRandom } from 'react-icons/fa'
-import { QuizMetadata } from '@/types/quiz'
+import { QuizMetadata, quizQuestionCount } from '@/types/quiz'
 import { CATEGORIES, getCategoryById } from '@/data/categories'
 
 const COUNT_OPTIONS = [5, 10, 20, 30]
@@ -57,7 +57,7 @@ export default function ShufflePracticeModal({
     [categoryQuizzes, selectedIds]
   )
   const totalAvailable = useMemo(
-    () => selectedQuizzes.reduce((sum, q) => sum + q.questions.length, 0),
+    () => selectedQuizzes.reduce((sum, q) => sum + quizQuestionCount(q), 0),
     [selectedQuizzes]
   )
   const runLength = Math.min(count, totalAvailable)
@@ -189,7 +189,7 @@ export default function ShufflePracticeModal({
                               </span>
                             </span>
                             <span className="flex-shrink-0 text-xs text-stone-400 dark:text-stone-500">
-                              {quiz.questions.length} Q
+                              {quizQuestionCount(quiz)} Q
                             </span>
                           </label>
                         )

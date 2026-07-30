@@ -7,7 +7,7 @@ import DynamicModeToggle from "@/components/DynamicModeToggle";
 import ShufflePracticeModal from "@/components/ShufflePracticeModal";
 import { FaSearch, FaTimes, FaRandom } from "react-icons/fa";
 import { useQuizMode } from "@/contexts/QuizModeContext";
-import { QuizMetadata } from "@/types/quiz";
+import { QuizMetadata, quizQuestionCount } from "@/types/quiz";
 import { parseQuizSeq } from "@/utils/quizSeq";
 import { storeShuffleSelection } from "@/utils/shufflePractice";
 import { CATEGORIES, getCategoryById } from "@/data/categories";
@@ -48,11 +48,14 @@ export default function Home() {
               color: data.color,
               category: data.category,
               subcategory: data.subcategory,
-              questions: data.questions,
+              questions: data.questions ?? [],
               tags: data.tags,
               type: data.type,
               lang: data.lang,
               hardness: data.hardness ?? "easy",
+              config: data.config,
+              facets: data.facets,
+              entities: data.entities,
               ...(seq !== undefined ? { seq } : {}),
             };
           })
@@ -227,7 +230,7 @@ export default function Home() {
               key={subject.id}
               subject={{
                 ...subject,
-                questions: subject.questions.length,
+                questions: quizQuestionCount(subject),
               }}
               index={index}
               onTagClick={(tag) => setSearchQuery(tag)}

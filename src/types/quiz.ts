@@ -71,6 +71,24 @@ export interface QuizMetadata {
   seq?: number
   lang?: string
   type?: QuizType
+  config?: ClassifyConfig
+  facets?: ClassifyFacet[]
+  entities?: ClassifyEntity[]
+}
+
+export function quizQuestionCount(
+  quiz: Pick<QuizMetadata, 'type' | 'questions' | 'entities' | 'config'>
+): number {
+  if (normalizeQuizType(quiz.type) === 'classify' && Array.isArray(quiz.entities)) {
+    if (quiz.config?.mode === 'sequential') {
+      return quiz.entities.reduce(
+        (acc, entity) => acc + Object.keys(entity.answers ?? {}).length,
+        0
+      )
+    }
+    return quiz.entities.length
+  }
+  return Array.isArray(quiz.questions) ? quiz.questions.length : 0
 }
 
 export interface Answer {

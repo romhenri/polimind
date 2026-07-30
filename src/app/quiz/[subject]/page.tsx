@@ -4,12 +4,14 @@ import { useState, useEffect, useRef, use } from 'react'
 import QuestionCard from '@/components/QuestionCard'
 import QuizResults from '@/components/QuizResults'
 import {
+  ClassifyQuizData,
   Question,
   QuizState,
   QuizType,
   normalizeQuizType,
   isAnswerCorrect,
 } from '@/types/quiz'
+import { generateClassifyQuestions } from '@/utils/classify/generate'
 import { FaArrowLeft } from 'react-icons/fa'
 import Link from 'next/link'
 import { formatSubject } from '@/utils/formatSubject'
@@ -25,6 +27,7 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
   const [category, setCategory] = useState<string>('')
   const [mathEnabled, setMathEnabled] = useState(false)
   const [quizType, setQuizType] = useState<QuizType>('options')
+  const [classifyData, setClassifyData] = useState<ClassifyQuizData | null>(null)
   const [quizLang, setQuizLang] = useState<string | undefined>(undefined)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -68,7 +71,13 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
           ? (preferPortuguese ? parsed[0] : (parsed[1] || parsed[0]))
           : parsed
         const type = normalizeQuizType(data.type)
-        setQuestions(shuffleAllQuestionOptions(data.questions, type))
+        if (type === 'classify') {
+          setQuestions(generateClassifyQuestions(data, Math.floor(Date.now() / 1000)))
+          setClassifyData(data)
+        } else {
+          setQuestions(shuffleAllQuestionOptions(data.questions, type))
+          setClassifyData(null)
+        }
         setCategory(data.category || 'general')
         const tags = Array.isArray(data.tags) ? data.tags : []
         setMathEnabled(
@@ -78,7 +87,11 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
         setQuizLang(data.lang)
         setLoading(false)
       } catch (err) {
-        setError('Error loading questions. Please try again.')
+        setError(
+          err instanceof Error && err.message.startsWith('[classify]')
+            ? err.message
+            : 'Error loading questions. Please try again.'
+        )
         setLoading(false)
       }
     }
@@ -168,7 +181,11 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
 
   const handleRestart = () => {
     clearAutoAdvance()
-    setQuestions(prev => shuffleAllQuestionOptions(prev, quizType))
+    if (classifyData) {
+      setQuestions(generateClassifyQuestions(classifyData, Math.floor(Date.now() / 1000)))
+    } else {
+      setQuestions(prev => shuffleAllQuestionOptions(prev, quizType))
+    }
     setQuizState({
       currentQuestionIndex: 0,
       answers: [],

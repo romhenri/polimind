@@ -116,6 +116,10 @@ export default function QuestionCard({
     return null
   }
 
+  if (quizType === 'classify' && (!('entity' in question) || !question.options)) {
+    return null
+  }
+
   const choiceDisabled = interactionLocked || showResult || selectedAnswer !== null
 
   const handleAnswerClick = (index: number) => {
@@ -187,6 +191,19 @@ export default function QuestionCard({
         )}
       </div>
 
+      {quizType === 'classify' && 'entity' in question && (
+        <div className="p-3 mb-3 text-center border rounded-lg sm:p-4 sm:mb-4 bg-stone-100 dark:bg-stone-800 border-stone-200 dark:border-stone-600">
+          <div className="text-xl font-bold tracking-wide font-display text-stone-800 dark:text-white sm:text-2xl">
+            {question.entity}
+          </div>
+          {question.subtitle && (
+            <div className="mt-0.5 text-xs text-stone-500 dark:text-stone-400 sm:text-sm">
+              {question.subtitle}
+            </div>
+          )}
+        </div>
+      )}
+
       <h2 className="mb-2 text-base font-bold text-left text-stone-800 dark:text-white sm:mb-4 sm:text-xl md:mb-6 md:text-2xl">
         <MathText mathEnabled={mathEnabled}>{question.question}</MathText>
       </h2>
@@ -243,6 +260,43 @@ export default function QuestionCard({
               </span>
             </button>
           ))}
+        </div>
+      )}
+
+      {quizType === 'classify' && 'entity' in question && question.options && (
+        <div className="flex flex-col gap-2 md:gap-4">
+          {question.options.map((option, index) => {
+            const hint = question.optionHints?.[index]
+            return (
+              <button
+                key={index}
+                type="button"
+                onClick={() => handleAnswerClick(index)}
+                disabled={choiceDisabled}
+                className={`w-full p-2 rounded-lg text-left font-semibold transition-all duration-300 sm:p-4 ${getAnswerClass(index)} ${
+                  choiceDisabled
+                    ? 'cursor-not-allowed'
+                    : 'cursor-pointer transform hover:scale-102'
+                }`}
+              >
+                <span className="flex items-center gap-2">
+                  <span className="flex items-center justify-center flex-shrink-0 p-2 text-sm font-bold rounded-full w-7 h-7 text-stone-800 bg-stone-200 dark:bg-stone-600 dark:text-white sm:w-8 sm:h-8 sm:text-base">
+                    {String.fromCharCode(65 + index)}
+                  </span>
+                  <span className="flex flex-col text-left">
+                    <span className="text-sm text-stone-800 dark:text-stone-200 sm:text-base">
+                      {option}
+                    </span>
+                    {hint && (
+                      <span className="text-xs text-stone-500 dark:text-stone-400">
+                        {hint}
+                      </span>
+                    )}
+                  </span>
+                </span>
+              </button>
+            )
+          })}
         </div>
       )}
 

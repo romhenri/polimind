@@ -1,4 +1,5 @@
 import { Question, QuizMetadata, QuizType, normalizeQuizType } from '@/types/quiz'
+import { generateClassifyQuestions } from '@/utils/classify/generate'
 import { shuffleQuestionOptions } from '@/utils/shuffleOptions'
 
 export interface PracticeQuestion {
@@ -46,7 +47,19 @@ function poolQuestions(quizzes: QuizMetadata[]): PracticeQuestion[] {
   for (const quiz of quizzes) {
     const quizType = normalizeQuizType(quiz.type)
     const mathEnabled = isMathQuiz(quiz)
-    for (const question of quiz.questions) {
+    const questions =
+      quizType === 'classify' && quiz.facets && quiz.entities
+        ? generateClassifyQuestions(
+            {
+              id: quiz.id,
+              config: quiz.config,
+              facets: quiz.facets,
+              entities: quiz.entities,
+            },
+            Math.floor(Date.now() / 1000)
+          )
+        : quiz.questions ?? []
+    for (const question of questions) {
       pool.push({
         question: shuffleQuestionOptions(question, quizType),
         quizType,

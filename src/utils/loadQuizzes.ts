@@ -1,3 +1,5 @@
+import { quizQuestionCount } from '@/types/quiz'
+
 export interface LoadedQuiz {
   id: string
   name: string
@@ -25,7 +27,7 @@ async function fetchQuiz(slug: string): Promise<LoadedQuiz | null> {
       color: data.color ?? 'gray',
       category: data.category ?? 'general',
       subcategory: typeof data.subcategory === 'string' ? data.subcategory : undefined,
-      questions: Array.isArray(data.questions) ? data.questions.length : 0,
+      questions: quizQuestionCount(data),
       tags: Array.isArray(data.tags) ? data.tags : [],
       hardness: data.hardness ?? 'easy',
     }
