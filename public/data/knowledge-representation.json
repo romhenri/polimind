@@ -1,0 +1,128 @@
+{
+  "id": "knowledge-representation",
+  "name": "Representação do Conhecimento e Raciocínio",
+  "description": "Avalie seus conhecimentos sobre formalização de conhecimento, trade-offs e paradigmas em agentes inteligentes.",
+  "color": "purple",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "tags": [
+    "ia",
+    "conhecimento",
+    "agentes",
+    "logica"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "Como se conceitua a relação de significado entre dados, informação e conhecimento na representação formal?",
+      "options": [
+        "Dados são conclusões lógicas abstratas obtidas após a execução de inferências em agentes.",
+        "Informação e conhecimento são termos idênticos que descrevem unicamente códigos em memória.",
+        "Dados são valores brutos, enquanto conhecimento envolve proposições simbólicas sobre o mundo.",
+        "Conhecimento refere-se exclusivamente a medições numéricas sem interpretação semântica."
+      ],
+      "correctAnswer": 2,
+      "explain": "Conhecimento consiste em representações simbólicas e proposições sobre o estado do mundo e suas relações."
+    },
+    {
+      "question": "Qual é o dilema ou trade-off fundamental estudado na área de Representação do Conhecimento e Raciocínio (KR&R)?",
+      "options": [
+        "O equilíbrio entre o tamanho da memória física utilizada e a velocidade de leitura em disco.",
+        "A relação de proporcionalidade inversa entre poder expressivo e eficiência computacional.",
+        "A escolha exclusiva entre utilizar sistemas baseados em regras ou algoritmos genéticos.",
+        "A divergência entre o tempo de pré-processamento dos dados e a fase de treinamento."
+      ],
+      "correctAnswer": 1,
+      "explain": "Linguagens mais expressivas permitem descrever problemas complexos, mas tornam o raciocínio computacionalmente mais custoso."
+    },
+    {
+      "question": "Qual é a função do Mecanismo de Inferência em um Agente Baseado em Conhecimento (Agente-BC)?",
+      "options": [
+        "Coletar dados brutos do ambiente através de sensores físicos antes do processamento.",
+        "Derivar novas sentenças lógicas e conclusões válidas a partir dos fatos presentes na base.",
+        "Remover inconsistências e ruídos de tabelas relacionais em banco de dados operacionais.",
+        "Ajustar os pesos das conexões sinápticas com base em funções de custo probabilísticas."
+      ],
+      "correctAnswer": 1,
+      "explain": "O mecanismo de inferência opera sobre as sentenças da Base de Conhecimento para deduzir novas informações válidas."
+    },
+    {
+      "question": "Qual metáfora conceitual fundamenta o paradigma Simbólico da Inteligência Artificial?",
+      "options": [
+        "Metáfora cerebral baseada em unidades interligadas de processamento em paralelo.",
+        "Metáfora da seleção natural com reprodução, variação genética e adaptação.",
+        "Metáfora linguística focada no processamento e manipulação formal de símbolos.",
+        "Metáfora probabilística baseada em estimativas bayesianas para cenários incertos."
+      ],
+      "correctAnswer": 2,
+      "explain": "O paradigma simbólico fundamenta-se na metáfora linguística, manipulando símbolos e regras formais de raciocínio."
+    },
+    {
+      "question": "Qual paradigma da IA utiliza a metáfora cerebral e redes de processamento interligadas?",
+      "options": [
+        "Paradigma Simbólico.",
+        "Paradigma Conexionista.",
+        "Paradigma Evolucionista.",
+        "Paradigma Probabilístico."
+      ],
+      "correctAnswer": 1,
+      "explain": "O paradigma conexionista inspira-se no funcionamento do cérebro para estruturar redes neurais artificiais."
+    },
+    {
+      "question": "O que diferencia um Agente Baseado em Conhecimento de um agente reativo simples?",
+      "options": [
+        "O Agente-BC opera apenas com entradas numéricas contínuas sem utilizar regras abstratas.",
+        "O Agente-BC combina percepções atuais com conhecimento interno para inferir estados ocultos.",
+        "O agente reativo possui uma base de regras dedutivas maior para tomar decisões em tempo real.",
+        "O Agente-BC executa exclusivamente mapeamentos diretos do tipo condição-ação sem raciocínio."
+      ],
+      "correctAnswer": 1,
+      "explain": "Agentes-BC mantêm um estado interno e realizam inferências sobre aspectos não diretamente observáveis do ambiente."
+    },
+    {
+      "question": "O que definem a sintaxe e a semântica de uma linguagem de representação do conhecimento?",
+      "options": [
+        "A sintaxe define a estrutura das sentenças válidas e a semântica estabelece seu significado.",
+        "A sintaxe calcula a velocidade do raciocínio e a semântica mede o consumo de memória.",
+        "A semântica especifica os símbolos permitidos e a sintaxe valida os resultados estatísticos.",
+        "Ambas tratam unicamente do formato de armazenamento dos dados no banco de dados."
+      ],
+      "correctAnswer": 0,
+      "explain": "A sintaxe determina quais configurações de símbolos formam sentenças, enquanto a semântica atribui o significado no mundo."
+    },
+    {
+      "question": "Qual é a característica do paradigma Evolucionista na Inteligência Artificial?",
+      "options": [
+        "A dedução formal de teoremas através de lógica de primeira ordem e axiomas.",
+        "A aplicação de conceitos de reprodução, mutação e seleção natural para buscar soluções.",
+        "A inferência de distribuições condicionais baseada em grafos direcionados e probabilidades.",
+        "A ordenação de dados estruturados em cubos multidimensionais para análises OLAP."
+      ],
+      "correctAnswer": 1,
+      "explain": "O paradigma evolucionista inspira-se nos mecanismos de evolução natural e genética para otimização e busca."
+    },
+    {
+      "question": "Por que a Lógica Proposicional apresenta limitações quando comparada à Lógica de Primeira Ordem?",
+      "options": [
+        "Pois não permite o uso de conectivos booleanos como conjunção e disjunção.",
+        "Pois é incapaz de expressar de forma concisa declarações sobre objetos e suas relações.",
+        "Pois exige o treinamento de pesos sinápticos para inferir novos fatos no ambiente.",
+        "Pois é limitada a lidar com dados numéricos contínuos em vez de variáveis discretas."
+      ],
+      "correctAnswer": 1,
+      "explain": "A Lógica Proposicional exige regras individuais para cada elemento, enquanto a de Primeira Ordem adiciona objetos, predicados e quantificadores."
+    },
+    {
+      "question": "Em que consiste a operação primária 'Tell' na interação com uma Base de Conhecimento?",
+      "options": [
+        "Consultar a base para descobrir qual ação o agente deve executar no momento.",
+        "Adicionar novas sentenças e percepções aprendidas sobre o ambiente à base.",
+        "Apagar todo o histórico de inferências anteriores para economizar memória.",
+        "Exportar o conhecimento para um formato legível por usuários não especialistas."
+      ],
+      "correctAnswer": 1,
+      "explain": "A operação Tell serve para inserir novos fatos e percepções na Base de Conhecimento do agente."
+    }
+  ]
+}
