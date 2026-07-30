@@ -48,7 +48,7 @@ export default function ShufflePracticeRunner({
 
   useEffect(() => clearAutoAdvance, [])
 
-  const advance = () => {
+  const advance = (delayMs = 1500) => {
     clearAutoAdvance()
     autoAdvanceRef.current = setTimeout(() => {
       autoAdvanceRef.current = null
@@ -59,7 +59,7 @@ export default function ShufflePracticeRunner({
         }
         return { ...prev, isFinished: true }
       })
-    }, 1500)
+    }, delayMs)
   }
 
   const handleAnswer = (selectedAnswer: number, timeTaken: number) => {
@@ -105,17 +105,7 @@ export default function ShufflePracticeRunner({
       }
     })
 
-    clearAutoAdvance()
-    autoAdvanceRef.current = setTimeout(() => {
-      autoAdvanceRef.current = null
-      setQuizState((prev) => {
-        if (practice.length === 0) return prev
-        if (prev.currentQuestionIndex < practice.length - 1) {
-          return { ...prev, currentQuestionIndex: prev.currentQuestionIndex + 1 }
-        }
-        return { ...prev, isFinished: true }
-      })
-    }, 1000)
+    advance(1000)
   }
 
   const handleNext = () => {

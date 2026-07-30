@@ -12,7 +12,7 @@ function isMathQuiz(quiz: QuizMetadata): boolean {
   return (quiz.tags ?? []).some((tag) => tag.toLowerCase() === 'math')
 }
 
-export function poolQuestions(quizzes: QuizMetadata[]): PracticeQuestion[] {
+function poolQuestions(quizzes: QuizMetadata[]): PracticeQuestion[] {
   const pool: PracticeQuestion[] = []
   for (const quiz of quizzes) {
     const quizType = normalizeQuizType(quiz.type)

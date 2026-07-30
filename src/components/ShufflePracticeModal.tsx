@@ -165,7 +165,7 @@ export default function ShufflePracticeModal({
                             key={quiz.id}
                             className={`flex cursor-pointer items-center justify-between gap-3 rounded-lg border-2 px-3 py-2.5 transition-colors ${
                               checked
-                                ? 'border-clay-400 bg-clay-50 dark:border-clay-500 dark:bg-stone-800'
+                                ? 'border-stone-300 bg-black/[0.04] dark:border-stone-600 dark:bg-white/[0.06]'
                                 : 'border-stone-200 hover:border-stone-300 dark:border-stone-700 dark:hover:border-stone-600'
                             }`}
                           >
