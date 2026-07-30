@@ -10,6 +10,7 @@ import { useQuizMode } from "@/contexts/QuizModeContext";
 import { QuizMetadata, quizQuestionCount } from "@/types/quiz";
 import { parseQuizSeq } from "@/utils/quizSeq";
 import { storeShuffleSelection } from "@/utils/shufflePractice";
+import { fetchQuizJson } from "@/utils/loadQuizzes";
 import { CATEGORIES, getCategoryById } from "@/data/categories";
 
 export default function Home() {
@@ -34,10 +35,7 @@ export default function Home() {
         const { slugs } = (await listRes.json()) as { slugs: string[] };
         const loadedSubjects = await Promise.all(
           slugs.map(async (slug) => {
-            const response = await fetch(`/data/${slug}.json`, {
-              cache: "no-store",
-            });
-            const parsed = await response.json();
+            const parsed = await fetchQuizJson(slug);
             const data = Array.isArray(parsed) ? (parsed[1] || parsed[0]) : parsed;
             const seq = parseQuizSeq(data.seq);
             return {

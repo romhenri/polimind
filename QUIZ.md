@@ -20,7 +20,7 @@
 | `hardness` | no | `easy` \| `medium` \| `hard`; omitted → treated as `easy` in the listing. |
 | `seq` | no | Integer in JSON as **number** or **numeric string** (e.g. `"0"`, `"12"`). **Home list order** (see §4): after `category` and first `tags[]` value, lower `seq` sorts first. Omit or invalid → treated as **+∞** (any finite `seq` is listed before). |
 | `lang` | no | e.g. `pt` — affects True/False labels and helper copy where applicable. |
-| `type` | no | `options` (default) or `bool` — sets question shape. |
+| `type` | no | `options` (default), `bool`, or `classify` — sets question shape. |
 
 ## 3.1. `options` type (default)
 
@@ -42,6 +42,26 @@ Each item:
 - `explain`: optional string
 
 (User answer: index `1` = true, `0` = false; see `isAnswerCorrect` in `src/types/quiz.ts`.)
+
+## 3.3. `classify` type
+
+In the root JSON: `"type": "classify"`. Instead of a `questions` array, the quiz declares `facets` and `entities`; the engine expands them into questions at load time (`src/utils/classify/generate.ts`) and validates the data (`src/utils/classify/validate.ts` — invalid data fails loudly with the quiz id and JSON path).
+
+Root fields:
+
+- `config` (optional):
+  - `mode`: `"sequential"` asks every facet in an entity's `answers` back to back, in `facets` declaration order; `"single"` (default) picks one random facet per entity.
+  - `optionCount`: choices shown, including the correct one. Default 4; clamped to the facet's group count.
+  - `shuffleEntities`: default `true`.
+- `facets[]`: classification dimensions.
+  - `id`, `label`, `prompt` (supports the `{entity}` placeholder).
+  - `groups[]`: `id`, `label`, optional `hint` (rendered as secondary text), optional `parentGroup`.
+  - optional `parent`: id of another facet; when set, every group needs a valid `parentGroup` in that facet, and distractor sampling prefers up to 2 sibling groups (same `parentGroup` as the correct answer).
+- `entities[]`: `id`, `entity` (display name), optional `subtitle`, `answers` (facet id → group id, at least one), optional `explain` (facet id → text shown after answering).
+
+One question = one (entity, facet) pair. The correct group plus sampled distractors from the same facet's pool are shuffled with a per-session seed (stable across re-renders, re-rolled on restart). Validation rules: answers resolve to real groups, ≥2 groups per facet, valid `parent`/`parentGroup` references, unique facet/group/entity ids.
+
+Classify quizzes live in `public/data/classify/<slug>.json`; the listing API and quiz page also look there. Seed examples: `public/data/classify/dino-classification.json` (two facets, sequential) and `public/data/classify/ml-learning-paradigms.json` (single facet).
 
 ## 4. Listing on the home page (automatic)
 

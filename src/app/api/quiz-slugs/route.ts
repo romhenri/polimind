@@ -7,6 +7,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const DATA_DIR = path.join(process.cwd(), "public", "data");
+const QUIZ_DIRS = [DATA_DIR, path.join(DATA_DIR, "classify")];
 
 function collectQuizSlugs(filenames: string[]): string[] {
   const slugs: string[] = [];
@@ -41,9 +42,9 @@ function compareListingKeys(a: SortKey, b: SortKey): number {
   return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
 }
 
-async function loadListingKey(slug: string): Promise<SortKey> {
+async function loadListingKey(slug: string, dir: string): Promise<SortKey> {
   try {
-    const raw = await readFile(path.join(DATA_DIR, `${slug}.json`), "utf8");
+    const raw = await readFile(path.join(dir, `${slug}.json`), "utf8");
     const parsed = JSON.parse(raw);
     const data = (Array.isArray(parsed) ? (parsed[1] || parsed[0]) : parsed) as Record<string, unknown>;
     const category =
@@ -66,9 +67,16 @@ async function loadListingKey(slug: string): Promise<SortKey> {
 
 export async function GET() {
   try {
-    const filenames = await readdir(DATA_DIR);
-    const slugs = collectQuizSlugs(filenames);
-    const keys = await Promise.all(slugs.map(loadListingKey));
+    const entries: { slug: string; dir: string }[] = [];
+    for (const dir of QUIZ_DIRS) {
+      const filenames = await readdir(dir).catch(() => [] as string[]);
+      for (const slug of collectQuizSlugs(filenames)) {
+        entries.push({ slug, dir });
+      }
+    }
+    const keys = await Promise.all(
+      entries.map(({ slug, dir }) => loadListingKey(slug, dir))
+    );
     keys.sort(compareListingKeys);
     return NextResponse.json({ slugs: keys.map((k) => k.slug) });
   } catch {

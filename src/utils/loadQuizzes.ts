@@ -1,5 +1,19 @@
 import { quizQuestionCount } from '@/types/quiz'
 
+const QUIZ_DATA_BASES = ['/data', '/data/classify']
+
+export async function fetchQuizJson(slug: string): Promise<any | null> {
+  for (const base of QUIZ_DATA_BASES) {
+    try {
+      const response = await fetch(`${base}/${slug}.json`, { cache: 'no-store' })
+      if (response.ok) return await response.json()
+    } catch {
+      continue
+    }
+  }
+  return null
+}
+
 export interface LoadedQuiz {
   id: string
   name: string
@@ -15,9 +29,8 @@ export interface LoadedQuiz {
 
 async function fetchQuiz(slug: string): Promise<LoadedQuiz | null> {
   try {
-    const response = await fetch(`/data/${slug}.json`, { cache: 'no-store' })
-    if (!response.ok) return null
-    const parsed = await response.json()
+    const parsed = await fetchQuizJson(slug)
+    if (parsed === null) return null
     const data = Array.isArray(parsed) ? parsed[1] || parsed[0] : parsed
     return {
       id: data.id ?? slug,

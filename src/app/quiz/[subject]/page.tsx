@@ -18,6 +18,7 @@ import { formatSubject } from '@/utils/formatSubject'
 import { useQuizMode } from '@/contexts/QuizModeContext'
 import { useProfile } from '@/contexts/ProfileContext'
 import { shuffleAllQuestionOptions } from '@/utils/shuffleOptions'
+import { fetchQuizJson } from '@/utils/loadQuizzes'
 
 export default function QuizPage({ params }: { params: Promise<{ subject: string }> }) {
   const resolvedParams = use(params)
@@ -62,11 +63,10 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
   useEffect(() => {
     const loadQuestions = async () => {
       try {
-        const response = await fetch(`/data/${resolvedParams.subject}.json`)
-        if (!response.ok) {
+        const parsed = await fetchQuizJson(resolvedParams.subject)
+        if (parsed === null) {
           throw new Error('Subject not found')
         }
-        const parsed = await response.json()
         const data = Array.isArray(parsed)
           ? (preferPortuguese ? parsed[0] : (parsed[1] || parsed[0]))
           : parsed

@@ -285,7 +285,7 @@ export default function QuestionCard({
                   </span>
                   <span className="flex flex-col text-left">
                     <span className="text-sm text-stone-800 dark:text-stone-200 sm:text-base">
-                      {option}
+                      <MathText mathEnabled={mathEnabled}>{option}</MathText>
                     </span>
                     {hint && (
                       <span className="text-xs text-stone-500 dark:text-stone-400">
