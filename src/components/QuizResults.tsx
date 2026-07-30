@@ -16,6 +16,7 @@ import {
   FaRedo,
   FaHome,
   FaArrowRight,
+  FaRandom,
 } from 'react-icons/fa'
 import { FaTrophy, FaThumbsUp, FaDumbbell } from 'react-icons/fa6'
 import {
@@ -76,6 +77,12 @@ function StatGroup({
   )
 }
 
+export interface QuestionMeta {
+  quizType: QuizType
+  lang?: string
+  mathEnabled: boolean
+}
+
 interface QuizResultsProps {
   questions: Question[]
   quizType: QuizType
@@ -85,6 +92,10 @@ interface QuizResultsProps {
   category: string
   mathEnabled?: boolean
   onRestart: () => void
+  questionMeta?: QuestionMeta[]
+  onReshuffle?: () => void
+  onExit?: () => void
+  recordCompletion?: boolean
 }
 
 export default function QuizResults({
@@ -96,14 +107,22 @@ export default function QuizResults({
   category,
   mathEnabled = false,
   onRestart,
+  questionMeta,
+  onReshuffle,
+  onExit,
+  recordCompletion = true,
 }: QuizResultsProps) {
   const { completeQuiz } = useProfile()
   const [showConfetti, setShowConfetti] = useState(true)
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 })
 
+  const metaFor = (index: number): QuestionMeta =>
+    questionMeta?.[index] ?? { quizType, lang: quizLang, mathEnabled }
+
   useEffect(() => {
+    if (!recordCompletion) return
     completeQuiz(subject, category)
-  }, [subject, category, completeQuiz])
+  }, [subject, category, completeQuiz, recordCompletion])
 
   useEffect(() => {
     setWindowSize({
@@ -210,7 +229,24 @@ export default function QuizResults({
 
       <div className="flex flex-col items-center gap-3">
         <div className="flex flex-col justify-center w-full gap-4 sm:flex-row-reverse">
-          {nextSlug ? (
+          {onReshuffle ? (
+            <>
+              <button onClick={onReshuffle} className="flex items-center justify-center gap-2 btn-primary">
+                <FaRandom />
+                Reshuffle
+              </button>
+              <button onClick={onRestart} className="flex items-center justify-center gap-2 btn-secondary">
+                <FaRedo />
+                Replay same
+              </button>
+              {onExit && (
+                <button onClick={onExit} className="flex items-center justify-center gap-2 btn-secondary">
+                  <FaHome />
+                  Back to Home
+                </button>
+              )}
+            </>
+          ) : nextSlug ? (
             <>
               <Link href={`/quiz/${nextSlug}`} className="flex items-center justify-center gap-2 btn-primary">
                 Next quiz
@@ -262,6 +298,7 @@ export default function QuizResults({
         <div className="space-y-4">
           {questions.map((question, index) => {
             const answer = quizState.answers[index]
+            const meta = metaFor(index)
             return (
               <div key={index} className="card">
                 <div className="flex items-start gap-4">
@@ -273,32 +310,32 @@ export default function QuizResults({
                   </div>
                   <div className="flex-grow">
                     <h3 className="mb-2 font-semibold text-stone-800 dark:text-stone-100">
-                      <MathText mathEnabled={mathEnabled}>{question.question}</MathText>
+                      <MathText mathEnabled={meta.mathEnabled}>{question.question}</MathText>
                     </h3>
                     <div className="text-sm space-y-1">
                       <p className={answer.isCorrect ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
                         <strong>Your answer:</strong>{' '}
-                        <MathText as="span" mathEnabled={mathEnabled}>
+                        <MathText as="span" mathEnabled={meta.mathEnabled}>
                           {formatUserAnswerText(
                             question,
-                            quizType,
+                            meta.quizType,
                             answer.selectedAnswer,
                             answer.wasAttempted,
-                            quizLang
+                            meta.lang
                           )}
                         </MathText>
                       </p>
                       {!answer.isCorrect && (
                         <p className="text-green-600 dark:text-green-400">
                           <strong>Correct answer:</strong>{' '}
-                          <MathText as="span" mathEnabled={mathEnabled}>
-                            {formatCorrectAnswerText(question, quizType, quizLang)}
+                          <MathText as="span" mathEnabled={meta.mathEnabled}>
+                            {formatCorrectAnswerText(question, meta.quizType, meta.lang)}
                           </MathText>
                         </p>
                       )}
                       {question.explain && (
                         <p className="pt-2 mt-2 border-t text-stone-600 dark:text-stone-300 border-stone-200 dark:border-stone-600">
-                          <MathText as="span" mathEnabled={mathEnabled}>
+                          <MathText as="span" mathEnabled={meta.mathEnabled}>
                             {question.explain}
                           </MathText>
                         </p>

@@ -5,6 +5,7 @@ import { FaArrowLeft } from 'react-icons/fa'
 import QuestionCard from '@/components/QuestionCard'
 import QuizResults from '@/components/QuizResults'
 import {
+  Question,
   QuizMetadata,
   QuizState,
   QuizType,
@@ -12,6 +13,7 @@ import {
   isAnswerCorrect,
 } from '@/types/quiz'
 import { useQuizMode } from '@/contexts/QuizModeContext'
+import { shuffleAllQuestionOptions } from '@/utils/shuffleOptions'
 
 interface AiQuizRunnerProps {
   quiz: QuizMetadata
@@ -20,9 +22,11 @@ interface AiQuizRunnerProps {
 
 export default function AiQuizRunner({ quiz, onExit }: AiQuizRunnerProps) {
   const { isDynamicMode, timeLimit } = useQuizMode()
-  const questions = quiz.questions
   const quizType: QuizType = normalizeQuizType(quiz.type)
   const mathEnabled = quiz.tags.some((tag) => tag.toLowerCase() === 'math')
+  const [questions, setQuestions] = useState<Question[]>(() =>
+    shuffleAllQuestionOptions(quiz.questions, quizType)
+  )
 
   const [quizState, setQuizState] = useState<QuizState>({
     currentQuestionIndex: 0,
@@ -123,6 +127,7 @@ export default function AiQuizRunner({ quiz, onExit }: AiQuizRunnerProps) {
 
   const handleRestart = () => {
     clearAutoAdvance()
+    setQuestions((prev) => shuffleAllQuestionOptions(prev, quizType))
     setQuizState({
       currentQuestionIndex: 0,
       answers: [],

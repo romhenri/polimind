@@ -15,6 +15,7 @@ import Link from 'next/link'
 import { formatSubject } from '@/utils/formatSubject'
 import { useQuizMode } from '@/contexts/QuizModeContext'
 import { useProfile } from '@/contexts/ProfileContext'
+import { shuffleAllQuestionOptions } from '@/utils/shuffleOptions'
 
 export default function QuizPage({ params }: { params: Promise<{ subject: string }> }) {
   const resolvedParams = use(params)
@@ -66,13 +67,14 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
         const data = Array.isArray(parsed)
           ? (preferPortuguese ? parsed[0] : (parsed[1] || parsed[0]))
           : parsed
-        setQuestions(data.questions)
+        const type = normalizeQuizType(data.type)
+        setQuestions(shuffleAllQuestionOptions(data.questions, type))
         setCategory(data.category || 'general')
         const tags = Array.isArray(data.tags) ? data.tags : []
         setMathEnabled(
           tags.some((t: unknown) => String(t).toLowerCase() === 'math')
         )
-        setQuizType(normalizeQuizType(data.type))
+        setQuizType(type)
         setQuizLang(data.lang)
         setLoading(false)
       } catch (err) {
@@ -166,6 +168,7 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
 
   const handleRestart = () => {
     clearAutoAdvance()
+    setQuestions(prev => shuffleAllQuestionOptions(prev, quizType))
     setQuizState({
       currentQuestionIndex: 0,
       answers: [],

@@ -3,7 +3,9 @@
 import { useState, useEffect, useMemo } from "react";
 import SubjectCard from "@/components/SubjectCard";
 import DynamicModeToggle from "@/components/DynamicModeToggle";
-import { FaSearch, FaTimes } from "react-icons/fa";
+import ShufflePracticeModal from "@/components/ShufflePracticeModal";
+import ShufflePracticeRunner from "@/components/ShufflePracticeRunner";
+import { FaSearch, FaTimes, FaRandom } from "react-icons/fa";
 import { useQuizMode } from "@/contexts/QuizModeContext";
 import { QuizMetadata } from "@/types/quiz";
 import { parseQuizSeq } from "@/utils/quizSeq";
@@ -18,6 +20,12 @@ export default function Home() {
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>(
     CATEGORIES[0].subcategories[0] ?? ""
   );
+  const [showShuffleModal, setShowShuffleModal] = useState(false);
+  const [shuffleRun, setShuffleRun] = useState<{
+    quizzes: QuizMetadata[];
+    count: number;
+    category: string;
+  } | null>(null);
 
   useEffect(() => {
     const loadSubjects = async () => {
@@ -45,6 +53,8 @@ export default function Home() {
               subcategory: data.subcategory,
               questions: data.questions,
               tags: data.tags,
+              type: data.type,
+              lang: data.lang,
               hardness: data.hardness ?? "easy",
               ...(seq !== undefined ? { seq } : {}),
             };
@@ -100,6 +110,17 @@ export default function Home() {
     handleSelectCategory(CATEGORIES[0].id);
   };
 
+  if (shuffleRun) {
+    return (
+      <ShufflePracticeRunner
+        quizzes={shuffleRun.quizzes}
+        count={shuffleRun.count}
+        category={shuffleRun.category}
+        onExit={() => setShuffleRun(null)}
+      />
+    );
+  }
+
   return (
     <div className="animate-fade-in">
       <div className="mb-4 text-center">
@@ -110,10 +131,18 @@ export default function Home() {
           Choose a subject and test your knowledge!
         </p>
 
-        <div className="flex flex-wrap justify-center gap-2 px-0">
+        <div className="flex flex-wrap items-center justify-center gap-3 px-0">
           <div className="w-full min-w-0 sm:w-auto">
             <DynamicModeToggle />
           </div>
+          <button
+            type="button"
+            onClick={() => setShowShuffleModal(true)}
+            className="flex items-center justify-center w-full gap-2 px-5 py-4 text-sm font-bold text-white transition-colors sm:w-auto rounded-2xl bg-clay-500 hover:bg-clay-600 focus:outline-none focus:ring-2 focus:ring-clay-500 focus:ring-offset-2 sm:text-base"
+          >
+            <FaRandom />
+            Shuffle Practice
+          </button>
         </div>
       </div>
 
@@ -219,6 +248,17 @@ export default function Home() {
             />
           ))}
         </div>
+      )}
+
+      {showShuffleModal && (
+        <ShufflePracticeModal
+          subjects={subjects}
+          onClose={() => setShowShuffleModal(false)}
+          onStart={(quizzes, count, category) => {
+            setShowShuffleModal(false);
+            setShuffleRun({ quizzes, count, category });
+          }}
+        />
       )}
     </div>
   );
