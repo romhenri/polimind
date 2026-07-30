@@ -12,7 +12,7 @@ import {
   isAnswerCorrect,
 } from '@/types/quiz'
 import { generateClassifyQuestions } from '@/utils/classify/generate'
-import { FaArrowLeft } from 'react-icons/fa'
+import { FaArrowLeft, FaPause, FaPlay } from 'react-icons/fa'
 import Link from 'next/link'
 import { formatSubject } from '@/utils/formatSubject'
 import { useQuizMode } from '@/contexts/QuizModeContext'
@@ -40,18 +40,57 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
     isFinished: false
   })
 
+  const [isPaused, setIsPaused] = useState(false)
+
   const autoAdvanceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const advanceDeadlineRef = useRef<number | null>(null)
+  const pausedRemainingRef = useRef<number | null>(null)
 
   const clearAutoAdvance = () => {
     if (autoAdvanceRef.current !== null) {
       clearTimeout(autoAdvanceRef.current)
       autoAdvanceRef.current = null
     }
+    advanceDeadlineRef.current = null
+  }
+
+  const advance = (delayMs: number) => {
+    clearAutoAdvance()
+    advanceDeadlineRef.current = Date.now() + delayMs
+    autoAdvanceRef.current = setTimeout(() => {
+      autoAdvanceRef.current = null
+      advanceDeadlineRef.current = null
+      setQuizState(prev => {
+        const len = questions.length
+        if (len === 0) return prev
+        if (prev.currentQuestionIndex < len - 1) {
+          return { ...prev, currentQuestionIndex: prev.currentQuestionIndex + 1 }
+        }
+        return { ...prev, isFinished: true }
+      })
+    }, delayMs)
   }
 
   useEffect(() => {
     return () => clearAutoAdvance()
   }, [])
+
+  useEffect(() => {
+    if (isPaused) {
+      if (autoAdvanceRef.current !== null && advanceDeadlineRef.current !== null) {
+        const remaining = Math.max(advanceDeadlineRef.current - Date.now(), 0)
+        clearAutoAdvance()
+        pausedRemainingRef.current = remaining
+      }
+    } else if (pausedRemainingRef.current !== null) {
+      const remaining = pausedRemainingRef.current
+      pausedRemainingRef.current = null
+      advance(remaining)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPaused])
+
+  const togglePause = () => setIsPaused(prev => !prev)
 
   useEffect(() => {
     setQuizState(prev => ({
@@ -120,18 +159,7 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
     })
 
     if (isDynamicMode) {
-      clearAutoAdvance()
-      autoAdvanceRef.current = setTimeout(() => {
-        autoAdvanceRef.current = null
-        setQuizState(prev => {
-          const len = questions.length
-          if (len === 0) return prev
-          if (prev.currentQuestionIndex < len - 1) {
-            return { ...prev, currentQuestionIndex: prev.currentQuestionIndex + 1 }
-          }
-          return { ...prev, isFinished: true }
-        })
-      }, 1500)
+      advance(1500)
     }
   }
 
@@ -165,22 +193,13 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
       }
     })
 
-    clearAutoAdvance()
-    autoAdvanceRef.current = setTimeout(() => {
-      autoAdvanceRef.current = null
-      setQuizState(prev => {
-        const len = questions.length
-        if (len === 0) return prev
-        if (prev.currentQuestionIndex < len - 1) {
-          return { ...prev, currentQuestionIndex: prev.currentQuestionIndex + 1 }
-        }
-        return { ...prev, isFinished: true }
-      })
-    }, 1000)
+    advance(1000)
   }
 
   const handleRestart = () => {
     clearAutoAdvance()
+    pausedRemainingRef.current = null
+    setIsPaused(false)
     if (classifyData) {
       setQuestions(generateClassifyQuestions(classifyData, Math.floor(Date.now() / 1000)))
     } else {
@@ -243,13 +262,25 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
 
   return (
     <div className="max-w-4xl mx-auto animate-fade-in">
-      <div className="6">
-        <Link
-          href="/"
-          className="items-center hidden gap-2 mb-2 font-semibold sm:inline-flex sm:mb-4 text-clay-600 dark:text-clay-400 hover:text-clay-700 dark:hover:text-clay-300"
-        >
-          <FaArrowLeft /> Back
-        </Link>
+      <div className="mb-6">
+        <div className="items-center justify-between hidden sm:flex sm:mb-4">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 font-semibold text-clay-600 dark:text-clay-400 hover:text-clay-700 dark:hover:text-clay-300"
+          >
+            <FaArrowLeft /> Back
+          </Link>
+
+          {isDynamicMode && (
+            <button
+              type="button"
+              onClick={togglePause}
+              className="inline-flex items-center gap-2 font-semibold text-clay-600 dark:text-clay-400 hover:text-clay-700 dark:hover:text-clay-300"
+            >
+              {isPaused ? <FaPlay /> : <FaPause />} {isPaused ? 'Resume' : 'Pause'}
+            </button>
+          )}
+        </div>
 
         <div className="flex items-center justify-between my-2 sm:mb-4">
           <h1 className="text-2xl font-bold tracking-wide font-display text-stone-800 dark:text-white sm:text-3xl md:text-4xl">
@@ -271,6 +302,8 @@ export default function QuizPage({ params }: { params: Promise<{ subject: string
         questionNumber={quizState.currentQuestionIndex + 1}
         currentCorrect={correctAnswers}
         mathEnabled={mathEnabled}
+        isPaused={isPaused}
+        onTogglePause={togglePause}
         onAnswer={handleAnswer}
         onTimeOut={handleTimeOut}
         onNext={handleNext}

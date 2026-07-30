@@ -1,4 +1,5 @@
 import { quizQuestionCount } from '@/types/quiz'
+import { getLocalQuiz } from '@/utils/localQuizzes'
 
 const QUIZ_DATA_BASES = ['/data', '/data/classify']
 
@@ -11,7 +12,7 @@ export async function fetchQuizJson(slug: string): Promise<any | null> {
       continue
     }
   }
-  return null
+  return getLocalQuiz(slug)
 }
 
 export interface LoadedQuiz {

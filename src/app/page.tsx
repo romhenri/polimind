@@ -11,12 +11,14 @@ import { QuizMetadata, quizQuestionCount } from "@/types/quiz";
 import { parseQuizSeq } from "@/utils/quizSeq";
 import { storeShuffleSelection } from "@/utils/shufflePractice";
 import { fetchQuizJson } from "@/utils/loadQuizzes";
+import { getLocalQuizzes, deleteLocalQuiz } from "@/utils/localQuizzes";
 import { CATEGORIES, getCategoryById } from "@/data/categories";
 
 export default function Home() {
   const router = useRouter();
   const { isDynamicMode } = useQuizMode();
   const [subjects, setSubjects] = useState<QuizMetadata[]>([]);
+  const [localQuizIds, setLocalQuizIds] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>(CATEGORIES[0].id);
@@ -58,7 +60,11 @@ export default function Home() {
             };
           })
         );
-        setSubjects(loadedSubjects);
+        const localQuizzes = getLocalQuizzes();
+        const localIds = new Set(localQuizzes.map((q) => q.id));
+        const remoteSubjects = loadedSubjects.filter((s) => !localIds.has(s.id));
+        setSubjects([...remoteSubjects, ...localQuizzes]);
+        setLocalQuizIds(localIds);
         setLoading(false);
       } catch (error) {
         console.error("Error loading subjects:", error);
@@ -106,6 +112,16 @@ export default function Home() {
   const clearFilters = () => {
     setSearchQuery("");
     handleSelectCategory(CATEGORIES[0].id);
+  };
+
+  const handleDeleteLocal = (id: string) => {
+    deleteLocalQuiz(id);
+    setSubjects((prev) => prev.filter((s) => s.id !== id));
+    setLocalQuizIds((prev) => {
+      const next = new Set(prev);
+      next.delete(id);
+      return next;
+    });
   };
 
   return (
@@ -232,6 +248,10 @@ export default function Home() {
               }}
               index={index}
               onTagClick={(tag) => setSearchQuery(tag)}
+              isLocal={localQuizIds.has(subject.id)}
+              onDeleteLocal={
+                localQuizIds.has(subject.id) ? () => handleDeleteLocal(subject.id) : undefined
+              }
             />
           ))}
         </div>

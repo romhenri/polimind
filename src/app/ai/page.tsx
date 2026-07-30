@@ -17,12 +17,14 @@ import {
   FaSlidersH,
   FaInfoCircle,
   FaClipboardCheck,
+  FaSave,
 } from 'react-icons/fa'
 import { FaWandMagicSparkles } from 'react-icons/fa6'
 import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
 import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, parseQuizJson } from '@/utils/aiQuiz'
 import { CATEGORIES, getCategoryById } from '@/data/categories'
 import type { StreamCallbacks, AiProvider, AiSettings } from '@/utils/aiQuiz'
+import { getLocalQuiz, saveLocalQuiz } from '@/utils/localQuizzes'
 import AiQuizRunner from './AiQuizRunner'
 import MetaEditor from './MetaEditor'
 import QuestionList from './QuestionList'
@@ -51,6 +53,7 @@ export default function AiPage() {
   const [regeneratingIndices, setRegeneratingIndices] = useState<Set<number>>(new Set())
   const [regenErrors, setRegenErrors] = useState<Record<number, string>>({})
   const [copied, setCopied] = useState(false)
+  const [savedLocally, setSavedLocally] = useState(false)
   const [importJson, setImportJson] = useState('')
   const [importError, setImportError] = useState<string | null>(null)
   const [streamProgress, setStreamProgress] = useState<{ current: number; total: number } | null>(null)
@@ -61,6 +64,13 @@ export default function AiPage() {
   useEffect(() => {
     const editId = new URLSearchParams(window.location.search).get('edit')
     if (!editId) return
+    const localQuiz = getLocalQuiz(editId)
+    if (localQuiz) {
+      setQuiz(localQuiz)
+      setUsedModel('')
+      setActiveTab('edit')
+      return
+    }
     let cancelled = false
     const loadForEdit = async () => {
       try {
@@ -280,6 +290,13 @@ export default function AiPage() {
     link.download = `${quiz.id}.json`
     link.click()
     URL.revokeObjectURL(url)
+  }
+
+  const handleSaveLocal = () => {
+    if (!quiz) return
+    saveLocalQuiz(quiz)
+    setSavedLocally(true)
+    setTimeout(() => setSavedLocally(false), 2000)
   }
 
   if (view === 'quiz' && quiz) {
@@ -725,6 +742,21 @@ export default function AiPage() {
               className="flex items-center justify-center gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-plum-700 border-plum-500 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-400 dark:hover:bg-stone-800"
             >
               <FaDownload /> Download JSON
+            </button>
+            <button
+              type="button"
+              onClick={handleSaveLocal}
+              className="flex items-center justify-center gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-plum-700 border-plum-500 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-400 dark:hover:bg-stone-800"
+            >
+              {savedLocally ? (
+                <>
+                  <FaCheck /> Saved!
+                </>
+              ) : (
+                <>
+                  <FaSave /> Save to Local Storage
+                </>
+              )}
             </button>
             <button
               type="button"

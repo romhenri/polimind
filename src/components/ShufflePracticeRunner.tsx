@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { FaArrowLeft } from 'react-icons/fa'
+import { FaArrowLeft, FaPause, FaPlay } from 'react-icons/fa'
 import QuestionCard from '@/components/QuestionCard'
 import QuizResults, { QuestionMeta } from '@/components/QuizResults'
 import { QuizMetadata, QuizState, isAnswerCorrect } from '@/types/quiz'
@@ -36,22 +36,28 @@ export default function ShufflePracticeRunner({
     sampleShuffledQuestions(quizzes, count)
   )
   const [quizState, setQuizState] = useState<QuizState>(freshState)
+  const [isPaused, setIsPaused] = useState(false)
 
   const autoAdvanceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const advanceDeadlineRef = useRef<number | null>(null)
+  const pausedRemainingRef = useRef<number | null>(null)
 
   const clearAutoAdvance = () => {
     if (autoAdvanceRef.current !== null) {
       clearTimeout(autoAdvanceRef.current)
       autoAdvanceRef.current = null
     }
+    advanceDeadlineRef.current = null
   }
 
   useEffect(() => clearAutoAdvance, [])
 
   const advance = (delayMs = 1500) => {
     clearAutoAdvance()
+    advanceDeadlineRef.current = Date.now() + delayMs
     autoAdvanceRef.current = setTimeout(() => {
       autoAdvanceRef.current = null
+      advanceDeadlineRef.current = null
       setQuizState((prev) => {
         if (practice.length === 0) return prev
         if (prev.currentQuestionIndex < practice.length - 1) {
@@ -61,6 +67,23 @@ export default function ShufflePracticeRunner({
       })
     }, delayMs)
   }
+
+  useEffect(() => {
+    if (isPaused) {
+      if (autoAdvanceRef.current !== null && advanceDeadlineRef.current !== null) {
+        const remaining = Math.max(advanceDeadlineRef.current - Date.now(), 0)
+        clearAutoAdvance()
+        pausedRemainingRef.current = remaining
+      }
+    } else if (pausedRemainingRef.current !== null) {
+      const remaining = pausedRemainingRef.current
+      pausedRemainingRef.current = null
+      advance(remaining)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPaused])
+
+  const togglePause = () => setIsPaused((prev) => !prev)
 
   const handleAnswer = (selectedAnswer: number, timeTaken: number) => {
     setQuizState((prev) => {
@@ -120,6 +143,8 @@ export default function ShufflePracticeRunner({
 
   const handleReplay = () => {
     clearAutoAdvance()
+    pausedRemainingRef.current = null
+    setIsPaused(false)
     setPractice((prev) =>
       prev.map((item) => ({
         ...item,
@@ -132,6 +157,8 @@ export default function ShufflePracticeRunner({
 
   const handleReshuffle = () => {
     clearAutoAdvance()
+    pausedRemainingRef.current = null
+    setIsPaused(false)
     setPractice(sampleShuffledQuestions(quizzes, count))
     setQuizState(freshState())
     setRunId((id) => id + 1)
@@ -185,13 +212,25 @@ export default function ShufflePracticeRunner({
   return (
     <div className="max-w-4xl mx-auto animate-fade-in">
       <div className="mb-3 sm:mb-6">
-        <button
-          type="button"
-          onClick={onExit}
-          className="items-center hidden gap-2 mb-2 font-semibold sm:inline-flex sm:mb-4 text-clay-600 dark:text-clay-400 hover:text-clay-700 dark:hover:text-clay-300"
-        >
-          <FaArrowLeft /> Back
-        </button>
+        <div className="items-center justify-between hidden sm:flex sm:mb-4">
+          <button
+            type="button"
+            onClick={onExit}
+            className="inline-flex items-center gap-2 font-semibold text-clay-600 dark:text-clay-400 hover:text-clay-700 dark:hover:text-clay-300"
+          >
+            <FaArrowLeft /> Back
+          </button>
+
+          {isDynamicMode && (
+            <button
+              type="button"
+              onClick={togglePause}
+              className="inline-flex items-center gap-2 font-semibold text-clay-600 dark:text-clay-400 hover:text-clay-700 dark:hover:text-clay-300"
+            >
+              {isPaused ? <FaPlay /> : <FaPause />} {isPaused ? 'Resume' : 'Pause'}
+            </button>
+          )}
+        </div>
 
         <div className="flex items-center justify-between gap-4 my-2 sm:mb-4">
           <div className="min-w-0">
@@ -223,6 +262,8 @@ export default function ShufflePracticeRunner({
         questionNumber={quizState.currentQuestionIndex + 1}
         currentCorrect={correctAnswers}
         mathEnabled={current.mathEnabled}
+        isPaused={isPaused}
+        onTogglePause={togglePause}
         onAnswer={handleAnswer}
         onTimeOut={handleTimeOut}
         onNext={handleNext}

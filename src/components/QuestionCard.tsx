@@ -8,7 +8,7 @@ import {
   correctBoolIndex,
   boolLabel,
 } from '@/types/quiz'
-import { FaClock, FaArrowRight } from 'react-icons/fa'
+import { FaClock, FaArrowRight, FaPause, FaPlay } from 'react-icons/fa'
 import { useQuizMode } from '@/contexts/QuizModeContext'
 import MathText from '@/components/MathText'
 
@@ -19,6 +19,8 @@ interface QuestionCardProps {
   questionNumber: number
   currentCorrect: number
   mathEnabled?: boolean
+  isPaused?: boolean
+  onTogglePause?: () => void
   onAnswer: (answer: number, timeTaken: number) => void
   onTimeOut: () => void
   onNext: () => void
@@ -31,6 +33,8 @@ export default function QuestionCard({
   questionNumber,
   currentCorrect,
   mathEnabled = false,
+  isPaused = false,
+  onTogglePause,
   onAnswer,
   onTimeOut,
   onNext,
@@ -60,7 +64,7 @@ export default function QuestionCard({
   }, [question, timeLimit])
 
   useEffect(() => {
-    if (showResult || !isDynamicMode || !question) return
+    if (showResult || !isDynamicMode || !question || isPaused) return
 
     const timer = setInterval(() => {
       setTimeLeft(prev => {
@@ -79,7 +83,7 @@ export default function QuestionCard({
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [showResult, onTimeOut, isDynamicMode, question])
+  }, [showResult, onTimeOut, isDynamicMode, question, isPaused])
 
   useEffect(() => {
     if (!showResult) return
@@ -123,7 +127,7 @@ export default function QuestionCard({
   const choiceDisabled = interactionLocked || showResult || selectedAnswer !== null
 
   const handleAnswerClick = (index: number) => {
-    if (interactionLockedRef.current || showResult || selectedAnswer !== null) return
+    if (interactionLockedRef.current || showResult || selectedAnswer !== null || isPaused) return
     interactionLockedRef.current = true
     setInteractionLocked(true)
 
@@ -191,113 +195,134 @@ export default function QuestionCard({
         )}
       </div>
 
-      {quizType === 'classify' && 'entity' in question && (
-        <div className="p-3 mb-3 text-center border rounded-lg sm:p-4 sm:mb-4 bg-stone-100 dark:bg-stone-800 border-stone-200 dark:border-stone-600">
-          <div className="text-xl font-bold tracking-wide font-display text-stone-800 dark:text-white sm:text-2xl">
-            {question.entity}
-          </div>
-          {question.subtitle && (
-            <div className="mt-0.5 text-xs text-stone-500 dark:text-stone-400 sm:text-sm">
-              {question.subtitle}
-            </div>
+      {isPaused && !showResult ? (
+        <div className="flex flex-col items-center justify-center gap-3 py-10 text-center sm:py-16">
+          <FaPause className="text-2xl text-stone-400 dark:text-stone-500 sm:text-3xl" />
+          <p className="text-sm font-semibold text-stone-600 dark:text-stone-300 sm:text-base">
+            Quiz paused
+          </p>
+          {onTogglePause && (
+            <button
+              type="button"
+              onClick={onTogglePause}
+              className="flex items-center gap-2 btn-primary"
+            >
+              <FaPlay />
+              Resume
+            </button>
           )}
         </div>
-      )}
+      ) : (
+        <>
+          {quizType === 'classify' && 'entity' in question && (
+            <div className="p-3 mb-3 text-center border rounded-lg sm:p-4 sm:mb-4 bg-stone-100 dark:bg-stone-800 border-stone-200 dark:border-stone-600">
+              <div className="text-xl font-bold tracking-wide font-display text-stone-800 dark:text-white sm:text-2xl">
+                {question.entity}
+              </div>
+              {question.subtitle && (
+                <div className="mt-0.5 text-xs text-stone-500 dark:text-stone-400 sm:text-sm">
+                  {question.subtitle}
+                </div>
+              )}
+            </div>
+          )}
 
-      <h2 className="mb-2 text-base font-bold text-left text-stone-800 dark:text-white sm:mb-4 sm:text-xl md:mb-6 md:text-2xl">
-        <MathText mathEnabled={mathEnabled}>{question.question}</MathText>
-      </h2>
+          <h2 className="mb-2 text-base font-bold text-left text-stone-800 dark:text-white sm:mb-4 sm:text-xl md:mb-6 md:text-2xl">
+            <MathText mathEnabled={mathEnabled}>{question.question}</MathText>
+          </h2>
 
-      {quizType === 'bool' && (
-        <div className="flex flex-col gap-2 md:gap-4 sm:flex-row">
-          <button
-            type="button"
-            onClick={() => handleAnswerClick(0)}
-            disabled={choiceDisabled}
-            className={`w-full p-2 rounded-lg text-center font-semibold transition-all duration-300 sm:p-4 ${getAnswerClass(0)} ${
-              choiceDisabled
-                ? 'cursor-not-allowed'
-                : 'cursor-pointer transform hover:scale-102'
-            }`}
-          >
-            {boolLabel(false, lang)}
-          </button>
-          <button
-            type="button"
-            onClick={() => handleAnswerClick(1)}
-            disabled={choiceDisabled}
-            className={`w-full p-2 rounded-lg text-center font-semibold transition-all duration-300 sm:p-4 ${getAnswerClass(1)} ${
-              choiceDisabled
-                ? 'cursor-not-allowed'
-                : 'cursor-pointer transform hover:scale-102'
-            }`}
-          >
-            {boolLabel(true, lang)}
-          </button>
-        </div>
-      )}
-      {quizType === 'options' && 'options' in question && question.options && (
-        <div className="flex flex-col gap-2 md:gap-4">
-          {question.options.map((option, index) => (
-            <button
-              key={index}
-              type="button"
-              onClick={() => handleAnswerClick(index)}
-              disabled={choiceDisabled}
-              className={`w-full p-2 rounded-lg text-left font-semibold transition-all duration-300 sm:p-4 ${getAnswerClass(index)} ${
-                choiceDisabled
-                  ? 'cursor-not-allowed'
-                  : 'cursor-pointer transform hover:scale-102'
-              }`}
-            >
-              <span className="flex items-center gap-2">
-                <span className="flex items-center justify-center flex-shrink-0 p-2 text-sm font-bold rounded-full w-7 h-7 text-stone-800 bg-stone-200 dark:bg-stone-600 dark:text-white sm:w-8 sm:h-8 sm:text-base">
-                  {String.fromCharCode(65 + index)}
-                </span>
-                <span className="text-sm text-stone-800 dark:text-stone-200 sm:text-base">
-                  <MathText mathEnabled={mathEnabled}>{option}</MathText>
-                </span>
-              </span>
-            </button>
-          ))}
-        </div>
-      )}
-
-      {quizType === 'classify' && 'entity' in question && question.options && (
-        <div className="flex flex-col gap-2 md:gap-4">
-          {question.options.map((option, index) => {
-            const hint = question.optionHints?.[index]
-            return (
+          {quizType === 'bool' && (
+            <div className="flex flex-col gap-2 md:gap-4 sm:flex-row">
               <button
-                key={index}
                 type="button"
-                onClick={() => handleAnswerClick(index)}
+                onClick={() => handleAnswerClick(0)}
                 disabled={choiceDisabled}
-                className={`w-full p-2 rounded-lg text-left font-semibold transition-all duration-300 sm:p-4 ${getAnswerClass(index)} ${
+                className={`w-full p-2 rounded-lg text-center font-semibold transition-all duration-300 sm:p-4 ${getAnswerClass(0)} ${
                   choiceDisabled
                     ? 'cursor-not-allowed'
                     : 'cursor-pointer transform hover:scale-102'
                 }`}
               >
-                <span className="flex items-center gap-2">
-                  <span className="flex items-center justify-center flex-shrink-0 p-2 text-sm font-bold rounded-full w-7 h-7 text-stone-800 bg-stone-200 dark:bg-stone-600 dark:text-white sm:w-8 sm:h-8 sm:text-base">
-                    {String.fromCharCode(65 + index)}
-                  </span>
-                  <span className="flex flex-col text-left">
+                {boolLabel(false, lang)}
+              </button>
+              <button
+                type="button"
+                onClick={() => handleAnswerClick(1)}
+                disabled={choiceDisabled}
+                className={`w-full p-2 rounded-lg text-center font-semibold transition-all duration-300 sm:p-4 ${getAnswerClass(1)} ${
+                  choiceDisabled
+                    ? 'cursor-not-allowed'
+                    : 'cursor-pointer transform hover:scale-102'
+                }`}
+              >
+                {boolLabel(true, lang)}
+              </button>
+            </div>
+          )}
+          {quizType === 'options' && 'options' in question && question.options && (
+            <div className="flex flex-col gap-2 md:gap-4">
+              {question.options.map((option, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => handleAnswerClick(index)}
+                  disabled={choiceDisabled}
+                  className={`w-full p-2 rounded-lg text-left font-semibold transition-all duration-300 sm:p-4 ${getAnswerClass(index)} ${
+                    choiceDisabled
+                      ? 'cursor-not-allowed'
+                      : 'cursor-pointer transform hover:scale-102'
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    <span className="flex items-center justify-center flex-shrink-0 p-2 text-sm font-bold rounded-full w-7 h-7 text-stone-800 bg-stone-200 dark:bg-stone-600 dark:text-white sm:w-8 sm:h-8 sm:text-base">
+                      {String.fromCharCode(65 + index)}
+                    </span>
                     <span className="text-sm text-stone-800 dark:text-stone-200 sm:text-base">
                       <MathText mathEnabled={mathEnabled}>{option}</MathText>
                     </span>
-                    {hint && (
-                      <span className="text-xs text-stone-500 dark:text-stone-400">
-                        {hint}
-                      </span>
-                    )}
                   </span>
-                </span>
-              </button>
-            )
-          })}
-        </div>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {quizType === 'classify' && 'entity' in question && question.options && (
+            <div className="flex flex-col gap-2 md:gap-4">
+              {question.options.map((option, index) => {
+                const hint = question.optionHints?.[index]
+                return (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => handleAnswerClick(index)}
+                    disabled={choiceDisabled}
+                    className={`w-full p-2 rounded-lg text-left font-semibold transition-all duration-300 sm:p-4 ${getAnswerClass(index)} ${
+                      choiceDisabled
+                        ? 'cursor-not-allowed'
+                        : 'cursor-pointer transform hover:scale-102'
+                    }`}
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="flex items-center justify-center flex-shrink-0 p-2 text-sm font-bold rounded-full w-7 h-7 text-stone-800 bg-stone-200 dark:bg-stone-600 dark:text-white sm:w-8 sm:h-8 sm:text-base">
+                        {String.fromCharCode(65 + index)}
+                      </span>
+                      <span className="flex flex-col text-left">
+                        <span className="text-sm text-stone-800 dark:text-stone-200 sm:text-base">
+                          <MathText mathEnabled={mathEnabled}>{option}</MathText>
+                        </span>
+                        {hint && (
+                          <span className="text-xs text-stone-500 dark:text-stone-400">
+                            {hint}
+                          </span>
+                        )}
+                      </span>
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+          )}
+        </>
       )}
 
       {showResult && (

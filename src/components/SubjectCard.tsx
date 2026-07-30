@@ -4,9 +4,20 @@ import { useEffect, useState, type CSSProperties, type MouseEvent as ReactMouseE
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { FaArrowRight, FaQuestionCircle, FaCheck, FaPen } from 'react-icons/fa'
+import {
+  FaArrowRight,
+  FaQuestionCircle,
+  FaCheck,
+  FaPen,
+  FaSave,
+  FaTrashAlt,
+  FaCopy,
+  FaLink,
+  FaDownload,
+} from 'react-icons/fa'
 import { getColor } from '@/utils/colorMapper'
 import { getQuizIcon } from '@/utils/iconMapper'
+import { downloadLocalQuiz } from '@/utils/localQuizzes'
 
 type Hardness = 'easy' | 'medium' | 'hard'
 
@@ -31,9 +42,11 @@ interface SubjectCardProps {
   index: number
   onTagClick?: (tag: string) => void
   completed?: boolean
+  isLocal?: boolean
+  onDeleteLocal?: () => void
 }
 
-export default function SubjectCard({ subject, index, onTagClick, completed }: SubjectCardProps) {
+export default function SubjectCard({ subject, index, onTagClick, completed, isLocal, onDeleteLocal }: SubjectCardProps) {
   const router = useRouter()
   const bgColor = getColor(subject.color)
   const Icon = getQuizIcon(subject.id, subject.category)
@@ -58,10 +71,12 @@ export default function SubjectCard({ subject, index, onTagClick, completed }: S
     }
   }, [menu])
 
+  const menuItemCount = 3 + (isLocal ? 1 : 0) + (isLocal && onDeleteLocal ? 1 : 0)
+
   const handleContextMenu = (e: ReactMouseEvent) => {
     e.preventDefault()
     const menuWidth = 176
-    const menuHeight = 48
+    const menuHeight = menuItemCount * 36 + 8
     setMenu({
       x: Math.min(e.clientX, window.innerWidth - menuWidth - 8),
       y: Math.min(e.clientY, window.innerHeight - menuHeight - 8),
@@ -71,6 +86,28 @@ export default function SubjectCard({ subject, index, onTagClick, completed }: S
   const handleEdit = () => {
     setMenu(null)
     router.push(`/ai?edit=${subject.id}`)
+  }
+
+  const handleDelete = () => {
+    setMenu(null)
+    if (window.confirm(`Delete the local quiz "${subject.name}"? This cannot be undone.`)) {
+      onDeleteLocal?.()
+    }
+  }
+
+  const handleCopyName = async () => {
+    setMenu(null)
+    await navigator.clipboard.writeText(subject.name)
+  }
+
+  const handleCopyLink = async () => {
+    setMenu(null)
+    await navigator.clipboard.writeText(`${window.location.origin}/quiz/${subject.id}`)
+  }
+
+  const handleDownload = async () => {
+    setMenu(null)
+    await downloadLocalQuiz(subject.id)
   }
 
   return (
@@ -91,6 +128,14 @@ export default function SubjectCard({ subject, index, onTagClick, completed }: S
         >
           <FaCheck aria-hidden />
           Complete
+        </div>
+      )}
+      {isLocal && (
+        <div
+          className={`absolute z-10 flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-full pointer-events-none right-4 bg-black/[0.55] text-white dark:bg-white/[0.15] dark:text-stone-100 ${completed ? 'top-14' : 'top-4'}`}
+        >
+          <FaSave aria-hidden />
+          Local
         </div>
       )}
       <div className="relative z-10 flex min-h-0 flex-1 flex-col justify-between pointer-events-none">
@@ -176,6 +221,42 @@ export default function SubjectCard({ subject, index, onTagClick, completed }: S
               <FaPen className="text-xs text-stone-500 dark:text-stone-400" aria-hidden />
               Edit quiz
             </button>
+            <button
+              type="button"
+              onClick={handleCopyName}
+              className="flex items-center w-full gap-2.5 px-3 py-2 text-sm font-medium text-left transition-colors text-stone-700 hover:bg-black/[0.06] dark:text-stone-200 dark:hover:bg-white/[0.06]"
+            >
+              <FaCopy className="text-xs text-stone-500 dark:text-stone-400" aria-hidden />
+              Copy quiz name
+            </button>
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              className="flex items-center w-full gap-2.5 px-3 py-2 text-sm font-medium text-left transition-colors text-stone-700 hover:bg-black/[0.06] dark:text-stone-200 dark:hover:bg-white/[0.06]"
+            >
+              <FaLink className="text-xs text-stone-500 dark:text-stone-400" aria-hidden />
+              Copy quiz link
+            </button>
+            {isLocal && (
+              <button
+                type="button"
+                onClick={handleDownload}
+                className="flex items-center w-full gap-2.5 px-3 py-2 text-sm font-medium text-left transition-colors text-stone-700 hover:bg-black/[0.06] dark:text-stone-200 dark:hover:bg-white/[0.06]"
+              >
+                <FaDownload className="text-xs text-stone-500 dark:text-stone-400" aria-hidden />
+                Download quiz
+              </button>
+            )}
+            {isLocal && onDeleteLocal && (
+              <button
+                type="button"
+                onClick={handleDelete}
+                className="flex items-center w-full gap-2.5 px-3 py-2 text-sm font-medium text-left text-red-600 transition-colors hover:bg-black/[0.06] dark:text-red-400 dark:hover:bg-white/[0.06]"
+              >
+                <FaTrashAlt className="text-xs" aria-hidden />
+                Delete quiz
+              </button>
+            )}
           </div>,
           document.body
         )}
