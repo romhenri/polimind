@@ -107,7 +107,7 @@
       "options": [
         "Definir o problema de negócio e a pergunta que o KDD deve responder.",
         "Anotar manualmente os resultados encontrados pelos especialistas de domínio.",
-        "Adequar os dados ao formato exigido pelos algoritmos de mineração (ex: normalização).",
+        "Adequar os dados ao formato exigido pelos algoritmos de mineração.",
         "Executar consultas SQL simples em bancos de dados transacionais OLTP."
       ],
       "correctAnswer": 2,

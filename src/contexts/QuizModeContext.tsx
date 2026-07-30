@@ -13,7 +13,7 @@ const QuizModeContext = createContext<QuizModeContextType | undefined>(undefined
 
 export function QuizModeProvider({ children }: { children: ReactNode }) {
   const [isDynamicMode, setIsDynamicMode] = useState(true)
-  const [timeLimit, setTimeLimit] = useState(15)
+  const [timeLimit, setTimeLimit] = useState(20)
 
   const toggleDynamicMode = () => {
     setIsDynamicMode(prev => !prev)

@@ -1,0 +1,128 @@
+{
+  "id": "ai-paradigms-and-algorithms",
+  "name": "Paradigmas e Algoritmos de IA",
+  "description": "Teste seus conhecimentos sobre os principais paradigmas da IA e algoritmos como KNN, Backpropagation e Algoritmos Genéticos.",
+  "color": "indigo",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "tags": [
+    "ia",
+    "paradigmas",
+    "machine-learning",
+    "algoritmos"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "A qual paradigma da Inteligência Artificial pertencem os Algoritmos Genéticos e a Programação Genética?",
+      "options": [
+        "Paradigma Simbólico, baseado na manipulação formal de regras e proposições.",
+        "Paradigma Evolucionista, fundamentado na seleção natural e operadores genéticos.",
+        "Paradigma Conexionista, baseado na modelagem de redes neurais artificiais.",
+        "Paradigma Estatístico, focado em distribuições de probabilidade condicionais."
+      ],
+      "correctAnswer": 1,
+      "explain": "Os Algoritmos Genéticos pertencem ao paradigma evolucionista, inspirando-se na evolução darwiniana e na genética."
+    },
+    {
+      "question": "Qual algoritmo de aprendizagem indutiva constrói uma estrutura hierárquica dividindo os dados a partir de medidas como Entropia ou Ganho de Informação?",
+      "options": [
+        "K-means.",
+        "Árvore de Decisão.",
+        "Naive Bayes.",
+        "Simulated Annealing."
+      ],
+      "correctAnswer": 1,
+      "explain": "Árvores de Decisão dividem o conjunto de dados recursivamente selecionando atributos com maior Ganho de Informação."
+    },
+    {
+      "question": "O algoritmo de Backpropagation é essencialmente utilizado para qual finalidade em Redes Neurais Artificiais?",
+      "options": [
+        "Realizar o agrupamento não supervisionado de dados através de centróides.",
+        "Calcular os gradientes de erro e ajustar os pesos da rede camada por camada.",
+        "Discretizar variáveis contínuas em termos linguísticos do tipo 'quente' ou 'frio'.",
+        "Evoluir uma população inicial de redes através de mutação e cruzamento de genes."
+      ],
+      "correctAnswer": 1,
+      "explain": "O Backpropagation calcula a derivada do erro e ajusta os pesos das conexões para minimizar a função de custo."
+    },
+    {
+      "question": "Qual é a principal característica do algoritmo de agrupamento K-means em Mineração de Dados?",
+      "options": [
+        "É um algoritmo não supervisionado que particiona dados em K clusters com base na distância aos centróides.",
+        "É um algoritmo de regressão supervisionada que prevê valores numéricos contínuos.",
+        "É uma técnica baseada em lógica formal que deduz novos teoremas a partir de axiomas prévios.",
+        "É um modelo probabilístico que assume independência absoluta entre todos os atributos de entrada."
+      ],
+      "correctAnswer": 0,
+      "explain": "O K-means agrupa dados não rotulados atribuindo cada ponto ao centróide mais próximo e recalculando as médias."
+    },
+    {
+      "question": "Como o algoritmo K-Nearest Neighbors (KNN) realiza a classificação de uma nova instância?",
+      "options": [
+        "Aplica regras lógicas condicionais encadeadas do tipo SE-ENTÃO extraídas de uma base.",
+        "Calcula a probabilidade a posteriori da classe usando o Teorema de Bayes.",
+        "Identifica os K exemplos mais próximos no espaço de atributos e realiza votação majoritária.",
+        "Ajusta os coeficientes de uma função logística com base em gradiente descendente."
+      ],
+      "correctAnswer": 2,
+      "explain": "O KNN avalia as distâncias entre a nova instância e os dados de treino, classificando-a com base nos K vizinhos mais próximos."
+    },
+    {
+      "question": "O que diferencia fundamentalmente a Lógica Fuzzy da lógica booleana clássica?",
+      "options": [
+        "A Lógica Fuzzy só aceita valores estritamente binários como 0 (falso) e 1 (verdadeiro).",
+        "A Lógica Fuzzy exige a independência estatística total entre todas as suas variáveis de entrada.",
+        "A Lógica Fuzzy aceita graus de pertinência intermediários entre 0 e 1 para modelar imprecisões.",
+        "A Lógica Fuzzy é utilizada exclusivamente no treinamento supervisionado de redes neurais profundas."
+      ],
+      "correctAnswer": 2,
+      "explain": "A Lógica Fuzzy estende a lógica tradicional ao permitir graus graduais de verdade, ideais para termos imprecisos."
+    },
+    {
+      "question": "Qual é a suposição simplificadora fundamental realizada pelo classificador Naive Bayes?",
+      "options": [
+        "Assume que todas as instâncias pertencem a um mesmo cluster inicial único.",
+        "Assume independência condicional entre os atributos dada a classe do exemplo.",
+        "Assume que as fronteiras de decisão entre classes são sempre estritamente lineares.",
+        "Assume que os pesos das conexões devem ser atualizados via aprendizagem por reforço."
+      ],
+      "correctAnswer": 1,
+      "explain": "O Naive Bayes assume 'ingenuamente' que a presença de um atributo não afeta a presença de outro dada a classe."
+    },
+    {
+      "question": "Qual é a função primária do algoritmo de Regressão Logística no aprendizado de máquina?",
+      "options": [
+        "Gerar árvores sintáticas para a execução autônoma de programas de computador.",
+        "Prever a probabilidade de ocorrência de uma classe categórica (geralmente binária).",
+        "Otimizar rotas em grafos utilizando feromônios sintéticos e colônias de agentes.",
+        "Reduzir o ruído de imagens através da consolidação de filtros de ativação contínuos."
+      ],
+      "correctAnswer": 1,
+      "explain": "A Regressão Logística utiliza a função sigmóide para modelar a probabilidade de um exemplo pertencer a uma classe."
+    },
+    {
+      "question": "A qual conceito a metaheurística Simulated Annealing recorre para evitar ficar presa em mínimos locais?",
+      "options": [
+        "Aceitar soluções piores com certa probabilidade, que diminui à medida que a 'temperatura' cai.",
+        "Multiplicar os pesos das camadas ocultas da rede neural por taxas de aprendizado aleatórias.",
+        "Descartar metade dos indivíduos da população a cada iteração sem avaliar a adequação.",
+        "Aumentar o número de vizinhos K até cobrir a totalidade dos dados do conjunto de teste."
+      ],
+      "correctAnswer": 0,
+      "explain": "Inspirado no recozimento de metais, o Simulated Annealing aceita movimentos desfavoráveis no início para explorar o espaço."
+    },
+    {
+      "question": "O paradigma Conexionista da Inteligência Artificial é melhor representado por qual das seguintes abordagens?",
+      "options": [
+        "Sistemas de Produção baseados em regras do tipo 'Se-Então' e inferência formal.",
+        "Redes Neurais Artificiais compostas por unidades interconectadas e pesos ajustáveis.",
+        "Algoritmos de busca estocástica baseados em recombinação e seleção natural de espécies.",
+        "Tabelas de contingência e estimadores de densidade probabilística de amostragem."
+      ],
+      "correctAnswer": 1,
+      "explain": "O paradigma conexionista fundamenta-se na metáfora cerebral, estruturando o conhecimento em Redes Neurais Artificiais."
+    }
+  ]
+}
