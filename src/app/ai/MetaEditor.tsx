@@ -98,23 +98,21 @@ export default function MetaEditor({ quiz, onSave, onCancel }: MetaEditorProps) 
             ))}
           </select>
         </div>
-        {subcategories.length > 0 && (
-          <div>
-            <label className={labelClass}>Subcategory</label>
-            <select
-              value={subcategory}
-              onChange={(e) => setSubcategory(e.target.value)}
-              className={fieldClass}
-            >
-              <option value="">None</option>
-              {subcategories.map((sub) => (
-                <option key={sub} value={sub}>
-                  {sub}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
+        <div>
+          <label className={labelClass}>Subcategory</label>
+          <select
+            value={subcategory}
+            onChange={(e) => setSubcategory(e.target.value)}
+            className={fieldClass}
+          >
+            <option value="">None</option>
+            {subcategories.map((sub) => (
+              <option key={sub} value={sub}>
+                {sub}
+              </option>
+            ))}
+          </select>
+        </div>
         <div>
           <label className={labelClass}>Color</label>
           <div className="flex items-center gap-2">

@@ -1,6 +1,10 @@
-import type { CSSProperties } from 'react'
+'use client'
+
+import { useEffect, useState, type CSSProperties, type MouseEvent as ReactMouseEvent } from 'react'
+import { createPortal } from 'react-dom'
 import Link from 'next/link'
-import { FaArrowRight, FaQuestionCircle, FaCheck } from 'react-icons/fa'
+import { useRouter } from 'next/navigation'
+import { FaArrowRight, FaQuestionCircle, FaCheck, FaPen } from 'react-icons/fa'
 import { getColor } from '@/utils/colorMapper'
 import { getQuizIcon } from '@/utils/iconMapper'
 
@@ -30,14 +34,50 @@ interface SubjectCardProps {
 }
 
 export default function SubjectCard({ subject, index, onTagClick, completed }: SubjectCardProps) {
+  const router = useRouter()
   const bgColor = getColor(subject.color)
   const Icon = getQuizIcon(subject.id, subject.category)
   const animationDelay = `${index * 0.1}s`
+  const [menu, setMenu] = useState<{ x: number; y: number } | null>(null)
+
+  useEffect(() => {
+    if (!menu) return
+    const close = () => setMenu(null)
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenu(null)
+    }
+    window.addEventListener('click', close)
+    window.addEventListener('scroll', close, true)
+    window.addEventListener('resize', close)
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('click', close)
+      window.removeEventListener('scroll', close, true)
+      window.removeEventListener('resize', close)
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [menu])
+
+  const handleContextMenu = (e: ReactMouseEvent) => {
+    e.preventDefault()
+    const menuWidth = 176
+    const menuHeight = 48
+    setMenu({
+      x: Math.min(e.clientX, window.innerWidth - menuWidth - 8),
+      y: Math.min(e.clientY, window.innerHeight - menuHeight - 8),
+    })
+  }
+
+  const handleEdit = () => {
+    setMenu(null)
+    router.push(`/ai?edit=${subject.id}`)
+  }
 
   return (
     <div
       className="relative flex flex-col justify-between h-full cursor-pointer card card-hover"
       style={{ animationDelay, '--qc': bgColor } as CSSProperties}
+      onContextMenu={handleContextMenu}
     >
       <Link
         href={`/quiz/${subject.id}`}
@@ -119,6 +159,26 @@ export default function SubjectCard({ subject, index, onTagClick, completed }: S
           </div>
         </div>
       </div>
+
+      {menu &&
+        createPortal(
+          <div
+            className="fixed z-50 w-44 py-1 overflow-hidden bg-white border-2 rounded-lg border-stone-200 dark:bg-stone-900 dark:border-stone-700"
+            style={{ top: menu.y, left: menu.x }}
+            onClick={(e) => e.stopPropagation()}
+            onContextMenu={(e) => e.preventDefault()}
+          >
+            <button
+              type="button"
+              onClick={handleEdit}
+              className="flex items-center w-full gap-2.5 px-3 py-2 text-sm font-medium text-left transition-colors text-stone-700 hover:bg-black/[0.06] dark:text-stone-200 dark:hover:bg-white/[0.06]"
+            >
+              <FaPen className="text-xs text-stone-500 dark:text-stone-400" aria-hidden />
+              Edit quiz
+            </button>
+          </div>,
+          document.body
+        )}
     </div>
   )
 }

@@ -59,6 +59,25 @@ function subcategoriesFor(category: string): string[] {
   return getCategoryById(category)?.subcategories ?? []
 }
 
+function resolveSubcategory(category: string, subcategory?: string): string | undefined {
+  const picked = subcategory?.trim()
+  return picked && subcategoriesFor(category).includes(picked) ? picked : undefined
+}
+
+function allowedSubcategories(category: string, subcategory?: string): string[] {
+  const forced = resolveSubcategory(category, subcategory)
+  return forced ? [forced] : subcategoriesFor(category)
+}
+
+function subcategoryRule(category: string, subcategory?: string): string {
+  const forced = resolveSubcategory(category, subcategory)
+  if (forced) return `- "subcategory": use exactly "${forced}".`
+  const options = subcategoriesFor(category)
+  return options.length > 0
+    ? `- "subcategory": pick exactly ONE from this list that best fits the subject: ${options.join(', ')}.`
+    : ''
+}
+
 function buildResponseSchema(subcategories: string[]): object {
   const properties: Record<string, unknown> = {
     id: { type: 'string' },
@@ -83,8 +102,7 @@ function buildResponseSchema(subcategories: string[]): object {
   return { type: 'object', properties, required }
 }
 
-function buildPrompt(subject: string, count: number, category: string): string {
-  const subcategories = subcategoriesFor(category)
+function buildPrompt(subject: string, count: number, category: string, subcategory?: string): string {
   return [
     'You are a quiz generator for "polimind", a learning platform.',
     'Generate one high-quality multiple-choice quiz as a single JSON object that follows the exact structure required by the platform.',
@@ -95,9 +113,7 @@ function buildPrompt(subject: string, count: number, category: string): string {
     '- "description": one engaging sentence describing the quiz.',
     `- "color": pick exactly ONE from this list: ${COLOR_KEYS.join(', ')}.`,
     `- "category": use exactly "${category}".`,
-    subcategories.length > 0
-      ? `- "subcategory": pick exactly ONE from this list that best fits the subject: ${subcategories.join(', ')}.`
-      : '',
+    subcategoryRule(category, subcategory),
     '- "tags": 2 to 4 lowercase keywords.',
     `- "hardness": one of ${HARDNESS_VALUES.join(', ')}.`,
     `- "questions": exactly ${count} items. Each item has:`,
@@ -116,9 +132,14 @@ function buildPrompt(subject: string, count: number, category: string): string {
     .join('\n')
 }
 
-export function buildCopyPrompt(subject: string, count: number, category: string): string {
+export function buildCopyPrompt(
+  subject: string,
+  count: number,
+  category: string,
+  subcategory?: string
+): string {
   const subjectLine = subject.trim() || '<describe your subject here>'
-  const subcategories = subcategoriesFor(category)
+  const subcategories = allowedSubcategories(category, subcategory)
   return [
     'You are a quiz generator for "polimind", a learning platform.',
     'Create one high-quality multiple-choice quiz about the subject below and return it as a SINGLE JSON object — no markdown, no code fences, no comments, no extra text.',
@@ -147,9 +168,7 @@ export function buildCopyPrompt(subject: string, count: number, category: string
     'Rules:',
     '- "id": lowercase kebab-case slug from the subject, only [a-z0-9-], no spaces.',
     `- "color": pick exactly ONE from: ${COLOR_KEYS.join(', ')}.`,
-    subcategories.length > 0
-      ? `- "subcategory": pick exactly ONE from this list that best fits the subject: ${subcategories.join(', ')}.`
-      : '',
+    subcategoryRule(category, subcategory),
     '- "tags": 2 to 4 lowercase keywords.',
     `- "hardness": exactly one of ${HARDNESS_VALUES.join(', ')}.`,
     '- "type": keep it as "options".',
@@ -499,11 +518,13 @@ export async function generateQuiz(
   settings: AiSettings,
   subject: string,
   count: number,
-  category: string
+  category: string,
+  subcategory?: string
 ): Promise<GeneratedQuiz> {
   assertApiKey(settings)
-  const prompt = buildPrompt(subject, count, category)
-  const schema = buildResponseSchema(subcategoriesFor(category))
+  const forcedSubcategory = resolveSubcategory(category, subcategory)
+  const prompt = buildPrompt(subject, count, category, forcedSubcategory)
+  const schema = buildResponseSchema(allowedSubcategories(category, forcedSubcategory))
   const { result, model } = await withModelFallback(
     providerModels(settings.provider),
     providerName(settings.provider),
@@ -512,7 +533,10 @@ export async function generateQuiz(
       return { result: normalizeQuiz(parsed, subject), model: usedModel }
     }
   )
-  return { quiz: { ...result, category }, model }
+  return {
+    quiz: { ...result, category, ...(forcedSubcategory ? { subcategory: forcedSubcategory } : {}) },
+    model,
+  }
 }
 
 export async function regenerateQuestion(
@@ -676,6 +700,7 @@ function extractPartialMeta(buffer: string): Partial<QuizMetadata> | null {
  * @param subject - quiz subject
  * @param count - number of questions
  * @param category - quiz category applied to the result
+ * @param subcategory - optional subcategory pinned on the result (empty means the model picks)
  * @param callbacks - real-time progress callbacks
  * @param signal - optional AbortSignal for cancellation
  * @returns the final GeneratedQuiz (also delivered via onDone callback)
@@ -685,14 +710,16 @@ export async function generateQuizStream(
   subject: string,
   count: number,
   category: string,
+  subcategory: string | undefined,
   callbacks: StreamCallbacks,
   signal?: AbortSignal
 ): Promise<GeneratedQuiz> {
   assertApiKey(settings)
+  const forcedSubcategory = resolveSubcategory(category, subcategory)
 
   if (settings.provider === 'gemini') {
     try {
-      const result = await generateQuiz(settings, subject, count, category)
+      const result = await generateQuiz(settings, subject, count, category, forcedSubcategory)
       if (callbacks.onMeta) {
         callbacks.onMeta({
           id: result.quiz.id,
@@ -730,7 +757,9 @@ export async function generateQuizStream(
         },
         body: JSON.stringify({
           model,
-          messages: [{ role: 'user', content: buildPrompt(subject, count, category) }],
+          messages: [
+            { role: 'user', content: buildPrompt(subject, count, category, forcedSubcategory) },
+          ],
           stream: true,
           temperature: settings.temperature,
         }),
@@ -800,7 +829,11 @@ export async function generateQuizStream(
         throw new Error('OpenRouter stream produced malformed JSON.')
       }
 
-      const quiz = { ...normalizeQuiz(parsed, subject), category }
+      const quiz = {
+        ...normalizeQuiz(parsed, subject),
+        category,
+        ...(forcedSubcategory ? { subcategory: forcedSubcategory } : {}),
+      }
       const result: GeneratedQuiz = { quiz, model: usedModel }
       callbacks.onDone?.(result)
       return result

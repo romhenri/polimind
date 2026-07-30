@@ -46,7 +46,14 @@ export const CATEGORIES: Category[] = [
   {
     id: 'general',
     label: 'General',
-    subcategories: [],
+    subcategories: [
+      'Business & Economics',
+      'Geography',
+      'Arts & Literature',
+      'Pop Culture',
+      'Sports & Games',
+      'Everyday Knowledge',
+    ],
   },
 ]
 

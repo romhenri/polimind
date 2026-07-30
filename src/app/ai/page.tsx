@@ -16,15 +16,17 @@ import {
   FaStop,
   FaSlidersH,
   FaInfoCircle,
+  FaClipboardCheck,
 } from 'react-icons/fa'
 import { FaWandMagicSparkles } from 'react-icons/fa6'
 import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
 import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, parseQuizJson } from '@/utils/aiQuiz'
-import { CATEGORIES } from '@/data/categories'
+import { CATEGORIES, getCategoryById } from '@/data/categories'
 import type { StreamCallbacks, AiProvider, AiSettings } from '@/utils/aiQuiz'
 import AiQuizRunner from './AiQuizRunner'
 import MetaEditor from './MetaEditor'
 import QuestionList from './QuestionList'
+import QuizTester from './QuizTester'
 
 const OPENROUTER_KEY_STORAGE = 'polimind.openRouterKey'
 const GEMINI_KEY_STORAGE = 'polimind.geminiKey'
@@ -37,6 +39,7 @@ export default function AiPage() {
   const [showApiKey, setShowApiKey] = useState(false)
   const [temperature, setTemperature] = useState('0.8')
   const [category, setCategory] = useState('general')
+  const [subcategory, setSubcategory] = useState('')
   const [subject, setSubject] = useState('')
   const [count, setCount] = useState(10)
   const [loading, setLoading] = useState(false)
@@ -44,7 +47,7 @@ export default function AiPage() {
   const [quiz, setQuiz] = useState<QuizMetadata | null>(null)
   const [usedModel, setUsedModel] = useState('')
   const [view, setView] = useState<'form' | 'quiz'>('form')
-  const [activeTab, setActiveTab] = useState<'generate' | 'meta' | 'edit'>('generate')
+  const [activeTab, setActiveTab] = useState<'generate' | 'meta' | 'edit' | 'test'>('generate')
   const [regeneratingIndices, setRegeneratingIndices] = useState<Set<number>>(new Set())
   const [regenErrors, setRegenErrors] = useState<Record<number, string>>({})
   const [copied, setCopied] = useState(false)
@@ -54,6 +57,31 @@ export default function AiPage() {
   const [streamingQuestions, setStreamingQuestions] = useState<OptionsQuestion[]>([])
   const [streamMeta, setStreamMeta] = useState<Partial<QuizMetadata> | null>(null)
   const abortRef = useRef<AbortController | null>(null)
+
+  useEffect(() => {
+    const editId = new URLSearchParams(window.location.search).get('edit')
+    if (!editId) return
+    let cancelled = false
+    const loadForEdit = async () => {
+      try {
+        const res = await fetch(`/data/${editId}.json`, { cache: 'no-store' })
+        if (!res.ok) throw new Error('not found')
+        const parsed = await res.json()
+        const data = Array.isArray(parsed) ? parsed[1] || parsed[0] : parsed
+        const imported = parseQuizJson(JSON.stringify(data))
+        if (cancelled) return
+        setQuiz(imported)
+        setUsedModel('')
+        setActiveTab('edit')
+      } catch {
+        if (!cancelled) setImportError(`Could not load quiz "${editId}" for editing.`)
+      }
+    }
+    loadForEdit()
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   useEffect(() => {
     const storedOpenRouterKey = localStorage.getItem(OPENROUTER_KEY_STORAGE)
@@ -76,6 +104,13 @@ export default function AiPage() {
     : 0.8
   const canGenerate = activeKey.trim() !== '' && subject.trim() !== '' && !loading
   const canCopy = subject.trim() !== ''
+  const subcategories = getCategoryById(category)?.subcategories ?? []
+
+  const handleCategoryChange = (nextCategory: string) => {
+    setCategory(nextCategory)
+    const nextSubcategories = getCategoryById(nextCategory)?.subcategories ?? []
+    if (!nextSubcategories.includes(subcategory)) setSubcategory('')
+  }
 
   const buildSettings = (): AiSettings => ({
     provider,
@@ -86,7 +121,9 @@ export default function AiPage() {
   const handleCopyPrompt = async () => {
     if (!canCopy) return
     try {
-      await navigator.clipboard.writeText(buildCopyPrompt(subject.trim(), count, category))
+      await navigator.clipboard.writeText(
+        buildCopyPrompt(subject.trim(), count, category, subcategory)
+      )
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
@@ -151,6 +188,7 @@ export default function AiPage() {
         subject.trim(),
         count,
         category,
+        subcategory,
         callbacks,
         controller.signal
       )
@@ -259,7 +297,7 @@ export default function AiPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-3 gap-2 p-1 mb-6 border-2 rounded-xl border-plum-200 bg-plum-50/50 dark:border-plum-900/60 dark:bg-stone-900">
+      <div className="grid grid-cols-2 gap-2 p-1 mb-6 border-2 rounded-xl border-plum-200 bg-plum-50/50 dark:border-plum-900/60 dark:bg-stone-900 sm:grid-cols-4">
         <button
           type="button"
           onClick={() => setActiveTab('generate')}
@@ -294,6 +332,18 @@ export default function AiPage() {
           }`}
         >
           <FaPen /> 3. Edit
+        </button>
+        <button
+          type="button"
+          onClick={() => quiz && setActiveTab('test')}
+          disabled={!quiz}
+          className={`flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold transition-colors rounded-lg disabled:cursor-not-allowed disabled:opacity-50 ${
+            activeTab === 'test'
+              ? 'bg-plum-600 text-white'
+              : 'text-plum-700 hover:bg-plum-100 dark:text-plum-300 dark:hover:bg-stone-800'
+          }`}
+        >
+          <FaClipboardCheck /> 4. Test
         </button>
       </div>
 
@@ -385,19 +435,36 @@ export default function AiPage() {
           .
         </p>
 
-        <div className="grid gap-4 mb-5 sm:grid-cols-2">
+        <div className="grid gap-4 mb-5 sm:grid-cols-3">
           <div>
             <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
               Category
             </label>
             <select
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={(e) => handleCategoryChange(e.target.value)}
               className="w-full px-4 py-3 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
             >
               {CATEGORIES.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
+              Subcategory
+            </label>
+            <select
+              value={subcategory}
+              onChange={(e) => setSubcategory(e.target.value)}
+              className="w-full px-4 py-3 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+            >
+              <option value="">Auto</option>
+              {subcategories.map((sub) => (
+                <option key={sub} value={sub}>
+                  {sub}
                 </option>
               ))}
             </select>
@@ -425,7 +492,7 @@ export default function AiPage() {
           onChange={(e) => setSubject(e.target.value)}
           rows={3}
           placeholder="e.g. The fall of the Roman Empire, React hooks, basics of organic chemistry..."
-          className="w-full px-4 py-3 mb-2 text-sm border-2 rounded-lg resize-none border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+          className="w-full px-4 py-3 mb-2 text-sm border-2 rounded-lg resize-y min-h-24 border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
         />
         <p className="mb-4 text-xs text-stone-500 dark:text-stone-400">
           polimind automatically adds the formatting instructions so the output works as a playable quiz.
@@ -658,6 +725,41 @@ export default function AiPage() {
               className="flex items-center justify-center gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-plum-700 border-plum-500 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-400 dark:hover:bg-stone-800"
             >
               <FaDownload /> Download JSON
+            </button>
+            <button
+              type="button"
+              onClick={() => setView('quiz')}
+              className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-plum-600 rounded-lg hover:bg-plum-700 active:bg-plum-800"
+            >
+              <FaPlay /> Start quiz
+            </button>
+          </div>
+        </div>
+      )}
+
+      {quiz && activeTab === 'test' && (
+        <div className="p-6 bg-white border-2 rounded-xl border-plum-200 dark:bg-stone-900 dark:border-plum-900/60 animate-fade-in">
+          <div className="flex items-start justify-between gap-3 mb-4">
+            <div className="flex items-center gap-2">
+              <FaClipboardCheck className="text-plum-500" aria-hidden />
+              <h2 className="text-xl font-bold tracking-wide font-display text-stone-800 dark:text-white sm:text-2xl">
+                Test run
+              </h2>
+            </div>
+            <span className="flex-shrink-0 text-sm font-semibold text-plum-600 dark:text-plum-400">
+              {quiz.questions.length} questions
+            </span>
+          </div>
+
+          <QuizTester key={quiz.id} quiz={quiz} />
+
+          <div className="flex flex-col gap-3 mt-5 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => setActiveTab('edit')}
+              className="flex items-center justify-center gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-plum-700 border-plum-500 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-400 dark:hover:bg-stone-800"
+            >
+              <FaPen /> Back to edit
             </button>
             <button
               type="button"
