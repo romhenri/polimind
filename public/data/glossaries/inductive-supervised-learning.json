@@ -1,0 +1,74 @@
+{
+  "id": "inductive-supervised-learning",
+  "name": "Aprendizagem Supervisionada e Indutiva",
+  "description": "Termos-chave sobre algoritmos de indução, árvores de decisão, métodos ensemble e PAC Learning.",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "color": "cyan",
+  "icon": "inductive-supervised-learning",
+  "terms": [
+    {
+      "groupName": "Fundamentos",
+      "group": [
+        {
+          "term": "Aprendizagem Supervisionada",
+          "definition": "Abordagem em que o algoritmo aprende a partir de exemplos rotulados, ou seja, um conjunto de dados que já contém a resposta correta."
+        },
+        {
+          "term": "Aprendizagem Indutiva",
+          "definition": "Processo de derivar uma regra geral (hipótese) a partir de exemplos específicos, generalizando observações particulares."
+        },
+        {
+          "term": "PAC Learning",
+          "definition": "Framework teórico ('Probably Approximately Correct') segundo o qual uma hipótese tem alta probabilidade de apresentar erro menor que um limite pequeno (epsilon)."
+        }
+      ]
+    },
+    {
+      "groupName": "Árvores de Decisão",
+      "group": [
+        {
+          "term": "ID3",
+          "definition": "Algoritmo de construção de **Árvore de Decisão** que utiliza o Ganho de Informação para escolher, em cada nó, o atributo que mais reduz a Entropia."
+        },
+        {
+          "term": "Árvore de Decisão",
+          "definition": "Estrutura hierárquica de classificação construída dividindo recursivamente os dados com base em atributos selecionados por algoritmos como o **ID3**."
+        },
+        {
+          "term": "Entropia",
+          "definition": "Medida do nível de impureza ou desordem dos dados em um nó; quanto maior a entropia, mais misturadas estão as classes."
+        },
+        {
+          "term": "Ganho de Informação",
+          "definition": "Diferença de **Entropia** antes e depois de um split, usada para escolher o atributo que melhor separa as classes em uma **Árvore de Decisão**."
+        },
+        {
+          "term": "Poda (Pruning)",
+          "definition": "Técnica de simplificar uma **Árvore de Decisão** removendo ramos pouco relevantes, prevenindo **Overfitting**."
+        },
+        {
+          "term": "Overfitting",
+          "definition": "Fenômeno em que um modelo, como uma árvore sem **Poda (Pruning)**, decora o ruído dos dados de treino e perde capacidade de generalização."
+        }
+      ]
+    },
+    {
+      "groupName": "Métodos Ensemble",
+      "group": [
+        {
+          "term": "Bagging",
+          "definition": "Técnica ensemble em que múltiplos modelos são treinados de forma independente e paralela, com foco na redução de variância — o oposto do **Boosting**."
+        },
+        {
+          "term": "Boosting",
+          "definition": "Técnica ensemble sequencial em que cada modelo depende do erro do anterior, com foco na redução de viés — o oposto do **Bagging**."
+        },
+        {
+          "term": "AdaBoost",
+          "definition": "Algoritmo de **Boosting** que ajusta sequencialmente os pesos das instâncias, dando mais atenção aos exemplos classificados incorretamente nos passos anteriores."
+        }
+      ]
+    }
+  ]
+}

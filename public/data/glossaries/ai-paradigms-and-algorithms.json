@@ -1,0 +1,123 @@
+{
+  "id": "ai-paradigms-and-algorithms",
+  "name": "Paradigmas e Algoritmos de IA",
+  "description": "Termos-chave dos paradigmas da Inteligência Artificial e dos algoritmos clássicos de aprendizado e otimização.",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "color": "indigo",
+  "icon": "ai-paradigms-and-algorithms",
+  "terms": [
+    {
+      "groupName": "Paradigmas de IA",
+      "group": [
+        {
+          "term": "Paradigma Simbólico",
+          "definition": "Abordagem da IA baseada na metáfora linguística, que representa e manipula conhecimento através de regras e proposições formais, como sistemas do tipo Se-Então."
+        },
+        {
+          "term": "Paradigma Conexionista",
+          "definition": "Abordagem da IA baseada na metáfora cerebral, que estrutura o conhecimento em **Rede Neural Artificial**s compostas por unidades interconectadas e pesos ajustáveis."
+        },
+        {
+          "term": "Paradigma Evolucionista",
+          "definition": "Abordagem da IA inspirada na seleção natural e na genética, da qual fazem parte os **Algoritmo Genético**s e a Programação Genética."
+        }
+      ]
+    },
+    {
+      "groupName": "Redes Neurais e Metaheurísticas",
+      "group": [
+        {
+          "term": "Rede Neural Artificial",
+          "definition": "Modelo do **Paradigma Conexionista** composto por unidades interconectadas (neurônios) cujos pesos são ajustados via **Backpropagation** durante o treinamento."
+        },
+        {
+          "term": "Backpropagation",
+          "definition": "Algoritmo que calcula os gradientes de erro e ajusta os pesos de uma **Rede Neural Artificial** camada por camada para minimizar a função de custo."
+        },
+        {
+          "term": "Algoritmo Genético",
+          "definition": "Metaheurística do **Paradigma Evolucionista** que evolui uma população de soluções através de operadores de mutação e cruzamento, selecionando os mais aptos."
+        },
+        {
+          "term": "Simulated Annealing",
+          "definition": "Metaheurística inspirada no recozimento de metais que aceita soluções piores com probabilidade decrescente, evitando ficar presa em mínimos locais."
+        },
+        {
+          "term": "Lógica Fuzzy",
+          "definition": "Extensão da lógica booleana clássica que aceita graus de pertinência intermediários entre 0 e 1, ideal para modelar termos imprecisos como 'quente' ou 'frio'."
+        }
+      ]
+    },
+    {
+      "groupName": "Aprendizado Supervisionado",
+      "group": [
+        {
+          "term": "Árvore de Decisão",
+          "definition": "Algoritmo indutivo que constrói uma estrutura hierárquica dividindo os dados recursivamente com base em medidas como Entropia ou Ganho de Informação."
+        },
+        {
+          "term": "K-Nearest Neighbors (KNN)",
+          "definition": "Algoritmo que classifica uma nova instância identificando os K exemplos mais próximos no espaço de atributos e realizando votação majoritária entre eles."
+        },
+        {
+          "term": "Naive Bayes",
+          "definition": "Classificador probabilístico que assume independência condicional entre os atributos dada a classe do exemplo, aplicando o Teorema de Bayes."
+        },
+        {
+          "term": "Regressão Logística",
+          "definition": "Algoritmo que utiliza a função sigmóide para modelar a probabilidade de um exemplo pertencer a uma classe categórica, geralmente binária."
+        },
+        {
+          "term": "Random Forest",
+          "definition": "Método ensemble que combina múltiplas **Árvore de Decisão**s treinadas via Bagging, agregando seus votos para melhorar a generalização."
+        },
+        {
+          "term": "Support Vector Machine (SVM)",
+          "definition": "Algoritmo supervisionado que busca o hiperplano de separação com a maior margem possível entre as classes de um conjunto de dados rotulado."
+        },
+        {
+          "term": "Rede Neural Convolucional (CNN)",
+          "definition": "**Rede Neural Artificial** supervisionada que usa camadas de convolução para extrair padrões espaciais, muito usada em classificação de imagens."
+        },
+        {
+          "term": "Rede Neural Recorrente (RNN)",
+          "definition": "**Rede Neural Artificial** supervisionada com conexões que realimentam a própria saída, adequada para dados sequenciais como texto e séries temporais."
+        }
+      ]
+    },
+    {
+      "groupName": "Aprendizado Não Supervisionado",
+      "group": [
+        {
+          "term": "K-means",
+          "definition": "Algoritmo não supervisionado que particiona os dados em K clusters, atribuindo cada ponto ao centróide mais próximo e recalculando as médias iterativamente."
+        },
+        {
+          "term": "Clustering Hierárquico",
+          "definition": "Técnica não supervisionada que agrupa instâncias em uma estrutura de árvore (dendrograma), unindo ou dividindo clusters sucessivamente sem exigir rótulos."
+        },
+        {
+          "term": "DBSCAN",
+          "definition": "Algoritmo de agrupamento não supervisionado baseado em densidade, capaz de identificar clusters de formato arbitrário e isolar pontos de ruído."
+        },
+        {
+          "term": "Análise de Componentes Principais (PCA)",
+          "definition": "Técnica não supervisionada de redução de dimensionalidade que projeta os dados em novos eixos (componentes) que maximizam a variância explicada."
+        },
+        {
+          "term": "Regras de Associação (Apriori)",
+          "definition": "Algoritmo não supervisionado que identifica itens frequentemente associados em um conjunto de dados, como produtos comprados em conjunto."
+        },
+        {
+          "term": "Autoencoder",
+          "definition": "**Rede Neural Artificial** não supervisionada treinada para reconstruir sua própria entrada, aprendendo uma representação compacta dos dados."
+        },
+        {
+          "term": "Self-Organizing Map (SOM)",
+          "definition": "**Rede Neural Artificial** não supervisionada que projeta dados de alta dimensão em um mapa de baixa dimensão, preservando a topologia das relações entre eles."
+        }
+      ]
+    }
+  ]
+}

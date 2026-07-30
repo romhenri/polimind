@@ -9,6 +9,9 @@ import {
   FaChartLine,
   FaLayerGroup,
   FaEye,
+  FaMagnifyingGlassChart,
+  FaGears,
+  FaSitemap,
 } from 'react-icons/fa6'
 import { TbBinaryTree, TbMath } from 'react-icons/tb'
 import { GiDinosaurRex, GiGreekTemple } from 'react-icons/gi'
@@ -23,6 +26,9 @@ const ICON_BY_ID: Record<string, IconType> = {
   dinosaurs: GiDinosaurRex,
   'greek-mythology': GiGreekTemple,
   'attention-mechanisms': FaEye,
+  'knowledge-discovery-in-databases': FaMagnifyingGlassChart,
+  'ai-paradigms-and-algorithms': FaGears,
+  'inductive-supervised-learning': FaSitemap,
 }
 
 const ICON_BY_CATEGORY: Record<string, IconType> = {

@@ -1,0 +1,74 @@
+{
+  "id": "knowledge-discovery-in-databases",
+  "name": "Processo de KDD",
+  "description": "Termos-chave do ciclo de Descoberta de Conhecimento em Bases de Dados, do pré-processamento à mineração e avaliação.",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "color": "indigo",
+  "icon": "knowledge-discovery-in-databases",
+  "terms": [
+    {
+      "groupName": "Fundamentos",
+      "group": [
+        {
+          "term": "KDD (Knowledge Discovery in Databases)",
+          "definition": "Processo global e interativo de descoberta de conhecimento em bases de dados, que engloba desde a seleção dos dados brutos até a interpretação do conhecimento final, tendo a **Mineração de Dados** como sua etapa central."
+        },
+        {
+          "term": "OLTP (Online Transaction Processing)",
+          "definition": "Modelo de sistemas voltado a transações diárias eficientes, cuja limitação em analisar grandes volumes de dados históricos motivou o surgimento do **KDD**."
+        },
+        {
+          "term": "Conhecimento Válido, Novo e Útil",
+          "definition": "Critério que define o sucesso do **KDD**: os padrões descobertos devem ser válidos, novos, potencialmente úteis e compreensíveis para apoiar a tomada de decisão."
+        }
+      ]
+    },
+    {
+      "groupName": "Etapas do Processo",
+      "group": [
+        {
+          "term": "Seleção",
+          "definition": "Primeira etapa do **KDD**, em que os dados relevantes ao problema são identificados e extraídos das fontes disponíveis."
+        },
+        {
+          "term": "Pré-processamento",
+          "definition": "Etapa do **KDD** que trata ruídos, dados ausentes, inconsistências e integra dados de múltiplas fontes para garantir qualidade nas análises seguintes."
+        },
+        {
+          "term": "Transformação de Dados",
+          "definition": "Etapa do **KDD** que adequa os dados já limpos ao formato exigido pelos algoritmos de mineração, incluindo normalização e redução de dimensionalidade."
+        },
+        {
+          "term": "Mineração de Dados",
+          "definition": "Etapa central do **KDD** em que algoritmos são aplicados sobre os dados já transformados para extrair padrões e relações."
+        },
+        {
+          "term": "Interpretação/Avaliação",
+          "definition": "Última etapa do **KDD**, na qual os padrões minerados são validados, filtrados e convertidos em conhecimento útil para a tomada de decisão."
+        }
+      ]
+    },
+    {
+      "groupName": "Tarefas de Mineração de Dados",
+      "group": [
+        {
+          "term": "Descrição",
+          "definition": "Tarefa de **Mineração de Dados** que busca identificar padrões ou propriedades legíveis por humanos que caracterizem os dados existentes."
+        },
+        {
+          "term": "Previsão (Predição)",
+          "definition": "Tarefa de **Mineração de Dados** que utiliza variáveis conhecidas para estimar um resultado ou rótulo futuro, como a classificação do risco de crédito de um solicitante."
+        },
+        {
+          "term": "Detecção de Outliers/Anomalias",
+          "definition": "Tarefa de **Mineração de Dados** que identifica registros que se desviam significativamente do comportamento normal, útil na detecção de fraudes."
+        },
+        {
+          "term": "Mineração de Regras de Associação",
+          "definition": "Tarefa de **Mineração de Dados** que identifica itens ou eventos que ocorrem frequentemente juntos, como produtos comprados em conjunto."
+        }
+      ]
+    }
+  ]
+}
