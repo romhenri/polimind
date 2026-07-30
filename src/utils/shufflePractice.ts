@@ -6,6 +6,7 @@ export interface PracticeQuestion {
   quizType: QuizType
   lang?: string
   mathEnabled: boolean
+  source: string
 }
 
 function isMathQuiz(quiz: QuizMetadata): boolean {
@@ -23,6 +24,7 @@ function poolQuestions(quizzes: QuizMetadata[]): PracticeQuestion[] {
         quizType,
         lang: quiz.lang,
         mathEnabled,
+        source: quiz.name,
       })
     }
   }

@@ -131,16 +131,16 @@ export default function Home() {
           Choose a subject and test your knowledge!
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 px-0">
+        <div className="flex flex-wrap items-stretch justify-center gap-3 px-0">
           <div className="w-full min-w-0 sm:w-auto">
             <DynamicModeToggle />
           </div>
           <button
             type="button"
             onClick={() => setShowShuffleModal(true)}
-            className="flex items-center justify-center w-full gap-2 px-5 py-4 text-sm font-bold text-white transition-colors sm:w-auto rounded-2xl bg-clay-500 hover:bg-clay-600 focus:outline-none focus:ring-2 focus:ring-clay-500 focus:ring-offset-2 sm:text-base"
+            className="flex items-center justify-center w-full gap-2 px-6 py-4 text-sm font-bold transition-colors bg-white border-2 sm:w-auto rounded-2xl border-stone-200 text-stone-800 hover:border-clay-400 dark:border-stone-700 dark:bg-stone-900 dark:text-white dark:hover:border-clay-500 focus:outline-none focus:ring-2 focus:ring-clay-500 sm:text-base"
           >
-            <FaRandom />
+            <FaRandom className="text-clay-500 dark:text-clay-400" />
             Shuffle Practice
           </button>
         </div>

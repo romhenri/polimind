@@ -193,12 +193,17 @@ export default function ShufflePracticeRunner({
           <FaArrowLeft /> Back
         </button>
 
-        <div className="flex items-center justify-between my-2 sm:mb-4">
-          <h1 className="text-2xl font-bold tracking-wide font-display text-stone-800 dark:text-white sm:text-3xl md:text-4xl">
-            Shuffle Practice
-          </h1>
+        <div className="flex items-center justify-between gap-4 my-2 sm:mb-4">
+          <div className="min-w-0">
+            <h1 className="text-2xl font-bold tracking-wide font-display text-stone-800 dark:text-white sm:text-3xl md:text-4xl">
+              Shuffle Practice
+            </h1>
+            <p className="mt-0.5 truncate text-sm text-stone-500 dark:text-stone-400">
+              {current.source}
+            </p>
+          </div>
           {totalAnswered > 0 && (
-            <div className="text-right">
+            <div className="flex-shrink-0 text-right">
               <div className="text-xl font-bold text-clay-600 dark:text-clay-400 sm:text-3xl">
                 {currentPercentage}%
               </div>
