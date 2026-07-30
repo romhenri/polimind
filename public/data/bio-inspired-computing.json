@@ -1,0 +1,128 @@
+{
+  "id": "bio-inspired-computing",
+  "name": "Computação Bioinspirada",
+  "description": "Teste os seus conhecimentos sobre os principais conceitos, técnicas e aplicações da computação bioinspirada.",
+  "color": "emerald",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "tags": [
+    "ia",
+    "bioinspirada",
+    "algoritmos",
+    "redes-neurais"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "Qual é a principal motivação para o desenvolvimento da Computação Bioinspirada?",
+      "options": [
+        "Substituir completamente o uso de hardware tradicional em sistemas.",
+        "Modelar sistemas computacionais baseados em soluções eficazes da natureza.",
+        "Garantir a execução determinística de qualquer algoritmo complexo.",
+        "Reduzir o consumo elétrico dos computadores a quase zero."
+      ],
+      "correctAnswer": 1,
+      "explain": "A computação bioinspirada investiga técnicas inspiradas na biologia para construir sistemas adaptativos baseados na natureza."
+    },
+    {
+      "question": "Quais são as três etapas fundamentais no projeto de uma Rede Neural Artificial?",
+      "options": [
+        "Definição do hardware, escolha da linguagem e testes finais.",
+        "Seleção da amostra, limpeza de dados e criação de relatórios.",
+        "Definição do neurônio artificial, estrutura da rede e aprendizagem.",
+        "Coleta de entradas, compilação do código e análise gráfica."
+      ],
+      "correctAnswer": 2,
+      "explain": "O projeto exige definir o neurônio artificial, a arquitetura de conexões e o método de ajuste dos pesos."
+    },
+    {
+      "question": "Qual é o objetivo principal do ajuste de pesos durante o treinamento de uma Rede Neural?",
+      "options": [
+        "Minimizar a função de custo calculada a partir dos erros cometidos.",
+        "Aumentar a velocidade do ciclo de clock dos processadores do sistema.",
+        "Eliminar a necessidade de funções de ativação nas camadas ocultas.",
+        "Reduzir a quantidade de dados exigida no conjunto de treinamento."
+      ],
+      "correctAnswer": 0,
+      "explain": "O algoritmo ajusta os pesos proporcionalmente ao erro para minimizar a função de custo ao longo do tempo."
+    },
+    {
+      "question": "O que caracteriza a propriedade de Inteligência Emergente em sistemas bioinspirados?",
+      "options": [
+        "Um agente centralizado tomando todas as decisões do grupo.",
+        "Capacidades complexas surgindo da interação entre agentes simples.",
+        "Instruções pré-programadas executadas isoladamente por robôs.",
+        "Uso exclusivo de memórias centralizadas de alta velocidade."
+      ],
+      "correctAnswer": 1,
+      "explain": "A inteligência emergente acontece quando comportamentos globais complexos surgem da auto-organização de agentes simples sem controle central."
+    },
+    {
+      "question": "Como os algoritmos baseados em colônias de formigas encontram o caminho mais curto?",
+      "options": [
+        "Por meio de varredura exaustiva de todas as rotas possíveis no grafo.",
+        "Depositando marcas que se intensificam nas rotas mais percorridas.",
+        "Calculando diretamente as distâncias com uso de coordenadas de GPS.",
+        "Apenas com movimento aleatório e sem retenção de memória de rotas."
+      ],
+      "correctAnswer": 1,
+      "explain": "Formigas reforçam quimicamente as rotas mais frequentes, permitindo que a colônia convirja para o caminho mais curto."
+    },
+    {
+      "question": "Na Computação Evolucionária, qual elemento atua como o critério de Seleção Natural?",
+      "options": [
+        "A taxa de variação dos bits presentes na memória principal.",
+        "A quantidade de iterações do laço de repetição principal.",
+        "A Função de Avaliação que mede a adequação dos indivíduos.",
+        "O tamanho máximo pré-determinado para a população inicial."
+      ],
+      "correctAnswer": 2,
+      "explain": "A função de avaliação (fitness) determina os indivíduos mais aptos a transmitir seu material genético para as próximas gerações."
+    },
+    {
+      "question": "Qual é a função do operador de Mutação em um Algoritmo Genético?",
+      "options": [
+        "Garantir a convergência imediata para uma única solução local.",
+        "Avaliar a qualidade da solução encontrada pelo indivíduo.",
+        "Introduzir perturbações aleatórias para manter a diversidade.",
+        "Remover os piores indivíduos da população a cada geração."
+      ],
+      "correctAnswer": 2,
+      "explain": "A mutação insere pequenas alterações aleatórias, permitindo explorar novas áreas do espaço de busca e evitar estagnação."
+    },
+    {
+      "question": "O que estuda a área da Vida Artificial no contexto da Computação Bioinspirada?",
+      "options": [
+        "A criação de órgãos biológicos em impressoras tridimensionais.",
+        "A recriação de fenômenos e lógicas biológicas em ambientes virtuais.",
+        "A automação do processo de sequenciamento de DNA humano.",
+        "A substituição de neurônios biológicos por circuitos integrados."
+      ],
+      "correctAnswer": 1,
+      "explain": "A Vida Artificial aplica regras biológicas em softwares e mundos virtuais para simular comportamentos de seres vivos."
+    },
+    {
+      "question": "Qual é o objetivo principal dos sistemas baseados em Computação Autonômica?",
+      "options": [
+        "Funcionar sem necessidade de conexão com redes externas.",
+        "Realizar auto-gerenciamento e ajuste sem intervenção humana.",
+        "Treinar modelos de inteligência artificial sem uso de dados.",
+        "Substituir todos os sistemas operacionais por código genético."
+      ],
+      "correctAnswer": 1,
+      "explain": "Inspirada no sistema nervoso autônomo, a computação autonômica busca criar sistemas que se autorregulam e se adaptam sozinhos."
+    },
+    {
+      "question": "Na Robótica Bioinspirada, qual é a vantagem de utilizar uma estrutura articular similar à de uma aranha ou centopeia?",
+      "options": [
+        "Maior estabilidade e capacidade de adaptação em terrenos irregulares.",
+        "Diminuição drástica no custo de fabricação de componentes mecânicos.",
+        "Eliminação de sensores para navegação e detecção de obstáculos.",
+        "Aumento na velocidade final de deslocamento em superfícies planas."
+      ],
+      "correctAnswer": 0,
+      "explain": "A locomoção articulada inspirada em insetos e aracnídeos melhora a estabilidade e a mobilidade em terrenos acidentados."
+    }
+  ]
+}
