@@ -1,0 +1,150 @@
+{
+  "id": "knowledge-discovery-in-databases",
+  "name": "Processo de KDD",
+  "description": "Teste os seus conhecimentos sobre o ciclo de vida do KDD, as etapas de pré-processamento e a mineração de dados.",
+  "color": "indigo",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "tags": [
+    "kdd",
+    "data-mining",
+    "mineracao-de-dados",
+    "ia"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "Qual é a principal diferença entre KDD (Descoberta de Conhecimento em Bases de Dados) e Mineração de Dados?",
+      "options": [
+        "A Mineração de Dados envolve todo o processo, enquanto o KDD é apenas a fase de limpeza dos dados.",
+        "A Mineração de Dados é uma etapa específica dentro do processo global e interativo do KDD.",
+        "O KDD aplica-se apenas a bancos de dados relacionais, e a Mineração de Dados a dados não estruturados.",
+        "Não existe diferença, pois ambos os termos são exatamente sinônimos e intercambiáveis."
+      ],
+      "correctAnswer": 1,
+      "explain": "A Mineração de Dados é a etapa central do processo de KDD na qual os algoritmos de extração de padrões são aplicados."
+    },
+    {
+      "question": "O que motivou a evolução dos sistemas OLTP para o surgimento do KDD e Data Mining?",
+      "options": [
+        "A necessidade de substituir completamente os bancos de dados relacionais por arquivos de texto.",
+        "O desejo de automatizar a digitação de dados em sistemas comerciais sem intervenção humana.",
+        "A limitação do OLTP em analisar grandes volumes de dados históricos para suporte à tomada de decisão.",
+        "O alto custo de armazenar transações diárias em sistemas corporativos tradicionais."
+      ],
+      "correctAnswer": 2,
+      "explain": "Enquanto o OLTP foca em transações eficientes do dia a dia, o KDD foca na análise e descoberta de conhecimento em dados históricos."
+    },
+    {
+      "question": "Qual é a sequência correta de etapas no processo clássico de KDD?",
+      "options": [
+        "Mineração de Dados, Seleção, Pré-processamento, Transformação e Avaliação.",
+        "Limpeza de Dados, Avaliação, Mineração de Dados, Seleção e Armazenamento.",
+        "Seleção, Pré-processamento, Transformação, Mineração de Dados e Interpretação/Avaliação.",
+        "Interpretação, Mineração de Dados, Limpeza, Integração e Seleção de Atributos."
+      ],
+      "correctAnswer": 2,
+      "explain": "O KDD segue um fluxo que vai desde a seleção e tratamento dos dados brutos até a mineração e interpretação do conhecimento final."
+    },
+    {
+      "question": "Em que consiste a etapa de Pré-processamento no ciclo do KDD?",
+      "options": [
+        "Na aplicação direta de algoritmos de redes neurais para prever comportamentos.",
+        "Na escolha das regras de associação que serão apresentadas ao usuário final.",
+        "No tratamento de ruídos, dados ausentes, inconsistências e integração de fontes.",
+        "Na apresentação visual dos resultados através de gráficos e painéis interativos."
+      ],
+      "correctAnswer": 2,
+      "explain": "O pré-processamento limpa e organiza os dados brutos para garantir a qualidade das análises nas etapas seguintes."
+    },
+    {
+      "question": "Qual é a principal meta das tarefas de Descrição na Mineração de Dados?",
+      "options": [
+        "Calcular a probabilidade exata de um cliente cancelar um serviço no futuro.",
+        "Identificar padrões ou propriedades humanas legíveis que caracterizem os dados existentes.",
+        "Classificar novos registros com base em rótulos pré-determinados por especialistas.",
+        "Estimar valores numéricos contínuos para períodos de tempo subsequentes."
+      ],
+      "correctAnswer": 1,
+      "explain": "Tarefas descritivas buscam sintetizar e encontrar padrões nos dados atuais para facilitar a interpretação humana."
+    },
+    {
+      "question": "Qual das opções abaixo representa uma tarefa típica de Previsão (Predição) em Mineração de Dados?",
+      "options": [
+        "Agrupamento de clientes por perfil socioeconômico sem rótulos prévios.",
+        "Identificação de itens comprados juntos com frequência no supermercado.",
+        "Classificação do risco de inadimplência de um novo solicitante de crédito.",
+        "Sumarização do volume total de vendas por região no último ano."
+      ],
+      "correctAnswer": 2,
+      "explain": "Predição utiliza variáveis conhecidas para estimar um resultado ou rótulo futuro, como o risco de crédito."
+    },
+    {
+      "question": "Em qual tarefa de Mineração de Dados se enquadra a identificação de transações bancárias suspeitas fora do padrão habitual?",
+      "options": [
+        "Detecção de Outliers / Anomalias.",
+        "Mineração de Regras de Associação.",
+        "Regressão Linear Múltipla.",
+        "Sumarização Estatística Básica."
+      ],
+      "correctAnswer": 0,
+      "explain": "A detecção de outliers busca registros que se desviam significativamente do comportamento normal, ideal para fraudes."
+    },
+    {
+      "question": "Como a Mineração de Dados auxilia na retenção de clientes (prevenção de churn) em uma empresa?",
+      "options": [
+        "Corrigindo erros de digitação nos cadastros de clientes antigos automaticamente.",
+        "Identificando padrões de comportamento de clientes prestes a cancelar o serviço.",
+        "Aumentando a capacidade de armazenamento de dados nos servidores centrais.",
+        "Substituindo o atendimento ao cliente por algoritmos de ordenação simples."
+      ],
+      "correctAnswer": 1,
+      "explain": "Modelos preditivos identificam sinais de insatisfação ou desuso, permitindo ações proativas de retenção."
+    },
+    {
+      "question": "Qual é o papel da etapa de Transformação de Dados no KDD?",
+      "options": [
+        "Definir o problema de negócio e a pergunta que o KDD deve responder.",
+        "Anotar manualmente os resultados encontrados pelos especialistas de domínio.",
+        "Adequar os dados ao formato exigido pelos algoritmos de mineração (ex: normalização).",
+        "Executar consultas SQL simples em bancos de dados transacionais OLTP."
+      ],
+      "correctAnswer": 2,
+      "explain": "A transformação prepara os dados limpos, aplicando redução de dimensionalidade ou normalização para os algoritmos."
+    },
+    {
+      "question": "O que ocorre na última etapa do processo de KDD (Interpretação/Avaliação)?",
+      "options": [
+        "Os padrões minerados são validados, filtrados e convertidos em conhecimento útil.",
+        "Os dados são extraídos do banco de dados relacional e salvos em tabelas temporárias.",
+        "Os valores nulos são preenchidos com a média aritmética dos atributos.",
+        "Os algoritmos de aprendizado supervisionado são executados pela primeira vez."
+      ],
+      "correctAnswer": 0,
+      "explain": "Na fase final, os padrões encontrados são analisados para verificar sua utilidade e novidade antes da tomada de decisão."
+    },
+  {
+    "question": "Qual é o pré-requisito fundamental quanto aos dados para que o processo de KDD possa ser iniciado e gerar valor?",
+    "options": [
+      "Ter um banco de dados relacional (SQL) perfeitamente estruturado e sem nenhuma inconsistência inicial.",
+      "Dispor de um volume expressivo de dados históricos que contenham relações implícitas, não óbvias e potencialmente úteis.",
+      "Armazenar exclusivamente dados transacionais do dia a dia (OLTP) em servidores locais.",
+      "Garantir que todos os dados tenham sido previamente rotulados por especialistas humanos."
+    ],
+    "correctAnswer": 1,
+    "explain": "O KDD pressupõe a existência de um volume significativo de dados onde haja conhecimento oculto e útil a ser descoberto."
+  },
+  {
+    "question": "Como é avaliado o sucesso de um processo de Descoberta de Conhecimento em Bases de Dados (KDD)?",
+    "options": [
+      "Pela quantidade total de megabytes processados pelos algoritmos de mineração por segundo.",
+      "Pela capacidade do algoritmo de executar sem gerar nenhum tipo de outlier ou dado inconsistente.",
+      "Pela descoberta de padrões que sejam válidos, novos, potencialmente úteis e compreensíveis para a tomada de decisão.",
+      "Pelo número de tabelas e atributos criados na fase de pré-processamento e limpeza."
+    ],
+    "correctAnswer": 2,
+    "explain": "O sucesso do KDD é medido pela extração de conhecimento que seja novo, válido, compreensível e aplicável ao negócio."
+  }
+  ]
+}
