@@ -1,17 +1,19 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import SubjectCard from "@/components/SubjectCard";
 import DynamicModeToggle from "@/components/DynamicModeToggle";
 import ShufflePracticeModal from "@/components/ShufflePracticeModal";
-import ShufflePracticeRunner from "@/components/ShufflePracticeRunner";
 import { FaSearch, FaTimes, FaRandom } from "react-icons/fa";
 import { useQuizMode } from "@/contexts/QuizModeContext";
 import { QuizMetadata } from "@/types/quiz";
 import { parseQuizSeq } from "@/utils/quizSeq";
+import { storeShuffleSelection } from "@/utils/shufflePractice";
 import { CATEGORIES, getCategoryById } from "@/data/categories";
 
 export default function Home() {
+  const router = useRouter();
   const { isDynamicMode } = useQuizMode();
   const [subjects, setSubjects] = useState<QuizMetadata[]>([]);
   const [loading, setLoading] = useState(true);
@@ -21,11 +23,6 @@ export default function Home() {
     CATEGORIES[0].subcategories[0] ?? ""
   );
   const [showShuffleModal, setShowShuffleModal] = useState(false);
-  const [shuffleRun, setShuffleRun] = useState<{
-    quizzes: QuizMetadata[];
-    count: number;
-    category: string;
-  } | null>(null);
 
   useEffect(() => {
     const loadSubjects = async () => {
@@ -109,17 +106,6 @@ export default function Home() {
     setSearchQuery("");
     handleSelectCategory(CATEGORIES[0].id);
   };
-
-  if (shuffleRun) {
-    return (
-      <ShufflePracticeRunner
-        quizzes={shuffleRun.quizzes}
-        count={shuffleRun.count}
-        category={shuffleRun.category}
-        onExit={() => setShuffleRun(null)}
-      />
-    );
-  }
 
   return (
     <div className="animate-fade-in">
@@ -255,8 +241,9 @@ export default function Home() {
           subjects={subjects}
           onClose={() => setShowShuffleModal(false)}
           onStart={(quizzes, count, category) => {
+            storeShuffleSelection({ quizzes, count, category });
             setShowShuffleModal(false);
-            setShuffleRun({ quizzes, count, category });
+            router.push("/quiz/shuffle");
           }}
         />
       )}

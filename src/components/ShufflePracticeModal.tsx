@@ -76,11 +76,17 @@ export default function ShufflePracticeModal({
     })
   }
 
-  const allSelected =
-    categoryQuizzes.length > 0 && categoryQuizzes.every((q) => selectedIds.has(q.id))
+  const isGroupSelected = (quizzes: QuizMetadata[]) =>
+    quizzes.length > 0 && quizzes.every((q) => selectedIds.has(q.id))
 
-  const toggleSelectAll = () => {
-    setSelectedIds(allSelected ? new Set() : new Set(categoryQuizzes.map((q) => q.id)))
+  const toggleGroup = (quizzes: QuizMetadata[]) => {
+    const ids = quizzes.map((q) => q.id)
+    setSelectedIds((prev) => {
+      const next = new Set(prev)
+      if (ids.every((id) => next.has(id))) ids.forEach((id) => next.delete(id))
+      else ids.forEach((id) => next.add(id))
+      return next
+    })
   }
 
   const canStart = selectedQuizzes.length > 0 && totalAvailable > 0
@@ -139,24 +145,26 @@ export default function ShufflePracticeModal({
             </p>
           ) : (
             <>
-              <div className="flex items-center justify-between mb-3">
+              <div className="mb-3">
                 <span className="text-xs font-semibold uppercase tracking-wider text-stone-400 dark:text-stone-500">
                   {selectedQuizzes.length} selected
                 </span>
-                <button
-                  type="button"
-                  onClick={toggleSelectAll}
-                  className="text-sm font-semibold transition-colors text-clay-600 hover:text-clay-700 dark:text-clay-400 dark:hover:text-clay-300"
-                >
-                  {allSelected ? 'Clear all' : 'Select all'}
-                </button>
               </div>
               <div className="space-y-5">
                 {groups.map((group) => (
                   <div key={group.name}>
-                    <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400">
-                      {group.name}
-                    </h3>
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400">
+                        {group.name}
+                      </h3>
+                      <button
+                        type="button"
+                        onClick={() => toggleGroup(group.quizzes)}
+                        className="text-xs font-semibold transition-colors text-clay-600 hover:text-clay-700 dark:text-clay-400 dark:hover:text-clay-300"
+                      >
+                        {isGroupSelected(group.quizzes) ? 'Clear all' : 'Select all'}
+                      </button>
+                    </div>
                     <div className="space-y-1.5">
                       {group.quizzes.map((quiz) => {
                         const checked = selectedIds.has(quiz.id)

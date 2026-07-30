@@ -9,6 +9,34 @@ export interface PracticeQuestion {
   source: string
 }
 
+export interface ShufflePracticeSelection {
+  quizzes: QuizMetadata[]
+  count: number
+  category: string
+}
+
+const SELECTION_STORAGE_KEY = 'polimind.shufflePractice'
+
+export function storeShuffleSelection(selection: ShufflePracticeSelection): void {
+  try {
+    sessionStorage.setItem(SELECTION_STORAGE_KEY, JSON.stringify(selection))
+  } catch {
+    return
+  }
+}
+
+export function loadShuffleSelection(): ShufflePracticeSelection | null {
+  try {
+    const raw = sessionStorage.getItem(SELECTION_STORAGE_KEY)
+    if (!raw) return null
+    const parsed = JSON.parse(raw)
+    if (!parsed || !Array.isArray(parsed.quizzes)) return null
+    return parsed as ShufflePracticeSelection
+  } catch {
+    return null
+  }
+}
+
 function isMathQuiz(quiz: QuizMetadata): boolean {
   return (quiz.tags ?? []).some((tag) => tag.toLowerCase() === 'math')
 }
