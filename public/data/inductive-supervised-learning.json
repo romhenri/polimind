@@ -1,0 +1,127 @@
+{
+  "id": "inductive-supervised-learning",
+  "name": "Aprendizagem Supervisionada e Indutiva",
+  "description": "Desafie seus conhecimentos sobre algoritmos de indução, árvores de decisão e conceitos de PAC Learning.",
+  "color": "cyan",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "tags": [
+    "machine learning",
+    "ia",
+    "algoritmos"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "O que caracteriza fundamentalmente a aprendizagem supervisionada?",
+      "options": [
+        "O uso de dados sem rótulos para encontrar padrões",
+        "O uso de exemplos rotulados para treinar o modelo",
+        "A busca por agrupamentos naturais nos dados",
+        "A redução da dimensionalidade dos atributos"
+      ],
+      "correctAnswer": 1,
+      "explain": "Na aprendizagem supervisionada, o algoritmo aprende a partir de um conjunto de dados que contém a resposta correta (rótulo)."
+    },
+    {
+      "question": "Na aprendizagem indutiva, o que o algoritmo busca fazer?",
+      "options": [
+        "Derivar uma regra geral a partir de exemplos específicos",
+        "Mapear apenas dados que já foram previamente classificados",
+        "Ignorar instâncias que não seguem o padrão esperado",
+        "Garantir que a hipótese seja idêntica aos dados de treino"
+      ],
+      "correctAnswer": 0,
+      "explain": "A indução consiste em generalizar uma hipótese a partir de observações particulares."
+    },
+    {
+      "question": "Qual é o objetivo principal do algoritmo ID3 na construção de árvores de decisão?",
+      "options": [
+        "Minimizar a entropia de cada nó da árvore",
+        "Maximizar o erro de classificação do modelo",
+        "Reduzir o número total de atributos da base",
+        "Aumentar a variância do conjunto de dados"
+      ],
+      "correctAnswer": 0,
+      "explain": "O ID3 utiliza o ganho de informação para selecionar o atributo que melhor reduz a entropia (desordem) nos nós."
+    },
+    {
+      "question": "O que a Entropia mede no contexto de árvores de decisão?",
+      "options": [
+        "A distância euclidiana entre dois pontos",
+        "O nível de impureza ou desordem dos dados",
+        "A velocidade de convergência do algoritmo",
+        "A quantidade de atributos irrelevantes"
+      ],
+      "correctAnswer": 1,
+      "explain": "A entropia é uma medida de desordem; quanto maior a entropia, mais misturadas estão as classes em um nó."
+    },
+    {
+      "question": "O que representa o 'Ganho de Informação'?",
+      "options": [
+        "O aumento da complexidade do modelo",
+        "A diferença de entropia antes e depois de um split",
+        "A soma de todos os erros cometidos no treino",
+        "O número de folhas em uma árvore de decisão"
+      ],
+      "correctAnswer": 1,
+      "explain": "O ganho de informação é a redução na entropia resultante da divisão dos dados por um atributo específico."
+    },
+    {
+      "question": "Qual é o conceito central por trás do AdaBoost?",
+      "options": [
+        "A criação de várias árvores independentes",
+        "A redução da variância via média aritmética",
+        "O ajuste sequencial de pesos de instâncias",
+        "A busca por clusters em espaços multidimensionais"
+      ],
+      "correctAnswer": 2,
+      "explain": "O AdaBoost é um método de boosting que foca nos exemplos classificados incorretamente nos passos anteriores."
+    },
+    {
+      "question": "No framework PAC Learning, o que significa o termo 'Probably Approximately Correct'?",
+      "options": [
+        "O erro é zero e a confiança é absoluta",
+        "A hipótese é exata para todos os dados",
+        "A hipótese tem alta chance de ter baixo erro",
+        "O modelo aprende apenas com poucos dados"
+      ],
+      "correctAnswer": 2,
+      "explain": "O PAC Learning lida com a probabilidade de o erro ser menor que um limite pequeno (epsilon)."
+    },
+    {
+      "question": "Qual a principal diferença entre Bagging e Boosting?",
+      "options": [
+        "Bagging é sequencial, Boosting é paralelo",
+        "Bagging foca em viés, Boosting foca em variância",
+        "Bagging usa rótulos, Boosting não usa rótulos",
+        "Bagging é paralelo, Boosting é sequencial"
+      ],
+      "correctAnswer": 3,
+      "explain": "No Bagging os modelos são treinados de forma independente; no Boosting, um modelo depende do erro do anterior."
+    },
+    {
+      "question": "O que acontece se uma árvore de decisão crescer sem poda (pruning)?",
+      "options": [
+        "O modelo sofre de underfitting",
+        "O modelo sofre de overfitting",
+        "A precisão no treino diminui sempre",
+        "A complexidade do modelo é reduzida"
+      ],
+      "correctAnswer": 1,
+      "explain": "Uma árvore muito profunda tende a decorar o ruído dos dados de treino, causando overfitting."
+    },
+    {
+      "question": "Como se define uma 'hipótese aproximadamente correta' no aprendizado indutivo?",
+      "options": [
+        "Uma função que classifica 100% dos casos",
+        "Uma função que minimiza o risco com alta confiança",
+        "Uma função que ignora atributos numéricos",
+        "Uma função que não possui parâmetros fixos"
+      ],
+      "correctAnswer": 1,
+      "explain": "No aprendizado indutivo, buscamos uma hipótese que, com alta probabilidade, tenha erro menor que um limite dado."
+    }
+  ]
+}
