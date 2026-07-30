@@ -1,4 +1,4 @@
-export type QuizType = 'bool' | 'options'
+export type QuizType = 'bool' | 'options' | 'classify'
 
 export interface OptionsQuestion {
   question: string
@@ -13,7 +13,49 @@ export interface BoolQuestion {
   explain?: string
 }
 
-export type Question = OptionsQuestion | BoolQuestion
+export interface ClassifyGroup {
+  id: string
+  label: string
+  hint?: string
+  parentGroup?: string
+}
+
+export interface ClassifyFacet {
+  id: string
+  label: string
+  prompt: string
+  parent?: string
+  groups: ClassifyGroup[]
+}
+
+export interface ClassifyEntity {
+  id: string
+  entity: string
+  subtitle?: string
+  answers: Record<string, string>
+  explain?: Record<string, string>
+}
+
+export interface ClassifyConfig {
+  mode?: 'sequential' | 'single'
+  optionCount?: number
+  shuffleEntities?: boolean
+}
+
+export interface ClassifyQuizData {
+  id: string
+  config?: ClassifyConfig
+  facets: ClassifyFacet[]
+  entities: ClassifyEntity[]
+}
+
+export interface ClassifyQuestion extends OptionsQuestion {
+  entity: string
+  subtitle?: string
+  optionHints?: (string | undefined)[]
+}
+
+export type Question = OptionsQuestion | BoolQuestion | ClassifyQuestion
 
 export interface QuizMetadata {
   id: string
@@ -48,7 +90,9 @@ export interface QuizState {
 }
 
 export function normalizeQuizType(type?: QuizType | string): QuizType {
-  return type === 'bool' ? 'bool' : 'options'
+  if (type === 'bool') return 'bool'
+  if (type === 'classify') return 'classify'
+  return 'options'
 }
 
 export function isAnswerCorrect(
