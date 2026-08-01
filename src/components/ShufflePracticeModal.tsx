@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { ReactNode, useEffect, useMemo, useState } from 'react'
 import { FaTimes, FaRandom } from 'react-icons/fa'
 import { QuizListing } from '@/types/quiz'
 import { CATEGORIES, getCategoryById } from '@/data/categories'
@@ -15,15 +15,29 @@ interface ShufflePracticeModalProps {
   subjects: QuizListing[]
   onClose: () => void
   onStart: (quizzes: QuizListing[], count: number, category: string) => void
+  title?: string
+  icon?: ReactNode
+  confirmLabel?: string
+  confirmIcon?: ReactNode
+  showCount?: boolean
+  initialSelectedIds?: string[]
 }
 
 export default function ShufflePracticeModal({
   subjects,
   onClose,
   onStart,
+  title = 'Shuffle Practice',
+  icon = <FaRandom className="text-clay-500 dark:text-clay-400" aria-hidden />,
+  confirmLabel = 'Start',
+  confirmIcon = <FaRandom />,
+  showCount = true,
+  initialSelectedIds,
 }: ShufflePracticeModalProps) {
   const [activeTab, setActiveTab] = useState<string>(ALL_TAB)
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(
+    () => new Set(initialSelectedIds)
+  )
   const [count, setCount] = useState<number>(DEFAULT_COUNT)
 
   useEffect(() => {
@@ -116,7 +130,9 @@ export default function ShufflePracticeModal({
     })
   }
 
-  const canStart = selectedQuizzes.length > 0 && totalAvailable > 0
+  const canStart = showCount
+    ? selectedQuizzes.length > 0 && totalAvailable > 0
+    : selectedQuizzes.length > 0
 
   const handleStart = () => {
     if (!canStart) return
@@ -134,9 +150,9 @@ export default function ShufflePracticeModal({
       >
         <div className="flex items-center justify-between px-5 py-4 border-b-2 border-stone-200 dark:border-stone-700">
           <div className="flex items-center gap-2">
-            <FaRandom className="text-clay-500 dark:text-clay-400" aria-hidden />
+            {icon}
             <h2 className="text-xl font-bold tracking-wide font-display text-stone-800 dark:text-white">
-              Shuffle Practice
+              {title}
             </h2>
           </div>
           <button
@@ -255,33 +271,39 @@ export default function ShufflePracticeModal({
         </div>
 
         <div className="px-5 py-4 border-t-2 border-stone-200 dark:border-stone-700">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-semibold text-stone-600 dark:text-stone-300">
-              Questions
-            </span>
-            <div className="flex gap-2">
-              {COUNT_OPTIONS.map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  onClick={() => setCount(option)}
-                  className={`h-8 w-10 rounded-md text-sm font-semibold transition-colors ${
-                    count === option
-                      ? 'bg-black/[0.08] text-stone-800 ring-1 ring-stone-300 dark:bg-white/[0.12] dark:text-white dark:ring-stone-600'
-                      : 'bg-black/[0.04] text-stone-500 hover:bg-black/[0.08] dark:bg-white/[0.04] dark:text-stone-400 dark:hover:bg-white/[0.08]'
-                  }`}
-                >
-                  {option}
-                </button>
-              ))}
+          {showCount && (
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-sm font-semibold text-stone-600 dark:text-stone-300">
+                Questions
+              </span>
+              <div className="flex gap-2">
+                {COUNT_OPTIONS.map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => setCount(option)}
+                    className={`h-8 w-10 rounded-md text-sm font-semibold transition-colors ${
+                      count === option
+                        ? 'bg-black/[0.08] text-stone-800 ring-1 ring-stone-300 dark:bg-white/[0.12] dark:text-white dark:ring-stone-600'
+                        : 'bg-black/[0.04] text-stone-500 hover:bg-black/[0.08] dark:bg-white/[0.04] dark:text-stone-400 dark:hover:bg-white/[0.08]'
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="flex items-center justify-between gap-3">
             <span className="text-xs text-stone-500 dark:text-stone-400">
-              {canStart
-                ? `Playing ${runLength} of ${totalAvailable} questions`
-                : 'Select at least one quiz'}
+              {showCount
+                ? canStart
+                  ? `Playing ${runLength} of ${totalAvailable} questions`
+                  : 'Select at least one quiz'
+                : canStart
+                  ? `${selectedQuizzes.length} selected`
+                  : 'Select at least one quiz'}
             </span>
             <button
               type="button"
@@ -289,8 +311,8 @@ export default function ShufflePracticeModal({
               disabled={!canStart}
               className="flex items-center gap-2 btn-primary disabled:cursor-not-allowed disabled:opacity-50"
             >
-              <FaRandom />
-              Start
+              {confirmIcon}
+              {confirmLabel}
             </button>
           </div>
         </div>

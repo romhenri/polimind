@@ -102,14 +102,56 @@ function buildResponseSchema(subcategories: string[]): object {
   return { type: 'object', properties, required }
 }
 
-function buildPrompt(subject: string, count: number, category: string, subcategory?: string): string {
+const STYLE_SAMPLE_PER_QUIZ = 3
+const STYLE_SAMPLE_TOTAL = 15
+
+/**
+ * Build a "style reference" prompt block from existing quizzes. Samples a few
+ * questions per quiz so the model matches their tone, difficulty and format —
+ * NOT their subject matter. Returns an empty string when there is nothing to
+ * sample.
+ */
+export function buildStyleContext(quizzes: QuizMetadata[]): string {
+  const samples: string[] = []
+  for (const quiz of quizzes) {
+    const questions = Array.isArray(quiz.questions) ? quiz.questions : []
+    let taken = 0
+    for (const question of questions) {
+      if (taken >= STYLE_SAMPLE_PER_QUIZ || samples.length >= STYLE_SAMPLE_TOTAL) break
+      if (!question || typeof (question as OptionsQuestion).question !== 'string') continue
+      const text = (question as OptionsQuestion).question.trim()
+      if (!text) continue
+      samples.push(`- (from "${quiz.name}") ${text}`)
+      taken++
+    }
+    if (samples.length >= STYLE_SAMPLE_TOTAL) break
+  }
+
+  if (samples.length === 0) return ''
+
+  return [
+    'Style reference — match the tone, difficulty, phrasing and question format of the example questions below.',
+    'These are ONLY a style guide: do NOT reuse their subject matter, topics, wording or answers. Write questions strictly about the Subject defined below.',
+    '',
+    'Example questions:',
+    ...samples,
+  ].join('\n')
+}
+
+function buildPrompt(
+  subject: string,
+  count: number,
+  category: string,
+  subcategory?: string,
+  styleContext?: string
+): string {
   return [
     'You are a quiz generator for "polimind", a learning platform.',
     'Generate one high-quality multiple-choice quiz as a single JSON object that follows the exact structure required by the platform.',
     '',
     'Rules:',
     '- "id": a short lowercase kebab-case slug derived from the subject (only [a-z0-9-], no spaces).',
-    '- "name": a concise, human-readable title.',
+    '- "name": a concise, human-readable title naming only the content itself. Do NOT include words like "quiz", "fundamentals", "test", "trivia", "challenge" or any equivalent.',
     '- "description": one engaging sentence describing the quiz.',
     `- "color": pick exactly ONE from this list: ${COLOR_KEYS.join(', ')}.`,
     `- "category": use exactly "${category}".`,
@@ -125,6 +167,7 @@ function buildPrompt(subject: string, count: number, category: string, subcatego
     '- Do NOT make the correct option the longest one; keep all options similar in length so length is not a clue.',
     '- Write everything in English (id too). Output only the JSON object, with no extra text.',
     '',
+    styleContext ? `${styleContext}\n` : '',
     `Subject: ${subject}`,
     `Number of questions: ${count}`,
   ]
@@ -136,7 +179,8 @@ export function buildCopyPrompt(
   subject: string,
   count: number,
   category: string,
-  subcategory?: string
+  subcategory?: string,
+  styleContext?: string
 ): string {
   const subjectLine = subject.trim() || '<describe your subject here>'
   const subcategories = allowedSubcategories(category, subcategory)
@@ -176,9 +220,10 @@ export function buildCopyPrompt(
     '- "correctAnswer": 0-based index (0 to 3) of the correct option; exactly one option is correct.',
     '- Vary the position of the correct answer across questions.',
     '- Do NOT make the correct option the longest one; keep all options similar in length so length is not a clue.',
-    '- Just Content on Title. Do not put words as: quiz, fundamentals, test or any equivalent in the title.',
+    '- "name": name only the content itself. Do NOT put words like "quiz", "fundamentals", "test", "trivia", "challenge" or any equivalent in the title.',
     '- Write everything in English (including "id"). Output ONLY the JSON object.',
     '',
+    styleContext ? `${styleContext}\n` : '',
     `Subject: ${subjectLine}`,
     `Number of questions: ${count}`,
   ]
@@ -519,11 +564,12 @@ export async function generateQuiz(
   subject: string,
   count: number,
   category: string,
-  subcategory?: string
+  subcategory?: string,
+  styleContext?: string
 ): Promise<GeneratedQuiz> {
   assertApiKey(settings)
   const forcedSubcategory = resolveSubcategory(category, subcategory)
-  const prompt = buildPrompt(subject, count, category, forcedSubcategory)
+  const prompt = buildPrompt(subject, count, category, forcedSubcategory, styleContext)
   const schema = buildResponseSchema(allowedSubcategories(category, forcedSubcategory))
   const { result, model } = await withModelFallback(
     providerModels(settings.provider),
@@ -712,14 +758,15 @@ export async function generateQuizStream(
   category: string,
   subcategory: string | undefined,
   callbacks: StreamCallbacks,
-  signal?: AbortSignal
+  signal?: AbortSignal,
+  styleContext?: string
 ): Promise<GeneratedQuiz> {
   assertApiKey(settings)
   const forcedSubcategory = resolveSubcategory(category, subcategory)
 
   if (settings.provider === 'gemini') {
     try {
-      const result = await generateQuiz(settings, subject, count, category, forcedSubcategory)
+      const result = await generateQuiz(settings, subject, count, category, forcedSubcategory, styleContext)
       if (callbacks.onMeta) {
         callbacks.onMeta({
           id: result.quiz.id,
@@ -758,7 +805,7 @@ export async function generateQuizStream(
         body: JSON.stringify({
           model,
           messages: [
-            { role: 'user', content: buildPrompt(subject, count, category, forcedSubcategory) },
+            { role: 'user', content: buildPrompt(subject, count, category, forcedSubcategory, styleContext) },
           ],
           stream: true,
           temperature: settings.temperature,

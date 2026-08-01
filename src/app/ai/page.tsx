@@ -19,12 +19,14 @@ import {
   FaClipboardCheck,
   FaSave,
 } from 'react-icons/fa'
-import { FaWandMagicSparkles } from 'react-icons/fa6'
-import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
-import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, parseQuizJson } from '@/utils/aiQuiz'
+import { FaWandMagicSparkles, FaLayerGroup } from 'react-icons/fa6'
+import { QuizMetadata, OptionsQuestion, QuizListing } from '@/types/quiz'
+import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, buildStyleContext, parseQuizJson } from '@/utils/aiQuiz'
 import { CATEGORIES, getCategoryById } from '@/data/categories'
 import type { StreamCallbacks, AiProvider, AiSettings } from '@/utils/aiQuiz'
-import { getLocalQuiz, saveLocalQuiz } from '@/utils/localQuizzes'
+import { getLocalQuiz, getLocalQuizzes, saveLocalQuiz } from '@/utils/localQuizzes'
+import { loadFullQuizzes, toQuizListing } from '@/utils/loadQuizzes'
+import ShufflePracticeModal from '@/components/ShufflePracticeModal'
 import AiQuizRunner from './AiQuizRunner'
 import MetaEditor from './MetaEditor'
 import QuestionList from './QuestionList'
@@ -59,6 +61,10 @@ export default function AiPage() {
   const [streamProgress, setStreamProgress] = useState<{ current: number; total: number } | null>(null)
   const [streamingQuestions, setStreamingQuestions] = useState<OptionsQuestion[]>([])
   const [streamMeta, setStreamMeta] = useState<Partial<QuizMetadata> | null>(null)
+  const [subjects, setSubjects] = useState<QuizListing[]>([])
+  const [showContextModal, setShowContextModal] = useState(false)
+  const [referenceIds, setReferenceIds] = useState<string[]>([])
+  const [referenceQuizzes, setReferenceQuizzes] = useState<QuizMetadata[]>([])
   const abortRef = useRef<AbortController | null>(null)
 
   useEffect(() => {
@@ -94,6 +100,23 @@ export default function AiPage() {
   }, [])
 
   useEffect(() => {
+    const loadSubjects = async () => {
+      try {
+        const listRes = await fetch('/api/quiz-list', { cache: 'no-store' })
+        if (!listRes.ok) throw new Error('Failed to load quiz list')
+        const { quizzes } = (await listRes.json()) as { quizzes: QuizListing[] }
+        const localQuizzes = getLocalQuizzes()
+        const localIds = new Set(localQuizzes.map((q) => q.id))
+        const remoteSubjects = quizzes.filter((s) => !localIds.has(s.id))
+        setSubjects([...remoteSubjects, ...localQuizzes.map(toQuizListing)])
+      } catch {
+        // Non-fatal: the reference picker just shows an empty pool.
+      }
+    }
+    loadSubjects()
+  }, [])
+
+  useEffect(() => {
     const storedOpenRouterKey = localStorage.getItem(OPENROUTER_KEY_STORAGE)
     const storedGeminiKey = localStorage.getItem(GEMINI_KEY_STORAGE)
     const storedProvider = localStorage.getItem(PROVIDER_STORAGE)
@@ -104,6 +127,7 @@ export default function AiPage() {
 
   const dataFile = useMemo(() => (quiz ? quizToDataFile(quiz) : null), [quiz])
   const jsonPreview = useMemo(() => (dataFile ? JSON.stringify(dataFile, null, 2) : ''), [dataFile])
+  const styleContext = useMemo(() => buildStyleContext(referenceQuizzes), [referenceQuizzes])
 
   const activeKey = provider === 'openrouter' ? openRouterKey : geminiKey
   const setActiveKey = provider === 'openrouter' ? setOpenRouterKey : setGeminiKey
@@ -132,13 +156,30 @@ export default function AiPage() {
     if (!canCopy) return
     try {
       await navigator.clipboard.writeText(
-        buildCopyPrompt(subject.trim(), count, category, subcategory)
+        buildCopyPrompt(subject.trim(), count, category, subcategory, styleContext)
       )
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
       setError('Could not copy to clipboard. Copy it manually from the JSON preview instead.')
     }
+  }
+
+  const handleContextConfirm = async (selected: QuizListing[]) => {
+    setShowContextModal(false)
+    const ids = selected.map((q) => q.id)
+    setReferenceIds(ids)
+    if (ids.length === 0) {
+      setReferenceQuizzes([])
+      return
+    }
+    const full = await loadFullQuizzes(ids)
+    setReferenceQuizzes(full)
+  }
+
+  const handleClearContext = () => {
+    setReferenceIds([])
+    setReferenceQuizzes([])
   }
 
   const handleCancel = () => {
@@ -200,7 +241,8 @@ export default function AiPage() {
         category,
         subcategory,
         callbacks,
-        controller.signal
+        controller.signal,
+        styleContext
       )
     } catch (err) {
       if (err instanceof DOMException && err.name === 'AbortError') {
@@ -515,6 +557,33 @@ export default function AiPage() {
           polimind automatically adds the formatting instructions so the output works as a playable quiz.
         </p>
 
+        <div className="mb-4">
+          <button
+            type="button"
+            onClick={() => setShowContextModal(true)}
+            className="flex items-center justify-center w-full gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-plum-700 border-plum-500 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-400 dark:hover:bg-stone-800"
+          >
+            <FaLayerGroup />
+            {referenceIds.length > 0
+              ? `${referenceIds.length} ${referenceIds.length === 1 ? 'quiz' : 'quizzes'} as reference`
+              : 'Add Special Context'}
+          </button>
+          {referenceIds.length > 0 && (
+            <div className="flex items-center justify-between gap-2 mt-2">
+              <p className="text-xs text-stone-500 dark:text-stone-400">
+                Their style, tone and difficulty guide the generated quiz — not their subject.
+              </p>
+              <button
+                type="button"
+                onClick={handleClearContext}
+                className="flex-shrink-0 text-xs font-semibold transition-colors text-clay-600 hover:text-clay-700 dark:text-clay-400 dark:hover:text-clay-300"
+              >
+                Clear
+              </button>
+            </div>
+          )}
+        </div>
+
         <div className="flex flex-col gap-3 sm:flex-row">
           <button
             type="button"
@@ -802,6 +871,20 @@ export default function AiPage() {
             </button>
           </div>
         </div>
+      )}
+
+      {showContextModal && (
+        <ShufflePracticeModal
+          subjects={subjects}
+          initialSelectedIds={referenceIds}
+          title="Add Special Context"
+          icon={<FaWandMagicSparkles className="text-plum-500 dark:text-plum-400" aria-hidden />}
+          confirmLabel="Done"
+          confirmIcon={<FaWandMagicSparkles />}
+          showCount={false}
+          onClose={() => setShowContextModal(false)}
+          onStart={(quizzes) => handleContextConfirm(quizzes)}
+        />
       )}
     </div>
   )
