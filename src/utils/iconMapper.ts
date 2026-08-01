@@ -34,6 +34,12 @@ import {
   FaBullseye,
   FaComments,
   FaRobot,
+  FaDna,
+  FaScaleBalanced,
+  FaGears,
+  FaSitemap,
+  FaMagnifyingGlassChart,
+  FaLightbulb,
 } from 'react-icons/fa6'
 import {
   TbRoute,
@@ -123,10 +129,16 @@ const ICON_BY_ID: Record<string, IconType> = {
   'ml-fundamentals': TbChartDots,
   'ml-fundamentals-2': TbChartDots,
   'ml-fundamentals-3': TbChartDots,
-  'ml-learning-paradigms': TbChartDots,
+  'ml-learning-paradigms': FaSitemap,
   'neural-networks': FaBrain,
   'nlp-basics': FaComments,
   'mcp-servers': FaRobot,
+  'bio-inspired-computing': FaDna,
+  'llm-evaluators': FaScaleBalanced,
+  'ai-paradigms-and-algorithms': FaSitemap,
+  'inductive-supervised-learning': FaSitemap,
+  'knowledge-discovery-in-databases': FaMagnifyingGlassChart,
+  'knowledge-representation': FaLightbulb,
 }
 
 const ICON_BY_CATEGORY: Record<string, IconType> = {

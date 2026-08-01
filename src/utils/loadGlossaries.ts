@@ -54,16 +54,32 @@ export async function fetchGlossary(slug: string): Promise<Glossary | null> {
   }
 }
 
+function toMeta(glossary: Glossary): GlossaryMeta {
+  const { groups, ...meta } = glossary
+  return { ...meta, termCount: termCount(groups) }
+}
+
 export async function loadGlossaries(): Promise<GlossaryMeta[]> {
   try {
     const listRes = await fetch('/api/glossary-slugs', { cache: 'no-store' })
     if (!listRes.ok) return []
     const { slugs } = (await listRes.json()) as { slugs: string[] }
     const loaded = await Promise.all(slugs.map(fetchGlossary))
-    return loaded
-      .filter((g): g is Glossary => g !== null)
-      .map(({ groups, ...meta }) => ({ ...meta, termCount: termCount(groups) }))
+    return loaded.filter((g): g is Glossary => g !== null).map(toMeta)
   } catch {
     return []
   }
+}
+
+export async function loadGlossariesBySlugs(
+  slugs: string[]
+): Promise<Record<string, GlossaryMeta>> {
+  const unique = Array.from(new Set(slugs))
+  const loaded = await Promise.all(unique.map(fetchGlossary))
+  const map: Record<string, GlossaryMeta> = {}
+  unique.forEach((slug, index) => {
+    const glossary = loaded[index]
+    if (glossary) map[slug] = toMeta(glossary)
+  })
+  return map
 }

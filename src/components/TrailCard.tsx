@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
-import { FaArrowRight, FaQuestionCircle, FaLayerGroup } from 'react-icons/fa'
+import { FaArrowRight, FaQuestionCircle, FaBookOpen } from 'react-icons/fa'
 import { getColor } from '@/utils/colorMapper'
 import type { Trail } from '@/data/trails'
 
@@ -22,6 +22,7 @@ export default function TrailCard({
   const bgColor = getColor(trail.color)
   const Icon = trail.icon
   const percent = quizCount > 0 ? Math.round((completedCount / quizCount) * 100) : 0
+  const libCount = trail.libs?.length ?? 0
   const animationDelay = `${index * 0.1}s`
 
   return (
@@ -69,10 +70,12 @@ export default function TrailCard({
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4 text-xs text-stone-600 dark:text-stone-400 sm:text-sm">
-              <span className="flex items-center gap-2">
-                <FaLayerGroup />
-                {quizCount}
-              </span>
+              {libCount > 0 && (
+                <span className="flex items-center gap-2">
+                  <FaBookOpen />
+                  {libCount}
+                </span>
+              )}
               <span className="flex items-center gap-2">
                 <FaQuestionCircle />
                 {totalQuestions}

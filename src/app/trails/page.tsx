@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
+import Link from 'next/link'
 import TrailCard from '@/components/TrailCard'
 import { TRAILS } from '@/data/trails'
 import { loadQuizzesBySlugs, type LoadedQuiz } from '@/utils/loadQuizzes'
@@ -11,7 +12,14 @@ export default function TrailsPage() {
   const { completedQuizzes } = useProfile()
   const [quizzes, setQuizzes] = useState<Record<string, LoadedQuiz>>({})
   const [loading, setLoading] = useState(true)
-  const [selectedCategory, setSelectedCategory] = useState<string>('all')
+  const [orphanCount, setOrphanCount] = useState(0)
+
+  const categories = useMemo(() => {
+    const present = new Set(TRAILS.map((t) => t.category))
+    return CATEGORIES.map((c) => c.id).filter((id) => present.has(id))
+  }, [])
+
+  const [selectedCategory, setSelectedCategory] = useState<string>(categories[0] ?? '')
 
   useEffect(() => {
     const load = async () => {
@@ -23,15 +31,23 @@ export default function TrailsPage() {
     load()
   }, [])
 
+  useEffect(() => {
+    const loadOrphanCount = async () => {
+      try {
+        const res = await fetch('/api/quiz-slugs', { cache: 'no-store' })
+        if (!res.ok) return
+        const { slugs } = (await res.json()) as { slugs: string[] }
+        const trailSlugs = new Set(TRAILS.flatMap((trail) => trail.quizzes))
+        setOrphanCount(slugs.filter((slug) => !trailSlugs.has(slug)).length)
+      } catch {}
+    }
+    loadOrphanCount()
+  }, [])
+
   const completedSet = useMemo(
     () => new Set(Object.values(completedQuizzes).flat()),
     [completedQuizzes]
   )
-
-  const categories = useMemo(() => {
-    const present = new Set(TRAILS.map((t) => t.category))
-    return CATEGORIES.map((c) => c.id).filter((id) => present.has(id))
-  }, [])
 
   const trailStats = useMemo(
     () =>
@@ -55,11 +71,7 @@ export default function TrailsPage() {
   )
 
   const filtered = useMemo(
-    () =>
-      trailStats.filter(
-        ({ trail }) =>
-          selectedCategory === 'all' || trail.category === selectedCategory
-      ),
+    () => trailStats.filter(({ trail }) => trail.category === selectedCategory),
     [trailStats, selectedCategory]
   )
 
@@ -77,15 +89,6 @@ export default function TrailsPage() {
       {!loading && (
         <div className="mb-6">
           <div className="flex gap-6 px-4 -mx-4 overflow-x-auto border-b flex-nowrap border-stone-200 dark:border-stone-700 sm:mx-0 sm:px-0 sm:justify-center sm:overflow-visible">
-            <button
-              onClick={() => setSelectedCategory('all')}
-              className={`flex-shrink-0 border-b-2 px-1 pb-3 text-sm font-semibold transition-colors ${selectedCategory === 'all'
-                ? 'border-clay-500 text-clay-600 dark:text-clay-400'
-                : 'border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200'
-                }`}
-            >
-              All
-            </button>
             {categories.map((category) => (
               <button
                 key={category}
@@ -123,6 +126,17 @@ export default function TrailsPage() {
               index={index}
             />
           ))}
+        </div>
+      )}
+
+      {!loading && orphanCount > 0 && (
+        <div className="mt-10 text-center">
+          <Link
+            href="/trails/no-trail"
+            className="text-sm font-medium text-stone-500 hover:underline dark:text-stone-400"
+          >
+            {orphanCount} quiz{orphanCount === 1 ? '' : 'zes'} not yet in a trail
+          </Link>
         </div>
       )}
     </div>

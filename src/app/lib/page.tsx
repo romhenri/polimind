@@ -10,7 +10,7 @@ export default function LibPage() {
   const [glossaries, setGlossaries] = useState<GlossaryMeta[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState<string>(CATEGORIES[0].id)
-  const [selectedSubcategory, setSelectedSubcategory] = useState<string>('all')
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string>('')
 
   useEffect(() => {
     const load = async () => {
@@ -41,19 +41,22 @@ export default function LibPage() {
     )
   }, [glossaries, selectedCategory])
 
+  useEffect(() => {
+    setSelectedSubcategory(subcategories[0] ?? '')
+  }, [subcategories])
+
   const filtered = useMemo(
     () =>
       glossaries.filter(
         (g) =>
           g.category === selectedCategory &&
-          (selectedSubcategory === 'all' || g.subcategory === selectedSubcategory)
+          (selectedSubcategory === '' || g.subcategory === selectedSubcategory)
       ),
     [glossaries, selectedCategory, selectedSubcategory]
   )
 
   const handleSelectCategory = (category: string) => {
     setSelectedCategory(category)
-    setSelectedSubcategory('all')
   }
 
   return (
@@ -86,7 +89,7 @@ export default function LibPage() {
 
           {subcategories.length > 0 && (
             <div className="flex flex-wrap justify-center gap-2 px-4 mt-4 -mx-4 sm:mx-0 sm:px-0">
-              {['all', ...subcategories].map((subcategory) => (
+              {subcategories.map((subcategory) => (
                 <button
                   key={subcategory}
                   onClick={() => setSelectedSubcategory(subcategory)}
@@ -95,7 +98,7 @@ export default function LibPage() {
                     : 'text-stone-500 hover:bg-black/[0.06] dark:text-stone-400 dark:hover:bg-white/[0.06]'
                     }`}
                 >
-                  {subcategory === 'all' ? 'All' : subcategory}
+                  {subcategory}
                 </button>
               ))}
             </div>

@@ -1,8 +1,9 @@
 import type { IconType } from 'react-icons'
-import { FaNetworkWired, FaEarthAmericas, FaGlobe, FaGears, FaDna, FaLayerGroup, FaChartColumn } from 'react-icons/fa6'
+import { FaNetworkWired, FaEarthAmericas, FaGlobe, FaGears, FaDna, FaLayerGroup, FaChartColumn, FaMicrochip, FaRobot } from 'react-icons/fa6'
 import { FaFistRaised } from 'react-icons/fa'
 import { TbBinaryTree, TbMath, TbBrain } from 'react-icons/tb'
 import { GiDinosaurRex, GiGreekTemple } from 'react-icons/gi'
+import { PiStarFourFill } from 'react-icons/pi'
 
 export interface Trail {
   id: string
@@ -12,6 +13,7 @@ export interface Trail {
   icon: IconType
   color: string
   quizzes: string[]
+  libs?: string[]
 }
 
 export const TRAILS: Trail[] = [
@@ -33,6 +35,7 @@ export const TRAILS: Trail[] = [
       'sorting-algorithms2',
       'sorting-algorithms3',
     ],
+    libs: ['algorithms'],
   },
   {
     id: 'data-structures',
@@ -42,6 +45,7 @@ export const TRAILS: Trail[] = [
     icon: FaLayerGroup,
     color: 'emerald',
     quizzes: ['data-structures-list', 'data-structures-list-2'],
+    libs: ['data-structures-list'],
   },
   {
     id: 'machine-learning',
@@ -53,11 +57,39 @@ export const TRAILS: Trail[] = [
     quizzes: [
       'ml-fundamentals',
       'ml-fundamentals-2',
+      'ml-fundamentals-3',
       'ml-evaluation-metrics',
       'neural-networks',
-      'attention-mechanisms-in-transformers',
-      'nlp-basics',
+      'inductive-supervised-learning',
+      'ai-paradigms-and-algorithms',
+      'ml-learning-paradigms',
+      'bio-inspired-computing',
     ],
+    libs: [
+      'machine-learning',
+      'ml-metrics',
+      'ai-paradigms-and-algorithms',
+      'inductive-supervised-learning',
+    ],
+  },
+  {
+    id: 'llms-and-transformers',
+    name: 'LLMs and Transformers',
+    description: 'Attention, transformers, NLP fundamentals and the tools built around LLMs.',
+    category: 'computer_science',
+    icon: PiStarFourFill,
+    color: 'indigo',
+    quizzes: ['nlp-basics', 'attention-mechanisms-in-transformers',  'llm-evaluators', 'mcp-servers'],
+    libs: ['attention-mechanisms'],
+  },
+  {
+    id: 'autonomous-agents',
+    name: 'Autonomous Agents',
+    description: 'How agents represent knowledge and mine it from data to act on their own.',
+    category: 'computer_science',
+    icon: FaRobot,
+    color: 'purple',
+    quizzes: ['knowledge-representation', 'knowledge-discovery-in-databases'],
   },
   {
     id: 'networks',
@@ -81,6 +113,16 @@ export const TRAILS: Trail[] = [
       'transport-layer',
       'udp',
     ],
+    libs: ['networks'],
+  },
+  {
+    id: 'hardware',
+    name: 'Hardware Architecture',
+    description: 'Microarchitecture, the data path and the memory model behind the IJVM.',
+    category: 'computer_science',
+    icon: FaMicrochip,
+    color: 'purple',
+    quizzes: ['datapath-microarchitecture', 'ijvm-memory-model'],
   },
   {
     id: 'general',
@@ -104,6 +146,7 @@ export const TRAILS: Trail[] = [
       'greek-mythology-2',
       'greek-mythology-3',
     ],
+    libs: ['greek-mythology'],
   },
   {
     id: 'revolutions',
@@ -120,7 +163,7 @@ export const TRAILS: Trail[] = [
     description: 'JavaScript, TypeScript, React, Next.js and the web platform.',
     category: 'computer_science',
     icon: FaGlobe,
-    color: 'violet',
+    color: 'blue',
     quizzes: [
       'javascript',
       'javascript2',
@@ -178,6 +221,7 @@ export const TRAILS: Trail[] = [
     icon: FaDna,
     color: 'emerald',
     quizzes: ['cytology', 'ecology', 'human-physiology'],
+    libs: ['biology'],
   },
   {
     id: 'dinosaur',
@@ -186,7 +230,8 @@ export const TRAILS: Trail[] = [
     category: 'sciences',
     icon: GiDinosaurRex,
     color: 'green',
-    quizzes: ['dinosaurs', 'dinosaurs2', 'dinosaurs3'],
+    quizzes: ['dinosaurs', 'dinosaurs2', 'dinosaurs3', 'dino-classification'],
+    libs: ['dinosaurs'],
   },
 ]
 

@@ -4,10 +4,13 @@ import { useState, useEffect, useMemo, use } from 'react'
 import Link from 'next/link'
 import { FaArrowLeft } from 'react-icons/fa'
 import SubjectCard from '@/components/SubjectCard'
+import GlossaryCard from '@/components/GlossaryCard'
 import { getTrail } from '@/data/trails'
 import { getColor } from '@/utils/colorMapper'
 import { loadQuizzesBySlugs, type LoadedQuiz } from '@/utils/loadQuizzes'
+import { loadGlossariesBySlugs } from '@/utils/loadGlossaries'
 import { useProfile } from '@/contexts/ProfileContext'
+import type { GlossaryMeta } from '@/types/glossary'
 import type { CSSProperties } from 'react'
 
 export default function TrailDetailPage({
@@ -19,6 +22,7 @@ export default function TrailDetailPage({
   const trail = getTrail(trailId)
   const { completedQuizzes } = useProfile()
   const [quizzes, setQuizzes] = useState<Record<string, LoadedQuiz>>({})
+  const [glossaries, setGlossaries] = useState<Record<string, GlossaryMeta>>({})
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -27,8 +31,12 @@ export default function TrailDetailPage({
       return
     }
     const load = async () => {
-      const map = await loadQuizzesBySlugs(trail.quizzes)
-      setQuizzes(map)
+      const [quizMap, glossaryMap] = await Promise.all([
+        loadQuizzesBySlugs(trail.quizzes),
+        loadGlossariesBySlugs(trail.libs ?? []),
+      ])
+      setQuizzes(quizMap)
+      setGlossaries(glossaryMap)
       setLoading(false)
     }
     load()
@@ -42,6 +50,11 @@ export default function TrailDetailPage({
   const orderedQuizzes = useMemo(
     () => (trail ? trail.quizzes.map((slug) => quizzes[slug]).filter(Boolean) : []),
     [trail, quizzes]
+  )
+
+  const orderedGlossaries = useMemo(
+    () => (trail ? (trail.libs ?? []).map((slug) => glossaries[slug]).filter(Boolean) : []),
+    [trail, glossaries]
   )
 
   const completedCount = orderedQuizzes.filter((q) => completedSet.has(q.id)).length
@@ -115,16 +128,36 @@ export default function TrailDetailPage({
           <div className="w-16 h-16 border-b-2 rounded-full border-clay-500 animate-spin"></div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {orderedQuizzes.map((quiz, index) => (
-            <SubjectCard
-              key={quiz.id}
-              subject={quiz}
-              index={index}
-              completed={completedSet.has(quiz.id)}
-            />
-          ))}
-        </div>
+        <>
+          {orderedGlossaries.length > 0 && (
+            <div className="mb-6">
+              <h2 className="mb-3 font-display text-lg font-bold tracking-wide text-stone-800 dark:text-white sm:text-xl">
+                Glossaries
+              </h2>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {orderedGlossaries.map((glossary, index) => (
+                  <GlossaryCard key={glossary.id} glossary={glossary} index={index} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div>
+            <h2 className="mb-3 font-display text-lg font-bold tracking-wide text-stone-800 dark:text-white sm:text-xl">
+              Quizzes
+            </h2>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {orderedQuizzes.map((quiz, index) => (
+                <SubjectCard
+                  key={quiz.id}
+                  subject={quiz}
+                  index={index}
+                  completed={completedSet.has(quiz.id)}
+                />
+              ))}
+            </div>
+          </div>
+        </>
       )}
     </div>
   )

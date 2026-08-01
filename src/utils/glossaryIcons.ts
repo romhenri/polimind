@@ -27,7 +27,7 @@ const ICON_BY_ID: Record<string, IconType> = {
   'greek-mythology': GiGreekTemple,
   'attention-mechanisms': FaEye,
   'knowledge-discovery-in-databases': FaMagnifyingGlassChart,
-  'ai-paradigms-and-algorithms': FaGears,
+  'ai-paradigms-and-algorithms': FaSitemap,
   'inductive-supervised-learning': FaSitemap,
 }
 
