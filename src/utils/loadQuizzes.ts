@@ -1,4 +1,4 @@
-import { quizQuestionCount } from '@/types/quiz'
+import { QuizListing, QuizMetadata, quizQuestionCount } from '@/types/quiz'
 import { getLocalQuiz } from '@/utils/localQuizzes'
 
 const QUIZ_DATA_BASES = ['/data', '/data/classify']
@@ -48,6 +48,35 @@ async function fetchQuiz(slug: string): Promise<LoadedQuiz | null> {
   } catch {
     return null
   }
+}
+
+export function toQuizListing(quiz: QuizMetadata): QuizListing {
+  return {
+    id: quiz.id,
+    name: quiz.name,
+    description: quiz.description,
+    icon: quiz.icon,
+    color: quiz.color,
+    category: quiz.category,
+    subcategory: quiz.subcategory,
+    tags: quiz.tags ?? [],
+    hardness: quiz.hardness ?? 'easy',
+    type: quiz.type,
+    seq: quiz.seq,
+    questions: quizQuestionCount(quiz),
+  }
+}
+
+export async function loadFullQuizzes(slugs: string[]): Promise<QuizMetadata[]> {
+  const unique = Array.from(new Set(slugs))
+  const loaded = await Promise.all(
+    unique.map(async (slug) => {
+      const parsed = await fetchQuizJson(slug)
+      if (parsed === null) return null
+      return (Array.isArray(parsed) ? parsed[1] || parsed[0] : parsed) as QuizMetadata
+    })
+  )
+  return loaded.filter((quiz): quiz is QuizMetadata => quiz !== null)
 }
 
 export async function loadQuizzesBySlugs(

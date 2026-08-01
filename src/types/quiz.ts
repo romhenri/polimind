@@ -76,6 +76,21 @@ export interface QuizMetadata {
   entities?: ClassifyEntity[]
 }
 
+export interface QuizListing {
+  id: string
+  name: string
+  description: string
+  icon: string
+  color: string
+  category: string
+  subcategory?: string
+  tags: string[]
+  hardness: 'easy' | 'medium' | 'hard'
+  type?: QuizType
+  seq?: number
+  questions: number
+}
+
 export function quizQuestionCount(
   quiz: Pick<QuizMetadata, 'type' | 'questions' | 'entities' | 'config'>
 ): number {

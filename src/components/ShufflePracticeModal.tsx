@@ -2,17 +2,19 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { FaTimes, FaRandom } from 'react-icons/fa'
-import { QuizMetadata, quizQuestionCount } from '@/types/quiz'
+import { QuizListing } from '@/types/quiz'
 import { CATEGORIES, getCategoryById } from '@/data/categories'
 
 const COUNT_OPTIONS = [5, 10, 20, 30]
 const DEFAULT_COUNT = 10
 const OTHER_GROUP = 'Other'
+const ALL_TAB = 'all'
+const MIXED_CATEGORY = 'mixed'
 
 interface ShufflePracticeModalProps {
-  subjects: QuizMetadata[]
+  subjects: QuizListing[]
   onClose: () => void
-  onStart: (quizzes: QuizMetadata[], count: number, category: string) => void
+  onStart: (quizzes: QuizListing[], count: number, category: string) => void
 }
 
 export default function ShufflePracticeModal({
@@ -20,7 +22,7 @@ export default function ShufflePracticeModal({
   onClose,
   onStart,
 }: ShufflePracticeModalProps) {
-  const [selectedCategory, setSelectedCategory] = useState<string>(CATEGORIES[0].id)
+  const [activeTab, setActiveTab] = useState<string>(ALL_TAB)
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
   const [count, setCount] = useState<number>(DEFAULT_COUNT)
 
@@ -32,40 +34,65 @@ export default function ShufflePracticeModal({
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [onClose])
 
-  const categoryQuizzes = useMemo(
-    () => subjects.filter((s) => s.category === selectedCategory),
-    [subjects, selectedCategory]
+  const tabs = useMemo(() => {
+    const available = CATEGORIES.filter((c) => subjects.some((s) => s.category === c.id))
+    return [{ id: ALL_TAB, label: 'All' }, ...available.map((c) => ({ id: c.id, label: c.label }))]
+  }, [subjects])
+
+  const tabQuizzes = useMemo(
+    () => (activeTab === ALL_TAB ? subjects : subjects.filter((s) => s.category === activeTab)),
+    [subjects, activeTab]
   )
 
   const groups = useMemo(() => {
-    const known = getCategoryById(selectedCategory)?.subcategories ?? []
-    const order = [...known, OTHER_GROUP]
-    const byGroup = new Map<string, QuizMetadata[]>()
-    for (const quiz of categoryQuizzes) {
-      const key = quiz.subcategory && known.includes(quiz.subcategory) ? quiz.subcategory : OTHER_GROUP
+    const byGroup = new Map<string, QuizListing[]>()
+    const push = (key: string, quiz: QuizListing) => {
       const list = byGroup.get(key) ?? []
       list.push(quiz)
       byGroup.set(key, list)
     }
+
+    let order: string[]
+    if (activeTab === ALL_TAB) {
+      const known = new Map(CATEGORIES.map((c) => [c.id, c.label]))
+      order = [...CATEGORIES.map((c) => c.label), OTHER_GROUP]
+      for (const quiz of tabQuizzes) push(known.get(quiz.category ?? '') ?? OTHER_GROUP, quiz)
+    } else {
+      const known = getCategoryById(activeTab)?.subcategories ?? []
+      order = [...known, OTHER_GROUP]
+      for (const quiz of tabQuizzes) {
+        push(quiz.subcategory && known.includes(quiz.subcategory) ? quiz.subcategory : OTHER_GROUP, quiz)
+      }
+    }
+
     return order
       .filter((g) => byGroup.has(g))
       .map((g) => ({ name: g, quizzes: byGroup.get(g)! }))
-  }, [categoryQuizzes, selectedCategory])
+  }, [tabQuizzes, activeTab])
 
   const selectedQuizzes = useMemo(
-    () => categoryQuizzes.filter((q) => selectedIds.has(q.id)),
-    [categoryQuizzes, selectedIds]
+    () => subjects.filter((q) => selectedIds.has(q.id)),
+    [subjects, selectedIds]
   )
   const totalAvailable = useMemo(
-    () => selectedQuizzes.reduce((sum, q) => sum + quizQuestionCount(q), 0),
+    () => selectedQuizzes.reduce((sum, q) => sum + q.questions, 0),
     [selectedQuizzes]
   )
   const runLength = Math.min(count, totalAvailable)
 
-  const handleSelectCategory = (category: string) => {
-    setSelectedCategory(category)
-    setSelectedIds(new Set())
-  }
+  const selectedPerTab = useMemo(() => {
+    const counts = new Map<string, number>([[ALL_TAB, selectedQuizzes.length]])
+    for (const quiz of selectedQuizzes) {
+      const key = quiz.category ?? ''
+      counts.set(key, (counts.get(key) ?? 0) + 1)
+    }
+    return counts
+  }, [selectedQuizzes])
+
+  const resolvedCategory = useMemo(() => {
+    const categories = new Set(selectedQuizzes.map((q) => q.category ?? MIXED_CATEGORY))
+    return categories.size === 1 ? [...categories][0] : MIXED_CATEGORY
+  }, [selectedQuizzes])
 
   const toggleQuiz = (id: string) => {
     setSelectedIds((prev) => {
@@ -76,10 +103,10 @@ export default function ShufflePracticeModal({
     })
   }
 
-  const isGroupSelected = (quizzes: QuizMetadata[]) =>
+  const isGroupSelected = (quizzes: QuizListing[]) =>
     quizzes.length > 0 && quizzes.every((q) => selectedIds.has(q.id))
 
-  const toggleGroup = (quizzes: QuizMetadata[]) => {
+  const toggleGroup = (quizzes: QuizListing[]) => {
     const ids = quizzes.map((q) => q.id)
     setSelectedIds((prev) => {
       const next = new Set(prev)
@@ -93,7 +120,7 @@ export default function ShufflePracticeModal({
 
   const handleStart = () => {
     if (!canStart) return
-    onStart(selectedQuizzes, count, selectedCategory)
+    onStart(selectedQuizzes, count, resolvedCategory)
   }
 
   return (
@@ -123,32 +150,50 @@ export default function ShufflePracticeModal({
         </div>
 
         <div className="flex gap-6 px-5 overflow-x-auto border-b flex-nowrap border-stone-200 dark:border-stone-700">
-          {CATEGORIES.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => handleSelectCategory(category.id)}
-              className={`flex-shrink-0 border-b-2 px-1 py-3 text-sm font-semibold transition-colors ${
-                selectedCategory === category.id
-                  ? 'border-clay-500 text-clay-600 dark:text-clay-400'
-                  : 'border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200'
-              }`}
-            >
-              {category.label}
-            </button>
-          ))}
+          {tabs.map((tab) => {
+            const selectedHere = selectedPerTab.get(tab.id) ?? 0
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex flex-shrink-0 items-center gap-2 border-b-2 px-1 py-3 text-sm font-semibold transition-colors ${
+                  activeTab === tab.id
+                    ? 'border-stone-400 text-stone-800 dark:border-stone-500 dark:text-stone-100'
+                    : 'border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200'
+                }`}
+              >
+                {tab.label}
+                {selectedHere > 0 && (
+                  <span className="rounded-full bg-black/[0.06] px-1.5 py-0.5 text-[11px] font-semibold text-stone-600 dark:bg-white/[0.12] dark:text-stone-300">
+                    {selectedHere}
+                  </span>
+                )}
+              </button>
+            )
+          })}
         </div>
 
         <div className="flex-1 px-5 py-4 overflow-y-auto">
-          {categoryQuizzes.length === 0 ? (
+          {tabQuizzes.length === 0 ? (
             <p className="py-8 text-sm text-center text-stone-500 dark:text-stone-400">
               No quizzes in this category yet.
             </p>
           ) : (
             <>
-              <div className="mb-3">
-                <span className="text-xs font-semibold uppercase tracking-wider text-stone-400 dark:text-stone-500">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold tracking-wider uppercase text-stone-400 dark:text-stone-500">
                   {selectedQuizzes.length} selected
+                  {selectedQuizzes.length > 0 && ` · ${totalAvailable} questions`}
                 </span>
+                {selectedQuizzes.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedIds(new Set())}
+                    className="text-xs font-semibold transition-colors text-clay-600 hover:text-clay-700 dark:text-clay-400 dark:hover:text-clay-300"
+                  >
+                    Clear selection
+                  </button>
+                )}
               </div>
               <div className="space-y-5">
                 {groups.map((group) => (
@@ -184,12 +229,19 @@ export default function ShufflePracticeModal({
                                 onChange={() => toggleQuiz(quiz.id)}
                                 className="w-4 h-4 accent-clay-500"
                               />
-                              <span className="text-sm font-medium truncate text-stone-800 dark:text-stone-100">
-                                {quiz.name}
+                              <span className="min-w-0">
+                                <span className="block text-sm font-medium truncate text-stone-800 dark:text-stone-100">
+                                  {quiz.name}
+                                </span>
+                                {activeTab === ALL_TAB && quiz.subcategory && (
+                                  <span className="block text-xs truncate text-stone-400 dark:text-stone-500">
+                                    {quiz.subcategory}
+                                  </span>
+                                )}
                               </span>
                             </span>
                             <span className="flex-shrink-0 text-xs text-stone-400 dark:text-stone-500">
-                              {quizQuestionCount(quiz)} Q
+                              {quiz.questions} Q
                             </span>
                           </label>
                         )

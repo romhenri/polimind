@@ -7,17 +7,16 @@ import DynamicModeToggle from "@/components/DynamicModeToggle";
 import ShufflePracticeModal from "@/components/ShufflePracticeModal";
 import { FaSearch, FaTimes, FaRandom } from "react-icons/fa";
 import { useQuizMode } from "@/contexts/QuizModeContext";
-import { QuizMetadata, quizQuestionCount } from "@/types/quiz";
-import { parseQuizSeq } from "@/utils/quizSeq";
+import { QuizListing } from "@/types/quiz";
 import { storeShuffleSelection } from "@/utils/shufflePractice";
-import { fetchQuizJson } from "@/utils/loadQuizzes";
+import { loadFullQuizzes, toQuizListing } from "@/utils/loadQuizzes";
 import { getLocalQuizzes, deleteLocalQuiz } from "@/utils/localQuizzes";
 import { CATEGORIES, getCategoryById } from "@/data/categories";
 
 export default function Home() {
   const router = useRouter();
   const { isDynamicMode } = useQuizMode();
-  const [subjects, setSubjects] = useState<QuizMetadata[]>([]);
+  const [subjects, setSubjects] = useState<QuizListing[]>([]);
   const [localQuizIds, setLocalQuizIds] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,40 +29,15 @@ export default function Home() {
   useEffect(() => {
     const loadSubjects = async () => {
       try {
-        const listRes = await fetch("/api/quiz-slugs", { cache: "no-store" });
+        const listRes = await fetch("/api/quiz-list", { cache: "no-store" });
         if (!listRes.ok) {
           throw new Error("Failed to load quiz list");
         }
-        const { slugs } = (await listRes.json()) as { slugs: string[] };
-        const loadedSubjects = await Promise.all(
-          slugs.map(async (slug) => {
-            const parsed = await fetchQuizJson(slug);
-            const data = Array.isArray(parsed) ? (parsed[1] || parsed[0]) : parsed;
-            const seq = parseQuizSeq(data.seq);
-            return {
-              id: data.id,
-              name: data.name,
-              description: data.description,
-              icon: data.icon,
-              color: data.color,
-              category: data.category,
-              subcategory: data.subcategory,
-              questions: data.questions ?? [],
-              tags: data.tags,
-              type: data.type,
-              lang: data.lang,
-              hardness: data.hardness ?? "easy",
-              config: data.config,
-              facets: data.facets,
-              entities: data.entities,
-              ...(seq !== undefined ? { seq } : {}),
-            };
-          })
-        );
+        const { quizzes } = (await listRes.json()) as { quizzes: QuizListing[] };
         const localQuizzes = getLocalQuizzes();
         const localIds = new Set(localQuizzes.map((q) => q.id));
-        const remoteSubjects = loadedSubjects.filter((s) => !localIds.has(s.id));
-        setSubjects([...remoteSubjects, ...localQuizzes]);
+        const remoteSubjects = quizzes.filter((s) => !localIds.has(s.id));
+        setSubjects([...remoteSubjects, ...localQuizzes.map(toQuizListing)]);
         setLocalQuizIds(localIds);
         setLoading(false);
       } catch (error) {
@@ -242,10 +216,7 @@ export default function Home() {
           {filteredSubjects.map((subject, index) => (
             <SubjectCard
               key={subject.id}
-              subject={{
-                ...subject,
-                questions: quizQuestionCount(subject),
-              }}
+              subject={subject}
               index={index}
               onTagClick={(tag) => setSearchQuery(tag)}
               isLocal={localQuizIds.has(subject.id)}
@@ -261,7 +232,8 @@ export default function Home() {
         <ShufflePracticeModal
           subjects={subjects}
           onClose={() => setShowShuffleModal(false)}
-          onStart={(quizzes, count, category) => {
+          onStart={async (selected, count, category) => {
+            const quizzes = await loadFullQuizzes(selected.map((q) => q.id));
             storeShuffleSelection({ quizzes, count, category });
             setShowShuffleModal(false);
             router.push("/quiz/shuffle");
