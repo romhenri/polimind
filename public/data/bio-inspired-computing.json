@@ -1,128 +1,128 @@
 {
   "id": "bio-inspired-computing",
-  "name": "Computação Bioinspirada",
-  "description": "Teste os seus conhecimentos sobre os principais conceitos, técnicas e aplicações da computação bioinspirada.",
+  "name": "Bio-Inspired Computing",
+  "description": "Test your knowledge of the main concepts, techniques, and applications of bio-inspired computing.",
   "color": "emerald",
   "category": "computer_science",
   "subcategory": "AI & Machine Learning",
   "tags": [
-    "ia",
-    "bioinspirada",
-    "algoritmos",
-    "redes-neurais"
+    "ai",
+    "bio-inspired",
+    "algorithms",
+    "neural-networks"
   ],
   "hardness": "easy",
   "type": "options",
   "questions": [
     {
-      "question": "Qual é a principal motivação para o desenvolvimento da Computação Bioinspirada?",
+      "question": "What is the main motivation behind the development of Bio-Inspired Computing?",
       "options": [
-        "Substituir completamente o uso de hardware tradicional em sistemas.",
-        "Modelar sistemas computacionais baseados em soluções eficazes da natureza.",
-        "Garantir a execução determinística de qualquer algoritmo complexo.",
-        "Reduzir o consumo elétrico dos computadores a quase zero."
+        "Completely replace the use of traditional hardware in systems.",
+        "Model computational systems based on effective solutions found in nature.",
+        "Guarantee the deterministic execution of any complex algorithm.",
+        "Reduce the electrical consumption of computers to nearly zero."
       ],
       "correctAnswer": 1,
-      "explain": "A computação bioinspirada investiga técnicas inspiradas na biologia para construir sistemas adaptativos baseados na natureza."
+      "explain": "Bio-inspired computing investigates techniques inspired by biology to build adaptive systems based on nature."
     },
     {
-      "question": "Quais são as três etapas fundamentais no projeto de uma Rede Neural Artificial?",
+      "question": "What are the three fundamental steps in designing an Artificial Neural Network?",
       "options": [
-        "Definição do hardware, escolha da linguagem e testes finais.",
-        "Seleção da amostra, limpeza de dados e criação de relatórios.",
-        "Definição do neurônio artificial, estrutura da rede e aprendizagem.",
-        "Coleta de entradas, compilação do código e análise gráfica."
+        "Hardware definition, language choice, and final testing.",
+        "Sample selection, data cleaning, and report creation.",
+        "Definition of the artificial neuron, network structure, and learning.",
+        "Input collection, code compilation, and graphical analysis."
       ],
       "correctAnswer": 2,
-      "explain": "O projeto exige definir o neurônio artificial, a arquitetura de conexões e o método de ajuste dos pesos."
+      "explain": "The design requires defining the artificial neuron, the connection architecture, and the weight-adjustment method."
     },
     {
-      "question": "Qual é o objetivo principal do ajuste de pesos durante o treinamento de uma Rede Neural?",
+      "question": "What is the main objective of weight adjustment during Neural Network training?",
       "options": [
-        "Minimizar a função de custo calculada a partir dos erros cometidos.",
-        "Aumentar a velocidade do ciclo de clock dos processadores do sistema.",
-        "Eliminar a necessidade de funções de ativação nas camadas ocultas.",
-        "Reduzir a quantidade de dados exigida no conjunto de treinamento."
+        "Minimize the cost function calculated from the errors made.",
+        "Increase the clock speed of the system's processors.",
+        "Eliminate the need for activation functions in hidden layers.",
+        "Reduce the amount of data required in the training set."
       ],
       "correctAnswer": 0,
-      "explain": "O algoritmo ajusta os pesos proporcionalmente ao erro para minimizar a função de custo ao longo do tempo."
+      "explain": "The algorithm adjusts the weights proportionally to the error to minimize the cost function over time."
     },
     {
-      "question": "O que caracteriza a propriedade de Inteligência Emergente em sistemas bioinspirados?",
+      "question": "What characterizes the property of Emergent Intelligence in bio-inspired systems?",
       "options": [
-        "Um agente centralizado tomando todas as decisões do grupo.",
-        "Capacidades complexas surgindo da interação entre agentes simples.",
-        "Instruções pré-programadas executadas isoladamente por robôs.",
-        "Uso exclusivo de memórias centralizadas de alta velocidade."
+        "A centralized agent making all decisions for the group.",
+        "Complex capabilities arising from the interaction between simple agents.",
+        "Pre-programmed instructions executed in isolation by robots.",
+        "Exclusive use of centralized high-speed memory."
       ],
       "correctAnswer": 1,
-      "explain": "A inteligência emergente acontece quando comportamentos globais complexos surgem da auto-organização de agentes simples sem controle central."
+      "explain": "Emergent intelligence occurs when complex global behaviors arise from the self-organization of simple agents without central control."
     },
     {
-      "question": "Como os algoritmos baseados em colônias de formigas encontram o caminho mais curto?",
+      "question": "How do ant colony-based algorithms find the shortest path?",
       "options": [
-        "Por meio de varredura exaustiva de todas as rotas possíveis no grafo.",
-        "Depositando marcas que se intensificam nas rotas mais percorridas.",
-        "Calculando diretamente as distâncias com uso de coordenadas de GPS.",
-        "Apenas com movimento aleatório e sem retenção de memória de rotas."
+        "Through an exhaustive scan of all possible routes in the graph.",
+        "By depositing markers that intensify on the most traveled routes.",
+        "By directly calculating distances using GPS coordinates.",
+        "Only with random movement and no route memory retention."
       ],
       "correctAnswer": 1,
-      "explain": "Formigas reforçam quimicamente as rotas mais frequentes, permitindo que a colônia convirja para o caminho mais curto."
+      "explain": "Ants chemically reinforce the most frequent routes, allowing the colony to converge on the shortest path."
     },
     {
-      "question": "Na Computação Evolucionária, qual elemento atua como o critério de Seleção Natural?",
+      "question": "In Evolutionary Computation, which element acts as the Natural Selection criterion?",
       "options": [
-        "A taxa de variação dos bits presentes na memória principal.",
-        "A quantidade de iterações do laço de repetição principal.",
-        "A Função de Avaliação que mede a adequação dos indivíduos.",
-        "O tamanho máximo pré-determinado para a população inicial."
+        "The rate of bit variation present in main memory.",
+        "The number of iterations of the main loop.",
+        "The Fitness Function that measures the fitness of individuals.",
+        "The predetermined maximum size of the initial population."
       ],
       "correctAnswer": 2,
-      "explain": "A função de avaliação (fitness) determina os indivíduos mais aptos a transmitir seu material genético para as próximas gerações."
+      "explain": "The fitness function determines which individuals are best suited to pass their genetic material to the next generations."
     },
     {
-      "question": "Qual é a função do operador de Mutação em um Algoritmo Genético?",
+      "question": "What is the function of the Mutation operator in a Genetic Algorithm?",
       "options": [
-        "Garantir a convergência imediata para uma única solução local.",
-        "Avaliar a qualidade da solução encontrada pelo indivíduo.",
-        "Introduzir perturbações aleatórias para manter a diversidade.",
-        "Remover os piores indivíduos da população a cada geração."
+        "Guarantee immediate convergence to a single local solution.",
+        "Evaluate the quality of the solution found by the individual.",
+        "Introduce random perturbations to maintain diversity.",
+        "Remove the worst individuals from the population each generation."
       ],
       "correctAnswer": 2,
-      "explain": "A mutação insere pequenas alterações aleatórias, permitindo explorar novas áreas do espaço de busca e evitar estagnação."
+      "explain": "Mutation inserts small random changes, allowing exploration of new areas of the search space and preventing stagnation."
     },
     {
-      "question": "O que estuda a área da Vida Artificial no contexto da Computação Bioinspirada?",
+      "question": "What does the field of Artificial Life study within the context of Bio-Inspired Computing?",
       "options": [
-        "A criação de órgãos biológicos em impressoras tridimensionais.",
-        "A recriação de fenômenos e lógicas biológicas em ambientes virtuais.",
-        "A automação do processo de sequenciamento de DNA humano.",
-        "A substituição de neurônios biológicos por circuitos integrados."
+        "The creation of biological organs using three-dimensional printers.",
+        "The recreation of biological phenomena and logic in virtual environments.",
+        "The automation of human DNA sequencing.",
+        "The replacement of biological neurons with integrated circuits."
       ],
       "correctAnswer": 1,
-      "explain": "A Vida Artificial aplica regras biológicas em softwares e mundos virtuais para simular comportamentos de seres vivos."
+      "explain": "Artificial Life applies biological rules in software and virtual worlds to simulate the behavior of living beings."
     },
     {
-      "question": "Qual é o objetivo principal dos sistemas baseados em Computação Autonômica?",
+      "question": "What is the main objective of systems based on Autonomic Computing?",
       "options": [
-        "Funcionar sem necessidade de conexão com redes externas.",
-        "Realizar auto-gerenciamento e ajuste sem intervenção humana.",
-        "Treinar modelos de inteligência artificial sem uso de dados.",
-        "Substituir todos os sistemas operacionais por código genético."
+        "Function without needing a connection to external networks.",
+        "Perform self-management and self-adjustment without human intervention.",
+        "Train artificial intelligence models without using data.",
+        "Replace all operating systems with genetic code."
       ],
       "correctAnswer": 1,
-      "explain": "Inspirada no sistema nervoso autônomo, a computação autonômica busca criar sistemas que se autorregulam e se adaptam sozinhos."
+      "explain": "Inspired by the autonomic nervous system, autonomic computing seeks to create systems that self-regulate and adapt on their own."
     },
     {
-      "question": "Na Robótica Bioinspirada, qual é a vantagem de utilizar uma estrutura articular similar à de uma aranha ou centopeia?",
+      "question": "In Bio-Inspired Robotics, what is the advantage of using a joint structure similar to that of a spider or centipede?",
       "options": [
-        "Maior estabilidade e capacidade de adaptação em terrenos irregulares.",
-        "Diminuição drástica no custo de fabricação de componentes mecânicos.",
-        "Eliminação de sensores para navegação e detecção de obstáculos.",
-        "Aumento na velocidade final de deslocamento em superfícies planas."
+        "Greater stability and adaptability on uneven terrain.",
+        "A drastic decrease in the manufacturing cost of mechanical components.",
+        "Elimination of sensors for navigation and obstacle detection.",
+        "An increase in final movement speed on flat surfaces."
       ],
       "correctAnswer": 0,
-      "explain": "A locomoção articulada inspirada em insetos e aracnídeos melhora a estabilidade e a mobilidade em terrenos acidentados."
+      "explain": "Articulated locomotion inspired by insects and arachnids improves stability and mobility on rough terrain."
     }
   ]
 }

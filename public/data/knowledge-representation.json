@@ -1,128 +1,128 @@
 {
   "id": "knowledge-representation",
-  "name": "Representação do Conhecimento e Raciocínio",
-  "description": "Avalie seus conhecimentos sobre formalização de conhecimento, trade-offs e paradigmas em agentes inteligentes.",
+  "name": "Knowledge Representation and Reasoning",
+  "description": "Evaluate your knowledge of knowledge formalization, trade-offs, and paradigms in intelligent agents.",
   "color": "purple",
   "category": "computer_science",
   "subcategory": "AI & Machine Learning",
   "tags": [
-    "ia",
-    "conhecimento",
-    "agentes",
-    "logica"
+    "ai",
+    "knowledge",
+    "agents",
+    "logic"
   ],
   "hardness": "easy",
   "type": "options",
   "questions": [
     {
-      "question": "Como se conceitua a relação de significado entre dados, informação e conhecimento na representação formal?",
+      "question": "How is the relationship of meaning between data, information, and knowledge conceptualized in formal representation?",
       "options": [
-        "Dados são conclusões lógicas abstratas obtidas após a execução de inferências em agentes.",
-        "Informação e conhecimento são termos idênticos que descrevem unicamente códigos em memória.",
-        "Dados são valores brutos, enquanto conhecimento envolve proposições simbólicas sobre o mundo.",
-        "Conhecimento refere-se exclusivamente a medições numéricas sem interpretação semântica."
+        "Data are abstract logical conclusions obtained after running inferences in agents.",
+        "Information and knowledge are identical terms that describe only codes in memory.",
+        "Data are raw values, while knowledge involves symbolic propositions about the world.",
+        "Knowledge refers exclusively to numerical measurements without semantic interpretation."
       ],
       "correctAnswer": 2,
-      "explain": "Conhecimento consiste em representações simbólicas e proposições sobre o estado do mundo e suas relações."
+      "explain": "Knowledge consists of symbolic representations and propositions about the state of the world and its relationships."
     },
     {
-      "question": "Qual é o dilema ou trade-off fundamental estudado na área de Representação do Conhecimento e Raciocínio (KR&R)?",
+      "question": "What is the fundamental dilemma or trade-off studied in the field of Knowledge Representation and Reasoning (KR&R)?",
       "options": [
-        "O equilíbrio entre o tamanho da memória física utilizada e a velocidade de leitura em disco.",
-        "A relação de proporcionalidade inversa entre poder expressivo e eficiência computacional.",
-        "A escolha exclusiva entre utilizar sistemas baseados em regras ou algoritmos genéticos.",
-        "A divergência entre o tempo de pré-processamento dos dados e a fase de treinamento."
+        "The balance between the physical memory size used and disk read speed.",
+        "The inverse proportional relationship between expressive power and computational efficiency.",
+        "The exclusive choice between using rule-based systems or genetic algorithms.",
+        "The divergence between data preprocessing time and the training phase."
       ],
       "correctAnswer": 1,
-      "explain": "Linguagens mais expressivas permitem descrever problemas complexos, mas tornam o raciocínio computacionalmente mais custoso."
+      "explain": "More expressive languages allow complex problems to be described, but make reasoning computationally more costly."
     },
     {
-      "question": "Qual é a função do Mecanismo de Inferência em um Agente Baseado em Conhecimento (Agente-BC)?",
+      "question": "What is the function of the Inference Mechanism in a Knowledge-Based Agent (KB-Agent)?",
       "options": [
-        "Coletar dados brutos do ambiente através de sensores físicos antes do processamento.",
-        "Derivar novas sentenças lógicas e conclusões válidas a partir dos fatos presentes na base.",
-        "Remover inconsistências e ruídos de tabelas relacionais em banco de dados operacionais.",
-        "Ajustar os pesos das conexões sinápticas com base em funções de custo probabilísticas."
+        "Collect raw data from the environment through physical sensors before processing.",
+        "Derive new logical sentences and valid conclusions from the facts present in the knowledge base.",
+        "Remove inconsistencies and noise from relational tables in operational databases.",
+        "Adjust synaptic connection weights based on probabilistic cost functions."
       ],
       "correctAnswer": 1,
-      "explain": "O mecanismo de inferência opera sobre as sentenças da Base de Conhecimento para deduzir novas informações válidas."
+      "explain": "The inference mechanism operates on the sentences in the Knowledge Base to deduce new valid information."
     },
     {
-      "question": "Qual metáfora conceitual fundamenta o paradigma Simbólico da Inteligência Artificial?",
+      "question": "Which conceptual metaphor underlies the Symbolic paradigm of Artificial Intelligence?",
       "options": [
-        "Metáfora cerebral baseada em unidades interligadas de processamento em paralelo.",
-        "Metáfora da seleção natural com reprodução, variação genética e adaptação.",
-        "Metáfora linguística focada no processamento e manipulação formal de símbolos.",
-        "Metáfora probabilística baseada em estimativas bayesianas para cenários incertos."
+        "A brain metaphor based on interconnected units of parallel processing.",
+        "A natural selection metaphor with reproduction, genetic variation, and adaptation.",
+        "A linguistic metaphor focused on the formal processing and manipulation of symbols.",
+        "A probabilistic metaphor based on Bayesian estimates for uncertain scenarios."
       ],
       "correctAnswer": 2,
-      "explain": "O paradigma simbólico fundamenta-se na metáfora linguística, manipulando símbolos e regras formais de raciocínio."
+      "explain": "The symbolic paradigm is grounded in the linguistic metaphor, manipulating symbols and formal rules of reasoning."
     },
     {
-      "question": "Qual paradigma da IA utiliza a metáfora cerebral e redes de processamento interligadas?",
+      "question": "Which AI paradigm uses the brain metaphor and interconnected processing networks?",
       "options": [
-        "Paradigma Simbólico.",
-        "Paradigma Conexionista.",
-        "Paradigma Evolucionista.",
-        "Paradigma Probabilístico."
+        "Symbolic Paradigm.",
+        "Connectionist Paradigm.",
+        "Evolutionary Paradigm.",
+        "Probabilistic Paradigm."
       ],
       "correctAnswer": 1,
-      "explain": "O paradigma conexionista inspira-se no funcionamento do cérebro para estruturar redes neurais artificiais."
+      "explain": "The connectionist paradigm draws inspiration from how the brain works to structure artificial neural networks."
     },
     {
-      "question": "O que diferencia um Agente Baseado em Conhecimento de um agente reativo simples?",
+      "question": "What differentiates a Knowledge-Based Agent from a simple reactive agent?",
       "options": [
-        "O Agente-BC opera apenas com entradas numéricas contínuas sem utilizar regras abstratas.",
-        "O Agente-BC combina percepções atuais com conhecimento interno para inferir estados ocultos.",
-        "O agente reativo possui uma base de regras dedutivas maior para tomar decisões em tempo real.",
-        "O Agente-BC executa exclusivamente mapeamentos diretos do tipo condição-ação sem raciocínio."
+        "The KB-Agent operates only with continuous numeric inputs without using abstract rules.",
+        "The KB-Agent combines current perceptions with internal knowledge to infer hidden states.",
+        "The reactive agent has a larger deductive rule base for making real-time decisions.",
+        "The KB-Agent exclusively executes direct condition-action mappings without reasoning."
       ],
       "correctAnswer": 1,
-      "explain": "Agentes-BC mantêm um estado interno e realizam inferências sobre aspectos não diretamente observáveis do ambiente."
+      "explain": "KB-Agents maintain an internal state and perform inferences about aspects of the environment that are not directly observable."
     },
     {
-      "question": "O que definem a sintaxe e a semântica de uma linguagem de representação do conhecimento?",
+      "question": "What do the syntax and semantics of a knowledge representation language define?",
       "options": [
-        "A sintaxe define a estrutura das sentenças válidas e a semântica estabelece seu significado.",
-        "A sintaxe calcula a velocidade do raciocínio e a semântica mede o consumo de memória.",
-        "A semântica especifica os símbolos permitidos e a sintaxe valida os resultados estatísticos.",
-        "Ambas tratam unicamente do formato de armazenamento dos dados no banco de dados."
+        "Syntax defines the structure of valid sentences, and semantics establishes their meaning.",
+        "Syntax calculates reasoning speed, and semantics measures memory consumption.",
+        "Semantics specifies the allowed symbols, and syntax validates statistical results.",
+        "Both deal solely with the storage format of data in the database."
       ],
       "correctAnswer": 0,
-      "explain": "A sintaxe determina quais configurações de símbolos formam sentenças, enquanto a semântica atribui o significado no mundo."
+      "explain": "Syntax determines which configurations of symbols form sentences, while semantics assigns their meaning in the world."
     },
     {
-      "question": "Qual é a característica do paradigma Evolucionista na Inteligência Artificial?",
+      "question": "What is the characteristic feature of the Evolutionary paradigm in Artificial Intelligence?",
       "options": [
-        "A dedução formal de teoremas através de lógica de primeira ordem e axiomas.",
-        "A aplicação de conceitos de reprodução, mutação e seleção natural para buscar soluções.",
-        "A inferência de distribuições condicionais baseada em grafos direcionados e probabilidades.",
-        "A ordenação de dados estruturados em cubos multidimensionais para análises OLAP."
+        "The formal deduction of theorems through first-order logic and axioms.",
+        "The application of reproduction, mutation, and natural selection concepts to search for solutions.",
+        "The inference of conditional distributions based on directed graphs and probabilities.",
+        "The ordering of structured data into multidimensional cubes for OLAP analysis."
       ],
       "correctAnswer": 1,
-      "explain": "O paradigma evolucionista inspira-se nos mecanismos de evolução natural e genética para otimização e busca."
+      "explain": "The evolutionary paradigm is inspired by the mechanisms of natural evolution and genetics for optimization and search."
     },
     {
-      "question": "Por que a Lógica Proposicional apresenta limitações quando comparada à Lógica de Primeira Ordem?",
+      "question": "Why does Propositional Logic have limitations compared to First-Order Logic?",
       "options": [
-        "Pois não permite o uso de conectivos booleanos como conjunção e disjunção.",
-        "Pois é incapaz de expressar de forma concisa declarações sobre objetos e suas relações.",
-        "Pois exige o treinamento de pesos sinápticos para inferir novos fatos no ambiente.",
-        "Pois é limitada a lidar com dados numéricos contínuos em vez de variáveis discretas."
+        "Because it does not allow the use of Boolean connectives such as conjunction and disjunction.",
+        "Because it is unable to concisely express statements about objects and their relationships.",
+        "Because it requires training synaptic weights to infer new facts about the environment.",
+        "Because it is limited to handling continuous numeric data rather than discrete variables."
       ],
       "correctAnswer": 1,
-      "explain": "A Lógica Proposicional exige regras individuais para cada elemento, enquanto a de Primeira Ordem adiciona objetos, predicados e quantificadores."
+      "explain": "Propositional Logic requires individual rules for each element, while First-Order Logic adds objects, predicates, and quantifiers."
     },
     {
-      "question": "Em que consiste a operação primária 'Tell' na interação com uma Base de Conhecimento?",
+      "question": "What does the primary 'Tell' operation consist of when interacting with a Knowledge Base?",
       "options": [
-        "Consultar a base para descobrir qual ação o agente deve executar no momento.",
-        "Adicionar novas sentenças e percepções aprendidas sobre o ambiente à base.",
-        "Apagar todo o histórico de inferências anteriores para economizar memória.",
-        "Exportar o conhecimento para um formato legível por usuários não especialistas."
+        "Querying the base to find out which action the agent should take at the moment.",
+        "Adding new sentences and learned perceptions about the environment to the base.",
+        "Erasing the entire history of previous inferences to save memory.",
+        "Exporting the knowledge into a format readable by non-expert users."
       ],
       "correctAnswer": 1,
-      "explain": "A operação Tell serve para inserir novos fatos e percepções na Base de Conhecimento do agente."
+      "explain": "The Tell operation is used to insert new facts and perceptions into the agent's Knowledge Base."
     }
   ]
 }

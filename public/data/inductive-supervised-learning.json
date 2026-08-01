@@ -1,127 +1,127 @@
 {
   "id": "inductive-supervised-learning",
-  "name": "Aprendizagem Supervisionada e Indutiva",
-  "description": "Desafie seus conhecimentos sobre algoritmos de indução, árvores de decisão e conceitos de PAC Learning.",
+  "name": "Supervised and Inductive Learning",
+  "description": "Challenge your knowledge of induction algorithms, decision trees, and PAC Learning concepts.",
   "color": "cyan",
   "category": "computer_science",
   "subcategory": "AI & Machine Learning",
   "tags": [
     "machine learning",
-    "ia",
-    "algoritmos"
+    "ai",
+    "algorithms"
   ],
   "hardness": "easy",
   "type": "options",
   "questions": [
     {
-      "question": "O que caracteriza fundamentalmente a aprendizagem supervisionada?",
+      "question": "What fundamentally characterizes supervised learning?",
       "options": [
-        "O uso de dados sem rótulos para encontrar padrões",
-        "O uso de exemplos rotulados para treinar o modelo",
-        "A busca por agrupamentos naturais nos dados",
-        "A redução da dimensionalidade dos atributos"
+        "The use of unlabeled data to find patterns",
+        "The use of labeled examples to train the model",
+        "The search for natural groupings in the data",
+        "The reduction of the dimensionality of the attributes"
       ],
       "correctAnswer": 1,
-      "explain": "Na aprendizagem supervisionada, o algoritmo aprende a partir de um conjunto de dados que contém a resposta correta (rótulo)."
+      "explain": "In supervised learning, the algorithm learns from a dataset that contains the correct answer (label)."
     },
     {
-      "question": "Na aprendizagem indutiva, o que o algoritmo busca fazer?",
+      "question": "In inductive learning, what does the algorithm seek to do?",
       "options": [
-        "Derivar uma regra geral a partir de exemplos específicos",
-        "Mapear apenas dados que já foram previamente classificados",
-        "Ignorar instâncias que não seguem o padrão esperado",
-        "Garantir que a hipótese seja idêntica aos dados de treino"
+        "Derive a general rule from specific examples",
+        "Map only data that has already been previously classified",
+        "Ignore instances that don't follow the expected pattern",
+        "Ensure that the hypothesis is identical to the training data"
       ],
       "correctAnswer": 0,
-      "explain": "A indução consiste em generalizar uma hipótese a partir de observações particulares."
+      "explain": "Induction consists of generalizing a hypothesis from particular observations."
     },
     {
-      "question": "Qual é o objetivo principal do algoritmo ID3 na construção de árvores de decisão?",
+      "question": "What is the main objective of the ID3 algorithm when building decision trees?",
       "options": [
-        "Minimizar a entropia de cada nó da árvore",
-        "Maximizar o erro de classificação do modelo",
-        "Reduzir o número total de atributos da base",
-        "Aumentar a variância do conjunto de dados"
+        "Minimize the entropy of each node in the tree",
+        "Maximize the model's classification error",
+        "Reduce the total number of attributes in the dataset",
+        "Increase the variance of the dataset"
       ],
       "correctAnswer": 0,
-      "explain": "O ID3 utiliza o ganho de informação para selecionar o atributo que melhor reduz a entropia (desordem) nos nós."
+      "explain": "ID3 uses information gain to select the attribute that best reduces entropy (disorder) at the nodes."
     },
     {
-      "question": "O que a Entropia mede no contexto de árvores de decisão?",
+      "question": "What does Entropy measure in the context of decision trees?",
       "options": [
-        "A distância euclidiana entre dois pontos",
-        "O nível de impureza ou desordem dos dados",
-        "A velocidade de convergência do algoritmo",
-        "A quantidade de atributos irrelevantes"
+        "The Euclidean distance between two points",
+        "The level of impurity or disorder in the data",
+        "The convergence speed of the algorithm",
+        "The number of irrelevant attributes"
       ],
       "correctAnswer": 1,
-      "explain": "A entropia é uma medida de desordem; quanto maior a entropia, mais misturadas estão as classes em um nó."
+      "explain": "Entropy is a measure of disorder; the higher the entropy, the more mixed the classes are at a node."
     },
     {
-      "question": "O que representa o 'Ganho de Informação'?",
+      "question": "What does 'Information Gain' represent?",
       "options": [
-        "O aumento da complexidade do modelo",
-        "A diferença de entropia antes e depois de um split",
-        "A soma de todos os erros cometidos no treino",
-        "O número de folhas em uma árvore de decisão"
+        "The increase in model complexity",
+        "The difference in entropy before and after a split",
+        "The sum of all errors made during training",
+        "The number of leaves in a decision tree"
       ],
       "correctAnswer": 1,
-      "explain": "O ganho de informação é a redução na entropia resultante da divisão dos dados por um atributo específico."
+      "explain": "Information gain is the reduction in entropy resulting from splitting the data by a specific attribute."
     },
     {
-      "question": "Qual é o conceito central por trás do AdaBoost?",
+      "question": "What is the central concept behind AdaBoost?",
       "options": [
-        "A criação de várias árvores independentes",
-        "A redução da variância via média aritmética",
-        "O ajuste sequencial de pesos de instâncias",
-        "A busca por clusters em espaços multidimensionais"
+        "The creation of several independent trees",
+        "The reduction of variance via arithmetic mean",
+        "The sequential adjustment of instance weights",
+        "The search for clusters in multidimensional spaces"
       ],
       "correctAnswer": 2,
-      "explain": "O AdaBoost é um método de boosting que foca nos exemplos classificados incorretamente nos passos anteriores."
+      "explain": "AdaBoost is a boosting method that focuses on the examples misclassified in previous rounds."
     },
     {
-      "question": "No framework PAC Learning, o que significa o termo 'Probably Approximately Correct'?",
+      "question": "In the PAC Learning framework, what does the term 'Probably Approximately Correct' mean?",
       "options": [
-        "O erro é zero e a confiança é absoluta",
-        "A hipótese é exata para todos os dados",
-        "A hipótese tem alta chance de ter baixo erro",
-        "O modelo aprende apenas com poucos dados"
+        "The error is zero and the confidence is absolute",
+        "The hypothesis is exact for all data",
+        "The hypothesis has a high chance of having low error",
+        "The model learns only from a small amount of data"
       ],
       "correctAnswer": 2,
-      "explain": "O PAC Learning lida com a probabilidade de o erro ser menor que um limite pequeno (epsilon)."
+      "explain": "PAC Learning deals with the probability that the error is smaller than a small threshold (epsilon)."
     },
     {
-      "question": "Qual a principal diferença entre Bagging e Boosting?",
+      "question": "What is the main difference between Bagging and Boosting?",
       "options": [
-        "Bagging é sequencial, Boosting é paralelo",
-        "Bagging foca em viés, Boosting foca em variância",
-        "Bagging usa rótulos, Boosting não usa rótulos",
-        "Bagging é paralelo, Boosting é sequencial"
+        "Bagging is sequential, Boosting is parallel",
+        "Bagging focuses on bias, Boosting focuses on variance",
+        "Bagging uses labels, Boosting does not use labels",
+        "Bagging is parallel, Boosting is sequential"
       ],
       "correctAnswer": 3,
-      "explain": "No Bagging os modelos são treinados de forma independente; no Boosting, um modelo depende do erro do anterior."
+      "explain": "In Bagging, models are trained independently; in Boosting, each model depends on the error of the previous one."
     },
     {
-      "question": "O que acontece se uma árvore de decisão crescer sem poda (pruning)?",
+      "question": "What happens if a decision tree grows without pruning?",
       "options": [
-        "O modelo sofre de underfitting",
-        "O modelo sofre de overfitting",
-        "A precisão no treino diminui sempre",
-        "A complexidade do modelo é reduzida"
+        "The model suffers from underfitting",
+        "The model suffers from overfitting",
+        "Training accuracy always decreases",
+        "The model's complexity is reduced"
       ],
       "correctAnswer": 1,
-      "explain": "Uma árvore muito profunda tende a decorar o ruído dos dados de treino, causando overfitting."
+      "explain": "A very deep tree tends to memorize the noise in the training data, causing overfitting."
     },
     {
-      "question": "Como se define uma 'hipótese aproximadamente correta' no aprendizado indutivo?",
+      "question": "How is a 'probably approximately correct hypothesis' defined in inductive learning?",
       "options": [
-        "Uma função que classifica 100% dos casos",
-        "Uma função que minimiza o risco com alta confiança",
-        "Uma função que ignora atributos numéricos",
-        "Uma função que não possui parâmetros fixos"
+        "A function that classifies 100% of cases",
+        "A function that minimizes risk with high confidence",
+        "A function that ignores numeric attributes",
+        "A function that has no fixed parameters"
       ],
       "correctAnswer": 1,
-      "explain": "No aprendizado indutivo, buscamos uma hipótese que, com alta probabilidade, tenha erro menor que um limite dado."
+      "explain": "In inductive learning, we seek a hypothesis that, with high probability, has an error smaller than a given threshold."
     }
   ]
 }

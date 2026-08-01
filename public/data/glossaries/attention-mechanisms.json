@@ -4,7 +4,7 @@
   "description": "Core vocabulary behind how transformers focus on relevant parts of their input.",
   "category": "computer_science",
   "subcategory": "AI & Machine Learning",
-  "color": "blue",
+  "color": "indigo",
   "icon": "attention-mechanisms",
   "terms": [
     {

@@ -1,0 +1,128 @@
+{
+  "id": "gof-patterns-principles",
+  "name": "Fundamentals of GoF Design Patterns",
+  "description": "Test your understanding of the pillars and goals of the main GoF design patterns.",
+  "color": "blue",
+  "category": "computer_science",
+  "subcategory": "Programming Languages",
+  "tags": [
+    "design",
+    "patterns",
+    "architecture",
+    "gof"
+  ],
+  "hardness": "medium",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the main goal of behavioral design patterns?",
+      "options": [
+        "Manage dependencies between objects",
+        "Create objects on demand",
+        "Define communication between objects",
+        "Organize code structures"
+      ],
+      "correctAnswer": 2,
+      "explain": "Behavioral patterns focus on how objects interact and distribute responsibilities."
+    },
+    {
+      "question": "What characterizes a structural design pattern?",
+      "options": [
+        "They solve problems related to the organization of classes and objects",
+        "They manage data flow between components",
+        "They manage the lifetime of objects",
+        "They define interactions between distributed systems"
+      ],
+      "correctAnswer": 0,
+      "explain": "Structural patterns deal with the composition of classes and objects to form larger structures."
+    },
+    {
+      "question": "What is the overall goal of the Singleton pattern?",
+      "options": [
+        "Allow multiple instances of a class",
+        "Ensure a single global instance",
+        "Manage dependencies automatically",
+        "Create objects on demand"
+      ],
+      "correctAnswer": 1,
+      "explain": "Singleton restricts the instantiation of a class to a single global instance."
+    },
+    {
+      "question": "The Factory Method pattern belongs to which category?",
+      "options": [
+        "Creational",
+        "Structural",
+        "Behavioral",
+        "Fluent"
+      ],
+      "correctAnswer": 0,
+      "explain": "Factory Method is a creational pattern focused on flexible object creation."
+    },
+    {
+      "question": "Which pattern is used to convert incompatible interfaces?",
+      "options": [
+        "Adapter",
+        "Façade",
+        "Bridge",
+        "Decorator"
+      ],
+      "correctAnswer": 0,
+      "explain": "Adapter converts one interface into another so classes can work together despite incompatible interfaces."
+    },
+    {
+      "question": "The Observer pattern is classified as _______.",
+      "options": [
+        "Structural",
+        "Creational",
+        "Behavioral",
+        "Fluent"
+      ],
+      "correctAnswer": 2,
+      "explain": "Observer is a behavioral pattern that defines a dependency relationship between objects."
+    },
+    {
+      "question": "What does the Strategy pattern aim to solve?",
+      "options": [
+        "System architecture problems",
+        "Variability of algorithms at runtime",
+        "Managing dependencies between modules",
+        "Performance optimization"
+      ],
+      "correctAnswer": 1,
+      "explain": "Strategy allows defining a family of algorithms and making them interchangeable."
+    },
+    {
+      "question": "Which pattern is used to avoid multiple base classes?",
+      "options": [
+        "Adapter",
+        "Bridge",
+        "Decorator",
+        "Proxy"
+      ],
+      "correctAnswer": 1,
+      "explain": "Bridge separates an interface from its implementation to avoid direct coupling."
+    },
+    {
+      "question": "What does the Command pattern implement?",
+      "options": [
+        "An interface for parameterized requests",
+        "An interface for converting interfaces",
+        "An interface for managing single instances",
+        "An interface for converting events"
+      ],
+      "correctAnswer": 0,
+      "explain": "Command encapsulates a request as an object, allowing parameterization of requests."
+    },
+    {
+      "question": "Which pattern is used to control access to objects?",
+      "options": [
+        "Proxy",
+        "Adapter",
+        "Decorator",
+        "Bridge"
+      ],
+      "correctAnswer": 0,
+      "explain": "Proxy controls access to an object and can add extra logic such as lazy loading."
+    }
+  ]
+}
