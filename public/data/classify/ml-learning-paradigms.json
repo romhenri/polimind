@@ -1,7 +1,7 @@
 {
   "id": "ml-learning-paradigms",
   "name": "ML Learning Paradigms",
-  "icon": "🎓",
+  "icon": "sitemap",
   "description": "Classify each algorithm into its learning paradigm: supervised, unsupervised, or reinforcement.",
   "color": "cyan",
   "category": "computer_science",

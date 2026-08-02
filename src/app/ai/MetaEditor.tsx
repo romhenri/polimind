@@ -6,6 +6,7 @@ import { QuizMetadata } from '@/types/quiz'
 import { AVAILABLE_COLORS, getColor } from '@/utils/colorMapper'
 import { slugify } from '@/utils/aiQuiz'
 import { CATEGORIES, getCategoryById } from '@/data/categories'
+import IconPicker from '@/components/IconPicker'
 
 const COLOR_KEYS = Object.keys(AVAILABLE_COLORS)
 const HARDNESS_VALUES = ['easy', 'medium', 'hard'] as const
@@ -24,6 +25,7 @@ export default function MetaEditor({ quiz, onSave, onCancel }: MetaEditorProps) 
   const [id, setId] = useState(quiz.id)
   const [name, setName] = useState(quiz.name)
   const [description, setDescription] = useState(quiz.description)
+  const [icon, setIcon] = useState(quiz.icon ?? '')
   const [color, setColor] = useState(quiz.color)
   const [category, setCategory] = useState(
     getCategoryById(quiz.category) ? quiz.category : CATEGORIES[0].id
@@ -51,6 +53,7 @@ export default function MetaEditor({ quiz, onSave, onCancel }: MetaEditorProps) 
       id: slugify(id),
       name: name.trim() || quiz.name,
       description: description.trim(),
+      icon,
       color,
       category,
       subcategory: subcategory || undefined,
@@ -112,6 +115,10 @@ export default function MetaEditor({ quiz, onSave, onCancel }: MetaEditorProps) 
               </option>
             ))}
           </select>
+        </div>
+        <div>
+          <label className={labelClass}>Icon</label>
+          <IconPicker value={icon} onChange={setIcon} color={getColor(color)} />
         </div>
         <div>
           <label className={labelClass}>Color</label>

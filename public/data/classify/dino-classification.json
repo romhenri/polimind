@@ -1,7 +1,7 @@
 {
   "id": "dino-classification",
   "name": "Dinosaur Classification",
-  "icon": "🦖",
+  "icon": "dinosaur",
   "description": "Place each dinosaur in its correct order and family.",
   "color": "amber",
   "category": "sciences",

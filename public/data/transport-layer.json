@@ -2,7 +2,7 @@
     "id": "transport-layer",
     "name": "Transport Layer",
     "description": "Quiz on control mechanisms, timing and transport protocols.",
-    "icon": "🌐",
+    "icon": "truck",
     "color": "blue",
     "category": "computer_science",
     "subcategory": "Networks",

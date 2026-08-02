@@ -2,7 +2,7 @@
     "id": "web1",
     "name": "Web 1",
     "description": "About web technologies, hosting and HTTP.",
-    "icon": "🌐",
+    "icon": "globe",
     "color": "blue",
     "category": "computer_science",
     "subcategory": "Programming Languages",

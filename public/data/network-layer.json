@@ -2,7 +2,7 @@
     "id": "network-layer",
     "name": "Network Layer",
     "description": "Quiz focused on routing, forwarding, IP addressing (v4 and v6) and auxiliary protocols (NAT, DHCP).",
-    "icon": "🌐",
+    "icon": "layers",
     "color": "blue",
     "category": "computer_science",
     "subcategory": "Networks",

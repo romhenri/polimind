@@ -1,5 +1,6 @@
 {
   "id": "data-structures-list",
+  "icon": "microchip",
   "name": "List Data Structures",
   "description": "Test your knowledge on the core concepts of lists, stacks, and queues, essential building blocks in computer science.",
   "color": "emerald",

@@ -2,7 +2,7 @@
   "id": "power-rules",
   "name": "Power Rules",
   "description": "Product and quotient with the same base, power of a power, zero and negative exponents — with small numbers.",
-  "icon": "⚡",
+  "icon": "superscript",
   "color": "orange",
   "category": "mathematics",
   "subcategory": "Algebra & Calculus",

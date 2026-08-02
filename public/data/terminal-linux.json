@@ -2,7 +2,7 @@
     "id": "terminal-linux",
     "name": "Linux Terminal",
     "description": "Easy Linux terminal questions.",
-    "icon": "🐧",
+    "icon": "linux",
     "color": "gray",
     "category": "computer_science",
     "subcategory": "Programming Languages",

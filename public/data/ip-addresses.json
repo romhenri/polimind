@@ -2,7 +2,7 @@
     "id": "ip-addresses",
     "name": "IP Addressing",
     "description": "Quiz focused on the IPv4 and IPv6 protocols, logical address resolution, spoofing and ports.",
-    "icon": "🌐",
+    "icon": "location",
     "color": "blue",
     "category": "computer_science",
     "subcategory": "Networks",

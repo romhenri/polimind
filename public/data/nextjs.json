@@ -2,7 +2,7 @@
   "id": "nextjs",
   "name": "Next.js",
   "description": "Challenge yourself with Next.js questions",
-  "icon": "▲",
+  "icon": "nextjs",
   "color": "gray",
   "category": "computer_science",
   "subcategory": "Programming Languages",

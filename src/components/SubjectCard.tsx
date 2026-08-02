@@ -49,7 +49,7 @@ interface SubjectCardProps {
 export default function SubjectCard({ subject, index, onTagClick, completed, isLocal, onDeleteLocal }: SubjectCardProps) {
   const router = useRouter()
   const bgColor = getColor(subject.color)
-  const Icon = getQuizIcon(subject.id, subject.category)
+  const Icon = getQuizIcon(subject.icon, subject.category)
   const animationDelay = `${index * 0.1}s`
   const [menu, setMenu] = useState<{ x: number; y: number } | null>(null)
 

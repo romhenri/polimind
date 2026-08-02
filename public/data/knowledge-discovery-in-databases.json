@@ -1,5 +1,6 @@
 {
   "id": "knowledge-discovery-in-databases",
+  "icon": "magnifying_chart",
   "name": "KDD Process",
   "description": "Test your knowledge of the KDD lifecycle, preprocessing steps, and data mining.",
   "color": "purple",

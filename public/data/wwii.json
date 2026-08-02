@@ -2,7 +2,7 @@
     "id": "wwii",
     "name": "World War II",
     "description": "World War II questions.",
-    "icon": "🎖️",
+    "icon": "medal",
     "color": "green",
     "category": "history",
     "subcategory": "Wars & Conflicts",

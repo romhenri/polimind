@@ -106,36 +106,54 @@ const STYLE_SAMPLE_PER_QUIZ = 3
 const STYLE_SAMPLE_TOTAL = 15
 
 /**
- * Build a "style reference" prompt block from existing quizzes. Samples a few
- * questions per quiz so the model matches their tone, difficulty and format —
- * NOT their subject matter. Returns an empty string when there is nothing to
- * sample.
+ * Build a "style reference" prompt block from existing quizzes. For each quiz
+ * it states its subject (name, description, topics) so the model understands
+ * what the sample questions are about, then lists a few sample questions so it
+ * can match their tone, difficulty and format — NOT their subject matter.
+ * Returns an empty string when there is nothing to sample.
  */
 export function buildStyleContext(quizzes: QuizMetadata[]): string {
-  const samples: string[] = []
+  const blocks: string[] = []
+  let total = 0
+
   for (const quiz of quizzes) {
+    if (total >= STYLE_SAMPLE_TOTAL) break
     const questions = Array.isArray(quiz.questions) ? quiz.questions : []
-    let taken = 0
+    const samples: string[] = []
     for (const question of questions) {
-      if (taken >= STYLE_SAMPLE_PER_QUIZ || samples.length >= STYLE_SAMPLE_TOTAL) break
+      if (samples.length >= STYLE_SAMPLE_PER_QUIZ || total >= STYLE_SAMPLE_TOTAL) break
       if (!question || typeof (question as OptionsQuestion).question !== 'string') continue
       const text = (question as OptionsQuestion).question.trim()
       if (!text) continue
-      samples.push(`- (from "${quiz.name}") ${text}`)
-      taken++
+      samples.push(`  - ${text}`)
+      total++
     }
-    if (samples.length >= STYLE_SAMPLE_TOTAL) break
+    if (samples.length === 0) continue
+
+    const description = quiz.description?.trim()
+    const tags = Array.isArray(quiz.tags) ? quiz.tags.filter(Boolean) : []
+    const subjectLine = [
+      `Reference "${quiz.name}"`,
+      description ? `— ${description}` : '',
+      tags.length > 0 ? `(topics: ${tags.join(', ')})` : '',
+    ]
+      .filter(Boolean)
+      .join(' ')
+
+    blocks.push([subjectLine, 'Example questions:', ...samples].join('\n'))
   }
 
-  if (samples.length === 0) return ''
+  if (blocks.length === 0) return ''
 
   return [
-    'Style reference — match the tone, difficulty, phrasing and question format of the example questions below.',
+    'Style reference — match the tone, difficulty, phrasing and question format of the reference quizzes below.',
+    'Each reference states its own subject only so you understand what its sample questions are about.',
     'These are ONLY a style guide: do NOT reuse their subject matter, topics, wording or answers. Write questions strictly about the Subject defined below.',
     '',
-    'Example questions:',
-    ...samples,
-  ].join('\n')
+    ...blocks.flatMap((block) => [block, '']),
+  ]
+    .join('\n')
+    .trimEnd()
 }
 
 function buildPrompt(
@@ -377,7 +395,7 @@ function normalizeQuiz(raw: unknown, fallbackSubject: string): QuizMetadata {
     id,
     name: typeof data.name === 'string' && data.name.trim() ? data.name.trim() : formatSubject(id),
     description: typeof data.description === 'string' ? data.description.trim() : '',
-    icon: '',
+    icon: typeof data.icon === 'string' ? data.icon : '',
     color,
     category,
     ...(subcategory ? { subcategory } : {}),
@@ -407,6 +425,7 @@ export function quizToDataFile(quiz: QuizMetadata): Record<string, unknown> {
     id: quiz.id,
     name: quiz.name,
     description: quiz.description,
+    ...(quiz.icon ? { icon: quiz.icon } : {}),
     color: quiz.color,
     category: quiz.category,
     ...(quiz.subcategory ? { subcategory: quiz.subcategory } : {}),

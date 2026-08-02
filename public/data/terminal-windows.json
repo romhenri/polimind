@@ -2,7 +2,7 @@
     "id": "terminal-windows",
     "name": "Windows Terminal",
     "description": "Questions about the Windows Terminal.",
-    "icon": "💻",
+    "icon": "windows",
     "color": "blue",
     "category": "computer_science",
     "subcategory": "Programming Languages",

@@ -2,7 +2,7 @@
   "id": "general4",
   "name": "General 4",
   "description": "Various questions about general culture",
-  "icon": "🌍",
+  "icon": "earth",
   "color": "amber",
   "category": "general",
   "tags": ["culture", "history", "geography", "science"],

@@ -2,7 +2,7 @@
     "id": "bmc",
     "name": "Business Model Canvas",
     "description": "Easy BMC questions.",
-    "icon": "📊",
+    "icon": "briefcase",
     "color": "emerald",
     "category": "general",
     "tags": ["business", "startup", "management", "entrepreneurship"],

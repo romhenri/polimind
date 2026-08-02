@@ -2,7 +2,7 @@
     "id": "general3",
     "name": "General 3",
     "description": "Easy general knowledge questions.",
-    "icon": "🌍",
+    "icon": "earth",
     "color": "amber",
     "category": "general",
     "tags": ["culture", "history", "geography", "science"],

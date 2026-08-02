@@ -2,7 +2,7 @@
     "id": "calculus-derivatives",
     "name": "Derivatives",
     "description": "Test your knowledge of differentiation rules, powers, and trigonometric functions.",
-    "icon": "🧮",
+    "icon": "math_function",
     "color": "orange",
     "category": "mathematics",
     "subcategory": "Algebra & Calculus",

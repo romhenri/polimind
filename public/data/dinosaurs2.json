@@ -2,7 +2,7 @@
   "id": "dinosaurs2",
   "name": "Dinosaur World 2",
   "description": "Basics about the creatures that once ruled the Earth.",
-  "icon": "🦖",
+  "icon": "dinosaur",
   "color": "green",
   "category": "sciences",
   "subcategory": "Paleontology",

@@ -2,7 +2,7 @@
   "id": "reliable-data-transfer",
   "name": "Reliable Data Transfer Mechanisms",
   "description": "Quiz on Pipelining, Go-Back-N (GBN) and Selective Repeat (SR).",
-  "icon": "🔄",
+  "icon": "rotate",
   "color": "blue",
   "category": "computer_science",
   "subcategory": "Networks",

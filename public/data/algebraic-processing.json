@@ -2,7 +2,7 @@
     "id": "algebraic-processing",
     "name": "Algebraic Processing",
     "description": "Master the manipulation of powers, roots, and fractions essential for Calculus.",
-    "icon": "⚡",
+    "icon": "square_root",
     "color": "orange",
     "category": "mathematics",
     "subcategory": "Algebra & Calculus",

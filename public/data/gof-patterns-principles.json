@@ -1,5 +1,6 @@
 {
   "id": "gof-patterns-principles",
+  "icon": "microchip",
   "name": "Fundamentals of GoF Design Patterns",
   "description": "Test your understanding of the pillars and goals of the main GoF design patterns.",
   "color": "blue",

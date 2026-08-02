@@ -1,5 +1,6 @@
 {
   "id": "ai-paradigms-and-algorithms",
+  "icon": "sitemap",
   "name": "AI Paradigms and Algorithms",
   "description": "Test your knowledge of the main AI paradigms and algorithms like KNN, Backpropagation, and Genetic Algorithms.",
   "color": "cyan",

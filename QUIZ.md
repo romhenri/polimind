@@ -12,7 +12,7 @@
 | `id` | yes | Must equal `<slug>`. Used for `/quiz/<id>` and must match the filename. |
 | `name` | yes | Title in the UI. |
 | `description` | yes | Card body text. |
-| `icon` | no | Legacy/unused by the UI. Card icons are resolved from `id` via `src/utils/iconMapper.ts` (`getQuizIcon`); add an entry there for a new `id`, otherwise the `category` fallback icon is used. |
+| `icon` | no | Icon identifier string (e.g. `brain`, `network`, `git`, `scroll`). Resolved to a `react-icons` component in `src/utils/iconMapper.ts` (`ICON_BY_NAME`; see exported `ICON_NAMES` for the full list). Unknown/omitted name → falls back to the `category` icon, then `book`. Add a new entry to `ICON_BY_NAME` to introduce a new name. |
 | `color` | yes | Key in `src/utils/colorMapper.ts` (`AVAILABLE_COLORS`) — 16 predefined earthy/terracotta tones. Returns a hex applied to the card icon tile. Unknown key → neutral fallback. |
 | `category` | yes | Drives category filters on the home page. |
 | `tags` | yes | String array; home search matches name and tags. |

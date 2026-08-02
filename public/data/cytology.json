@@ -1,5 +1,6 @@
 {
   "id": "cytology",
+  "icon": "flask",
   "name": "Cytology",
   "description": "Test your fundamental knowledge of cells, the basic units of life.",
   "color": "emerald",

@@ -1,5 +1,6 @@
 {
   "id": "statistics",
+  "icon": "math",
   "name": "Intro to Statistics",
   "description": "Test your basic knowledge of fundamental statistical principles and their applications.",
   "color": "amber",

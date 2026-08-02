@@ -2,7 +2,7 @@
   "id": "typescript2",
   "name": "TypeScript 2",
   "description": "Evaluate your TypeScript knowledge",
-  "icon": "📘",
+  "icon": "typescript",
   "color": "blue",
   "category": "computer_science",
   "subcategory": "Programming Languages",

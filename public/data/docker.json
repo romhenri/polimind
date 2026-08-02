@@ -2,7 +2,7 @@
     "id": "docker",
     "name": "Docker Essentials",
     "description": "Test your knowledge on core Docker commands and container concepts.",
-    "icon": "🐳",
+    "icon": "docker",
     "color": "blue",
     "category": "computer_science",
     "subcategory": "Programming Languages",

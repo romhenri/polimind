@@ -1,7 +1,7 @@
 {
   "id": "neural-networks",
   "name": "Neural Networks",
-  "icon": "🧠",
+  "icon": "brain",
   "description": "Core concepts and components of artificial neural networks.",
   "color": "cyan",
   "category": "computer_science",

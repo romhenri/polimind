@@ -2,7 +2,7 @@
 "id": "datapath-microarchitecture",
 "name": "Data Path",
 "description": "A study of the microarchitecture, the data path, internal registers, the ALU, buses, and the timing of the execution subcycles.",
-"icon": "🛣️",
+"icon": "microchip",
 "color": "purple",
 "category": "computer_science",
 "subcategory": "Hardware",

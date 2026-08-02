@@ -2,7 +2,7 @@
   "id": "mcp-servers",
   "name": "MCP Servers",
   "description": "Build and understand Model Context Protocol (MCP) servers — tools, resources, transports, and the client-server lifecycle.",
-  "icon": "🤖",
+  "icon": "robot",
   "color": "orange",
   "category": "computer_science",
   "subcategory": "AI & Machine Learning",

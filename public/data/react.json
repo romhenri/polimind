@@ -2,7 +2,7 @@
   "id": "react",
   "name": "React 1",
   "description": "Evaluate your mastery of React and its concepts",
-  "icon": "⚛️",
+  "icon": "react",
   "color": "blue",
   "category": "computer_science",
   "subcategory": "Programming Languages",

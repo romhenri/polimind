@@ -1,5 +1,6 @@
 {
   "id": "llm-evaluators",
+  "icon": "scale",
   "name": "LLM Evaluators",
   "description": "Test your knowledge of how large language models are measured and assessed.",
   "color": "indigo",

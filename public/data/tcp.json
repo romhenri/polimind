@@ -2,7 +2,7 @@
     "id": "tcp",
     "name": "TCP Transport Protocol",
     "description": "In-depth quiz on the TCP protocol: reliability, flow control, congestion control and handshaking.",
-    "icon": "🌐",
+    "icon": "handshake",
     "color": "blue",
     "category": "computer_science",
     "subcategory": "Networks",

@@ -2,7 +2,7 @@
     "id": "router-data-plane",
     "name": "Router Data Plane",
     "description": "Quiz focusing on hardware architecture, switching, TCAM and queues in routers.",
-    "icon": "🌐",
+    "icon": "router",
     "color": "blue",
     "category": "computer_science",
     "subcategory": "Networks",

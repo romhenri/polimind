@@ -1,5 +1,6 @@
 {
   "id": "data-structures-list-2",
+  "icon": "microchip",
   "name": "List Data Structures 2",
   "description": "Test your knowledge on linked lists, circular lists, heterogeneous lists, and double-ended queues.",
   "color": "emerald",

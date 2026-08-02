@@ -2,7 +2,7 @@
     "id": "web3",
     "name": "Web 3",
     "description": "About web technologies, hosting and HTTP.",
-    "icon": "🌐",
+    "icon": "globe",
     "color": "blue",
     "category": "computer_science",
     "subcategory": "Programming Languages",

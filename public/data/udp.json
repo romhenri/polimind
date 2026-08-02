@@ -2,7 +2,7 @@
     "id": "udp",
     "name": "UDP Transport Protocol",
     "description": "Quiz focused exclusively on the UDP protocol, its characteristics, advantages and demultiplexing.",
-    "icon": "🌐",
+    "icon": "paper_plane",
     "color": "blue",
     "category": "computer_science",
     "subcategory": "Networks",

@@ -1,7 +1,7 @@
 {
   "id": "attention-mechanisms",
   "name": "Attention Mechanisms in Transformers",
-  "icon": "👁️",
+  "icon": "eye",
   "description": "Understanding of how attention mechanisms work in transformer models.",
   "color": "indigo",
   "category": "computer_science",

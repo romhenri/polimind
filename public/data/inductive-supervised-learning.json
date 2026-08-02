@@ -1,5 +1,6 @@
 {
   "id": "inductive-supervised-learning",
+  "icon": "sitemap",
   "name": "Supervised and Inductive Learning",
   "description": "Challenge your knowledge of induction algorithms, decision trees, and PAC Learning concepts.",
   "color": "cyan",

@@ -2,7 +2,7 @@
   "id": "fraction-rules",
   "name": "Fraction Rules",
   "description": "Negative powers, addition, product, division (inverse), and simplification — with small numbers.",
-  "icon": "➗",
+  "icon": "divide",
   "color": "orange",
   "category": "mathematics",
   "subcategory": "Algebra & Calculus",

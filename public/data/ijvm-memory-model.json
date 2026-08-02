@@ -2,7 +2,7 @@
     "id": "ijvm-memory-model",
     "name": "IJVM Memory Model",
     "description": "Test your knowledge of the IJVM virtual machine memory model, including memory areas, stacks, control registers, and access to local variables.",
-    "icon": "🧠",
+    "icon": "memory",
     "color": "purple",
     "category": "computer_science",
     "subcategory": "Hardware",

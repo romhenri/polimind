@@ -2,7 +2,7 @@
     "id": "quic",
     "name": "QUIC Protocol and HTTP/3",
     "description": "Advanced quiz with 15 questions on the architecture, multiplexing, handshakes and ecosystem of QUIC.",
-    "icon": "🌐",
+    "icon": "bolt",
     "color": "blue",
     "category": "computer_science",
     "subcategory": "Networks",

@@ -2,7 +2,7 @@
   "id": "computer-networks2",
   "name": "Computer Networks 2",
   "description": "Protocols, architectures and layers of computer networks.",
-  "icon": "🌐",
+  "icon": "network",
   "color": "blue",
   "category": "computer_science",
   "subcategory": "Networks",

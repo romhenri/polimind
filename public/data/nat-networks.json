@@ -2,7 +2,7 @@
     "id": "nat-networks",
     "name": "Network Address Translation (NAT)",
     "description": "Quiz on the operation, advantages, implementation and controversies of the NAT protocol.",
-    "icon": "🔄",
+    "icon": "swap",
     "color": "blue",
     "category": "computer_science",
     "subcategory": "Networks",

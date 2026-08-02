@@ -2,7 +2,7 @@
   "id": "dhcp-protocol",
   "name": "DHCP Protocol (Dynamic Host Configuration Protocol)",
   "description": "Advanced quiz on dynamic IP allocation, DORA messages, UDP and encapsulation.",
-  "icon": "🌐",
+  "icon": "server",
   "color": "blue",
   "category": "computer_science",
   "subcategory": "Networks",

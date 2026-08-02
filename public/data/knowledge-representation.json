@@ -1,5 +1,6 @@
 {
   "id": "knowledge-representation",
+  "icon": "lightbulb",
   "name": "Knowledge Representation and Reasoning",
   "description": "Evaluate your knowledge of knowledge formalization, trade-offs, and paradigms in intelligent agents.",
   "color": "purple",

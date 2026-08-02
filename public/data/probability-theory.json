@@ -1,5 +1,6 @@
 {
   "id": "probability-theory",
+  "icon": "math",
   "name": "Probability Theory",
   "description": "Test your understanding of conditional probability, Bayes' theorem, intersections, and complements.",
   "color": "amber",

@@ -1,0 +1,128 @@
+{
+  "id": "neural-networks-2",
+  "icon": "microchip",
+  "name": "Neural Networks 2",
+  "description": "Test your understanding of key concepts in neural networks with this medium-difficulty multiple-choice quiz.",
+  "color": "blue",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "tags": [
+    "ai",
+    "machine-learning",
+    "deep-learning"
+  ],
+  "hardness": "medium",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the main role of a bias term in a fully connected layer?",
+      "options": [
+        "Adds offset to activation",
+        "Scales the input features",
+        "Normalizes layer neuron outputs",
+        "Prevents overfitting issues"
+      ],
+      "correctAnswer": 0,
+      "explain": "The bias adds a constant offset to the neuron's pre‑activation, allowing the model to shift the activation function."
+    },
+    {
+      "question": "Which of the following is NOT a property of the ReLU activation function?",
+      "options": [
+        "non-saturating",
+        "output range is [0, ∞)",
+        "differentiable everywhere",
+        "computationally efficient"
+      ],
+      "correctAnswer": 2,
+      "explain": "ReLU is not differentiable at 0, so it is not differentiable everywhere."
+    },
+    {
+      "question": "What is being normalized in batch normalization?",
+      "options": [
+        "Model parameters",
+        "Loss values",
+        "Input activations",
+        "Gradient updates"
+      ],
+      "correctAnswer": 2,
+      "explain": "Batch normalization scales the inputs of each layer to have zero mean and unit variance, improving training stability."
+    },
+    {
+      "question": "Which regularization technique randomly drops neurons during training?",
+      "options": [
+        "Dropout technique",
+        "L2 regularization",
+        "Early stopping",
+        "Weight decay"
+      ],
+      "correctAnswer": 0,
+      "explain": "Dropout randomly disables neurons during each training step, which reduces overfitting."
+    },
+    {
+      "question": "Which metric measures the proportion of correctly classified instances?",
+      "options": [
+        "Accuracy",
+        "Precision",
+        "Recall",
+        "F1-score"
+      ],
+      "correctAnswer": 0,
+      "explain": "Accuracy counts the fraction of predictions that match the true labels, directly measuring correct classification proportion."
+    },
+    {
+      "question": "What is the primary purpose of the 'omentum' term in many gradient descent optimizers?",
+      "options": [
+        "To increase the learning rate",
+        "To accelerate convergence and reduce oscillations",
+        "To add non-linearity to the model",
+        "To prevent weight decay during training"
+      ],
+      "correctAnswer": 1,
+      "explain": "Momentum helps accelerate gradient descent by accumulating a moving average of past gradients, helping to navigate across plateaus and dampen oscillations."
+    },
+    {
+      "question": "In a convolutional neural network, what does pooling aim to achieve?",
+      "options": [
+        "Reduce spatial dimensions",
+        "Increase depth level",
+        "Apply non-linear activation",
+        "Normalize channel values"
+      ],
+      "correctAnswer": 0,
+      "explain": "Pooling reduces the spatial resolution of feature maps, lowering computational cost and providing translation invariance."
+    },
+    {
+      "question": "Which loss function is commonly used for binary classification?",
+      "options": [
+        "Mean squared error",
+        "Cross-entropy loss",
+        "Hinge loss function",
+        "Categorical cross-entropy"
+      ],
+      "correctAnswer": 1,
+      "explain": "Cross‑entropy loss penalizes the difference between predicted probabilities and true binary labels, making it suitable for binary tasks."
+    },
+    {
+      "question": "What is the purpose of a residual connection in deep networks?",
+      "options": [
+        "Adds gradient shortcut paths",
+        "Increases model parameter count",
+        "Replaces pooling layers",
+        "Normalizes neuron activations"
+      ],
+      "correctAnswer": 0,
+      "explain": "Residual connections add shortcut paths that let gradients flow directly, easing training of very deep nets."
+    },
+    {
+      "question": "Which of the following is a type of unsupervised learning for neural networks?",
+      "options": [
+        "Supervised learning",
+        "Neural autoencoder",
+        "Unsupervised regression",
+        "Pattern classification"
+      ],
+      "correctAnswer": 1,
+      "explain": "Autoencoders learn to reconstruct input data without labels, embodying unsupervised learning."
+    }
+  ]
+}

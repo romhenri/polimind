@@ -2,7 +2,7 @@
     "id": "python",
     "name": "Python 1",
     "description": "Easy Python questions.",
-    "icon": "🐍",
+    "icon": "python",
     "color": "blue",
     "category": "computer_science",
     "subcategory": "Programming Languages",
