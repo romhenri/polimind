@@ -445,6 +445,16 @@ function buildEditPrompt(question: Question, instructions: string, type: GenType
     .join('\n')
 }
 
+function parseSeq(raw: unknown): number | undefined {
+  if (typeof raw === 'number' && Number.isFinite(raw)) return raw
+  if (typeof raw === 'string' && raw.trim() !== '' && Number.isFinite(Number(raw))) return Number(raw)
+  return undefined
+}
+
+function parseLang(raw: unknown): string | undefined {
+  return typeof raw === 'string' && raw.trim() ? raw.trim() : undefined
+}
+
 export function slugify(value: string): string {
   const slug = value
     .toLowerCase()
@@ -569,6 +579,8 @@ function normalizeQuiz(
     ...(subcategory ? { subcategory } : {}),
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     hardness,
+    ...(parseSeq(data.seq) !== undefined ? { seq: parseSeq(data.seq) } : {}),
+    ...(parseLang(data.lang) ? { lang: parseLang(data.lang) } : {}),
     type,
     questions,
   }
@@ -603,6 +615,8 @@ export function quizToDataFile(quiz: QuizMetadata): Record<string, unknown> {
       ...(quiz.subcategory ? { subcategory: quiz.subcategory } : {}),
       tags: quiz.tags,
       hardness: quiz.hardness,
+      ...(quiz.seq !== undefined ? { seq: quiz.seq } : {}),
+      ...(quiz.lang ? { lang: quiz.lang } : {}),
       type: quiz.type,
       facets: quiz.facets ?? [],
       entities: quiz.entities ?? [],
@@ -618,6 +632,8 @@ export function quizToDataFile(quiz: QuizMetadata): Record<string, unknown> {
     ...(quiz.subcategory ? { subcategory: quiz.subcategory } : {}),
     tags: quiz.tags,
     hardness: quiz.hardness,
+    ...(quiz.seq !== undefined ? { seq: quiz.seq } : {}),
+    ...(quiz.lang ? { lang: quiz.lang } : {}),
     type: quiz.type,
     questions: quiz.questions,
   }
@@ -1399,6 +1415,8 @@ function normalizeClassify(raw: unknown, fallbackSubject: string): QuizMetadata 
     ...(subcategory ? { subcategory } : {}),
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     hardness,
+    ...(parseSeq(data.seq) !== undefined ? { seq: parseSeq(data.seq) } : {}),
+    ...(parseLang(data.lang) ? { lang: parseLang(data.lang) } : {}),
     type: 'classify',
     facets,
     entities,

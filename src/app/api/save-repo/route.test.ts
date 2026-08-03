@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import path from 'path'
-import { resolveTargetPath } from './route'
+import { resolveTargetPath } from './paths'
 
 describe('resolveTargetPath', () => {
   it('maps each kind to its dir', () => {
