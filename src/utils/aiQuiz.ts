@@ -604,7 +604,6 @@ export function quizToDataFile(quiz: QuizMetadata): Record<string, unknown> {
       tags: quiz.tags,
       hardness: quiz.hardness,
       type: quiz.type,
-      ...(quiz.config ? { config: quiz.config } : {}),
       facets: quiz.facets ?? [],
       entities: quiz.entities ?? [],
     }
@@ -1116,9 +1115,8 @@ function buildClassifySchema(subcategories: string[]): object {
               properties: {
                 id: { type: 'string' },
                 label: { type: 'string' },
-                hint: { type: 'string' },
               },
-              required: ['id', 'label', 'hint'],
+              required: ['id', 'label'],
             },
           },
         },
@@ -1141,7 +1139,7 @@ function classifyRules(count: number): string[] {
     '    - "id": a short lowercase kebab-case identifier (e.g. "category", "era").',
     '    - "label": a short human-readable name for the dimension.',
     '    - "prompt": a question containing the placeholder {entity} (e.g. "Which era does {entity} belong to?").',
-    '    - "groups": 3 to 5 possible values. Each group has "id" (kebab-case), "label", and "hint" (a very short clue, or "" if none).',
+    '    - "groups": 3 to 5 possible values. Each group has "id" (kebab-case) and "label".',
     '    - Do NOT nest facets or reference other facets; keep every facet independent.',
     `- "entities": exactly ${count} items. Each entity has:`,
     '    - "id": a short lowercase kebab-case identifier.',
@@ -1171,9 +1169,9 @@ const CLASSIFY_FEWSHOT = `{
       "label": "Order",
       "prompt": "Which order does {entity} belong to?",
       "groups": [
-        { "id": "saurischia", "label": "Saurischia", "hint": "Lizard-hipped" },
-        { "id": "ornithischia", "label": "Ornithischia", "hint": "Bird-hipped" },
-        { "id": "pterosauria", "label": "Pterosauria", "hint": "Flying, not a dinosaur" }
+        { "id": "saurischia", "label": "Saurischia" },
+        { "id": "ornithischia", "label": "Ornithischia" },
+        { "id": "pterosauria", "label": "Pterosauria" }
       ]
     },
     {
@@ -1181,9 +1179,9 @@ const CLASSIFY_FEWSHOT = `{
       "label": "Diet",
       "prompt": "What did {entity} primarily eat?",
       "groups": [
-        { "id": "carnivore", "label": "Carnivore", "hint": "Ate meat" },
-        { "id": "herbivore", "label": "Herbivore", "hint": "Ate plants" },
-        { "id": "omnivore", "label": "Omnivore", "hint": "Ate both" }
+        { "id": "carnivore", "label": "Carnivore" },
+        { "id": "herbivore", "label": "Herbivore" },
+        { "id": "omnivore", "label": "Omnivore" }
       ]
     }
   ],
@@ -1268,10 +1266,9 @@ export function buildClassifyCopyPrompt(
     '  "tags": ["two", "to", "four", "keywords"],',
     `  "hardness": "one of: ${HARDNESS_VALUES.join(', ')}",`,
     '  "type": "classify",',
-    '  "config": { "mode": "sequential", "optionCount": 4, "shuffleEntities": true },',
     '  "facets": [',
     '    { "id": "facet-id", "label": "Facet name", "prompt": "Which ... does {entity} belong to?",',
-    '      "groups": [ { "id": "group-id", "label": "Group name", "hint": "short clue" } ] }',
+    '      "groups": [ { "id": "group-id", "label": "Group name" } ] }',
     '  ],',
     '  "entities": [',
     '    { "id": "entity-id", "entity": "Name", "subtitle": "optional",',
@@ -1310,7 +1307,6 @@ function normalizeClassifyFacets(raw: unknown): ClassifyFacet[] {
           .map((g) => ({
             id: String(g.id).trim(),
             label: typeof g.label === 'string' && g.label.trim() ? g.label.trim() : String(g.id).trim(),
-            ...(typeof g.hint === 'string' && g.hint.trim() ? { hint: g.hint.trim() } : {}),
           }))
       : []
     facets.push({
@@ -1376,7 +1372,6 @@ function normalizeClassify(raw: unknown, fallbackSubject: string): QuizMetadata 
 
   const classifyData: ClassifyQuizData = {
     id,
-    config: { mode: 'sequential', optionCount: 4, shuffleEntities: true },
     facets,
     entities,
   }
@@ -1405,7 +1400,6 @@ function normalizeClassify(raw: unknown, fallbackSubject: string): QuizMetadata 
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     hardness,
     type: 'classify',
-    config: classifyData.config,
     facets,
     entities,
     questions: [],

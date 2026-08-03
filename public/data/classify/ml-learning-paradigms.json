@@ -14,20 +14,24 @@
   ],
   "hardness": "easy",
   "type": "classify",
-  "config": {
-    "mode": "single",
-    "optionCount": 3,
-    "shuffleEntities": true
-  },
   "facets": [
     {
       "id": "paradigm",
       "label": "Paradigm",
       "prompt": "Which learning paradigm does {entity} belong to?",
       "groups": [
-        { "id": "supervised", "label": "Supervised", "hint": "Learns from labeled data" },
-        { "id": "unsupervised", "label": "Unsupervised", "hint": "Finds structure without labels" },
-        { "id": "reinforcement", "label": "Reinforcement", "hint": "Learns from rewards" }
+        {
+          "id": "supervised",
+          "label": "Supervised"
+        },
+        {
+          "id": "unsupervised",
+          "label": "Unsupervised"
+        },
+        {
+          "id": "reinforcement",
+          "label": "Reinforcement"
+        }
       ]
     }
   ],
@@ -35,50 +39,82 @@
     {
       "id": "kmeans",
       "entity": "K-Means",
-      "answers": { "paradigm": "unsupervised" },
-      "explain": { "paradigm": "K-Means groups unlabeled data into clusters, so it is unsupervised." }
+      "answers": {
+        "paradigm": "unsupervised"
+      },
+      "explain": {
+        "paradigm": "K-Means groups unlabeled data into clusters, so it is unsupervised."
+      }
     },
     {
       "id": "linear-regression",
       "entity": "Linear Regression",
-      "answers": { "paradigm": "supervised" },
-      "explain": { "paradigm": "Linear Regression fits labeled input-output pairs, so it is supervised." }
+      "answers": {
+        "paradigm": "supervised"
+      },
+      "explain": {
+        "paradigm": "Linear Regression fits labeled input-output pairs, so it is supervised."
+      }
     },
     {
       "id": "q-learning",
       "entity": "Q-Learning",
-      "answers": { "paradigm": "reinforcement" },
-      "explain": { "paradigm": "Q-Learning learns action values from rewards, the core of reinforcement learning." }
+      "answers": {
+        "paradigm": "reinforcement"
+      },
+      "explain": {
+        "paradigm": "Q-Learning learns action values from rewards, the core of reinforcement learning."
+      }
     },
     {
       "id": "pca",
       "entity": "PCA (Principal Component Analysis)",
-      "answers": { "paradigm": "unsupervised" },
-      "explain": { "paradigm": "PCA reduces dimensionality without labels, so it is unsupervised." }
+      "answers": {
+        "paradigm": "unsupervised"
+      },
+      "explain": {
+        "paradigm": "PCA reduces dimensionality without labels, so it is unsupervised."
+      }
     },
     {
       "id": "random-forest",
       "entity": "Random Forest",
-      "answers": { "paradigm": "supervised" },
-      "explain": { "paradigm": "Random Forest is an ensemble of decision trees trained on labeled data." }
+      "answers": {
+        "paradigm": "supervised"
+      },
+      "explain": {
+        "paradigm": "Random Forest is an ensemble of decision trees trained on labeled data."
+      }
     },
     {
       "id": "dbscan",
       "entity": "DBSCAN (Density-Based Spatial Clustering of Applications with Noise)",
-      "answers": { "paradigm": "unsupervised" },
-      "explain": { "paradigm": "DBSCAN clusters points by density without labels, so it is unsupervised." }
+      "answers": {
+        "paradigm": "unsupervised"
+      },
+      "explain": {
+        "paradigm": "DBSCAN clusters points by density without labels, so it is unsupervised."
+      }
     },
     {
       "id": "svm",
       "entity": "SVM (Support Vector Machine)",
-      "answers": { "paradigm": "supervised" },
-      "explain": { "paradigm": "SVM learns a decision boundary from labeled examples, so it is supervised." }
+      "answers": {
+        "paradigm": "supervised"
+      },
+      "explain": {
+        "paradigm": "SVM learns a decision boundary from labeled examples, so it is supervised."
+      }
     },
     {
       "id": "autoencoder",
       "entity": "Autoencoder",
-      "answers": { "paradigm": "unsupervised" },
-      "explain": { "paradigm": "Autoencoders learn to reconstruct their input without labels, so they are unsupervised." }
+      "answers": {
+        "paradigm": "unsupervised"
+      },
+      "explain": {
+        "paradigm": "Autoencoders learn to reconstruct their input without labels, so they are unsupervised."
+      }
     }
   ]
 }

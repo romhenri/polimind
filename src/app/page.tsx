@@ -21,9 +21,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>(CATEGORIES[0].id);
-  const [selectedSubcategory, setSelectedSubcategory] = useState<string>(
-    CATEGORIES[0].subcategories[0] ?? ""
-  );
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string>("");
   const [showShuffleModal, setShowShuffleModal] = useState(false);
 
   useEffect(() => {
@@ -51,8 +49,19 @@ export default function Home() {
 
   // Subcategories available for the selected category
   const subcategories = useMemo(() => {
-    return getCategoryById(selectedCategory)?.subcategories ?? [];
-  }, [selectedCategory]);
+    const present = new Set(
+      subjects
+        .filter((s) => s.category === selectedCategory && s.subcategory)
+        .map((s) => s.subcategory as string)
+    );
+    return (getCategoryById(selectedCategory)?.subcategories ?? []).filter((s) =>
+      present.has(s)
+    );
+  }, [subjects, selectedCategory]);
+
+  useEffect(() => {
+    setSelectedSubcategory(subcategories[0] ?? "");
+  }, [subcategories]);
 
   // Filter subjects based on search and filters
   const filteredSubjects = useMemo(() => {
@@ -76,7 +85,6 @@ export default function Home() {
 
   const handleSelectCategory = (category: string) => {
     setSelectedCategory(category);
-    setSelectedSubcategory(getCategoryById(category)?.subcategories[0] ?? "");
   };
 
   const handleSelectSubcategory = (subcategory: string) => {

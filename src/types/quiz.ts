@@ -16,7 +16,6 @@ export interface BoolQuestion {
 export interface ClassifyGroup {
   id: string
   label: string
-  hint?: string
   parentGroup?: string
 }
 
@@ -36,15 +35,8 @@ export interface ClassifyEntity {
   explain?: Record<string, string>
 }
 
-export interface ClassifyConfig {
-  mode?: 'sequential' | 'single'
-  optionCount?: number
-  shuffleEntities?: boolean
-}
-
 export interface ClassifyQuizData {
   id: string
-  config?: ClassifyConfig
   facets: ClassifyFacet[]
   entities: ClassifyEntity[]
 }
@@ -52,7 +44,6 @@ export interface ClassifyQuizData {
 export interface ClassifyQuestion extends OptionsQuestion {
   entity: string
   subtitle?: string
-  optionHints?: (string | undefined)[]
 }
 
 export type Question = OptionsQuestion | BoolQuestion | ClassifyQuestion
@@ -71,7 +62,6 @@ export interface QuizMetadata {
   seq?: number
   lang?: string
   type?: QuizType
-  config?: ClassifyConfig
   facets?: ClassifyFacet[]
   entities?: ClassifyEntity[]
 }
@@ -91,17 +81,17 @@ export interface QuizListing {
   questions: number
 }
 
+export const CLASSIFY_QUESTIONS_PER_RUN = 10
+
 export function quizQuestionCount(
-  quiz: Pick<QuizMetadata, 'type' | 'questions' | 'entities' | 'config'>
+  quiz: Pick<QuizMetadata, 'type' | 'questions' | 'entities'>
 ): number {
   if (normalizeQuizType(quiz.type) === 'classify' && Array.isArray(quiz.entities)) {
-    if (quiz.config?.mode === 'sequential') {
-      return quiz.entities.reduce(
-        (acc, entity) => acc + Object.keys(entity.answers ?? {}).length,
-        0
-      )
-    }
-    return quiz.entities.length
+    const pool = quiz.entities.reduce(
+      (acc, entity) => acc + Object.keys(entity.answers ?? {}).length,
+      0
+    )
+    return Math.min(CLASSIFY_QUESTIONS_PER_RUN, pool)
   }
   return Array.isArray(quiz.questions) ? quiz.questions.length : 0
 }

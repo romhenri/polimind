@@ -52,7 +52,6 @@ function poolQuestions(quizzes: QuizMetadata[]): PracticeQuestion[] {
         ? generateClassifyQuestions(
             {
               id: quiz.id,
-              config: quiz.config,
               facets: quiz.facets,
               entities: quiz.entities,
             },

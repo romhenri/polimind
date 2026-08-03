@@ -1,4 +1,5 @@
 import {
+  CLASSIFY_QUESTIONS_PER_RUN,
   ClassifyFacet,
   ClassifyGroup,
   ClassifyQuestion,
@@ -81,46 +82,29 @@ export function generateClassifyQuestions(
 ): ClassifyQuestion[] {
   validateClassifyQuiz(quiz)
 
-  const config = quiz.config ?? {}
-  const mode = config.mode === 'sequential' ? 'sequential' : 'single'
-  const optionCount = config.optionCount ?? 4
-  const shuffleEntities = config.shuffleEntities !== false
+  // ponytail: fixed 4-option cap; sampleOptions clamps to the facet's group count, so 2-group facets show 2.
+  const optionCount = 4
 
-  const entities = shuffleEntities
-    ? shuffled(quiz.entities, mulberry32(hashString(`${seed}:entities`)))
-    : quiz.entities
+  const pool = quiz.entities.flatMap((entity) =>
+    quiz.facets
+      .filter((f) => f.id in entity.answers)
+      .map((facet) => ({ entity, facet }))
+  )
 
-  const questions: ClassifyQuestion[] = []
-  for (const entity of entities) {
-    const answered = quiz.facets.filter((f) => f.id in entity.answers)
-    const facets =
-      mode === 'sequential'
-        ? answered
-        : [
-            answered[
-              Math.floor(
-                mulberry32(hashString(`${seed}:${entity.id}:facet`))() *
-                  answered.length
-              )
-            ],
-          ]
+  // ponytail: fixed 10-per-run; add config.questionCount if a quiz ever needs a different length.
+  const picked = pick(pool, CLASSIFY_QUESTIONS_PER_RUN, mulberry32(seed))
 
-    for (const facet of facets) {
-      const rand = mulberry32(hashString(`${seed}:${entity.id}:${facet.id}`))
-      const correctId = entity.answers[facet.id]
-      const options = sampleOptions(facet, correctId, optionCount, rand)
-      questions.push({
-        question: facet.prompt.replace(/\{entity\}/g, entity.entity),
-        entity: entity.entity,
-        subtitle: entity.subtitle,
-        options: options.map((g) => g.label),
-        optionHints: options.some((g) => g.hint)
-          ? options.map((g) => g.hint)
-          : undefined,
-        correctAnswer: options.findIndex((g) => g.id === correctId),
-        explain: entity.explain?.[facet.id],
-      })
+  return picked.map(({ entity, facet }) => {
+    const rand = mulberry32(hashString(`${seed}:${entity.id}:${facet.id}`))
+    const correctId = entity.answers[facet.id]
+    const options = sampleOptions(facet, correctId, optionCount, rand)
+    return {
+      question: facet.prompt.replace(/\{entity\}/g, entity.entity),
+      entity: entity.entity,
+      subtitle: entity.subtitle,
+      options: options.map((g) => g.label),
+      correctAnswer: options.findIndex((g) => g.id === correctId),
+      explain: entity.explain?.[facet.id],
     }
-  }
-  return questions
+  })
 }

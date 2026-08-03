@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import {
   FaArrowRight,
   FaQuestionCircle,
+  FaLayerGroup,
   FaCheck,
   FaPen,
   FaSave,
@@ -18,6 +19,7 @@ import {
 import { getColor } from '@/utils/colorMapper'
 import { getQuizIcon } from '@/utils/iconMapper'
 import { downloadLocalQuiz } from '@/utils/localQuizzes'
+import type { QuizType } from '@/types/quiz'
 
 type Hardness = 'easy' | 'medium' | 'hard'
 
@@ -38,6 +40,7 @@ interface SubjectCardProps {
     questions: number
     tags: string[]
     hardness?: Hardness
+    type?: QuizType
   }
   index: number
   onTagClick?: (tag: string) => void
@@ -186,8 +189,10 @@ export default function SubjectCard({ subject, index, onTagClick, completed, isL
 
         <div className="flex items-center justify-between mt-auto">
           <div className="flex items-center gap-2 text-xs text-stone-600 dark:text-stone-400 sm:text-sm">
-            <FaQuestionCircle />
-            <span>{subject.questions} questions</span>
+            {subject.type === 'classify' ? <FaLayerGroup /> : <FaQuestionCircle />}
+            <span>
+              {subject.questions} {subject.type === 'classify' ? 'to classify' : 'questions'}
+            </span>
             <span className="flex items-center gap-0.5" title={{ easy: 'Fácil', medium: 'Médio', hard: 'Difícil' }[subject.hardness ?? 'easy']}>
               {[1, 2, 3].map((i) => (
                 <span

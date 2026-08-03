@@ -1,7 +1,7 @@
 {
   "id": "dino-classification",
   "name": "Dinosaur Classification",
-  "description": "Place each dinosaur in its correct order and family.",
+  "description": "Place each dinosaur in its correct order, suborder and family.",
   "icon": "dinosaur",
   "color": "green",
   "category": "sciences",
@@ -11,13 +11,8 @@
     "dinosaurs",
     "taxonomy"
   ],
-  "hardness": "medium",
+  "hardness": "hard",
   "type": "classify",
-  "config": {
-    "mode": "sequential",
-    "optionCount": 4,
-    "shuffleEntities": true
-  },
   "facets": [
     {
       "id": "order",
@@ -26,23 +21,38 @@
       "groups": [
         {
           "id": "saurischia",
-          "label": "Saurischia",
-          "hint": "Lizard-hipped"
+          "label": "Saurischia"
         },
         {
           "id": "ornithischia",
-          "label": "Ornithischia",
-          "hint": "Bird-hipped"
+          "label": "Ornithischia"
+        }
+      ]
+    },
+    {
+      "id": "suborder",
+      "label": "Suborder",
+      "prompt": "Which suborder does {entity} belong to?",
+      "groups": [
+        {
+          "id": "theropoda",
+          "label": "Theropoda"
         },
         {
-          "id": "pterosauria",
-          "label": "Pterosauria",
-          "hint": "Not a dinosaur"
+          "id": "sauropodomorpha",
+          "label": "Sauropodomorpha"
         },
         {
-          "id": "plesiosauria",
-          "label": "Plesiosauria",
-          "hint": "Marine reptiles"
+          "id": "thyreophora",
+          "label": "Thyreophora"
+        },
+        {
+          "id": "marginocephalia",
+          "label": "Marginocephalia"
+        },
+        {
+          "id": "ornithopoda",
+          "label": "Ornithopoda"
         }
       ]
     },
@@ -66,6 +76,22 @@
         {
           "id": "spinosauridae",
           "label": "Spinosauridae"
+        },
+        {
+          "id": "allosauridae",
+          "label": "Allosauridae"
+        },
+        {
+          "id": "compsognathidae",
+          "label": "Compsognathidae"
+        },
+        {
+          "id": "therizinosauridae",
+          "label": "Therizinosauridae"
+        },
+        {
+          "id": "titanosauridae",
+          "label": "Titanosauridae"
         },
         {
           "id": "ceratopsidae",
@@ -93,37 +119,28 @@
       "subtitle": "Late Cretaceous, North America",
       "answers": {
         "order": "saurischia",
+        "suborder": "theropoda",
         "family": "tyrannosauridae"
       },
       "explain": {
         "order": "Saurischia ('lizard-hipped') includes all theropods.",
+        "suborder": "Bipedal, hollow-boned carnivore: a classic theropod.",
         "family": "Tyrannosaurids are large theropods with two-fingered forelimbs."
       }
     },
     {
-      "id": "velociraptor",
-      "entity": "Velociraptor",
-      "subtitle": "Late Cretaceous, Mongolia",
-      "answers": {
-        "order": "saurischia",
-        "family": "dromaeosauridae"
-      },
-      "explain": {
-        "order": "Velociraptor is a theropod, so it falls under Saurischia.",
-        "family": "Dromaeosaurids are small, feathered raptors with a sickle claw."
-      }
-    },
-    {
-      "id": "diplodocus",
-      "entity": "Diplodocus",
+      "id": "allosaurus",
+      "entity": "Allosaurus",
       "subtitle": "Late Jurassic, North America",
       "answers": {
         "order": "saurischia",
-        "family": "diplodocidae"
+        "suborder": "theropoda",
+        "family": "allosauridae"
       },
       "explain": {
-        "order": "Sauropods like Diplodocus are lizard-hipped despite being herbivores.",
-        "family": "Diplodocids are long-necked sauropods with whip-like tails."
+        "order": "A predatory theropod, therefore lizard-hipped.",
+        "suborder": "Theropoda covers the bipedal carnivorous dinosaurs.",
+        "family": "Allosaurids are large Jurassic hunters with paired brow horns and three-fingered hands."
       }
     },
     {
@@ -132,11 +149,118 @@
       "subtitle": "Mid Cretaceous, North Africa",
       "answers": {
         "order": "saurischia",
+        "suborder": "theropoda",
         "family": "spinosauridae"
       },
       "explain": {
         "order": "Spinosaurus is a theropod and therefore saurischian.",
+        "suborder": "Despite the aquatic habits, its skeleton is fully theropod.",
         "family": "Spinosaurids are semi-aquatic, sail-backed fish-eaters with crocodile-like snouts."
+      }
+    },
+    {
+      "id": "oxalaia",
+      "entity": "Oxalaia",
+      "subtitle": "Late Cretaceous, Brazil (Maranhão)",
+      "answers": {
+        "order": "saurischia",
+        "suborder": "theropoda",
+        "family": "spinosauridae"
+      },
+      "explain": {
+        "order": "Another lizard-hipped predator.",
+        "suborder": "Known mostly from snout fragments, but clearly theropod.",
+        "family": "Brazil's largest known theropod, a spinosaurid close to Spinosaurus; some researchers even treat it as the same animal."
+      }
+    },
+    {
+      "id": "velociraptor",
+      "entity": "Velociraptor",
+      "subtitle": "Late Cretaceous, Mongolia",
+      "answers": {
+        "order": "saurischia",
+        "suborder": "theropoda",
+        "family": "dromaeosauridae"
+      },
+      "explain": {
+        "order": "Velociraptor is a theropod, so it falls under Saurischia.",
+        "suborder": "Feathered coelurosaur inside Theropoda.",
+        "family": "Dromaeosaurids are small, feathered raptors with a sickle claw."
+      }
+    },
+    {
+      "id": "utahraptor",
+      "entity": "Utahraptor",
+      "subtitle": "Early Cretaceous, North America",
+      "answers": {
+        "order": "saurischia",
+        "suborder": "theropoda",
+        "family": "dromaeosauridae"
+      },
+      "explain": {
+        "order": "Raptors are saurischian.",
+        "suborder": "A theropod, like every other raptor.",
+        "family": "The largest well-known dromaeosaurid: same sickle claw as Velociraptor, but roughly seven metres long."
+      }
+    },
+    {
+      "id": "compsognathus",
+      "entity": "Compsognathus",
+      "subtitle": "Late Jurassic, Europe",
+      "answers": {
+        "order": "saurischia",
+        "suborder": "theropoda",
+        "family": "compsognathidae"
+      },
+      "explain": {
+        "order": "Small size does not change the hip: it is saurischian.",
+        "suborder": "A tiny but unmistakable theropod.",
+        "family": "Compsognathids are chicken-to-turkey-sized coelurosaurs with long tails and slender limbs."
+      }
+    },
+    {
+      "id": "therizinosaurus",
+      "entity": "Therizinosaurus",
+      "subtitle": "Late Cretaceous, Mongolia",
+      "answers": {
+        "order": "saurischia",
+        "suborder": "theropoda",
+        "family": "therizinosauridae"
+      },
+      "explain": {
+        "order": "Saurischian, even though it had a backwards-pointing pubis convergent with ornithischians.",
+        "suborder": "A theropod that went herbivorous: the clade is defined by ancestry, not diet.",
+        "family": "Therizinosaurids are pot-bellied, feathered plant-eaters with the longest claws of any known animal."
+      }
+    },
+    {
+      "id": "diplodocus",
+      "entity": "Diplodocus",
+      "subtitle": "Late Jurassic, North America",
+      "answers": {
+        "order": "saurischia",
+        "suborder": "sauropodomorpha",
+        "family": "diplodocidae"
+      },
+      "explain": {
+        "order": "Sauropods like Diplodocus are lizard-hipped despite being herbivores.",
+        "suborder": "Sauropodomorpha groups the long-necked quadrupedal herbivores.",
+        "family": "Diplodocids are long-necked sauropods with whip-like tails."
+      }
+    },
+    {
+      "id": "argentinosaurus",
+      "entity": "Argentinosaurus",
+      "subtitle": "Late Cretaceous, Argentina",
+      "answers": {
+        "order": "saurischia",
+        "suborder": "sauropodomorpha",
+        "family": "titanosauridae"
+      },
+      "explain": {
+        "order": "Sauropods sit inside Saurischia.",
+        "suborder": "One of the heaviest sauropodomorphs ever found.",
+        "family": "A titanosaur: wide-gauge stance, sometimes armoured skin. Its exact family placement is still debated from fragmentary remains."
       }
     },
     {
@@ -145,10 +269,12 @@
       "subtitle": "Late Cretaceous, North America",
       "answers": {
         "order": "ornithischia",
+        "suborder": "marginocephalia",
         "family": "ceratopsidae"
       },
       "explain": {
         "order": "Triceratops is bird-hipped, like all horned dinosaurs.",
+        "suborder": "Marginocephalia means 'fringed heads': frills and thick skull margins.",
         "family": "Ceratopsids are horned dinosaurs with large neck frills."
       }
     },
@@ -158,24 +284,13 @@
       "subtitle": "Late Jurassic, North America",
       "answers": {
         "order": "ornithischia",
+        "suborder": "thyreophora",
         "family": "stegosauridae"
       },
       "explain": {
         "order": "Plated, plant-eating, and bird-hipped.",
+        "suborder": "Thyreophora ('shield bearers') covers plated and armoured dinosaurs.",
         "family": "Stegosaurids carry back plates and defensive tail spikes."
-      }
-    },
-    {
-      "id": "parasaurolophus",
-      "entity": "Parasaurolophus",
-      "subtitle": "Late Cretaceous, North America",
-      "answers": {
-        "order": "ornithischia",
-        "family": "hadrosauridae"
-      },
-      "explain": {
-        "order": "Duck-billed dinosaurs belong to the bird-hipped Ornithischia.",
-        "family": "Hadrosaurids are duck-billed herbivores; Parasaurolophus has a hollow head crest."
       }
     },
     {
@@ -184,33 +299,28 @@
       "subtitle": "Late Cretaceous, North America",
       "answers": {
         "order": "ornithischia",
+        "suborder": "thyreophora",
         "family": "ankylosauridae"
       },
       "explain": {
         "order": "Armored dinosaurs are bird-hipped ornithischians.",
+        "suborder": "Body armour places it with the shield bearers, alongside Stegosaurus.",
         "family": "Ankylosaurids are armored tanks with a bony tail club."
       }
     },
     {
-      "id": "pteranodon",
-      "entity": "Pteranodon",
+      "id": "parasaurolophus",
+      "entity": "Parasaurolophus",
       "subtitle": "Late Cretaceous, North America",
       "answers": {
-        "order": "pterosauria"
+        "order": "ornithischia",
+        "suborder": "ornithopoda",
+        "family": "hadrosauridae"
       },
       "explain": {
-        "order": "Pteranodon is a flying reptile, not a dinosaur — it belongs to Pterosauria."
-      }
-    },
-    {
-      "id": "elasmosaurus",
-      "entity": "Elasmosaurus",
-      "subtitle": "Late Cretaceous, North America",
-      "answers": {
-        "order": "plesiosauria"
-      },
-      "explain": {
-        "order": "Elasmosaurus is a long-necked marine reptile of Plesiosauria, not a dinosaur."
+        "order": "Duck-billed dinosaurs belong to the bird-hipped Ornithischia.",
+        "suborder": "Ornithopods are unarmoured herbivores that could walk on two or four legs.",
+        "family": "Hadrosaurids are duck-billed herbivores; Parasaurolophus has a hollow head crest."
       }
     }
   ]

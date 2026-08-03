@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { ClassifyFacet, ClassifyQuizData } from '@/types/quiz'
+import { CLASSIFY_QUESTIONS_PER_RUN, ClassifyFacet, ClassifyQuizData } from '@/types/quiz'
 import { generateClassifyQuestions, mulberry32, sampleOptions } from './generate'
 import { validateClassifyQuiz } from './validate'
 
@@ -8,8 +8,8 @@ const orderFacet: ClassifyFacet = {
   label: 'Order',
   prompt: 'Which order does {entity} belong to?',
   groups: [
-    { id: 'saurischia', label: 'Saurischia', hint: 'Lizard-hipped' },
-    { id: 'ornithischia', label: 'Ornithischia', hint: 'Bird-hipped' },
+    { id: 'saurischia', label: 'Saurischia' },
+    { id: 'ornithischia', label: 'Ornithischia' },
     { id: 'pterosauria', label: 'Pterosauria' },
     { id: 'plesiosauria', label: 'Plesiosauria' },
   ],
@@ -32,7 +32,6 @@ const familyFacet: ClassifyFacet = {
 
 const quiz: ClassifyQuizData = {
   id: 'test-quiz',
-  config: { mode: 'sequential', optionCount: 4, shuffleEntities: true },
   facets: [orderFacet, familyFacet],
   entities: [
     {
@@ -128,48 +127,36 @@ describe('generateClassifyQuestions', () => {
     }
   })
 
-  it('sequential mode emits one question per answered facet, in facet order', () => {
+  it('emits every (entity, facet) pair when the pool is smaller than the cap', () => {
     const questions = generateClassifyQuestions(quiz, 42)
     expect(questions).toHaveLength(5)
-    const trexQuestions = questions.filter((q) => q.entity === 'Tyrannosaurus rex')
-    expect(trexQuestions.map((q) => q.question)).toEqual([
-      'Which order does Tyrannosaurus rex belong to?',
-      'Which family does Tyrannosaurus rex belong to?',
-    ])
-    const first = questions.findIndex((q) => q.entity === 'Tyrannosaurus rex')
-    expect(questions[first + 1].entity).toBe('Tyrannosaurus rex')
+    const trexQuestions = questions
+      .filter((q) => q.entity === 'Tyrannosaurus rex')
+      .map((q) => q.question)
+    expect(trexQuestions).toHaveLength(2)
+    expect(trexQuestions).toContain('Which order does Tyrannosaurus rex belong to?')
+    expect(trexQuestions).toContain('Which family does Tyrannosaurus rex belong to?')
   })
 
-  it('single mode emits exactly one question per entity', () => {
-    const singleQuiz: ClassifyQuizData = {
+  it('caps a large pool at CLASSIFY_QUESTIONS_PER_RUN questions', () => {
+    const bigQuiz: ClassifyQuizData = {
       ...quiz,
-      config: { ...quiz.config, mode: 'single' },
+      entities: Array.from({ length: 30 }, (_, i) => ({
+        id: `e${i}`,
+        entity: `Entity ${i}`,
+        answers: { order: 'saurischia' },
+      })),
     }
-    const questions = generateClassifyQuestions(singleQuiz, 42)
-    expect(questions).toHaveLength(3)
+    expect(generateClassifyQuestions(bigQuiz, 42)).toHaveLength(CLASSIFY_QUESTIONS_PER_RUN)
   })
 
-  it('keeps entity order when shuffleEntities is false', () => {
-    const stableQuiz: ClassifyQuizData = {
-      ...quiz,
-      config: { mode: 'single', shuffleEntities: false },
-    }
-    const questions = generateClassifyQuestions(stableQuiz, 42)
-    expect(questions.map((q) => q.entity)).toEqual([
-      'Tyrannosaurus rex',
-      'Stegosaurus',
-      'Triceratops',
-    ])
-  })
-
-  it('carries subtitle, hints, and explain through to the question', () => {
+  it('carries subtitle and explain through to the question', () => {
     const questions = generateClassifyQuestions(quiz, 42)
     const trexOrder = questions.find(
       (q) => q.entity === 'Tyrannosaurus rex' && q.question.includes('order')
     )!
     expect(trexOrder.subtitle).toBe('Late Cretaceous')
     expect(trexOrder.explain).toBe('Theropod.')
-    expect(trexOrder.optionHints).toHaveLength(trexOrder.options.length)
   })
 })
 

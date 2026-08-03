@@ -207,7 +207,7 @@ export default function AiPage() {
     if (!quiz || quiz.type !== 'classify') return null
     try {
       const questions = generateClassifyQuestions(
-        { id: quiz.id, config: quiz.config, facets: quiz.facets ?? [], entities: quiz.entities ?? [] },
+        { id: quiz.id, facets: quiz.facets ?? [], entities: quiz.entities ?? [] },
         12345
       )
       return { questions, error: null as string | null }

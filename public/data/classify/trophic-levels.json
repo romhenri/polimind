@@ -13,11 +13,6 @@
   ],
   "hardness": "easy",
   "type": "classify",
-  "config": {
-    "mode": "sequential",
-    "optionCount": 4,
-    "shuffleEntities": true
-  },
   "facets": [
     {
       "id": "trophic-role",
@@ -26,23 +21,19 @@
       "groups": [
         {
           "id": "producer",
-          "label": "Producer",
-          "hint": "Makes own food"
+          "label": "Producer"
         },
         {
           "id": "primary-consumer",
-          "label": "Primary Consumer",
-          "hint": "Eats plants"
+          "label": "Primary Consumer"
         },
         {
           "id": "secondary-consumer",
-          "label": "Secondary Consumer",
-          "hint": "Eats animals"
+          "label": "Secondary Consumer"
         },
         {
           "id": "decomposer",
-          "label": "Decomposer",
-          "hint": "Breaks down dead matter"
+          "label": "Decomposer"
         }
       ]
     },
@@ -53,23 +44,19 @@
       "groups": [
         {
           "id": "sunlight",
-          "label": "Sunlight",
-          "hint": "Photosynthesis"
+          "label": "Sunlight"
         },
         {
           "id": "plants",
-          "label": "Plants",
-          "hint": "Primary food source"
+          "label": "Plants"
         },
         {
           "id": "animals",
-          "label": "Animals",
-          "hint": "Secondary food source"
+          "label": "Animals"
         },
         {
           "id": "detritus",
-          "label": "Detritus",
-          "hint": "Dead organic matter"
+          "label": "Detritus"
         }
       ]
     }

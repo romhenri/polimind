@@ -158,12 +158,6 @@ export default function ClassifyEditor({
                       placeholder="Group label"
                       className={fieldClass}
                     />
-                    <input
-                      value={group.hint ?? ''}
-                      onChange={(e) => updateGroup(fi, gi, { hint: e.target.value || undefined })}
-                      placeholder="Hint (optional)"
-                      className={`${fieldClass} max-w-[40%]`}
-                    />
                     <button
                       type="button"
                       onClick={() => removeGroup(fi, gi)}

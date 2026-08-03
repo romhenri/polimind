@@ -19,6 +19,7 @@ describe.each(['dino-classification', 'ml-learning-paradigms'])('%s', (slug) => 
   it('generates well-formed questions', () => {
     const questions = generateClassifyQuestions(loadSeed(slug), 42)
     expect(questions.length).toBeGreaterThan(0)
+    expect(questions.length).toBeLessThanOrEqual(10)
     for (const q of questions) {
       expect(q.options.length).toBeGreaterThanOrEqual(2)
       expect(new Set(q.options).size).toBe(q.options.length)

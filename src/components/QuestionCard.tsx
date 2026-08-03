@@ -289,7 +289,6 @@ export default function QuestionCard({
           {quizType === 'classify' && 'entity' in question && question.options && (
             <div className="flex flex-col gap-2 md:gap-4">
               {question.options.map((option, index) => {
-                const hint = question.optionHints?.[index]
                 return (
                   <button
                     key={index}
@@ -310,11 +309,6 @@ export default function QuestionCard({
                         <span className="text-sm text-stone-800 dark:text-stone-200 sm:text-base">
                           <MathText mathEnabled={mathEnabled}>{option}</MathText>
                         </span>
-                        {hint && (
-                          <span className="text-xs text-stone-500 dark:text-stone-400">
-                            {hint}
-                          </span>
-                        )}
                       </span>
                     </span>
                   </button>
