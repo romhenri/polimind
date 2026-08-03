@@ -1,0 +1,128 @@
+{
+  "id": "heaps",
+  "name": "Heaps",
+  "description": "Test your knowledge of heap properties, priority queues, and heap-based algorithms.",
+  "icon": "binary_tree",
+  "color": "emerald",
+  "category": "computer_science",
+  "subcategory": "Algorithms & Data Structures",
+  "tags": [
+    "binary heaps",
+    "priority queues",
+    "sorting"
+  ],
+  "hardness": "medium",
+  "type": "options",
+  "questions": [
+    {
+      "question": "In a max-heap, where is the maximum element located?",
+      "options": [
+        "At the leftmost leaf",
+        "At the root node",
+        "At the rightmost leaf",
+        "At the middle level"
+      ],
+      "correctAnswer": 1,
+      "explain": "By definition, the root of a max-heap contains the largest element in the heap."
+    },
+    {
+      "question": "What is the time complexity of inserting a new element into a binary heap of size n?",
+      "options": [
+        "O(1)",
+        "O(n)",
+        "O(log n)",
+        "O(n log n)"
+      ],
+      "correctAnswer": 2,
+      "explain": "Inserting into a heap requires bubbling up the element, which takes logarithmic time relative to the heap size."
+    },
+    {
+      "question": "Which data structure is most commonly implemented using a binary heap?",
+      "options": [
+        "Hash Table",
+        "Priority Queue",
+        "Linked List",
+        "Binary Search Tree"
+      ],
+      "correctAnswer": 1,
+      "explain": "Heaps are the standard underlying structure for efficient priority queue implementations."
+    },
+    {
+      "question": "What is the time complexity of the 'heapify' operation on an array of size n?",
+      "options": [
+        "O(n)",
+        "O(log n)",
+        "O(n log n)",
+        "O(1)"
+      ],
+      "correctAnswer": 0,
+      "explain": "Building a heap from an existing array using the bottom-up heapify method takes linear time."
+    },
+    {
+      "question": "In a complete binary tree representation of a heap, if a node is at index i, what is the index of its left child?",
+      "options": [
+        "i + 1",
+        "2i + 1",
+        "2i + 2",
+        "i / 2"
+      ],
+      "correctAnswer": 1,
+      "explain": "In a zero-indexed array representation, the left child of index i is located at 2i + 1."
+    },
+    {
+      "question": "Which of these is a valid property of a min-heap?",
+      "options": [
+        "The root is the largest element",
+        "Every parent is smaller than its children",
+        "The tree must be a complete binary tree",
+        "The children must be larger than the parent"
+      ],
+      "correctAnswer": 1,
+      "explain": "In a min-heap, the value of each node is less than or equal to the values of its children."
+    },
+    {
+      "question": "What is the time complexity of removing the root element from a heap?",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n log n)"
+      ],
+      "correctAnswer": 1,
+      "explain": "Removing the root requires replacing it with the last element and performing a 'ift-down' operation."
+    },
+    {
+      "question": "How many elements are at the deepest level of a perfect binary heap of height h?",
+      "options": [
+        "2^h",
+        "2^(h-1)",
+        "h^2",
+        "log(n)"
+      ],
+      "correctAnswer": 0,
+      "explain": "A perfect binary tree of height h has 2^h nodes at its leaf level."
+    },
+    {
+      "question": "Which algorithm uses a heap to sort an array in O(n log n) time?",
+      "options": [
+        "Merge Sort",
+        "Quick Sort",
+        "Heap Sort",
+        "Bubble Sort"
+      ],
+      "correctAnswer": 2,
+      "explain": "Heap Sort utilizes the properties of a heap to repeatedly extract the maximum element."
+    },
+    {
+      "question": "What happens to the height of a heap when its size is doubled?",
+      "options": [
+        "It stays the same",
+        "It doubles",
+        "It increases by 1",
+        "It increases by 2"
+      ],
+      "correctAnswer": 2,
+      "explain": "Since a heap is a complete binary tree, its height grows logarithmically with its size."
+    }
+  ]
+}
