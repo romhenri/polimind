@@ -1,0 +1,69 @@
+{
+  "id": "tree-data-structures",
+  "name": "Tree Data Structures",
+  "description": "Master the hierarchical structures and traversal methods essential for efficient data organization and retrieval.",
+  "color": "cyan",
+  "category": "computer_science",
+  "subcategory": "Algorithms & Data Structures",
+  "terms": [
+    {
+      "groupName": "Tree Fundamentals",
+      "group": [
+        {
+          "term": "Root",
+          "definition": "The topmost node in a tree structure from which all other nodes descend."
+        },
+        {
+          "term": "Leaf",
+          "definition": "A node in a tree that does not have any child nodes."
+        },
+        {
+          "term": "Height",
+          "definition": "The number of edges on the longest path from a specific node to a leaf."
+        },
+        {
+          "term": "Depth",
+          "definition": "The number of edges from the root node to a specific node."
+        }
+      ]
+    },
+    {
+      "groupName": "Specialized Trees",
+      "group": [
+        {
+          "term": "Binary Tree",
+          "definition": "A tree data structure in which each node has at most two children, typically referred to as the left and right child."
+        },
+        {
+          "term": "Binary Search Tree",
+          "definition": "A binary tree where the left subtree contains values less than the parent and the right subtree contains values greater."
+        },
+        {
+          "term": "AVL Tree",
+          "definition": "A self-balancing binary search tree where the difference in heights of two child subtrees is at most one."
+        },
+        {
+          "term": "B-Tree",
+          "definition": "A self-balancing search tree that allows for nodes to have more than two children, optimized for systems with large blocks of data."
+        }
+      ]
+    },
+    {
+      "groupName": "Traversal Methods",
+      "group": [
+        {
+          "term": "In-order Traversal",
+          "definition": "A method of visiting nodes where the left subtree is visited first, then the root, and finally the right subtree."
+        },
+        {
+          "term": "Pre-order Traversal",
+          "definition": "A traversal method where the root node is visited before its child subtrees."
+        },
+        {
+          "term": "Post-order Traversal",
+          "definition": "A traversal method where the root node is visited after its left and right subtrees have been processed."
+        }
+      ]
+    }
+  ]
+}
