@@ -20,6 +20,7 @@ const ICON_BY_ID: Record<string, IconType> = {
   'machine-learning': FaBrain,
   'ml-metrics': FaChartLine,
   algorithms: TbBinaryTree,
+  'tree-data-structures': TbBinaryTree,
   'data-structures-list': FaLayerGroup,
   networks: FaNetworkWired,
   biology: FaDna,

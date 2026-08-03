@@ -49,6 +49,7 @@ import {
   TbMathIntegral,
   TbMath,
   TbChartDots,
+  TbColumns3,
 } from 'react-icons/tb'
 import {
   SiCss3,
@@ -75,6 +76,7 @@ const ICON_BY_NAME: Record<string, IconType> = {
   memory: FaMemory,
   location: FaLocationDot,
   binary_tree: TbBinaryTree,
+  array: TbColumns3,
   swap: FaRightLeft,
   layers: FaLayerGroup,
   bolt: FaBolt,

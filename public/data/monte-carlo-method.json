@@ -2,6 +2,7 @@
   "id": "monte-carlo-method",
   "name": "Monte Carlo Method Overview",
   "description": "Explore the fundamentals and applications of Monte Carlo techniques in computational science.",
+  "icon": "chart_dots",
   "color": "teal",
   "category": "computer_science",
   "subcategory": "AI & Machine Learning",

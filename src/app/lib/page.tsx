@@ -3,12 +3,13 @@
 import { useState, useEffect, useMemo } from 'react'
 import GlossaryCard from '@/components/GlossaryCard'
 import { loadGlossaries } from '@/utils/loadGlossaries'
-import { getLocalGlossaryMetas } from '@/utils/localGlossaries'
+import { getLocalGlossaryMetas, deleteLocalGlossary } from '@/utils/localGlossaries'
 import { CATEGORIES, getCategoryById, getCategoryLabel } from '@/data/categories'
 import type { GlossaryMeta } from '@/types/glossary'
 
 export default function LibPage() {
   const [glossaries, setGlossaries] = useState<GlossaryMeta[]>([])
+  const [localIds, setLocalIds] = useState<Set<string>>(new Set())
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState<string>(CATEGORIES[0].id)
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>('')
@@ -17,9 +18,10 @@ export default function LibPage() {
     const load = async () => {
       const remote = await loadGlossaries()
       const local = getLocalGlossaryMetas()
-      const localIds = new Set(local.map((g) => g.id))
-      const data = [...remote.filter((g) => !localIds.has(g.id)), ...local]
+      const ids = new Set(local.map((g) => g.id))
+      const data = [...remote.filter((g) => !ids.has(g.id)), ...local]
       setGlossaries(data)
+      setLocalIds(ids)
       const firstPresent = CATEGORIES.map((c) => c.id).find((id) =>
         data.some((g) => g.category === id)
       )
@@ -61,6 +63,16 @@ export default function LibPage() {
 
   const handleSelectCategory = (category: string) => {
     setSelectedCategory(category)
+  }
+
+  const handleDeleteLocal = (id: string) => {
+    deleteLocalGlossary(id)
+    setGlossaries((prev) => prev.filter((g) => g.id !== id))
+    setLocalIds((prev) => {
+      const next = new Set(prev)
+      next.delete(id)
+      return next
+    })
   }
 
   return (
@@ -128,7 +140,15 @@ export default function LibPage() {
       ) : (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {filtered.map((glossary, index) => (
-            <GlossaryCard key={glossary.id} glossary={glossary} index={index} />
+            <GlossaryCard
+              key={glossary.id}
+              glossary={glossary}
+              index={index}
+              isLocal={localIds.has(glossary.id)}
+              onDeleteLocal={
+                localIds.has(glossary.id) ? () => handleDeleteLocal(glossary.id) : undefined
+              }
+            />
           ))}
         </div>
       )}

@@ -6,6 +6,7 @@ import { QuizMetadata } from '@/types/quiz'
 import { AVAILABLE_COLORS, getColor } from '@/utils/colorMapper'
 import { slugify } from '@/utils/aiQuiz'
 import { CATEGORIES, getCategoryById } from '@/data/categories'
+import { getGlossaryIcon } from '@/utils/glossaryIcons'
 import IconPicker from '@/components/IconPicker'
 
 const COLOR_KEYS = Object.keys(AVAILABLE_COLORS)
@@ -124,7 +125,12 @@ export default function MetaEditor({ quiz, onSave, onCancel, variant = 'quiz' }:
         </div>
         <div>
           <label className={labelClass}>Icon</label>
-          <IconPicker value={icon} onChange={setIcon} color={getColor(color)} />
+          <IconPicker
+            value={icon}
+            onChange={setIcon}
+            color={getColor(color)}
+            fallbackIcon={isGlossary ? getGlossaryIcon(id, category) : undefined}
+          />
         </div>
         <div>
           <label className={labelClass}>Color</label>

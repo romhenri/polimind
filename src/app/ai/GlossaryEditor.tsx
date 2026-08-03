@@ -1,6 +1,7 @@
 'use client'
 
-import { FaPlus, FaTrash, FaSyncAlt, FaSpinner } from 'react-icons/fa'
+import { useState } from 'react'
+import { FaPlus, FaTrash, FaSyncAlt, FaSpinner, FaMagic } from 'react-icons/fa'
 import type { Glossary, GlossaryGroup } from '@/types/glossary'
 
 interface GlossaryEditorProps {
@@ -8,6 +9,7 @@ interface GlossaryEditorProps {
   onChange: (glossary: Glossary) => void
   onRegenerateAll?: () => void
   regenerating?: boolean
+  onAskTerm?: (groupIndex: number, request: string) => Promise<void>
 }
 
 const fieldClass =
@@ -18,7 +20,28 @@ export default function GlossaryEditor({
   onChange,
   onRegenerateAll,
   regenerating,
+  onAskTerm,
 }: GlossaryEditorProps) {
+  const [askOpen, setAskOpen] = useState<number | null>(null)
+  const [askText, setAskText] = useState('')
+  const [askingGi, setAskingGi] = useState<number | null>(null)
+  const [askError, setAskError] = useState<string | null>(null)
+
+  const submitAsk = async (gi: number) => {
+    if (!onAskTerm || !askText.trim()) return
+    setAskingGi(gi)
+    setAskError(null)
+    try {
+      await onAskTerm(gi, askText.trim())
+      setAskText('')
+      setAskOpen(null)
+    } catch (err) {
+      setAskError(err instanceof Error ? err.message : 'Could not generate the term.')
+    } finally {
+      setAskingGi(null)
+    }
+  }
+
   const setGroups = (groups: GlossaryGroup[]) => onChange({ ...glossary, groups })
 
   const updateGroup = (gi: number, patch: Partial<GlossaryGroup>) =>
@@ -109,13 +132,58 @@ export default function GlossaryEditor({
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={() => addTerm(gi)}
-            className="inline-flex items-center gap-1.5 mt-3 text-xs font-semibold text-plum-700 dark:text-plum-300 hover:underline"
-          >
-            <FaPlus /> Add term
-          </button>
+          <div className="flex items-center gap-4 mt-3">
+            <button
+              type="button"
+              onClick={() => addTerm(gi)}
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-plum-700 dark:text-plum-300 hover:underline"
+            >
+              <FaPlus /> Add term
+            </button>
+            {onAskTerm && (
+              <button
+                type="button"
+                onClick={() => {
+                  setAskOpen((cur) => (cur === gi ? null : gi))
+                  setAskText('')
+                  setAskError(null)
+                }}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-plum-700 dark:text-plum-300 hover:underline"
+              >
+                <FaMagic /> Ask for
+              </button>
+            )}
+          </div>
+
+          {onAskTerm && askOpen === gi && (
+            <div className="mt-2">
+              <div className="flex items-center gap-2">
+                <input
+                  value={askText}
+                  onChange={(e) => setAskText(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault()
+                      submitAsk(gi)
+                    }
+                  }}
+                  autoFocus
+                  disabled={askingGi === gi}
+                  placeholder="Describe the term to add…"
+                  className={fieldClass}
+                />
+                <button
+                  type="button"
+                  onClick={() => submitAsk(gi)}
+                  disabled={askingGi === gi || !askText.trim()}
+                  className="flex items-center justify-center flex-shrink-0 gap-1.5 px-3 py-2 text-sm font-semibold text-white transition-colors rounded-lg bg-plum-600 hover:bg-plum-700 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {askingGi === gi ? <FaSpinner className="animate-spin" /> : <FaMagic />}
+                </button>
+              </div>
+              {askError && <p className="mt-1 text-xs text-red-600">{askError}</p>}
+            </div>
+          )}
         </div>
       ))}
 

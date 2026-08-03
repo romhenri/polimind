@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
+import type { IconType } from 'react-icons'
 import { FaTimes, FaCheck } from 'react-icons/fa'
 import { ICON_NAMES, getQuizIcon } from '@/utils/iconMapper'
 
@@ -9,9 +10,10 @@ interface IconPickerProps {
   value: string
   onChange: (icon: string) => void
   color?: string
+  fallbackIcon?: IconType
 }
 
-export default function IconPicker({ value, onChange, color }: IconPickerProps) {
+export default function IconPicker({ value, onChange, color, fallbackIcon }: IconPickerProps) {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [mounted, setMounted] = useState(false)
@@ -33,7 +35,7 @@ export default function IconPicker({ value, onChange, color }: IconPickerProps) 
     return ICON_NAMES.filter((name) => name.includes(q))
   }, [query])
 
-  const Selected = getQuizIcon(value)
+  const Selected = value ? getQuizIcon(value) : (fallbackIcon ?? getQuizIcon(value))
 
   const handleSelect = (name: string) => {
     onChange(name)

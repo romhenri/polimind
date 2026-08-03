@@ -1,6 +1,6 @@
 import { QuizMetadata, OptionsQuestion, BoolQuestion, Question, QuizType } from '@/types/quiz'
 import type { ClassifyQuizData, ClassifyFacet, ClassifyEntity } from '@/types/quiz'
-import type { Glossary, GlossaryGroup } from '@/types/glossary'
+import type { Glossary, GlossaryGroup, GlossaryTerm } from '@/types/glossary'
 import { validateClassifyQuiz } from '@/utils/classify/validate'
 import { AVAILABLE_COLORS } from '@/utils/colorMapper'
 import { formatSubject } from '@/utils/formatSubject'
@@ -1017,6 +1017,41 @@ export async function generateGlossary(
     glossary: { ...result, category, ...(forcedSubcategory ? { subcategory: forcedSubcategory } : {}) },
     model,
   }
+}
+
+export async function generateGlossaryTerm(
+  settings: AiSettings,
+  glossaryName: string,
+  request: string,
+  existingTerms: string[]
+): Promise<GlossaryTerm> {
+  assertApiKey(settings)
+  const prompt = [
+    `You are adding a single term to the "${glossaryName}" glossary on "polimind", a learning platform.`,
+    `The user asked for: ${request}`,
+    existingTerms.length > 0 ? `Do NOT duplicate any of these existing terms: ${existingTerms.join(', ')}.` : '',
+    'Return a JSON object with "term" (the concept name) and "definition" (a clear, self-contained one to two sentence definition). Write in English. Output only the JSON object.',
+  ]
+    .filter(Boolean)
+    .join('\n')
+  const schema = {
+    type: 'object',
+    properties: { term: { type: 'string' }, definition: { type: 'string' } },
+    required: ['term', 'definition'],
+  }
+  const { result } = await withModelFallback(
+    settingsModels(settings),
+    providerName(settings.provider),
+    async (m) => {
+      const { parsed } = await callProvider(settings, m, prompt, schema)
+      const data = parsed as { term?: unknown; definition?: unknown }
+      const term = typeof data.term === 'string' ? data.term.trim() : ''
+      const definition = typeof data.definition === 'string' ? data.definition.trim() : ''
+      if (!term) throw new AiProviderError(`${providerName(settings.provider)} returned an invalid term.`, true)
+      return { result: { term, definition }, model: m }
+    }
+  )
+  return result
 }
 
 // ---------------------------------------------------------------------------

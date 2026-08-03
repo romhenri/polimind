@@ -2,6 +2,7 @@
   "id": "binary-tree",
   "name": "Binary Tree",
   "description": "Test your knowledge of tree structures, traversals, and properties.",
+  "icon": "binary_tree",
   "color": "emerald",
   "category": "computer_science",
   "subcategory": "Algorithms & Data Structures",
@@ -10,7 +11,7 @@
     "recursion",
     "data-structures"
   ],
-  "hardness": "medium",
+  "hardness": "easy",
   "type": "options",
   "questions": [
     {

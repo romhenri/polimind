@@ -17,17 +17,17 @@ import {
   FaInfoCircle,
   FaClipboardCheck,
   FaSave,
-  FaArrowRight,
 } from 'react-icons/fa'
 import { FaWandMagicSparkles, FaLayerGroup } from 'react-icons/fa6'
 import { QuizMetadata, Question, QuizListing } from '@/types/quiz'
 import type { Glossary } from '@/types/glossary'
-import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, buildQuizContext, parseQuizJson, generateGlossary, buildGlossaryCopyPrompt, generateClassify, buildClassifyCopyPrompt, regenerateClassifyEntity, fetchOpenRouterFreeModels } from '@/utils/aiQuiz'
+import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, buildQuizContext, parseQuizJson, generateGlossary, generateGlossaryTerm, buildGlossaryCopyPrompt, generateClassify, buildClassifyCopyPrompt, regenerateClassifyEntity, fetchOpenRouterFreeModels } from '@/utils/aiQuiz'
 import { generateClassifyQuestions } from '@/utils/classify/generate'
 import { CATEGORIES, getCategoryById } from '@/data/categories'
 import type { StreamCallbacks, AiProvider, AiSettings, GenType, OpenRouterModelOption } from '@/utils/aiQuiz'
 import { getLocalQuiz, getLocalQuizzes, saveLocalQuiz } from '@/utils/localQuizzes'
 import { saveLocalGlossary, glossaryToDataFile, getLocalGlossary } from '@/utils/localGlossaries'
+import { fetchGlossary } from '@/utils/loadGlossaries'
 import { loadFullQuizzes, toQuizListing } from '@/utils/loadQuizzes'
 import ShufflePracticeModal from '@/components/ShufflePracticeModal'
 import AiQuizRunner from './AiQuizRunner'
@@ -64,6 +64,7 @@ export default function AiPage() {
   const [usedModel, setUsedModel] = useState('')
   const [view, setView] = useState<'form' | 'quiz'>('form')
   const [activeTab, setActiveTab] = useState<'generate' | 'meta' | 'edit' | 'test'>('generate')
+  const [editMode, setEditMode] = useState(false)
   const [regeneratingIndices, setRegeneratingIndices] = useState<Set<number>>(new Set())
   const [regenErrors, setRegenErrors] = useState<Record<number, string>>({})
   const [regeneratingEntities, setRegeneratingEntities] = useState<Set<number>>(new Set())
@@ -82,20 +83,40 @@ export default function AiPage() {
   const abortRef = useRef<AbortController | null>(null)
 
   useEffect(() => {
-    const editId = new URLSearchParams(window.location.search).get('edit')
+    const params = new URLSearchParams(window.location.search)
+    const editId = params.get('edit')
     if (!editId) return
     const localGloss = getLocalGlossary(editId)
     if (localGloss) {
       setGlossary(localGloss)
       setUsedModel('')
-      setActiveTab('edit')
+      setEditMode(true)
+      setActiveTab('meta')
       return
+    }
+    if (params.get('type') === 'glossary') {
+      let cancelled = false
+      fetchGlossary(editId).then((g) => {
+        if (cancelled) return
+        if (g) {
+          setGlossary(g)
+          setUsedModel('')
+          setEditMode(true)
+          setActiveTab('meta')
+        } else {
+          setImportError(`Could not load glossary "${editId}" for editing.`)
+        }
+      })
+      return () => {
+        cancelled = true
+      }
     }
     const localQuiz = getLocalQuiz(editId)
     if (localQuiz) {
       setQuiz(localQuiz)
       setUsedModel('')
-      setActiveTab('edit')
+      setEditMode(true)
+      setActiveTab('meta')
       return
     }
     let cancelled = false
@@ -109,7 +130,8 @@ export default function AiPage() {
         if (cancelled) return
         setQuiz(imported)
         setUsedModel('')
-        setActiveTab('edit')
+        setEditMode(true)
+        setActiveTab('meta')
       } catch {
         if (!cancelled) setImportError(`Could not load quiz "${editId}" for editing.`)
       }
@@ -292,6 +314,17 @@ export default function AiPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleAskTerm = async (gi: number, request: string) => {
+    if (!glossary) return
+    const existing = glossary.groups.flatMap((g) => g.group.map((t) => t.term)).filter(Boolean)
+    const term = await generateGlossaryTerm(buildSettings(), glossary.name, request, existing)
+    setGlossary((prev) =>
+      prev
+        ? { ...prev, groups: prev.groups.map((g, i) => (i === gi ? { ...g, group: [...g.group, term] } : g)) }
+        : prev
+    )
   }
 
   const handleGenerateClassify = async () => {
@@ -533,11 +566,6 @@ export default function AiPage() {
     setTimeout(() => setSavedLocally(false), 2000)
   }
 
-  const handleOpenGlossary = () => {
-    if (!glossary) return
-    saveLocalGlossary(glossary)
-    window.location.assign(`/lib/${glossary.id}`)
-  }
 
   if (view === 'quiz' && quiz) {
     return <AiQuizRunner quiz={quiz} onExit={() => setView('form')} />
@@ -554,7 +582,8 @@ export default function AiPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-2 p-1 mb-6 border-2 rounded-xl border-plum-200 bg-plum-50/50 dark:border-plum-900/60 dark:bg-stone-900 sm:grid-cols-4">
+      <div className={`grid grid-cols-2 gap-2 p-1 mb-6 border-2 rounded-xl border-plum-200 bg-plum-50/50 dark:border-plum-900/60 dark:bg-stone-900 ${editMode ? '' : 'sm:grid-cols-4'}`}>
+        {!editMode && (
         <button
           type="button"
           onClick={() => setActiveTab('generate')}
@@ -566,6 +595,7 @@ export default function AiPage() {
         >
           <FaWandMagicSparkles /> 1. Generate
         </button>
+        )}
         <button
           type="button"
           onClick={() => (quiz || glossary) && setActiveTab('meta')}
@@ -576,7 +606,7 @@ export default function AiPage() {
               : 'text-plum-700 hover:bg-plum-100 dark:text-plum-300 dark:hover:bg-stone-800'
           }`}
         >
-          <FaSlidersH /> 2. Meta Edit
+          <FaSlidersH /> {editMode ? 'Meta Edit' : '2. Meta Edit'}
         </button>
         <button
           type="button"
@@ -588,8 +618,9 @@ export default function AiPage() {
               : 'text-plum-700 hover:bg-plum-100 dark:text-plum-300 dark:hover:bg-stone-800'
           }`}
         >
-          <FaPen /> 3. Edit
+          <FaPen /> {editMode ? 'Edit' : '3. Edit'}
         </button>
+        {!editMode && (
         <button
           type="button"
           onClick={() => quiz && setActiveTab('test')}
@@ -602,6 +633,7 @@ export default function AiPage() {
         >
           <FaClipboardCheck /> 4. Test
         </button>
+        )}
       </div>
 
       <div className={`p-6 bg-white border-2 rounded-xl border-plum-200 dark:bg-stone-900 dark:border-plum-900/60 ${activeTab === 'generate' ? '' : 'hidden'}`}>
@@ -1045,6 +1077,7 @@ export default function AiPage() {
             onChange={setGlossary}
             onRegenerateAll={handleGenerateGlossary}
             regenerating={loading}
+            onAskTerm={handleAskTerm}
           />
 
           <details className="mt-5 group">
@@ -1081,15 +1114,8 @@ export default function AiPage() {
             </button>
             <button
               type="button"
-              onClick={handleOpenGlossary}
-              className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-plum-600 rounded-lg hover:bg-plum-700 active:bg-plum-800"
-            >
-              <FaArrowRight /> Open glossary
-            </button>
-            <button
-              type="button"
               onClick={handleDownload}
-              className="flex items-center justify-center gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-plum-700 border-plum-500 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-400 dark:hover:bg-stone-800"
+              className="flex items-center justify-center flex-1 gap-2 px-6 py-3 font-semibold text-white transition-colors bg-plum-600 rounded-lg hover:bg-plum-700 active:bg-plum-800"
             >
               <FaDownload /> Download
             </button>

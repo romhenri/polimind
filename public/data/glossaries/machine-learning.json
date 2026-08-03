@@ -2,10 +2,10 @@
   "id": "machine-learning",
   "name": "Machine Learning",
   "description": "Core concepts behind models that learn patterns from data.",
+  "icon": "chart_dots",
+  "color": "lime",
   "category": "computer_science",
   "subcategory": "AI & Machine Learning",
-  "color": "lime",
-  "icon": "machine-learning",
   "terms": [
     {
       "groupName": "Data Concepts",

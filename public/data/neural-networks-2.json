@@ -1,9 +1,9 @@
 {
   "id": "neural-networks-2",
-  "icon": "microchip",
   "name": "Neural Networks 2",
   "description": "Test your understanding of key concepts in neural networks with this medium-difficulty multiple-choice quiz.",
-  "color": "blue",
+  "icon": "brain",
+  "color": "sky",
   "category": "computer_science",
   "subcategory": "AI & Machine Learning",
   "tags": [
