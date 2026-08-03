@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import GlossaryCard from '@/components/GlossaryCard'
 import { loadGlossaries } from '@/utils/loadGlossaries'
+import { getLocalGlossaryMetas } from '@/utils/localGlossaries'
 import { CATEGORIES, getCategoryById, getCategoryLabel } from '@/data/categories'
 import type { GlossaryMeta } from '@/types/glossary'
 
@@ -14,7 +15,10 @@ export default function LibPage() {
 
   useEffect(() => {
     const load = async () => {
-      const data = await loadGlossaries()
+      const remote = await loadGlossaries()
+      const local = getLocalGlossaryMetas()
+      const localIds = new Set(local.map((g) => g.id))
+      const data = [...remote.filter((g) => !localIds.has(g.id)), ...local]
       setGlossaries(data)
       const firstPresent = CATEGORIES.map((c) => c.id).find((id) =>
         data.some((g) => g.category === id)

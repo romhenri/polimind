@@ -1,4 +1,5 @@
 import type { Glossary, GlossaryGroup, GlossaryMeta } from '@/types/glossary'
+import { getLocalGlossary } from '@/utils/localGlossaries'
 
 function normalizeGroups(raw: unknown): GlossaryGroup[] {
   if (!Array.isArray(raw)) return []
@@ -37,7 +38,7 @@ function termCount(groups: GlossaryGroup[]): number {
 export async function fetchGlossary(slug: string): Promise<Glossary | null> {
   try {
     const response = await fetch(`/data/glossaries/${slug}.json`, { cache: 'no-store' })
-    if (!response.ok) return null
+    if (!response.ok) return getLocalGlossary(slug)
     const data = await response.json()
     return {
       id: data.id ?? slug,
@@ -50,7 +51,7 @@ export async function fetchGlossary(slug: string): Promise<Glossary | null> {
       groups: normalizeGroups(data.terms),
     }
   } catch {
-    return null
+    return getLocalGlossary(slug)
   }
 }
 
