@@ -2,20 +2,21 @@
 
 import { useState } from 'react'
 import { FaCheck, FaSyncAlt, FaSpinner, FaPenFancy, FaTimes, FaPen, FaPlus, FaTrash } from 'react-icons/fa'
-import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
+import { QuizMetadata, Question } from '@/types/quiz'
 
 interface QuestionListProps {
   quiz: QuizMetadata
   regeneratingIndices: Set<number>
   errors: Record<number, string>
   onRegenerate: (index: number, instructions?: string) => void
-  onUpdateQuestion: (index: number, question: OptionsQuestion) => void
+  onUpdateQuestion: (index: number, question: Question) => void
 }
 
 interface DraftQuestion {
   question: string
   options: string[]
   correctAnswer: number
+  result: boolean
   explain: string
 }
 
@@ -28,6 +29,7 @@ export default function QuestionList({
 }: QuestionListProps) {
   const [instructionDrafts, setInstructionDrafts] = useState<Record<number, string>>({})
   const [drafts, setDrafts] = useState<Record<number, DraftQuestion>>({})
+  const isBool = quiz.type === 'bool'
 
   const openInstructions = (index: number) =>
     setInstructionDrafts((prev) => ({ ...prev, [index]: '' }))
@@ -57,6 +59,7 @@ export default function QuestionList({
         question: q.question,
         options: options.length ? options : ['', '', '', ''],
         correctAnswer,
+        result: 'result' in q ? q.result : true,
         explain: q.explain ?? '',
       },
     }))
@@ -69,21 +72,27 @@ export default function QuestionList({
       return next
     })
 
-  const canSaveDraft = (draft: DraftQuestion) =>
-    draft.question.trim() !== '' &&
-    draft.options.length >= 2 &&
-    draft.options.every((o) => o.trim() !== '') &&
-    draft.correctAnswer >= 0 &&
-    draft.correctAnswer < draft.options.length
+  const canSaveDraft = (draft: DraftQuestion) => {
+    if (draft.question.trim() === '') return false
+    if (isBool) return true
+    return (
+      draft.options.length >= 2 &&
+      draft.options.every((o) => o.trim() !== '') &&
+      draft.correctAnswer >= 0 &&
+      draft.correctAnswer < draft.options.length
+    )
+  }
 
   const saveEdit = (index: number) => {
     const draft = drafts[index]
     if (!draft || !canSaveDraft(draft)) return
-    const next: OptionsQuestion = {
-      question: draft.question.trim(),
-      options: draft.options.map((o) => o.trim()),
-      correctAnswer: draft.correctAnswer,
-    }
+    const next: Question = isBool
+      ? { question: draft.question.trim(), result: draft.result }
+      : {
+          question: draft.question.trim(),
+          options: draft.options.map((o) => o.trim()),
+          correctAnswer: draft.correctAnswer,
+        }
     if (draft.explain.trim()) next.explain = draft.explain.trim()
     onUpdateQuestion(index, next)
     closeEdit(index)
@@ -143,47 +152,73 @@ export default function QuestionList({
                 className="w-full px-3 py-2 mb-3 text-sm border-2 rounded-lg resize-none border-plum-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-plum-900/60 dark:bg-stone-800 dark:text-white"
               />
 
-              <label className="block mb-1 text-xs font-semibold text-stone-500 dark:text-stone-400">
-                Options (select the correct one)
-              </label>
-              <div className="space-y-2">
-                {draft.options.map((option, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      name={`correct-${index}`}
-                      checked={draft.correctAnswer === i}
-                      onChange={() => updateDraft(index, { correctAnswer: i })}
-                      className="flex-shrink-0 w-4 h-4 accent-green-600"
-                      aria-label={`Mark option ${i + 1} as correct`}
-                    />
-                    <input
-                      type="text"
-                      value={option}
-                      onChange={(e) => setOption(index, i, e.target.value)}
-                      placeholder={`Option ${i + 1}`}
-                      className="flex-1 px-3 py-2 text-sm border-2 rounded-lg border-plum-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-plum-900/60 dark:bg-stone-800 dark:text-white"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeOption(index, i)}
-                      disabled={draft.options.length <= 2}
-                      className="flex-shrink-0 p-2 transition-colors rounded-lg text-stone-400 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-30"
-                      aria-label={`Remove option ${i + 1}`}
-                    >
-                      <FaTrash />
-                    </button>
+              {isBool ? (
+                <>
+                  <label className="block mb-1 text-xs font-semibold text-stone-500 dark:text-stone-400">
+                    Correct answer
+                  </label>
+                  <div className="flex gap-2">
+                    {[true, false].map((value) => (
+                      <button
+                        key={String(value)}
+                        type="button"
+                        onClick={() => updateDraft(index, { result: value })}
+                        className={`flex-1 px-3 py-2 text-sm font-semibold transition-colors border-2 rounded-lg ${
+                          draft.result === value
+                            ? 'border-green-500 bg-green-50 text-green-700 dark:border-green-500/60 dark:bg-green-950/30 dark:text-green-400'
+                            : 'border-stone-200 text-stone-600 hover:bg-stone-100 dark:border-stone-700 dark:text-stone-300 dark:hover:bg-stone-800'
+                        }`}
+                      >
+                        {value ? 'True' : 'False'}
+                      </button>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </>
+              ) : (
+                <>
+                  <label className="block mb-1 text-xs font-semibold text-stone-500 dark:text-stone-400">
+                    Options (select the correct one)
+                  </label>
+                  <div className="space-y-2">
+                    {draft.options.map((option, i) => (
+                      <div key={i} className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          name={`correct-${index}`}
+                          checked={draft.correctAnswer === i}
+                          onChange={() => updateDraft(index, { correctAnswer: i })}
+                          className="flex-shrink-0 w-4 h-4 accent-green-600"
+                          aria-label={`Mark option ${i + 1} as correct`}
+                        />
+                        <input
+                          type="text"
+                          value={option}
+                          onChange={(e) => setOption(index, i, e.target.value)}
+                          placeholder={`Option ${i + 1}`}
+                          className="flex-1 px-3 py-2 text-sm border-2 rounded-lg border-plum-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-plum-900/60 dark:bg-stone-800 dark:text-white"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => removeOption(index, i)}
+                          disabled={draft.options.length <= 2}
+                          className="flex-shrink-0 p-2 transition-colors rounded-lg text-stone-400 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-30"
+                          aria-label={`Remove option ${i + 1}`}
+                        >
+                          <FaTrash />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
 
-              <button
-                type="button"
-                onClick={() => addOption(index)}
-                className="inline-flex items-center gap-1.5 mt-2 text-xs font-semibold text-plum-700 dark:text-plum-300 hover:underline"
-              >
-                <FaPlus /> Add option
-              </button>
+                  <button
+                    type="button"
+                    onClick={() => addOption(index)}
+                    className="inline-flex items-center gap-1.5 mt-2 text-xs font-semibold text-plum-700 dark:text-plum-300 hover:underline"
+                  >
+                    <FaPlus /> Add option
+                  </button>
+                </>
+              )}
 
               <label className="block mt-3 mb-1 text-xs font-semibold text-stone-500 dark:text-stone-400">
                 Explanation (optional)
@@ -226,28 +261,35 @@ export default function QuestionList({
               <span className="text-plum-600 dark:text-plum-400">{index + 1}.</span> {q.question}
             </p>
 
-            <ul className="mt-3 space-y-1.5">
-              {options.map((option, i) => {
-                const correct = i === correctAnswer
-                return (
-                  <li
-                    key={i}
-                    className={`flex items-start gap-2 text-sm ${
-                      correct
-                        ? 'font-semibold text-green-700 dark:text-green-400'
-                        : 'text-stone-600 dark:text-stone-300'
-                    }`}
-                  >
-                    {correct ? (
-                      <FaCheck className="flex-shrink-0 mt-0.5 text-green-600 dark:text-green-400" />
-                    ) : (
-                      <span className="flex-shrink-0 w-3.5" aria-hidden />
-                    )}
-                    {option}
-                  </li>
-                )
-              })}
-            </ul>
+            {isBool ? (
+              <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-green-700 dark:text-green-400">
+                <FaCheck className="flex-shrink-0 text-green-600 dark:text-green-400" />
+                {'result' in q && q.result ? 'True' : 'False'}
+              </p>
+            ) : (
+              <ul className="mt-3 space-y-1.5">
+                {options.map((option, i) => {
+                  const correct = i === correctAnswer
+                  return (
+                    <li
+                      key={i}
+                      className={`flex items-start gap-2 text-sm ${
+                        correct
+                          ? 'font-semibold text-green-700 dark:text-green-400'
+                          : 'text-stone-600 dark:text-stone-300'
+                      }`}
+                    >
+                      {correct ? (
+                        <FaCheck className="flex-shrink-0 mt-0.5 text-green-600 dark:text-green-400" />
+                      ) : (
+                        <span className="flex-shrink-0 w-3.5" aria-hidden />
+                      )}
+                      {option}
+                    </li>
+                  )
+                })}
+              </ul>
+            )}
 
             {q.explain && (
               <p className="mt-2 text-xs italic text-stone-500 dark:text-stone-400">{q.explain}</p>

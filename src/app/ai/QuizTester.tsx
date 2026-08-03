@@ -2,13 +2,40 @@
 
 import { useEffect, useState } from 'react'
 import { FaCheck, FaTimes, FaSyncAlt } from 'react-icons/fa'
-import { QuizMetadata, OptionsQuestion } from '@/types/quiz'
+import { QuizMetadata } from '@/types/quiz'
 
 interface QuizTesterProps {
   quiz: QuizMetadata
 }
 
+interface PresentedQuestion {
+  question: string
+  options: string[]
+  correctIndex: number
+  explain?: string
+  isBool: boolean
+}
+
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F']
+
+function presentQuestion(q: QuizMetadata['questions'][number]): PresentedQuestion {
+  if ('result' in q) {
+    return {
+      question: q.question,
+      options: ['True', 'False'],
+      correctIndex: q.result ? 0 : 1,
+      explain: q.explain,
+      isBool: true,
+    }
+  }
+  return {
+    question: q.question,
+    options: q.options,
+    correctIndex: q.correctAnswer,
+    explain: q.explain,
+    isBool: false,
+  }
+}
 
 export default function QuizTester({ quiz }: QuizTesterProps) {
   const [answers, setAnswers] = useState<Record<number, number>>({})
@@ -17,13 +44,11 @@ export default function QuizTester({ quiz }: QuizTesterProps) {
     setAnswers({})
   }, [quiz.id])
 
-  const questions = quiz.questions.filter(
-    (q): q is OptionsQuestion => 'options' in q && Array.isArray(q.options)
-  )
+  const questions = quiz.questions.map(presentQuestion)
 
   const answered = Object.keys(answers).length
   const correct = questions.reduce(
-    (total, question, index) => (answers[index] === question.correctAnswer ? total + 1 : total),
+    (total, question, index) => (answers[index] === question.correctIndex ? total + 1 : total),
     0
   )
   const percentage = answered > 0 ? Math.round((correct / answered) * 100) : 0
@@ -36,7 +61,7 @@ export default function QuizTester({ quiz }: QuizTesterProps) {
   if (questions.length === 0) {
     return (
       <p className="text-sm text-stone-500 dark:text-stone-400">
-        This quiz has no multiple-choice questions to test.
+        This quiz has no questions to test.
       </p>
     )
   }
@@ -82,7 +107,7 @@ export default function QuizTester({ quiz }: QuizTesterProps) {
 
               <div className="space-y-2">
                 {question.options.map((option, optionIndex) => {
-                  const isCorrect = optionIndex === question.correctAnswer
+                  const isCorrect = optionIndex === question.correctIndex
                   const isSelected = selected === optionIndex
 
                   let stateClass =
@@ -105,9 +130,11 @@ export default function QuizTester({ quiz }: QuizTesterProps) {
                       disabled={isAnswered}
                       className={`flex items-center w-full gap-3 px-4 py-2.5 text-sm text-left transition-colors border-2 rounded-lg disabled:cursor-default ${stateClass}`}
                     >
-                      <span className="flex-shrink-0 font-semibold">
-                        {LETTERS[optionIndex] ?? optionIndex + 1}
-                      </span>
+                      {!question.isBool && (
+                        <span className="flex-shrink-0 font-semibold">
+                          {LETTERS[optionIndex] ?? optionIndex + 1}
+                        </span>
+                      )}
                       <span className="flex-1">{option}</span>
                       {isAnswered && isCorrect && <FaCheck className="flex-shrink-0" />}
                       {isAnswered && isSelected && !isCorrect && (

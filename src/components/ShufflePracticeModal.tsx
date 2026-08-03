@@ -165,7 +165,7 @@ export default function ShufflePracticeModal({
           </button>
         </div>
 
-        <div className="flex gap-6 px-5 overflow-x-auto border-b flex-nowrap border-stone-200 dark:border-stone-700">
+        <div className="flex flex-shrink-0 gap-6 px-5 overflow-x-auto border-b flex-nowrap border-stone-200 dark:border-stone-700">
           {tabs.map((tab) => {
             const selectedHere = selectedPerTab.get(tab.id) ?? 0
             return (
@@ -189,7 +189,7 @@ export default function ShufflePracticeModal({
           })}
         </div>
 
-        <div className="flex-1 px-5 py-4 overflow-y-auto">
+        <div className="flex-1 min-h-0 px-5 py-4 overflow-y-auto">
           {tabQuizzes.length === 0 ? (
             <p className="py-8 text-sm text-center text-stone-500 dark:text-stone-400">
               No quizzes in this category yet.

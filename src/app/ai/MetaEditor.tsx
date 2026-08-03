@@ -15,13 +15,15 @@ interface MetaEditorProps {
   quiz: QuizMetadata
   onSave: (meta: Partial<QuizMetadata>) => void
   onCancel: () => void
+  variant?: 'quiz' | 'glossary'
 }
 
 const fieldClass =
   'w-full px-4 py-2.5 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white'
 const labelClass = 'block mb-1.5 text-sm font-semibold text-stone-700 dark:text-stone-200'
 
-export default function MetaEditor({ quiz, onSave, onCancel }: MetaEditorProps) {
+export default function MetaEditor({ quiz, onSave, onCancel, variant = 'quiz' }: MetaEditorProps) {
+  const isGlossary = variant === 'glossary'
   const [id, setId] = useState(quiz.id)
   const [name, setName] = useState(quiz.name)
   const [description, setDescription] = useState(quiz.description)
@@ -57,11 +59,15 @@ export default function MetaEditor({ quiz, onSave, onCancel }: MetaEditorProps) 
       color,
       category,
       subcategory: subcategory || undefined,
-      tags: tags
-        .split(',')
-        .map((tag) => tag.trim())
-        .filter(Boolean),
-      hardness,
+      ...(isGlossary
+        ? {}
+        : {
+            tags: tags
+              .split(',')
+              .map((tag) => tag.trim())
+              .filter(Boolean),
+            hardness,
+          }),
     })
   }
 
@@ -138,24 +144,28 @@ export default function MetaEditor({ quiz, onSave, onCancel }: MetaEditorProps) 
           </div>
         </div>
 
-        <div>
-          <label className={labelClass}>Hardness</label>
-          <select
-            value={hardness}
-            onChange={(e) => setHardness(e.target.value as (typeof HARDNESS_VALUES)[number])}
-            className={fieldClass}
-          >
-            {HARDNESS_VALUES.map((value) => (
-              <option key={value} value={value}>
-                {value}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className={labelClass}>Tags (comma separated)</label>
-          <input value={tags} onChange={(e) => setTags(e.target.value)} className={fieldClass} />
-        </div>
+        {!isGlossary && (
+          <>
+            <div>
+              <label className={labelClass}>Hardness</label>
+              <select
+                value={hardness}
+                onChange={(e) => setHardness(e.target.value as (typeof HARDNESS_VALUES)[number])}
+                className={fieldClass}
+              >
+                {HARDNESS_VALUES.map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className={labelClass}>Tags (comma separated)</label>
+              <input value={tags} onChange={(e) => setTags(e.target.value)} className={fieldClass} />
+            </div>
+          </>
+        )}
       </div>
 
       <div className="flex flex-col gap-3 mt-5 sm:flex-row">

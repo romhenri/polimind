@@ -54,7 +54,7 @@ type SaveFilePicker = (options: {
   types?: { description: string; accept: Record<string, string[]> }[]
 }) => Promise<FileSystemFileHandleLike>
 
-async function writeJsonFile(filename: string, json: string): Promise<boolean> {
+export async function writeJsonFile(filename: string, json: string): Promise<boolean> {
   const showSaveFilePicker = (window as typeof window & { showSaveFilePicker?: SaveFilePicker })
     .showSaveFilePicker
 
