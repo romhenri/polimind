@@ -1,0 +1,127 @@
+{
+  "id": "hipoteses-estatistica",
+  "name": "Hipóteses e Testes de Hipóteses",
+  "description": "Explore os conceitos fundamentais de testes de hipóteses para médias e proporções.",
+  "color": "blue",
+  "category": "mathematics",
+  "subcategory": "Algebra & Calculus",
+  "tags": [
+    "estatistica",
+    "inferencia",
+    "probabilidade"
+  ],
+  "hardness": "medium",
+  "type": "options",
+  "questions": [
+    {
+      "question": "Qual é a principal função da hipótese nula (H0)?",
+      "options": [
+        "Confirmar a nova teoria",
+        "Representar o status quo",
+        "Demonstrar a variabilidade",
+        "Invalidar os dados coletados"
+      ],
+      "correctAnswer": 1,
+      "explain": "A hipótese nula geralmente representa a afirmação de que não há efeito ou diferença, servindo como ponto de partida para o teste."
+    },
+    {
+      "question": "O que caracteriza um erro do Tipo I em um teste de hipóteses?",
+      "options": [
+        "Rejeitar H0 quando ela é verdadeira",
+        "Não rejeitar H0 quando ela é falsa",
+        "Aceitar H1 quando ela é falsa",
+        "Rejeitar H1 quando ela é verdadeira"
+      ],
+      "correctAnswer": 0,
+      "explain": "O erro do Tipo I ocorre quando rejeitamos a hipótese nula sendo ela verdadeira (falso positivo)."
+    },
+    {
+      "question": "Em um teste de hipótese para a média, quando devemos rejeitar H0?",
+      "options": [
+        "Quando o p-valor é maior que alpha",
+        "Quando o p-valor é igual a zero",
+        "Quando o p-valor é menor que alpha",
+        "Quando a variância é muito alta"
+      ],
+      "correctAnswer": 2,
+      "explain": "A regra de decisão padrão é rejeitar H0 se o p-valor for inferior ao nível de significância alpha."
+    },
+    {
+      "question": "Qual é a definição correta de hipótese alternativa (H1)?",
+      "options": [
+        "A afirmação que se deseja testar",
+        "O valor esperado da população",
+        "A média calculada da amostra",
+        "O erro padrão da distribuição"
+      ],
+      "correctAnswer": 0,
+      "explain": "A hipótese alternativa representa a afirmação ou efeito que o pesquisador está tentando encontrar evidências para."
+    },
+    {
+      "question": "Para testar a proporção de uma população, qual distribuição é comumente usada para grandes amostras?",
+      "options": [
+        "Distribuição de Poisson",
+        "Distribuição Normal",
+        "Distribuição Binomial",
+        "Distribuição de Student"
+      ],
+      "correctAnswer": 1,
+      "explain": "Para grandes amostras, a distribuição da proporção amostral aproxima-se da distribuição Normal via Teorema Central do Limite."
+    },
+    {
+      "question": "O que representa o nível de significância (alpha)?",
+      "options": [
+        "A probabilidade de erro do Tipo II",
+        "A margem de erro da amostra",
+        "A probabilidade de erro do Tipo I",
+        "O tamanho da amostra necessária"
+      ],
+      "correctAnswer": 2,
+      "explain": "O nível de significância é a probabilidade máxima que o pesquisador aceita de cometer um erro do Tipo I."
+    },
+    {
+      "question": "O que acontece com o poder do teste (1 - beta) se aumentarmos o nível de significância?",
+      "options": [
+        "O poder do teste aumenta",
+        "O poder do teste diminui",
+        "O poder permanece constante",
+        "O erro do Tipo II aumenta"
+      ],
+      "correctAnswer": 0,
+      "explain": "Ao aumentar o nível de significância, facilitamos a rejeição de H0, o que aumenta a probabilidade de rejeitar uma H0 falsa (poder)."
+    },
+    {
+      "question": "Qual é a principal diferença entre o teste para média e para proporção?",
+      "options": [
+        "O tipo de dados analisados",
+        "O valor do erro padrão",
+        "O tamanho da amostra",
+        "O nível de significância"
+      ],
+      "correctAnswer": 0,
+      "explain": "O teste para média lida com variáveis quantitativas, enquanto o de proporção lida com variáveis qualitativas/categóricas."
+    },
+    {
+      "question": "O que define um teste de hipóteses unilateral (one-tailed)?",
+      "options": [
+        "O uso de uma amostra única",
+        "A busca por uma diferença em um sentido",
+        "A ausência de hipótese alternativa",
+        "O uso de dados não paramétricos"
+      ],
+      "correctAnswer": 1,
+      "explain": "Testes unilaterais focam em uma direção específica (ex: maior que ou menor que) em vez de apenas 'diferente'."
+    },
+    {
+      "question": "O erro do Tipo II está associado a qual conceito?",
+      "options": [
+        "Falso positivo",
+        "Falso negativo",
+        "Erro de amostragem",
+        "Viés de seleção"
+      ],
+      "correctAnswer": 1,
+      "explain": "O erro do Tipo II ocorre quando não rejeitamos uma hipótese nula que é, na verdade, falsa."
+    }
+  ]
+}
