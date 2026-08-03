@@ -1,0 +1,128 @@
+{
+  "id": "monte-carlo-method",
+  "name": "Monte Carlo Method Overview",
+  "description": "Explore the fundamentals and applications of Monte Carlo techniques in computational science.",
+  "color": "teal",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "tags": [
+    "monte-carlo",
+    "simulation",
+    "probabilistic",
+    "sampling"
+  ],
+  "hardness": "medium",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the primary purpose of the Monte Carlo method?",
+      "options": [
+        "Solve equations deterministically.",
+        "Estimate outcomes using random sampling.",
+        "Optimize algorithmic complexity.",
+        "Encode data with lossless compression."
+      ],
+      "correctAnswer": 1,
+      "explain": "Monte Carlo methods rely on random sampling to approximate probabilities."
+    },
+    {
+      "question": "During which historical project was the Monte Carlo method developed?",
+      "options": [
+        "Manhattan Project research.",
+        "Apollo Program missions.",
+        "Hubble Space Telescope initiative.",
+        "Internet Protocol development effort."
+      ],
+      "correctAnswer": 0,
+      "explain": "The method was pioneered by scientists working on the Manhattan Project."
+    },
+    {
+      "question": "Which of the following is a classic Monte Carlo application?",
+      "options": [
+        "Calculating exact integrals analytically.",
+        "Simulating photon transport in matter.",
+        "Estimate π using random points.",
+        "Sorting a list of numbers."
+      ],
+      "correctAnswer": 2,
+      "explain": "Estimating π by random sampling is a textbook Monte Carlo example."
+    },
+    {
+      "question": "What is the main effect of increasing the number of samples in a Monte Carlo simulation?",
+      "options": [
+        "Decreases variance.",
+        "Increases bias.",
+        "Reduces computational cost.",
+        "Improves estimate precision."
+      ],
+      "correctAnswer": 3,
+      "explain": "More samples lead to a more accurate estimate."
+    },
+    {
+      "question": "Which property is most crucial for a random number generator used in Monte Carlo simulations?",
+      "options": [
+        "Speed only.",
+        "Large period length.",
+        "Uniform distribution over [0,1].",
+        "Ability to produce negative numbers."
+      ],
+      "correctAnswer": 1,
+      "explain": "A long period reduces repetition of random sequences."
+    },
+    {
+      "question": "Which of the following is NOT a typical Monte Carlo application?",
+      "options": [
+        "Financial risk analysis.",
+        "Bayesian inference.",
+        "Deterministic convex function optimization.",
+        "Physics particle transport."
+      ],
+      "correctAnswer": 2,
+      "explain": "Monte Carlo methods are stochastic and not suited for deterministic convex optimization."
+    },
+    {
+      "question": "Which technique is commonly used to reduce variance in Monte Carlo estimates?",
+      "options": [
+        "Gradient descent.",
+        "Importance sampling.",
+        "Principal component analysis.",
+        "K‑means clustering."
+      ],
+      "correctAnswer": 1,
+      "explain": "Importance sampling focuses samples where they matter most, lowering variance."
+    },
+    {
+      "question": "When estimating the area of an irregular shape using Monte Carlo, the area estimate is given by:",
+      "options": [
+        "hits / total * box area.",
+        "total / hits * box area.",
+        "hits plus total of trials.",
+        "box area minus hits of sample."
+      ],
+      "correctAnswer": 0,
+      "explain": "The ratio of hits to total trials multiplied by the bounding box area yields the estimated area."
+    },
+    {
+      "question": "Which statement best describes the law of large numbers in context of Monte Carlo?",
+      "options": [
+        "Sample mean always equals population mean after few trials.",
+        "As trials increase, sample mean converges to expected value.",
+        "Random numbers are always uniformly distributed.",
+        "Computational complexity reduces with more trials."
+      ],
+      "correctAnswer": 1,
+      "explain": "The law of large numbers guarantees convergence of the sample average to the true expectation."
+    },
+    {
+      "question": "In machine learning, Monte Carlo dropout is primarily used for:",
+      "options": [
+        "Reducing model size drastically.",
+        "Estimating uncertainty via Bayesian methods.",
+        "Speeding up training quickly.",
+        "Encoding categorical variables efficiently."
+      ],
+      "correctAnswer": 1,
+      "explain": "Monte Carlo dropout provides a way to estimate predictive uncertainty via Bayesian approximation."
+    }
+  ]
+}
