@@ -1,0 +1,127 @@
+{
+  "id": "binary-tree",
+  "name": "Binary Tree",
+  "description": "Test your knowledge of tree structures, traversals, and properties.",
+  "color": "emerald",
+  "category": "computer_science",
+  "subcategory": "Algorithms & Data Structures",
+  "tags": [
+    "trees",
+    "recursion",
+    "data-structures"
+  ],
+  "hardness": "medium",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the maximum number of nodes in a binary tree of height h (where height of a single node is 0)?",
+      "options": [
+        "2^h",
+        "2^(h+1) - 1",
+        "2^h - 1",
+        "2 * h"
+      ],
+      "correctAnswer": 1,
+      "explain": "The sum of nodes in a perfect binary tree is a geometric series resulting in 2^(h+1) - 1."
+    },
+    {
+      "question": "In which traversal is the root node visited last?",
+      "options": [
+        "Pre-order",
+        "In-order",
+        "Post-order",
+        "Level-order"
+      ],
+      "correctAnswer": 2,
+      "explain": "Post-order traversal follows the Left-Right-Root sequence."
+    },
+    {
+      "question": "What is the time complexity of searching for a value in a balanced Binary Search Tree (BST)?",
+      "options": [
+        "O(1)",
+        "O(n)",
+        "O(log n)",
+        "O(n log n)"
+      ],
+      "correctAnswer": 2,
+      "explain": "Balanced trees ensure height is logarithmic relative to the number of nodes."
+    },
+    {
+      "question": "Which type of tree has every node having at most two children?",
+      "options": [
+        "Binary Tree",
+        "Ternary Tree",
+        "B-Tree",
+        "AVL Tree"
+      ],
+      "correctAnswer": 0,
+      "explain": "By definition, a binary tree restricts each node to a maximum of two children."
+    },
+    {
+      "question": "In an in-order traversal of a Binary Search Tree, the values are visited in:",
+      "options": [
+        "Descending order",
+        "Ascending order",
+        "Random order",
+        "Reverse order"
+      ],
+      "correctAnswer": 1,
+      "explain": "In-order traversal of a BST visits nodes in non-decreasing order."
+    },
+    {
+      "question": "A tree where the height of the two child subtrees of any node differs by at most one is called:",
+      "options": [
+        "Complete tree",
+        "Full tree",
+        "AVL tree",
+        "Perfect tree"
+      ],
+      "correctAnswer": 2,
+      "explain": "AVL trees are height-balanced binary search trees."
+    },
+    {
+      "question": "What is the height of a complete binary tree with n nodes?",
+      "options": [
+        "log2(n)",
+        "floor(log2(n))",
+        "n - 1",
+        "log2(n + 1)"
+      ],
+      "correctAnswer": 1,
+      "explain": "The height of a complete binary tree is approximately log base 2 of n."
+    },
+    {
+      "question": "Which traversal is equivalent to a Breadth-First Search (BFS)?",
+      "options": [
+        "Pre-order",
+        "In-order",
+        "Post-order",
+        "Level-order"
+      ],
+      "correctAnswer": 3,
+      "explain": "Level-order traversal visits nodes level by level, similar to BFS."
+    },
+    {
+      "question": "In a full binary tree, if there are n internal nodes, how many leaf nodes are there?",
+      "options": [
+        "n + 1",
+        "n - 1",
+        "2n",
+        "n/2"
+      ],
+      "correctAnswer": 0,
+      "explain": "In a full binary tree, the number of leaves is always one more than the number of internal nodes."
+    },
+    {
+      "question": "Which property is violated if a node has three children?",
+      "options": [
+        "Binary property",
+        "Search property",
+        "Balanced property",
+        "Root property"
+      ],
+      "correctAnswer": 0,
+      "explain": "A binary tree is strictly limited to a maximum of two children per node."
+    }
+  ]
+}
