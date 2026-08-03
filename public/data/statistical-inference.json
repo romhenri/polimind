@@ -1,0 +1,127 @@
+{
+  "id": "statistical-inference",
+  "name": "Statistical Inference",
+  "description": "Explore key concepts of statistical inference through concise, thought‑provoking questions.",
+  "color": "purple",
+  "category": "mathematics",
+  "subcategory": "Statistics & Probability",
+  "tags": [
+    "statistics",
+    "probability",
+    "inference"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the primary goal of hypothesis testing?",
+      "options": [
+        "To estimate population parameters",
+        "To decide if data support a claim",
+        "To calculate average values",
+        "To generate random numbers"
+      ],
+      "correctAnswer": 1,
+      "explain": "Hypothesis testing evaluates evidence against a stated hypothesis."
+    },
+    {
+      "question": "Which error occurs when we incorrectly reject a true null hypothesis?",
+      "options": [
+        "Type I error",
+        "Type II error",
+        "Sampling error",
+        "Non-response bias"
+      ],
+      "correctAnswer": 0,
+      "explain": "Rejecting a true null hypothesis is a Type I error."
+    },
+    {
+      "question": "What does a 95% confidence interval represent?",
+      "options": [
+        "It contains the true parameter 95% of the time",
+        "There is a 95% chance the parameter lies in it",
+        "The interval will contain 95% of the data",
+        "The sample mean is within 95% of the population mean"
+      ],
+      "correctAnswer": 2,
+      "explain": "A 95% confidence interval is constructed so that 95% of such intervals capture the true parameter."
+    },
+    {
+      "question": "Which statistic is used to test equality of variances across groups?",
+      "options": [
+        "t-test",
+        "ANOVA",
+        "Chi-sq",
+        "F-test"
+      ],
+      "correctAnswer": 3,
+      "explain": "The F-test compares variances to assess if they are equal."
+    },
+    {
+      "question": "In linear regression, the coefficient represents...",
+      "options": [
+        "The intercept of the line",
+        "The average change in Y for each unit change in X",
+        "The proportion of variance explained by the model",
+        "The typical distance of points from the line"
+      ],
+      "correctAnswer": 1,
+      "explain": "The slope coefficient shows how Y responds to changes in X."
+    },
+    {
+      "question": "What is the p-value in hypothesis testing?",
+      "options": [
+        "Probability that the null hypothesis is true",
+        "Probability of making a Type I error",
+        "Probability of observing data as extreme as the sample",
+        "Probability that the alternative hypothesis is true"
+      ],
+      "correctAnswer": 2,
+      "explain": "The p-value measures how unlikely the observed data are under the null."
+    },
+    {
+      "question": "Which measure indicates the strength of association in a contingency table?",
+      "options": [
+        "Cramer's V",
+        "Pearson's r",
+        "Correlation",
+        "Chi-square"
+      ],
+      "correctAnswer": 0,
+      "explain": "Cramer's V quantifies association between categorical variables."
+    },
+    {
+      "question": "What does the Central Limit Theorem state?",
+      "options": [
+        "Sample means approach a normal distribution as n grows",
+        "The population distribution is always normal",
+        "Variance decreases as sample size gets larger",
+        "Confidence intervals are always symmetric"
+      ],
+      "correctAnswer": 1,
+      "explain": "The CLT explains why the sampling distribution of the mean becomes normal."
+    },
+    {
+      "question": "Which test compares means of three or more groups?",
+      "options": [
+        "One-sample t-test",
+        "Two-sample t-test",
+        "One-way ANOVA",
+        "Mann-Whitney U"
+      ],
+      "correctAnswer": 2,
+      "explain": "ANOVA tests whether group means differ significantly."
+    },
+    {
+      "question": "What is a Type II error?",
+      "options": [
+        "Failing to reject a false null",
+        "Rejecting a true null",
+        "Accepting the alternative hypothesis",
+        "Correctly rejecting a false null"
+      ],
+      "correctAnswer": 3,
+      "explain": "A Type II error occurs when we do not reject a false null hypothesis."
+    }
+  ]
+}
