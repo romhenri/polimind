@@ -1,0 +1,129 @@
+{
+  "id": "photosynthesis",
+  "name": "Photosynthesis",
+  "description": "Explore how plants convert light energy into chemical energy through this essential biological process.",
+  "icon": "plant",
+  "color": "emerald",
+  "category": "sciences",
+  "subcategory": "Biology",
+  "tags": [
+    "biology",
+    "plants",
+    "energy",
+    "chlorophyll"
+  ],
+  "hardness": "easy",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the primary pigment involved in photosynthesis?",
+      "options": [
+        "Chlorophyll",
+        "Erythrocytes",
+        "Melanin",
+        "Keratin"
+      ],
+      "correctAnswer": 0,
+      "explain": "Chlorophyll absorbs light energy needed for photosynthesis."
+    },
+    {
+      "question": "What gas is released during photosynthesis?",
+      "options": [
+        "Carbon dioxide",
+        "Oxygen",
+        "Nitrogen",
+        "Hydrogen"
+      ],
+      "correctAnswer": 1,
+      "explain": "Plants release oxygen as a byproduct of splitting water molecules."
+    },
+    {
+      "question": "Where in the plant cell does photosynthesis primarily occur?",
+      "options": [
+        "Nucleus",
+        "Mitochondria",
+        "Chloroplast",
+        "Ribosome"
+      ],
+      "correctAnswer": 2,
+      "explain": "Chloroplasts contain chlorophyll and the machinery for photosynthesis."
+    },
+    {
+      "question": "Which of the following is NOT a reactant in photosynthesis?",
+      "options": [
+        "Carbon dioxide",
+        "Water",
+        "Oxygen",
+        "Sunlight"
+      ],
+      "correctAnswer": 2,
+      "explain": "Oxygen is a product of photosynthesis, not a reactant."
+    },
+    {
+      "question": "What stage of photosynthesis occurs in the thylakoid membranes?",
+      "options": [
+        "Calvin cycle",
+        "Light independent reactions",
+        "Light reactions",
+        "Krebs cycle"
+      ],
+      "correctAnswer": 2,
+      "explain": "The light-dependent reactions capture energy from sunlight in the thylakoid membranes."
+    },
+    {
+      "question": "What does NADPH provide during photosynthesis?",
+      "options": [
+        "Structural support",
+        "Reducing power",
+        "Mechanical energy",
+        "Protective coating"
+      ],
+      "correctAnswer": 1,
+      "explain": "NADPH provides the reducing power needed for the Calvin cycle."
+    },
+    {
+      "question": "What happens to the oxygen produced during photosynthesis?",
+      "options": [
+        "Used for growth",
+        "Stored as energy",
+        "Converted to water",
+        "Released as gas"
+      ],
+      "correctAnswer": 3,
+      "explain": "The oxygen generated from splitting water is released as a byproduct."
+    },
+    {
+      "question": "Which wavelength of light is most effectively absorbed by chlorophyll?",
+      "options": [
+        "Green",
+        "Red and blue",
+        "Yellow",
+        "Ultraviolet"
+      ],
+      "correctAnswer": 1,
+      "explain": "Chlorophyll absorbs red and blue light most efficiently for photosynthesis."
+    },
+    {
+      "question": "What is the Calvin cycle also known as?",
+      "options": [
+        "Light reactions",
+        "Dark reactions",
+        "Glycolysis",
+        "Krebs cycle"
+      ],
+      "correctAnswer": 1,
+      "explain": "The Calvin cycle is often called the dark reactions because it doesn't directly require light."
+    },
+    {
+      "question": "What is the final product of the Calvin cycle?",
+      "options": [
+        "ATP",
+        "NADPH",
+        "Glucose",
+        "Oxygen"
+      ],
+      "correctAnswer": 2,
+      "explain": "The Calvin cycle produces glucose as its final organic product."
+    }
+  ]
+}
