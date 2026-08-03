@@ -585,6 +585,9 @@ export function parseQuizJson(text: string): QuizMetadata {
   } catch {
     throw new Error('Invalid JSON: check for missing commas, quotes or brackets.')
   }
+  if ((parsed as Record<string, unknown> | null)?.type === 'classify') {
+    return normalizeClassify(parsed, 'imported-quiz')
+  }
   return normalizeQuiz(parsed, 'imported-quiz')
 }
 

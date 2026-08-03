@@ -28,7 +28,7 @@ import type { StreamCallbacks, AiProvider, AiSettings, GenType, OpenRouterModelO
 import { getLocalQuiz, getLocalQuizzes, saveLocalQuiz } from '@/utils/localQuizzes'
 import { saveLocalGlossary, glossaryToDataFile, getLocalGlossary } from '@/utils/localGlossaries'
 import { fetchGlossary } from '@/utils/loadGlossaries'
-import { loadFullQuizzes, toQuizListing } from '@/utils/loadQuizzes'
+import { loadFullQuizzes, toQuizListing, fetchQuizJson } from '@/utils/loadQuizzes'
 import ShufflePracticeModal from '@/components/ShufflePracticeModal'
 import AiQuizRunner from './AiQuizRunner'
 import MetaEditor from './MetaEditor'
@@ -41,6 +41,7 @@ const OPENROUTER_KEY_STORAGE = 'polimind.openRouterKey'
 const GEMINI_KEY_STORAGE = 'polimind.geminiKey'
 const PROVIDER_STORAGE = 'polimind.aiProvider'
 const OPENROUTER_MODEL_STORAGE = 'polimind.openRouterModel'
+const REPO_MODE = process.env.NEXT_PUBLIC_TARGET_SAVE === 'repo'
 
 export default function AiPage() {
   const [provider, setProvider] = useState<AiProvider>('openrouter')
@@ -71,6 +72,7 @@ export default function AiPage() {
   const [entityErrors, setEntityErrors] = useState<Record<number, string>>({})
   const [copied, setCopied] = useState(false)
   const [savedLocally, setSavedLocally] = useState(false)
+  const [saveError, setSaveError] = useState(false)
   const [importJson, setImportJson] = useState('')
   const [importError, setImportError] = useState<string | null>(null)
   const [streamProgress, setStreamProgress] = useState<{ current: number; total: number } | null>(null)
@@ -122,9 +124,8 @@ export default function AiPage() {
     let cancelled = false
     const loadForEdit = async () => {
       try {
-        const res = await fetch(`/data/${editId}.json`, { cache: 'no-store' })
-        if (!res.ok) throw new Error('not found')
-        const parsed = await res.json()
+        const parsed = await fetchQuizJson(editId)
+        if (parsed === null) throw new Error('not found')
         const data = Array.isArray(parsed) ? parsed[1] || parsed[0] : parsed
         const imported = parseQuizJson(JSON.stringify(data))
         if (cancelled) return
@@ -554,14 +555,31 @@ export default function AiPage() {
     URL.revokeObjectURL(url)
   }
 
-  const handleSaveLocal = () => {
-    if (glossary) {
+  const handleSaveLocal = async () => {
+    const id = glossary?.id ?? quiz?.id
+    if (!dataFile || !id) return
+
+    if (REPO_MODE) {
+      const kind = glossary ? 'glossary' : quiz?.type === 'classify' ? 'classify' : 'quiz'
+      try {
+        const res = await fetch('/api/save-repo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ kind, id, data: dataFile }),
+        })
+        if (!res.ok) throw new Error(await res.text())
+      } catch (err) {
+        console.error('Repo save failed', err)
+        setSaveError(true)
+        setTimeout(() => setSaveError(false), 2000)
+        return
+      }
+    } else if (glossary) {
       saveLocalGlossary(glossary)
-    } else if (quiz) {
-      saveLocalQuiz(quiz)
     } else {
-      return
+      saveLocalQuiz(quiz!)
     }
+
     setSavedLocally(true)
     setTimeout(() => setSavedLocally(false), 2000)
   }
@@ -1106,9 +1124,13 @@ export default function AiPage() {
                 <>
                   <FaCheck /> Saved!
                 </>
+              ) : saveError ? (
+                <>
+                  <FaSave /> Save failed
+                </>
               ) : (
                 <>
-                  <FaSave /> Save to Local Storage
+                  <FaSave /> {REPO_MODE ? 'Save to Repo' : 'Save to Local Storage'}
                 </>
               )}
             </button>
@@ -1211,9 +1233,13 @@ export default function AiPage() {
                 <>
                   <FaCheck /> Saved!
                 </>
+              ) : saveError ? (
+                <>
+                  <FaSave /> Save failed
+                </>
               ) : (
                 <>
-                  <FaSave /> Save to Local Storage
+                  <FaSave /> {REPO_MODE ? 'Save to Repo' : 'Save to Local Storage'}
                 </>
               )}
             </button>
@@ -1276,9 +1302,13 @@ export default function AiPage() {
                 <>
                   <FaCheck /> Saved!
                 </>
+              ) : saveError ? (
+                <>
+                  <FaSave /> Save failed
+                </>
               ) : (
                 <>
-                  <FaSave /> Save to Local Storage
+                  <FaSave /> {REPO_MODE ? 'Save to Repo' : 'Save to Local Storage'}
                 </>
               )}
             </button>
