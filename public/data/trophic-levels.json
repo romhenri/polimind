@@ -1,0 +1,209 @@
+{
+  "id": "trophic-levels",
+  "name": "Basic Trophic Levels",
+  "description": "Identify the nutritional role and primary energy source of various organisms.",
+  "icon": "plant",
+  "color": "green",
+  "category": "sciences",
+  "subcategory": "Biology",
+  "tags": [
+    "ecology",
+    "food-chains",
+    "ecosystems"
+  ],
+  "hardness": "easy",
+  "type": "classify",
+  "config": {
+    "mode": "sequential",
+    "optionCount": 4,
+    "shuffleEntities": true
+  },
+  "facets": [
+    {
+      "id": "trophic-role",
+      "label": "Trophic Role",
+      "prompt": "Which role does {entity} play in a food web?",
+      "groups": [
+        {
+          "id": "producer",
+          "label": "Producer",
+          "hint": "Makes own food"
+        },
+        {
+          "id": "primary-consumer",
+          "label": "Primary Consumer",
+          "hint": "Eats plants"
+        },
+        {
+          "id": "secondary-consumer",
+          "label": "Secondary Consumer",
+          "hint": "Eats animals"
+        },
+        {
+          "id": "decomposer",
+          "label": "Decomposer",
+          "hint": "Breaks down dead matter"
+        }
+      ]
+    },
+    {
+      "id": "energy-source",
+      "label": "Energy Source",
+      "prompt": "Where does {entity} get its energy from?",
+      "groups": [
+        {
+          "id": "sunlight",
+          "label": "Sunlight",
+          "hint": "Photosynthesis"
+        },
+        {
+          "id": "plants",
+          "label": "Plants",
+          "hint": "Primary food source"
+        },
+        {
+          "id": "animals",
+          "label": "Animals",
+          "hint": "Secondary food source"
+        },
+        {
+          "id": "detritus",
+          "label": "Detritus",
+          "hint": "Dead organic matter"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "grass",
+      "entity": "Grass",
+      "subtitle": "Common vegetation",
+      "answers": {
+        "trophic-role": "producer",
+        "energy-source": "sunlight"
+      },
+      "explain": {
+        "trophic-role": "Grass uses photosynthesis to create energy.",
+        "energy-source": "It converts solar energy into chemical energy."
+      }
+    },
+    {
+      "id": "rabbit",
+      "entity": "Rabbit",
+      "subtitle": "Lagomorph",
+      "answers": {
+        "trophic-role": "primary-consumer",
+        "energy-source": "plants"
+      },
+      "explain": {
+        "trophic-role": "Rabbits are herbivores that eat producers.",
+        "energy-source": "They derive nutrients from eating vegetation."
+      }
+    },
+    {
+      "id": "fox",
+      "entity": "Red Fox",
+      "subtitle": "Carnivorous mammal",
+      "answers": {
+        "trophic-role": "secondary-consumer",
+        "energy-source": "animals"
+      },
+      "explain": {
+        "trophic-role": "Foxes eat animals like rabbits.",
+        "energy-source": "Their energy comes from consuming other animals."
+      }
+    },
+    {
+      "id": "mushroom",
+      "entity": "Mushroom",
+      "subtitle": "Fungi",
+      "answers": {
+        "trophic-role": "decomposer",
+        "energy-source": "detritus"
+      },
+      "explain": {
+        "trophic-role": "Fungi break down organic matter.",
+        "energy-source": "They feed on decaying biological material."
+      }
+    },
+    {
+      "id": "oak-tree",
+      "entity": "Oak Tree",
+      "subtitle": "Large perennial",
+      "answers": {
+        "trophic-role": "producer",
+        "energy-source": "sunlight"
+      },
+      "explain": {
+        "trophic-role": "Trees are autotrophs.",
+        "energy-source": "They rely on photosynthesis."
+      }
+    },
+    {
+      "id": "grasshopper",
+      "entity": "Grasshopper",
+      "subtitle": "Invertebrate",
+      "answers": {
+        "trophic-role": "primary-consumer",
+        "energy-source": "plants"
+      },
+      "explain": {
+        "trophic-role": "They are herbivores.",
+        "energy-source": "They feed on various plant parts."
+      }
+    },
+    {
+      "id": "snake",
+      "entity": "King Snake",
+      "subtitle": "Reptile",
+      "answers": {
+        "trophic-role": "secondary-consumer",
+        "energy-source": "animals"
+      },
+      "explain": {
+        "trophic-role": "Snakes act as predators in the food chain.",
+        "energy-source": "They consume other animals for energy."
+      }
+    },
+    {
+      "id": "bacteria",
+      "entity": "Soil Bacteria",
+      "subtitle": "Microscopic organisms",
+      "answers": {
+        "trophic-role": "decomposer",
+        "energy-source": "detritus"
+      },
+      "explain": {
+        "trophic-role": "Bacteria are vital for nutrient cycling.",
+        "energy-source": "They feed on decaying organic matter."
+      }
+    },
+    {
+      "id": "algae",
+      "entity": "Green Algae",
+      "subtitle": "Aquatic producer",
+      "answers": {
+        "trophic-role": "producer",
+        "energy-source": "sunlight"
+      },
+      "explain": {
+        "trophic-role": "Algae are primary producers in water.",
+        "energy-source": "They utilize sunlight for photosynthesis."
+      }
+    },
+    {
+      "id": "hawk",
+      "entity": "Red-tailed Hawk",
+      "subtitle": "Apex predator",
+      "answers": {
+        "trophic-role": "secondary-consumer",
+        "energy-source": "animals"
+      },
+      "explain": {
+        "trophic-role": "Hawks are high-level predators.",
+        "energy-source": "They hunt animals to survive."
+      }
+    }
+  ]
+}
