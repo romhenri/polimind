@@ -21,7 +21,7 @@ import {
 import { FaWandMagicSparkles, FaLayerGroup } from 'react-icons/fa6'
 import { QuizMetadata, Question, QuizListing } from '@/types/quiz'
 import type { Glossary } from '@/types/glossary'
-import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, buildQuizContext, parseQuizJson, generateGlossary, generateGlossaryTerm, buildGlossaryCopyPrompt, generateClassify, buildClassifyCopyPrompt, regenerateClassifyEntity, fetchOpenRouterFreeModels } from '@/utils/aiQuiz'
+import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, buildQuizContext, parseQuizJson, generateGlossary, generateGlossaryTerm, buildGlossaryCopyPrompt, generateClassify, buildClassifyCopyPrompt, regenerateClassifyEntity, fetchOpenRouterFreeModels, GEMINI_MODELS } from '@/utils/aiQuiz'
 import { generateClassifyQuestions } from '@/utils/classify/generate'
 import { CATEGORIES, getCategoryById } from '@/data/categories'
 import type { StreamCallbacks, AiProvider, AiSettings, GenType, OpenRouterModelOption } from '@/utils/aiQuiz'
@@ -36,6 +36,7 @@ import QuestionList from './QuestionList'
 import QuizTester from './QuizTester'
 import GlossaryEditor from './GlossaryEditor'
 import ClassifyEditor from './ClassifyEditor'
+import AiJudge from './AiJudge'
 
 const OPENROUTER_KEY_STORAGE = 'polimind.openRouterKey'
 const GEMINI_KEY_STORAGE = 'polimind.geminiKey'
@@ -216,6 +217,10 @@ export default function AiPage() {
     }
   }, [quiz])
   const quizContext = useMemo(() => buildQuizContext(referenceQuizzes), [referenceQuizzes])
+  const judgeModels = useMemo(
+    () => (provider === 'openrouter' ? freeModels : GEMINI_MODELS.map((id) => ({ id, name: id }))),
+    [provider, freeModels]
+  )
 
   const activeKey = provider === 'openrouter' ? openRouterKey : geminiKey
   const setActiveKey = provider === 'openrouter' ? setOpenRouterKey : setGeminiKey
@@ -1252,6 +1257,16 @@ export default function AiPage() {
             </button>
           </div>
         </div>
+      )}
+
+      {quiz && quiz.type !== 'classify' && activeTab === 'edit' && (
+        <AiJudge
+          key={quiz.id}
+          quiz={quiz}
+          models={judgeModels}
+          defaultModel={provider === 'openrouter' ? openRouterModel : GEMINI_MODELS[0]}
+          buildSettings={buildSettings}
+        />
       )}
 
       {quiz && activeTab === 'test' && (
