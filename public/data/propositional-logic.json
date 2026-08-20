@@ -1,0 +1,129 @@
+{
+  "id": "propositional-logic",
+  "name": "Propositional Logic",
+  "description": "Connectives, truth tables, logical equivalences and the valid argument forms built on them.",
+  "icon": "scale",
+  "color": "indigo",
+  "category": "mathematics",
+  "subcategory": "Discrete Math & Logic",
+  "tags": [
+    "logic",
+    "truth tables",
+    "proofs"
+  ],
+  "hardness": "easy",
+  "lang": "en",
+  "type": "options",
+  "questions": [
+    {
+      "question": "The statement \"If the server is down, the alert fires\" is evaluated on a day when the server is NOT down and no alert fires. What is the truth value of the implication?",
+      "options": [
+        "False, because the alert never fired",
+        "It cannot be determined without more information",
+        "True, because a false antecedent makes the implication true",
+        "True, but only because both parts are false"
+      ],
+      "correctAnswer": 2,
+      "explain": "An implication P → Q is false only in the single case where P is true and Q is false. With P false the implication is vacuously true, regardless of Q. The last option gets the right answer for the wrong reason: it would still be true if the alert had fired."
+    },
+    {
+      "question": "What is the contrapositive of \"If it rains, the match is cancelled\"?",
+      "options": [
+        "If the match is not cancelled, then it did not rain",
+        "If the match is cancelled, then it rained",
+        "If it does not rain, then the match is not cancelled",
+        "It rains and the match is not cancelled"
+      ],
+      "correctAnswer": 0,
+      "explain": "The contrapositive of P → Q is ¬Q → ¬P, and it is always logically equivalent to the original. The second option is the converse and the third is the inverse; neither is equivalent to the original statement."
+    },
+    {
+      "question": "Which expression is logically equivalent to ¬(P ∧ Q)?",
+      "options": [
+        "¬P ∧ ¬Q",
+        "P ∨ Q",
+        "¬P ∧ Q",
+        "¬P ∨ ¬Q"
+      ],
+      "correctAnswer": 3,
+      "explain": "De Morgan's law: negating a conjunction turns it into a disjunction of the negated parts. The first option is the classic mistake of distributing the negation without flipping the connective, and it is equivalent to ¬(P ∨ Q) instead."
+    },
+    {
+      "question": "A formula that evaluates to true under every possible assignment of its variables is called:",
+      "options": [
+        "A contingency",
+        "A tautology",
+        "A contradiction",
+        "A satisfiable formula"
+      ],
+      "correctAnswer": 1,
+      "explain": "A tautology is true under every assignment. Every tautology is also satisfiable, but satisfiable only requires at least one true assignment, so it is the weaker property and not the answer here."
+    },
+    {
+      "question": "How many rows does a complete truth table for a formula with 4 distinct propositional variables have?",
+      "options": [
+        "8",
+        "12",
+        "16",
+        "4"
+      ],
+      "correctAnswer": 2,
+      "explain": "Each variable is independently true or false, so the table has 2^n rows: 2^4 = 16. The answer 8 is 2^3, a common off-by-one when the variables are miscounted."
+    },
+    {
+      "question": "You know that \"If the build passes, the artifact is published\" is true, and you observe that the artifact was NOT published. What follows?",
+      "options": [
+        "The build did not pass",
+        "The build passed",
+        "Nothing follows about the build",
+        "The build both passed and failed"
+      ],
+      "correctAnswer": 0,
+      "explain": "This is modus tollens: from P → Q and ¬Q you may conclude ¬P. If the build had passed, the artifact would necessarily have been published."
+    },
+    {
+      "question": "From \"If the disk is full, writes fail\" and the observation \"writes are failing\", a colleague concludes the disk is full. What is wrong with this reasoning?",
+      "options": [
+        "Nothing, this is modus ponens",
+        "The implication should have been negated first",
+        "The premises contradict each other",
+        "It affirms the consequent, which is an invalid form"
+      ],
+      "correctAnswer": 3,
+      "explain": "From P → Q and Q you cannot conclude P, because Q may have other causes (bad permissions, a read-only mount). Modus ponens requires observing the antecedent P, not the consequent Q."
+    },
+    {
+      "question": "Which expression is logically equivalent to P → Q?",
+      "options": [
+        "P ∧ ¬Q",
+        "¬P ∨ Q",
+        "¬P ∧ Q",
+        "P ∨ ¬Q"
+      ],
+      "correctAnswer": 1,
+      "explain": "The implication is false only when P is true and Q is false, which is exactly the negation of P ∧ ¬Q, that is ¬P ∨ Q. Note that P ∧ ¬Q is the negation of the implication, not an equivalent of it."
+    },
+    {
+      "question": "What can be said about the formula P ∧ ¬P?",
+      "options": [
+        "It is a contradiction and therefore unsatisfiable",
+        "It is a tautology by the law of excluded middle",
+        "It is true whenever P is true",
+        "It is satisfiable but not a tautology"
+      ],
+      "correctAnswer": 0,
+      "explain": "No assignment makes both P and ¬P true, so the formula is false everywhere. The law of excluded middle is P ∨ ¬P, the disjunction, which is the tautology and is easy to confuse with this one."
+    },
+    {
+      "question": "The biconditional P ↔ Q is true exactly when:",
+      "options": [
+        "Both P and Q are true",
+        "At least one of P and Q is true",
+        "P and Q have the same truth value",
+        "P is true and Q is false"
+      ],
+      "correctAnswer": 2,
+      "explain": "P ↔ Q holds when both are true and also when both are false, since it abbreviates (P → Q) ∧ (Q → P). Requiring both to be true describes conjunction, which misses the false-false row."
+    }
+  ]
+}

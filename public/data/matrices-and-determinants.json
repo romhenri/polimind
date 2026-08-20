@@ -1,0 +1,129 @@
+{
+  "id": "matrices-and-determinants",
+  "name": "Matrices and Determinants",
+  "description": "Matrix products, determinant properties, row operations and the link between determinants and invertibility.",
+  "icon": "array",
+  "color": "violet",
+  "category": "mathematics",
+  "subcategory": "Linear Algebra",
+  "tags": [
+    "matrices",
+    "determinants",
+    "math"
+  ],
+  "hardness": "medium",
+  "lang": "en",
+  "type": "options",
+  "questions": [
+    {
+      "question": "A is a 3×2 matrix and B is a 2×4 matrix. What are the dimensions of the product AB?",
+      "options": [
+        "2×2",
+        "3×4",
+        "4×3",
+        "The product is undefined"
+      ],
+      "correctAnswer": 1,
+      "explain": "The inner dimensions must match (2 = 2) and the result takes the outer ones, giving 3×4. Note that BA is genuinely undefined here, since 4 does not match 3."
+    },
+    {
+      "question": "If A is a 4×4 matrix with det(A) = 3, what is det(2A)?",
+      "options": [
+        "6",
+        "12",
+        "24",
+        "48"
+      ],
+      "correctAnswer": 3,
+      "explain": "Scaling a matrix scales every one of its n rows, so det(kA) = kⁿ·det(A) = 2⁴·3 = 48. Answering 6 treats the scalar as if it factored out only once, which is the most common error here."
+    },
+    {
+      "question": "Two rows of a square matrix are swapped. What happens to its determinant?",
+      "options": [
+        "It changes sign",
+        "It is unchanged",
+        "It becomes zero",
+        "It is doubled"
+      ],
+      "correctAnswer": 0,
+      "explain": "A single row swap is an odd permutation, so it multiplies the determinant by −1. This is why row reduction has to track the number of swaps performed."
+    },
+    {
+      "question": "A square matrix A is invertible if and only if:",
+      "options": [
+        "All of its entries are non-zero",
+        "It is symmetric",
+        "Its determinant is non-zero",
+        "Its determinant equals 1"
+      ],
+      "correctAnswer": 2,
+      "explain": "det(A) ≠ 0 is equivalent to full rank, independent rows and the existence of A⁻¹. A determinant of exactly 1 is a special case (unimodular), not a requirement."
+    },
+    {
+      "question": "What is the determinant of an upper triangular matrix?",
+      "options": [
+        "The sum of the diagonal entries",
+        "Always zero, since the lower half is zero",
+        "The product of all non-zero entries",
+        "The product of the diagonal entries"
+      ],
+      "correctAnswer": 3,
+      "explain": "Cofactor expansion leaves only the diagonal product, which is why row reduction to triangular form is the practical way to compute determinants. The sum of the diagonal is the trace, a different quantity entirely."
+    },
+    {
+      "question": "For square matrices A and B of the same size, which identity always holds?",
+      "options": [
+        "det(AB) = det(A)·det(B)",
+        "det(A + B) = det(A) + det(B)",
+        "det(AB) = det(A) + det(B)",
+        "det(AB) = det(BA) only when A is invertible"
+      ],
+      "correctAnswer": 0,
+      "explain": "The determinant is multiplicative, so det(AB) = det(A)·det(B), and this also makes det(AB) = det(BA) hold unconditionally for square matrices. The determinant is not additive, so the first identity fails for almost any pair."
+    },
+    {
+      "question": "Adding 5 times row 1 to row 3 of a matrix has what effect on its determinant?",
+      "options": [
+        "It multiplies the determinant by 5",
+        "It leaves the determinant unchanged",
+        "It adds 5 to the determinant",
+        "It multiplies the determinant by 6"
+      ],
+      "correctAnswer": 1,
+      "explain": "Adding a multiple of one row to a different row does not change the determinant, which is what makes Gaussian elimination safe for computing it. Multiplying a single row by 5, by contrast, would multiply the determinant by 5."
+    },
+    {
+      "question": "A 5×5 matrix has one row that is exactly twice another row. What is its determinant?",
+      "options": [
+        "Twice the determinant of the matrix with that row removed",
+        "Undefined without knowing the other entries",
+        "Zero",
+        "Two"
+      ],
+      "correctAnswer": 2,
+      "explain": "Proportional rows are linearly dependent, so the matrix is singular and its determinant is 0. Equivalently, subtracting twice the first row leaves an all-zero row without changing the determinant."
+    },
+    {
+      "question": "Which statement about matrix multiplication is correct?",
+      "options": [
+        "It is commutative whenever both products are defined",
+        "It is commutative but not associative",
+        "It is neither associative nor commutative",
+        "It is associative but not generally commutative"
+      ],
+      "correctAnswer": 3,
+      "explain": "(AB)C = A(BC) always holds, but AB and BA usually differ even when both are defined and square. This non-commutativity is why the order of transformations matters in graphics and in change-of-basis work."
+    },
+    {
+      "question": "If A and B are invertible n×n matrices, what is (AB)⁻¹?",
+      "options": [
+        "A⁻¹B⁻¹",
+        "(BA)⁻¹",
+        "B⁻¹A⁻¹",
+        "A⁻¹ + B⁻¹"
+      ],
+      "correctAnswer": 2,
+      "explain": "The order reverses: (AB)(B⁻¹A⁻¹) = A(BB⁻¹)A⁻¹ = I. Writing A⁻¹B⁻¹ only works in the special case where A and B commute."
+    }
+  ]
+}
