@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseQuizJson, quizToDataFile, parseGlossaryJson, slugify } from './aiQuiz'
+import { parseQuizJson, quizToDataFile, parseGlossaryJson, slugify, parseJudgeResponse } from './aiQuiz'
 import { glossaryToDataFile } from './localGlossaries'
 
 const optionsQuiz = {
@@ -93,5 +93,44 @@ describe('slugify', () => {
   it('kebab-cases and falls back', () => {
     expect(slugify('The Fall of Rome!')).toBe('the-fall-of-rome')
     expect(slugify('   ')).toBe('ai-quiz')
+  })
+})
+
+describe('parseJudgeResponse', () => {
+  it('keeps valid scores, drops out-of-range and duplicate indices', () => {
+    const result = parseJudgeResponse(
+      {
+        overall: 7.44,
+        summary: ' Solid quiz. ',
+        questions: [
+          { index: 1, score: 12, issue: 'Ambiguous wording' },
+          { index: 0, score: 6.25, issue: '' },
+          { index: 0, score: 2, issue: 'dup' },
+          { index: 9, score: 8, issue: 'out of range' },
+          { index: 2, score: 'nope', issue: 'bad score' },
+        ],
+      },
+      'test-model',
+      3
+    )
+    expect(result.questions).toEqual([
+      { index: 0, score: 6.3, issue: '' },
+      { index: 1, score: 10, issue: 'Ambiguous wording' },
+    ])
+    expect(result.overall).toBe(7.4)
+    expect(result.summary).toBe('Solid quiz.')
+  })
+
+  it('averages the scores when overall is missing', () => {
+    const result = parseJudgeResponse(
+      { questions: [{ index: 0, score: 4 }, { index: 1, score: 9 }] },
+      'test-model',
+      2
+    )
+    expect(result.overall).toBe(6.5)
+  })
+
+  it('throws when nothing is usable', () => {
+    expect(() => parseJudgeResponse({ questions: [] }, 'test-model', 3)).toThrow()
   })
 })

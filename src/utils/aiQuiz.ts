@@ -1850,3 +1850,135 @@ export async function generateQuizStream(
   callbacks.onError?.(finalError)
   throw finalError
 }
+
+// ---------------------------------------------------------------------------
+// LLM-as-judge: score each question's quality
+// ---------------------------------------------------------------------------
+
+export interface JudgeQuestionScore {
+  index: number
+  score: number
+  issue: string
+}
+
+export interface JudgeResult {
+  model: string
+  overall: number
+  summary: string
+  questions: JudgeQuestionScore[]
+}
+
+const JUDGE_SCHEMA = {
+  type: 'object',
+  properties: {
+    overall: { type: 'number' },
+    summary: { type: 'string' },
+    questions: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          index: { type: 'integer' },
+          score: { type: 'number' },
+          issue: { type: 'string' },
+        },
+        required: ['index', 'score', 'issue'],
+      },
+    },
+  },
+  required: ['overall', 'summary', 'questions'],
+}
+
+function buildJudgePrompt(quiz: QuizMetadata): string {
+  const isBool = quiz.type === 'bool'
+  const items = quiz.questions.map((q, i) => {
+    const lines = [`${i}. ${q.question}`]
+    if (!isBool && 'options' in q) {
+      lines.push(...q.options.map((opt, oi) => `   ${oi}${oi === q.correctAnswer ? ' (marked correct)' : ''}. ${opt}`))
+    } else if ('result' in q) {
+      lines.push(`   marked: ${q.result ? 'True' : 'False'}`)
+    }
+    if (q.explain) lines.push(`   explanation: ${q.explain}`)
+    return lines.join('\n')
+  })
+
+  return [
+    'You are a strict quiz reviewer for "polimind", a learning platform.',
+    `Judge the quality of each ${isBool ? 'true/false statement' : 'multiple-choice question'} in the quiz "${quiz.name}".`,
+    quiz.description ? `Quiz description: ${quiz.description}` : '',
+    `Category: ${quiz.category}. Difficulty: ${quiz.hardness}.`,
+    '',
+    'Score each item from 0 to 10 on:',
+    '- Factual correctness of the marked answer and the explanation.',
+    '- Clarity and self-containment of the wording.',
+    isBool
+      ? '- Whether the statement is unambiguously true or false.'
+      : '- Plausibility of the distractors (no giveaways, no other defensible correct option).',
+    '- Value as a learning question, and no overlap with the other items.',
+    '',
+    'Rules:',
+    `- Return exactly ${quiz.questions.length} entries, one per item, using its 0-based "index".`,
+    '- "score": 0-10, one decimal at most. Be discriminating: reserve 9-10 for flawless items.',
+    '- "issue": the single biggest problem in under 15 words, or "none" when the item is solid.',
+    '- "overall": 0-10 quality of the quiz as a whole. "summary": one sentence.',
+    '- Write in English. Output only the JSON object, with no extra text.',
+    '',
+    'Items:',
+    ...items,
+  ]
+    .filter(Boolean)
+    .join('\n')
+}
+
+export function parseJudgeResponse(parsed: unknown, model: string, total: number): JudgeResult {
+  const raw = (parsed ?? {}) as Record<string, unknown>
+  const list = Array.isArray(raw.questions) ? raw.questions : []
+  const clamp = (n: number) => Math.max(0, Math.min(10, Math.round(n * 10) / 10))
+  const questions: JudgeQuestionScore[] = []
+
+  for (const item of list) {
+    if (!item || typeof item !== 'object') continue
+    const entry = item as Record<string, unknown>
+    const index = Number(entry.index)
+    const score = Number(entry.score)
+    if (!Number.isInteger(index) || index < 0 || index >= total || !Number.isFinite(score)) continue
+    if (questions.some((q) => q.index === index)) continue
+    questions.push({
+      index,
+      score: clamp(score),
+      issue: typeof entry.issue === 'string' ? entry.issue.trim() : '',
+    })
+  }
+
+  if (questions.length === 0) {
+    throw new AiProviderError(`${model} returned no usable scores.`, false)
+  }
+
+  questions.sort((a, b) => a.index - b.index)
+  const rawOverall = Number(raw.overall)
+  const overall = Number.isFinite(rawOverall)
+    ? clamp(rawOverall)
+    : clamp(questions.reduce((sum, q) => sum + q.score, 0) / questions.length)
+
+  return {
+    model,
+    overall,
+    summary: typeof raw.summary === 'string' ? raw.summary.trim() : '',
+    questions,
+  }
+}
+
+export async function judgeQuiz(
+  settings: AiSettings,
+  quiz: QuizMetadata,
+  model: string
+): Promise<JudgeResult> {
+  assertApiKey(settings)
+  const { parsed } = await callProvider(
+    { ...settings, temperature: 0 },
+    model,
+    buildJudgePrompt(quiz),
+    JUDGE_SCHEMA
+  )
+  return parseJudgeResponse(parsed, model, quiz.questions.length)
+}
