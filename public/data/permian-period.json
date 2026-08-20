@@ -1,0 +1,127 @@
+{
+  "id": "permian-period",
+  "name": "Permian Period",
+  "description": "Explore the era of the great Pangaean supercontinent and the greatest mass extinction in Earth's history.",
+  "color": "orange",
+  "category": "sciences",
+  "subcategory": "Paleontology",
+  "tags": [
+    "geology",
+    "extinction",
+    "paleozoics"
+  ],
+  "hardness": "medium",
+  "type": "options",
+  "questions": [
+    {
+      "question": "Which supercontinent was forming during the Permian period?",
+      "options": [
+        "Gondwana",
+        "Laurasia",
+        "Pangaea",
+        "Rodinia"
+      ],
+      "correctAnswer": 2,
+      "explain": "The Permian saw the final assembly of the supercontinent Pangaea."
+    },
+    {
+      "question": "What is the name of the mass extinction event at the end of the Permian?",
+      "options": [
+        "The Great Dying",
+        "The K-Pg Event",
+        "The Late Devonian",
+        "The End-Triassic"
+      ],
+      "correctAnswer": 0,
+      "explain": "The Permian-Triassic extinction is often called the Great Dying due to its scale."
+    },
+    {
+      "question": "Which group of amphibians reached their peak diversity during this period?",
+      "options": [
+        "Lissamphibians",
+        "Temnospondyls",
+        "Caecilians",
+        "Salamanders"
+      ],
+      "correctAnswer": 1,
+      "explain": "Temnospondyls were a major group of extinct amphibians dominant in the Permian."
+    },
+    {
+      "question": "Which reptile-like group began to dominate land habitats during the Permian?",
+      "options": [
+        "Dinosaurs",
+        "Synapsids",
+        "Pterosaurs",
+        "Ichthyosaurs"
+      ],
+      "correctAnswer": 1,
+      "explain": "Synapsids, the precursors to mammals, were the dominant land vertebrates."
+    },
+    {
+      "question": "What was a major environmental feature of the Permian landmass?",
+      "options": [
+        "Extensive ice sheets",
+        "Dense tropical rainforests",
+        "Arid interior deserts",
+        "High humidity oceans"
+      ],
+      "correctAnswer": 2,
+      "explain": "The vast interior of Pangaea created highly arid and desert-like conditions."
+    },
+    {
+      "question": "Which plant group was highly successful in the Permian's dry environments?",
+      "options": [
+        "Ferns",
+        "Gymnosperms",
+        "Angiosperms",
+        "Mosses"
+      ],
+      "correctAnswer": 1,
+      "explain": "Gymnosperms, like conifers, thrived in the drier Permian climates."
+    },
+    {
+      "question": "What was a primary driver of the Permian-Triassic extinction?",
+      "options": [
+        "Asteroid impact",
+        "Volcanic activity",
+        "Glacial expansion",
+        "Solar radiation"
+      ],
+      "correctAnswer": 1,
+      "explain": "Massive volcanism in the Siberian Traps is the leading theory for the extinction."
+    },
+    {
+      "question": "Which marine group saw a massive decline during the end-Permian?",
+      "options": [
+        "Brachiopods",
+        "Ammonites",
+        "Crinoids",
+        "All of the above"
+      ],
+      "correctAnswer": 3,
+      "explain": "The extinction wiped out a vast majority of marine invertebrates, including these groups."
+    },
+    {
+      "question": "What characterizes the Permian geological time scale position?",
+      "options": [
+        "First period of Paleozoic",
+        "Last period of Paleozoic",
+        "First period of Mesozoic",
+        "Last period of Mesozoic"
+      ],
+      "correctAnswer": 1,
+      "explain": "The Permian is the final period of the Paleozoic Era."
+    },
+    {
+      "question": "Which organism is often associated with the Permian fossil record?",
+      "options": [
+        "Dimetrodon",
+        "Triceratops",
+        "Stegosaurus",
+        "Tyrannosaurus"
+      ],
+      "correctAnswer": 0,
+      "explain": "Dimetrodon is a famous sail-backed synapsid from the Permian period."
+    }
+  ]
+}
