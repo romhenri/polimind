@@ -1,0 +1,129 @@
+{
+  "id": "roman-republic-to-empire",
+  "name": "Roman Republic to Empire",
+  "description": "How Rome's republican institutions were strained, bypassed and finally replaced by the rule of one man.",
+  "icon": "landmark",
+  "color": "amber",
+  "category": "history",
+  "subcategory": "Ancient History",
+  "tags": [
+    "rome",
+    "republic",
+    "augustus"
+  ],
+  "hardness": "medium",
+  "lang": "en",
+  "type": "options",
+  "questions": [
+    {
+      "question": "Why did the Roman Republic elect two consuls each year rather than one?",
+      "options": [
+        "So that each could veto the other, preventing a return to monarchy",
+        "So that one could govern Rome while the other governed the provinces",
+        "Because the patricians and plebeians each demanded their own head of state",
+        "Because a single magistrate could not manage the Senate's workload"
+      ],
+      "correctAnswer": 0,
+      "explain": "Collegiality was the core republican safeguard: equal colleagues holding office for a single year, each able to block the other. The division between city and provinces was a later administrative practice, not the reason for the pairing."
+    },
+    {
+      "question": "What was the defining power of the tribune of the plebs?",
+      "options": [
+        "Command of the legions stationed in Italy",
+        "The right to convene the Senate and set its agenda",
+        "The power to veto acts of magistrates and the Senate",
+        "Sole authority to collect taxes in the provinces"
+      ],
+      "correctAnswer": 2,
+      "explain": "The intercessio, backed by the tribune's sacrosanct person, let a single tribune halt almost any state act. That blocking power made the tribunate a prize worth fighting over in the late Republic, and Augustus later took its authority for himself."
+    },
+    {
+      "question": "The Marian reforms opened army recruitment to citizens without property. What was their most destabilising political consequence?",
+      "options": [
+        "Rome's legions became too small to defend the frontiers",
+        "The Senate lost its power to declare war",
+        "Provincial subjects were granted citizenship en masse",
+        "Soldiers looked to their general, not the Senate, for land and pay"
+      ],
+      "correctAnswer": 3,
+      "explain": "Landless recruits depended on their commander to secure discharge settlements, which turned legions into personal followings. That loyalty is what made it possible for Sulla, Caesar and later Octavian to march on Rome itself."
+    },
+    {
+      "question": "Why was Caesar's crossing of the Rubicon in 49 BC an act of war?",
+      "options": [
+        "It broke a treaty Rome had signed with the Gallic tribes",
+        "The river marked the boundary beyond which a general could not lead his army",
+        "He crossed during a religious festival when campaigning was forbidden",
+        "He had not yet been granted a triumph for his Gallic victories"
+      ],
+      "correctAnswer": 1,
+      "explain": "A promagistrate's military command lapsed at the boundary of Italy, so entering with troops under arms was by definition insurrection. Caesar's own account frames it as self-defence against enemies who would prosecute him once he was a private citizen."
+    },
+    {
+      "question": "Who were the members of the First Triumvirate, and what was its legal status?",
+      "options": [
+        "Caesar, Pompey and Crassus, an informal private alliance with no official standing",
+        "Caesar, Pompey and Crassus, a magistracy created by law for five years",
+        "Octavian, Antony and Lepidus, an informal private alliance",
+        "Sulla, Pompey and Crassus, a commission appointed by the Senate"
+      ],
+      "correctAnswer": 0,
+      "explain": "The First Triumvirate was a private bargain to pool influence, never an office, which is why it dissolved once Crassus died and the other two fell out. The Second Triumvirate of Octavian, Antony and Lepidus, by contrast, was formally established by law in 43 BC."
+    },
+    {
+      "question": "What was the outcome of the Battle of Actium in 31 BC?",
+      "options": [
+        "Pompey defeated Caesar's fleet, delaying the civil war",
+        "Antony and Cleopatra defeated Octavian, splitting the empire in two",
+        "Octavian's forces defeated Antony and Cleopatra, leaving him unrivalled",
+        "The Senate's fleet defeated both triumvirs and restored the Republic"
+      ],
+      "correctAnswer": 2,
+      "explain": "Agrippa's naval victory off the Greek coast ended the last serious challenge to Octavian, and Antony and Cleopatra died in Egypt the following year. Sole control of the legions and of Egypt's grain followed directly from it."
+    },
+    {
+      "question": "Augustus preferred the title princeps, or 'first citizen'. What does that choice reveal about his settlement?",
+      "options": [
+        "He held no real power and governed only through persuasion",
+        "He kept republican forms and titles while holding decisive power himself",
+        "He formally abolished the Senate and ruled by decree",
+        "He claimed divine kingship in the manner of Hellenistic monarchs"
+      ],
+      "correctAnswer": 1,
+      "explain": "The Senate continued to meet and magistrates were still elected, but Augustus controlled the armed provinces and held tribunician power for life. Preserving the familiar vocabulary was precisely what made one-man rule tolerable after Caesar's assassination."
+    },
+    {
+      "question": "How did the Third Punic War end in 146 BC?",
+      "options": [
+        "Carthage paid an indemnity and kept its independence",
+        "Hannibal was defeated at Zama and Carthage lost its Spanish territories",
+        "The two cities signed a lasting peace guaranteeing free trade",
+        "Carthage was destroyed and its territory annexed as a Roman province"
+      ],
+      "correctAnswer": 3,
+      "explain": "The third war ended with the city sacked and Africa turned into a Roman province. Zama and the loss of Spain belong to the second war, which ended in 201 BC and left Carthage intact but subordinate."
+    },
+    {
+      "question": "What made the fate of the Gracchi brothers a turning point in republican politics?",
+      "options": [
+        "They were the first magistrates to command an army against Rome",
+        "Their land reforms were passed unanimously and ended the agrarian crisis",
+        "Political disputes were settled by lethal violence rather than by institutions",
+        "They abolished the office of tribune after their reforms failed"
+      ],
+      "correctAnswer": 2,
+      "explain": "Tiberius and Gaius Gracchus were both killed amid political conflict over land reform, breaking the convention that disputes ended in the Senate or the assemblies. Once killing an opponent became a usable tactic, the escalation to Sulla's proscriptions and open civil war followed."
+    },
+    {
+      "question": "What was the immediate political result of Caesar's assassination on the Ides of March, 44 BC?",
+      "options": [
+        "The Republic's institutions resumed functioning as the conspirators intended",
+        "A new round of civil war that ended in one-man rule under Octavian",
+        "The Senate immediately appointed Octavian as Caesar's successor",
+        "Rome was left without a central government for nearly a decade"
+      ],
+      "correctAnswer": 1,
+      "explain": "Removing Caesar did nothing about the armies, the veterans or the rival commanders, so the conspirators were defeated at Philippi within two years. The assassination accelerated the collapse it was meant to prevent."
+    }
+  ]
+}
