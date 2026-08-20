@@ -1,0 +1,129 @@
+{
+  "id": "newtonian-mechanics",
+  "name": "Newtonian Mechanics",
+  "description": "Newton's three laws applied to forces, motion and the everyday intuitions they overturn.",
+  "icon": "bolt",
+  "color": "sky",
+  "category": "sciences",
+  "subcategory": "Physics",
+  "tags": [
+    "physics",
+    "forces",
+    "motion"
+  ],
+  "hardness": "easy",
+  "lang": "en",
+  "type": "options",
+  "questions": [
+    {
+      "question": "A hockey puck slides across frictionless ice at a constant velocity in a straight line. What is the net force on it?",
+      "options": [
+        "Zero",
+        "A constant force in the direction of motion",
+        "A force that decreases as it slows",
+        "A force equal to its weight, pointing forward"
+      ],
+      "correctAnswer": 0,
+      "explain": "Newton's first law: constant velocity means zero acceleration, and F = ma then forces the net force to be zero. The intuition that motion requires a sustained force is the single most common misconception in mechanics."
+    },
+    {
+      "question": "A book rests on a table. According to Newton's third law, what is the reaction to the gravitational force the Earth exerts on the book?",
+      "options": [
+        "The normal force the table exerts on the book",
+        "The weight of the table pressing on the floor",
+        "The gravitational force the book exerts on the Earth",
+        "The force the book exerts on the table"
+      ],
+      "correctAnswer": 2,
+      "explain": "Third-law pairs are the same type of force between the same two bodies, acting in opposite directions. The normal force is a contact force between book and table, and it balances the weight only because the book is in equilibrium, not because of the third law."
+    },
+    {
+      "question": "An astronaut carries a 6 kg toolkit from Earth to the Moon. On the Moon:",
+      "options": [
+        "Both its mass and its weight are about one sixth of their Earth values",
+        "Its mass is still 6 kg but its weight is about one sixth of its Earth weight",
+        "Its mass drops to about 1 kg and its weight is unchanged",
+        "Both its mass and its weight are unchanged"
+      ],
+      "correctAnswer": 1,
+      "explain": "Mass measures the amount of matter and is the same everywhere; weight is the force mg and scales with the local gravitational field. Weaker lunar gravity therefore changes the weight but leaves the mass untouched."
+    },
+    {
+      "question": "The net force on a cart of fixed mass is doubled. What happens to its acceleration?",
+      "options": [
+        "It stays the same, since mass is unchanged",
+        "It is halved",
+        "It is quadrupled",
+        "It is doubled"
+      ],
+      "correctAnswer": 3,
+      "explain": "From a = F/m with m constant, acceleration is directly proportional to the net force. Quadrupling would require the force to be squared, which is not how the second law works."
+    },
+    {
+      "question": "A ball is thrown straight up. At the exact instant it reaches its highest point, what are its velocity and acceleration?",
+      "options": [
+        "Velocity zero, acceleration zero",
+        "Velocity zero, acceleration about 9.8 m/s² downward",
+        "Velocity 9.8 m/s upward, acceleration zero",
+        "Velocity zero, acceleration about 9.8 m/s² upward"
+      ],
+      "correctAnswer": 1,
+      "explain": "The velocity passes through zero as it reverses direction, but gravity acts continuously, so the acceleration never stops pointing downward. If the acceleration were zero there, the ball would hang motionless in the air."
+    },
+    {
+      "question": "A crate is pushed to the right across a rough floor and slides. In which direction does kinetic friction on the crate act?",
+      "options": [
+        "To the left, opposing the crate's motion",
+        "To the right, in the direction of the push",
+        "Downward, adding to the crate's weight",
+        "Upward, balancing the normal force"
+      ],
+      "correctAnswer": 0,
+      "explain": "Kinetic friction always opposes the relative sliding motion of the surfaces in contact, so it points opposite the crate's velocity. Its magnitude μN depends on the normal force, not on how hard the crate is pushed horizontally."
+    },
+    {
+      "question": "A hammer and a feather are released from the same height inside a vacuum chamber. What happens?",
+      "options": [
+        "The hammer lands first, because it has more mass",
+        "The feather lands first, because it has less inertia",
+        "They land at the same time",
+        "Neither falls, because there is no air to push them down"
+      ],
+      "correctAnswer": 2,
+      "explain": "Greater mass means greater gravitational force but proportionally greater inertia, so a = F/m = g for every object. On Earth the hammer normally wins only because air resistance affects the feather far more."
+    },
+    {
+      "question": "A car drives at constant speed around a circular track. What is the direction of the net force on it?",
+      "options": [
+        "Forward, along the direction of travel",
+        "Outward, away from the centre of the circle",
+        "Zero, because the speed is constant",
+        "Inward, toward the centre of the circle"
+      ],
+      "correctAnswer": 3,
+      "explain": "Constant speed still means changing velocity, since the direction changes, and that acceleration points to the centre. The outward 'centrifugal force' passengers feel is an artefact of the rotating frame, not a real force on the car."
+    },
+    {
+      "question": "Why do airbags reduce injury in a collision?",
+      "options": [
+        "They extend the collision time, reducing the peak force for the same change in momentum",
+        "They reduce the total change in momentum of the passenger",
+        "They cancel the passenger's inertia during the impact",
+        "They convert the collision from inelastic to elastic"
+      ],
+      "correctAnswer": 0,
+      "explain": "Impulse F·Δt equals the change in momentum, which is fixed by the crash, so stretching Δt shrinks the average force the body absorbs. Nothing about the airbag changes how much momentum has to be removed."
+    },
+    {
+      "question": "A block of weight W sits at rest on a frictionless ramp inclined at 30°. How does the normal force from the ramp compare to W?",
+      "options": [
+        "It is greater than W",
+        "It is exactly equal to W",
+        "It is less than W",
+        "It is zero, since the block is on an incline"
+      ],
+      "correctAnswer": 2,
+      "explain": "The normal force balances only the component of weight perpendicular to the surface, W·cos30°, which is smaller than W. The normal force equals the weight only on a horizontal surface with no other vertical forces."
+    }
+  ]
+}

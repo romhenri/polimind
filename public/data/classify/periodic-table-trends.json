@@ -1,0 +1,248 @@
+{
+  "id": "periodic-table-trends",
+  "name": "Periodic Table Trends",
+  "description": "Place elements by metallic character and by the family whose properties they share.",
+  "icon": "flask",
+  "color": "lime",
+  "category": "sciences",
+  "subcategory": "Chemistry",
+  "tags": [
+    "chemistry",
+    "periodic table",
+    "elements"
+  ],
+  "hardness": "medium",
+  "lang": "en",
+  "type": "classify",
+  "config": {
+    "mode": "single",
+    "optionCount": 4,
+    "shuffleEntities": true
+  },
+  "facets": [
+    {
+      "id": "character",
+      "label": "Metallic Character",
+      "prompt": "Is {entity} a metal, a metalloid or a nonmetal?",
+      "groups": [
+        {
+          "id": "metal",
+          "label": "Metal",
+          "hint": "Conducts well, loses electrons, forms basic oxides"
+        },
+        {
+          "id": "metalloid",
+          "label": "Metalloid",
+          "hint": "Sits on the staircase; semiconducting, intermediate behaviour"
+        },
+        {
+          "id": "nonmetal",
+          "label": "Nonmetal",
+          "hint": "Poor conductor, gains or shares electrons, forms acidic oxides"
+        }
+      ]
+    },
+    {
+      "id": "family",
+      "label": "Element Family",
+      "prompt": "Which family does {entity} belong to?",
+      "parent": "character",
+      "groups": [
+        {
+          "id": "alkali-metal",
+          "label": "Alkali Metal",
+          "hint": "Group 1; one valence electron, violently reactive with water",
+          "parentGroup": "metal"
+        },
+        {
+          "id": "alkaline-earth-metal",
+          "label": "Alkaline Earth Metal",
+          "hint": "Group 2; two valence electrons, reactive but less so than group 1",
+          "parentGroup": "metal"
+        },
+        {
+          "id": "transition-metal",
+          "label": "Transition Metal",
+          "hint": "d-block; variable oxidation states, often coloured compounds",
+          "parentGroup": "metal"
+        },
+        {
+          "id": "halogen",
+          "label": "Halogen",
+          "hint": "Group 17; one electron short of a full shell, strong oxidisers",
+          "parentGroup": "nonmetal"
+        },
+        {
+          "id": "noble-gas",
+          "label": "Noble Gas",
+          "hint": "Group 18; full valence shell, almost no reactivity",
+          "parentGroup": "nonmetal"
+        },
+        {
+          "id": "semimetal",
+          "label": "Metalloid",
+          "hint": "Along the staircase between metals and nonmetals",
+          "parentGroup": "metalloid"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "lithium",
+      "entity": "Lithium",
+      "subtitle": "Li, atomic number 3",
+      "answers": {
+        "character": "metal",
+        "family": "alkali-metal"
+      },
+      "explain": {
+        "character": "Lithium is a soft, conductive group 1 metal, despite being light enough to float on water.",
+        "family": "It heads group 1 with a single valence electron, so it reacts with water to give a hydroxide and hydrogen gas."
+      }
+    },
+    {
+      "id": "potassium",
+      "entity": "Potassium",
+      "subtitle": "K, atomic number 19",
+      "answers": {
+        "character": "metal",
+        "family": "alkali-metal"
+      },
+      "explain": {
+        "character": "A group 1 metal, and one that must be stored under oil because it oxidises on contact with air.",
+        "family": "Reactivity increases down group 1, so potassium reacts with water far more violently than lithium does."
+      }
+    },
+    {
+      "id": "magnesium",
+      "entity": "Magnesium",
+      "subtitle": "Mg, atomic number 12",
+      "answers": {
+        "character": "metal",
+        "family": "alkaline-earth-metal"
+      },
+      "explain": {
+        "character": "A structural metal, light and conductive, used in alloys where weight matters.",
+        "family": "Group 2 with two valence electrons, forming Mg²⁺; it is not an alkali metal despite the similar-sounding name."
+      }
+    },
+    {
+      "id": "barium",
+      "entity": "Barium",
+      "subtitle": "Ba, atomic number 56",
+      "answers": {
+        "character": "metal",
+        "family": "alkaline-earth-metal"
+      },
+      "explain": {
+        "character": "A dense, reactive metal that tarnishes quickly in air.",
+        "family": "Group 2, sitting below magnesium and calcium, and reactive enough to be handled under oil like the alkali metals."
+      }
+    },
+    {
+      "id": "titanium",
+      "entity": "Titanium",
+      "subtitle": "Ti, atomic number 22",
+      "answers": {
+        "character": "metal",
+        "family": "transition-metal"
+      },
+      "explain": {
+        "character": "A strong, corrosion-resistant metal, protected by a tough oxide layer.",
+        "family": "A d-block element with several oxidation states, most commonly +4 as in TiO₂."
+      }
+    },
+    {
+      "id": "zinc",
+      "entity": "Zinc",
+      "subtitle": "Zn, atomic number 30",
+      "answers": {
+        "character": "metal",
+        "family": "transition-metal"
+      },
+      "explain": {
+        "character": "A metal used to galvanise steel, sacrificing itself to corrosion first.",
+        "family": "It sits in the d-block, though its filled d shell and single +2 state make it behave less typically than iron or copper."
+      }
+    },
+    {
+      "id": "chlorine",
+      "entity": "Chlorine",
+      "subtitle": "Cl, atomic number 17",
+      "answers": {
+        "character": "nonmetal",
+        "family": "halogen"
+      },
+      "explain": {
+        "character": "A diatomic gas that gains electrons rather than losing them, forming acidic oxides.",
+        "family": "Group 17, one electron short of a full shell, which makes it a powerful oxidising agent."
+      }
+    },
+    {
+      "id": "iodine",
+      "entity": "Iodine",
+      "subtitle": "I, atomic number 53",
+      "answers": {
+        "character": "nonmetal",
+        "family": "halogen"
+      },
+      "explain": {
+        "character": "A nonmetal despite its metallic sheen as a solid; it sublimes to a violet vapour.",
+        "family": "Group 17, but the least reactive common halogen, since the larger atom holds an added electron less tightly."
+      }
+    },
+    {
+      "id": "argon",
+      "entity": "Argon",
+      "subtitle": "Ar, atomic number 18",
+      "answers": {
+        "character": "nonmetal",
+        "family": "noble-gas"
+      },
+      "explain": {
+        "character": "A nonmetal gas, and the third most abundant component of dry air.",
+        "family": "Group 18 with a full valence shell, which is why it is used as an inert shield in welding."
+      }
+    },
+    {
+      "id": "krypton",
+      "entity": "Krypton",
+      "subtitle": "Kr, atomic number 36",
+      "answers": {
+        "character": "nonmetal",
+        "family": "noble-gas"
+      },
+      "explain": {
+        "character": "A nonmetal gas, monatomic and colourless under ordinary conditions.",
+        "family": "Group 18; heavier noble gases are not perfectly inert, and krypton does form compounds such as KrF₂ under force."
+      }
+    },
+    {
+      "id": "silicon",
+      "entity": "Silicon",
+      "subtitle": "Si, atomic number 14",
+      "answers": {
+        "character": "metalloid",
+        "family": "semimetal"
+      },
+      "explain": {
+        "character": "It has a metallic lustre but conducts only when doped or heated, which is the defining metalloid behaviour.",
+        "family": "It sits on the staircase between aluminium and phosphorus, and that intermediate position is what makes semiconductors possible."
+      }
+    },
+    {
+      "id": "arsenic",
+      "entity": "Arsenic",
+      "subtitle": "As, atomic number 33",
+      "answers": {
+        "character": "metalloid",
+        "family": "semimetal"
+      },
+      "explain": {
+        "character": "Its grey allotrope looks and conducts somewhat like a metal, while it forms covalent compounds like a nonmetal.",
+        "family": "A staircase element in group 15, used as a dopant in semiconductors for exactly that intermediate character."
+      }
+    }
+  ]
+}
