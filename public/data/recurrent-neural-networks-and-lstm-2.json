@@ -1,0 +1,128 @@
+{
+  "id": "recurrent-neural-networks-and-lstm-2",
+  "name": "Sequential Neural Architectures",
+  "description": "Deepen your knowledge of recurrent mechanisms, hidden state dynamics, and gating structures.",
+  "color": "cyan",
+  "category": "general",
+  "subcategory": "Everyday Knowledge",
+  "tags": [
+    "deep-learning",
+    "nlp",
+    "lstm",
+    "rnn"
+  ],
+  "hardness": "hard",
+  "type": "options",
+  "questions": [
+    {
+      "question": "How does the hidden state in a standard RNN update at time step t?",
+      "options": [
+        "By averaging the static embeddings of all preceding tokens",
+        "By computing a function of the current input and previous hidden state",
+        "By applying self-attention weights across the entire sentence",
+        "By resetting the activation values back to random uniform noise"
+      ],
+      "correctAnswer": 1,
+      "explain": "The hidden state combines the current input vector with the previous hidden state at each step."
+    },
+    {
+      "question": "What primary computational issue occurs during backpropagation through time in vanilla RNNs?",
+      "options": [
+        "Matrix dimensions shrink dynamically across every layer",
+        "Gradients exponentially vanish or explode across deep time steps",
+        "Token embeddings lose their assigned semantic vector coordinates",
+        "The model converts continuous activations into discrete integers"
+      ],
+      "correctAnswer": 1,
+      "explain": "Repeated matrix multiplications over long temporal steps cause gradients to vanish or explode."
+    },
+    {
+      "question": "Which analogy best illustrates the memory degradation of standard RNNs on long texts?",
+      "options": [
+        "Translating a full document into binary machine code",
+        "Shuffling a deck of cards before dealing every round",
+        "Reading a book and forgetting the protagonist by chapter two",
+        "Looking up every unknown word in a printed dictionary"
+      ],
+      "correctAnswer": 2,
+      "explain": "The slide uses the analogy of reading a book and forgetting early character names as context grows."
+    },
+    {
+      "question": "How does the Cell State in an LSTM facilitate long-range information transfer?",
+      "options": [
+        "It acts as a conveyor belt allowing information to flow unchanged",
+        "It applies non-linear pooling to compress the sequence length",
+        "It calculates global pairwise cross-attention between tokens",
+        "It removes stopwords deterministically prior to inference"
+      ],
+      "correctAnswer": 0,
+      "explain": "The cell state functions like a conveyor belt, preserving key signals across extended steps."
+    },
+    {
+      "question": "Why does training recurrent networks fail to fully utilize modern parallel GPU architectures?",
+      "options": [
+        "Recurrent units require double-precision floating-point CPUs",
+        "Step t strictly depends on the sequential output of step t minus one",
+        "Backpropagation through time cannot calculate loss gradients",
+        "Recurrent layers discard token order during parameter updates"
+      ],
+      "correctAnswer": 1,
+      "explain": "Sequential dependencies prevent simultaneous token computations across multiple GPU cores."
+    },
+    {
+      "question": "What key limitation of Bag-of-Words and LDA was directly solved by RNN sequence modeling?",
+      "options": [
+        "Inability to handle continuous word embeddings",
+        "High computational cost of matrix inversion",
+        "Inability to account for word order and negation context",
+        "Lack of support for unsupervised topic discovery"
+      ],
+      "correctAnswer": 2,
+      "explain": "RNNs process tokens sequentially, distinguishing between phrases with identical words but different meanings."
+    },
+    {
+      "question": "In sequential sentiment analysis, why is order preservation essential for phrases like 'not bad'?",
+      "options": [
+        "Negation tokens invert semantic polarity based on their position",
+        "Stopword filters automatically remove positive descriptive words",
+        "Word embeddings assign equal vector values to opposing concepts",
+        "Classification layers only evaluate the final token in the sequence"
+      ],
+      "correctAnswer": 0,
+      "explain": "Sequential order determines how modifying words like 'not' alter the meaning of surrounding words."
+    },
+    {
+      "question": "How do Word Embeddings complement recurrent layers in deep NLP pipelines?",
+      "options": [
+        "They eliminate the need for temporal hidden state updates",
+        "They map words to continuous semantic vectors before recurrence",
+        "They enforce strict rule-based syntactic grammar constraints",
+        "They convert sentences into sparse high-dimensional count matrices"
+      ],
+      "correctAnswer": 1,
+      "explain": "Dense word embeddings provide semantic vector inputs that the recurrent layers process sequentially."
+    },
+    {
+      "question": "What structural transition marked the evolution from LSTM networks to Transformers?",
+      "options": [
+        "Replacing recurrent connections entirely with attention mechanisms",
+        "Increasing the number of recurrent hidden cells per time step",
+        "Returning to Bag-of-Words representations for faster training",
+        "Removing positional information completely from input sentences"
+      ],
+      "correctAnswer": 0,
+      "explain": "Transformers discarded recurrent recurrence in favor of parallel self-attention mechanisms."
+    },
+    {
+      "question": "Which task represents a sequential classification objective suited for recurrent networks?",
+      "options": [
+        "Clustering unlabelled documents into latent themes",
+        "Computing document-wide inverse term frequencies",
+        "Categorizing customer reviews as positive or negative",
+        "Generating word-level morphological dictionary lemmas"
+      ],
+      "correctAnswer": 2,
+      "explain": "Sentiment classification of customer reviews is a classic supervised task for sequence models."
+    }
+  ]
+}
