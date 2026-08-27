@@ -1,0 +1,129 @@
+{
+  "id": "recurrent-neural-networks-and-lstm",
+  "name": "Recurrent Neural Networks and LSTM",
+  "description": "Explore sequential deep learning architectures and understand how recurrent memory mechanisms function.",
+  "icon": "recurrence",
+  "color": "teal",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "tags": [
+    "deep-learning",
+    "nlp",
+    "lstm",
+    "rnn"
+  ],
+  "hardness": "medium",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the defining structural property of standard Recurrent Neural Networks (RNNs)?",
+      "options": [
+        "A hidden state fed back into the network across steps",
+        "A multi-head attention block replacing convolutions",
+        "A strictly feedforward path without any internal loops",
+        "A static document-term weighting matrix mechanism"
+      ],
+      "correctAnswer": 0,
+      "explain": "RNNs maintain a recurring hidden state that passes prior step information forward to the current step."
+    },
+    {
+      "question": "How do standard RNNs process an incoming natural language sentence?",
+      "options": [
+        "By parsing all tokens in parallel using self-attention",
+        "By sequentially feeding one word at a time in order",
+        "By aggregating global word counts into static vectors",
+        "By shuffling tokens randomly into dense projection layers"
+      ],
+      "correctAnswer": 1,
+      "explain": "RNNs iterate over input sequences step by step, updating their internal state on each word."
+    },
+    {
+      "question": "Which major mathematical obstacle affects vanilla RNNs when processing long texts?",
+      "options": [
+        "Vanishing Gradient",
+        "Deterministic Overfitting",
+        "Dimensionality Collapse",
+        "Greedy Token Pruning"
+      ],
+      "correctAnswer": 0,
+      "explain": "Vanishing gradients cause vanilla RNNs to forget early contextual tokens as sequences grow long."
+    },
+    {
+      "question": "What core component does an LSTM introduce to preserve long-term context?",
+      "options": [
+        "A dynamic vocabulary stemmer",
+        "A static cross-entropy layer",
+        "A dedicated Cell State path",
+        "A positional sinusoidal matrix"
+      ],
+      "correctAnswer": 2,
+      "explain": "The Cell State acts like a conveyor belt carrying long-term memory across sequential steps."
+    },
+    {
+      "question": "Why did vanilla RNNs struggle with texts where the subject and predicate are far apart?",
+      "options": [
+        "They discard word order entirely during text tokenization",
+        "They can only process numerical continuous financial data",
+        "They cannot maintain long-distance contextual dependencies",
+        "They require bidirectional Transformer decoders to run"
+      ],
+      "correctAnswer": 2,
+      "explain": "Standard recurrent layers suffer from memory decay and fail to track long-range dependencies."
+    },
+    {
+      "question": "What does the abbreviation LSTM stand for in deep learning terminology?",
+      "options": [
+        "Linear Structured Text Modeling",
+        "Long Short-Term Memory",
+        "Latent Stochastic Tree Model",
+        "Layered Sequence Token Matrix"
+      ],
+      "correctAnswer": 1,
+      "explain": "LSTM stands for Long Short-Term Memory, an architecture designed for long-term sequence tracking."
+    },
+    {
+      "question": "What is the primary operational distinction between RNN working memory and LSTM design?",
+      "options": [
+        "LSTM separates working memory from cell state memory",
+        "RNN relies completely on non-sequential matrix tensors",
+        "LSTM completely avoids calculating activation gradients",
+        "RNN eliminates recurrent connections between layers"
+      ],
+      "correctAnswer": 0,
+      "explain": "LSTMs separate temporary working memory from long-term memory managed by the cell state."
+    },
+    {
+      "question": "Which data type is inherently well-suited for processing by Recurrent Neural Networks?",
+      "options": [
+        "Unordered tabular categories",
+        "Sequential and time-series data",
+        "Static spatial pixel matrices",
+        "Disjoint document vocabulary lists"
+      ],
+      "correctAnswer": 1,
+      "explain": "Recurrent architectures are explicitly built to model sequential inputs and time-series signals."
+    },
+    {
+      "question": "What hardware limitation hindered the massive scalability of RNN and LSTM models?",
+      "options": [
+        "Inability to run on CPU arithmetic execution units",
+        "Requirement of quadratic GPU memory storage buffers",
+        "Sequential nature preventing efficient GPU parallelization",
+        "Strict dependency on single-precision integer caches"
+      ],
+      "correctAnswer": 2,
+      "explain": "Step-by-step sequential processing prevents full parallel execution on modern GPU hardware."
+    },
+    {
+      "question": "What architecture emerged directly to solve recurrent bottlenecks by processing sequences in parallel?",
+      "options": [
+        "Multilayer Perceptron",
+        "Linear Discriminant Classifier",
+        "Latent Dirichlet Allocation",
+        "Transformer Model"
+      ],
+      "correctAnswer": 3,
+      "explain": "Transformers replaced sequential recurrence with attention, allowing parallel sequence processing."
+    }
+  ]
+}
