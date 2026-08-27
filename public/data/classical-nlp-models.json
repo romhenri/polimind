@@ -1,0 +1,129 @@
+{
+  "id": "classical-nlp-models",
+  "name": "Classical NLP Models",
+  "description": "Test your understanding of classic text processing techniques from TF-IDF and LDA to early neural architectures.",
+  "icon": "comments",
+  "color": "indigo",
+  "category": "computer_science",
+  "subcategory": "AI & Machine Learning",
+  "tags": [
+    "nlp",
+    "tfidf",
+    "lda",
+    "machine-learning"
+  ],
+  "hardness": "medium",
+  "type": "options",
+  "questions": [
+    {
+      "question": "What is the primary role of the Inverse Document Frequency (IDF) term in TF-IDF?",
+      "options": [
+        "To count total occurrences across sentences",
+        "To penalize words appearing in many documents",
+        "To generate dense vector representations",
+        "To capture contextual word order patterns"
+      ],
+      "correctAnswer": 1,
+      "explain": "IDF scales down the weight of words that occur frequently across the entire corpus."
+    },
+    {
+      "question": "Which of the following is a major limitation of classic Bag-of-Words and TF-IDF models?",
+      "options": [
+        "They require labeled target data to run",
+        "They ignore word order and semantic meaning",
+        "They cannot handle numerical input features",
+        "They run exclusively on parallel GPU cores"
+      ],
+      "correctAnswer": 1,
+      "explain": "Traditional Bag-of-Words models treat text as unstructured bags and miss sentence order and semantics."
+    },
+    {
+      "question": "How is Latent Dirichlet Allocation (LDA) categorized in text processing?",
+      "options": [
+        "Supervised classification algorithm",
+        "Sequence-to-sequence translation model",
+        "Unsupervised topic modeling technique",
+        "Rule-based dependency parser framework"
+      ],
+      "correctAnswer": 2,
+      "explain": "LDA discovers underlying topics across unstructured documents without human-provided labels."
+    },
+    {
+      "question": "What human step is typically required after LDA extracts topic word distributions?",
+      "options": [
+        "Calculating the cross-entropy loss value",
+        "Interpreting the word list to name the topic",
+        "Converting continuous tokens into integers",
+        "Re-indexing the document sparse matrices"
+      ],
+      "correctAnswer": 1,
+      "explain": "LDA outputs representative word clusters which humans analyze to assign qualitative topic names."
+    },
+    {
+      "question": "How can semantic clustering help improve traditional LDA topic models?",
+      "options": [
+        "By enforcing strict word order dependencies",
+        "By replacing all multi-layer neural networks",
+        "By grouping synonyms using word embeddings",
+        "By converting text tokens into binary hashes"
+      ],
+      "correctAnswer": 2,
+      "explain": "Grouping semantically related terms via embeddings mitigates the semantic blindness of LDA."
+    },
+    {
+      "question": "Why is the phrase 'dog bit man' indistinguishable from 'man bit dog' in standard Bag-of-Words?",
+      "options": [
+        "Word order is discarded in token frequency counts",
+        "Both sentences share the exact same sentiment label",
+        "Stopword removal strips out the nouns and verbs",
+        "Stemming reduces every word to an identical root"
+      ],
+      "correctAnswer": 0,
+      "explain": "Bag-of-Words only counts word frequencies, entirely losing the sequential order of words."
+    },
+    {
+      "question": "Which preprocessing step involves reducing words to their base dictionary forms?",
+      "options": [
+        "Lemmatization",
+        "Quantization",
+        "Token pooling",
+        "Vector slicing"
+      ],
+      "correctAnswer": 0,
+      "explain": "Lemmatization uses vocabulary and morphological analysis to return words to their base lemma."
+    },
+    {
+      "question": "What is the primary formula component represented by df_x in TF-IDF calculations?",
+      "options": [
+        "The total count of term x across one single document",
+        "The relative frequency rank of document x in corpus",
+        "The maximum length of all documents containing term x",
+        "The number of documents containing the specific term x"
+      ],
+      "correctAnswer": 3,
+      "explain": "The document frequency df_x measures how many documents contain the term x."
+    },
+    {
+      "question": "How do continuous word embeddings capture grammatical and semantic relations?",
+      "options": [
+        "Through positional vector distance and arithmetic",
+        "Through sequential token parsing in tree layers",
+        "Through binary one-hot vocabulary representation",
+        "Through character-level deterministic regex matching"
+      ],
+      "correctAnswer": 0,
+      "explain": "Embeddings place similar concepts close in vector space and allow semantic arithmetic operations."
+    },
+    {
+      "question": "Which common NLP task involves assigning predefined categories like spam or non-spam to texts?",
+      "options": [
+        "Information retrieval",
+        "Text classification",
+        "Sequence generation",
+        "Semantic paraphrasing"
+      ],
+      "correctAnswer": 1,
+      "explain": "Categorizing texts into predefined buckets such as spam or ham is the task of text classification."
+    }
+  ]
+}
