@@ -73,12 +73,17 @@ function providerModels(provider: AiProvider): string[] {
 
 /**
  * Models to try for a request. When the user pinned a specific OpenRouter model
- * it's the only one tried; otherwise fall back to the provider's default list.
+ * it's the only one tried (OpenRouter's "Auto" already routes otherwise); for
+ * Gemini the pinned model is tried first, then the rest as fallback.
  */
 function settingsModels(settings: AiSettings): string[] {
   const pinned = settings.model?.trim()
   if (settings.provider === 'openrouter' && pinned) return [pinned]
-  return providerModels(settings.provider)
+  const defaults = providerModels(settings.provider)
+  if (settings.provider === 'gemini' && pinned) {
+    return [pinned, ...defaults.filter((m) => m !== pinned)]
+  }
+  return defaults
 }
 
 class AiProviderError extends Error {
