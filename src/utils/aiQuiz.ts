@@ -147,7 +147,7 @@ function questionRules(type: GenType, count: number): string[] {
     '    - "correctAnswer": the 0-based index (0 to 3) of the correct option.',
     '    - "explain": one short sentence explaining why the answer is correct.',
     '- Exactly one option is correct, and vary the position of the correct answer across questions.',
-    '- Do NOT make the correct option the longest one; keep all options similar in length so length is not a clue.',
+    '- Keep all 4 options within a word or two of each other in length (similar word count), and never make the correct one noticeably longer than the rest.',
   ]
 }
 
@@ -317,7 +317,7 @@ function copyItemRules(type: GenType, count: number): string[] {
     `- "questions": exactly ${count} items, each with exactly 4 plausible options.`,
     '- "correctAnswer": 0-based index (0 to 3) of the correct option; exactly one option is correct.',
     '- Vary the position of the correct answer across questions.',
-    '- Do NOT make the correct option the longest one; keep all options similar in length so length is not a clue.',
+    '- Keep all 4 options within a word or two of each other in length (similar word count), and never make the correct one noticeably longer than the rest.',
   ]
 }
 
@@ -385,7 +385,7 @@ function singleItemRules(type: GenType): string[] {
     '- "correctAnswer": the 0-based index (0 to 3) of the correct option.',
     '- "explain": one short sentence explaining why the answer is correct.',
     '- Exactly one option is correct.',
-    '- Do NOT make the correct option the longest one; keep all options similar in length so length is not a clue.',
+    '- Keep all 4 options within a word or two of each other in length (similar word count), and never make the correct one noticeably longer than the rest.',
   ]
 }
 
