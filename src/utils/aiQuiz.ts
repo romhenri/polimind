@@ -826,6 +826,46 @@ export async function generateQuiz(
 }
 
 // ---------------------------------------------------------------------------
+// Endless mode — generate the next batch of options questions for a running
+// quiz, optionally emphasizing concepts the learner has gotten wrong so far.
+// ---------------------------------------------------------------------------
+
+function buildEndlessSubject(
+  topic: string,
+  askedQuestions: string[],
+  weakQuestions: string[]
+): string {
+  const lines = [topic.trim()]
+  if (askedQuestions.length > 0) {
+    lines.push(
+      '',
+      'Do not repeat or closely rephrase any of these already-asked questions:',
+      ...askedQuestions.map((q) => `- ${q}`)
+    )
+  }
+  if (weakQuestions.length > 0) {
+    lines.push(
+      '',
+      'The learner struggled with the concepts behind these questions — write at least 3 of the 5 new questions testing those same concepts (fresh questions, not repeats):',
+      ...weakQuestions.map((q) => `- ${q}`)
+    )
+  }
+  return lines.join('\n')
+}
+
+export async function generateEndlessBatch(
+  settings: AiSettings,
+  topic: string,
+  count: number,
+  category: string,
+  askedQuestions: string[],
+  weakQuestions: string[]
+): Promise<GeneratedQuiz> {
+  const subject = buildEndlessSubject(topic, askedQuestions.slice(-30), weakQuestions.slice(-10))
+  return generateQuiz(settings, subject, count, category, undefined, undefined, 'options')
+}
+
+// ---------------------------------------------------------------------------
 // Glossary generation
 // ---------------------------------------------------------------------------
 
