@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { GiGreekTemple } from 'react-icons/gi'
 import { SiGooglegemini } from 'react-icons/si'
+import { FaInfinity } from 'react-icons/fa'
 import { IoMdMap } from 'react-icons/io'
 import { IoLibrary } from 'react-icons/io5'
 import { IconType } from 'react-icons'
@@ -13,6 +14,7 @@ const NAV_ITEMS: { href: string; label: string; Icon: IconType }[] = [
   { href: '/lib', label: 'Lib', Icon: IoLibrary },
   { href: '/trails', label: 'Trail', Icon: IoMdMap },
   { href: '/ai', label: 'AI', Icon: SiGooglegemini },
+  { href: '/endless', label: 'Endless', Icon: FaInfinity },
 ]
 
 export default function BottomNav() {
