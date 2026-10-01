@@ -4,6 +4,7 @@ const DIRS: Record<string, string> = {
   quiz: 'public/data',
   classify: 'public/data/classify',
   glossary: 'public/data/glossaries',
+  endless: 'public/data/endless',
 }
 
 export function resolveTargetPath(kind: unknown, id: unknown): string | null {

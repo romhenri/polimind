@@ -837,12 +837,22 @@ export async function generateQuiz(
 // quiz, optionally emphasizing concepts the learner has gotten wrong so far.
 // ---------------------------------------------------------------------------
 
+export const ENDLESS_LANGUAGES = ['English', 'Portuguese (Brazil)'] as const
+export type EndlessLanguage = (typeof ENDLESS_LANGUAGES)[number]
+
 function buildEndlessSubject(
   topic: string,
   askedQuestions: string[],
-  weakQuestions: string[]
+  weakQuestions: string[],
+  outputLanguage: EndlessLanguage
 ): string {
   const lines = [topic.trim()]
+  if (outputLanguage !== 'English') {
+    lines.push(
+      '',
+      `Write the question, options and explain fields in ${outputLanguage}, despite any other instruction to write in English. Keep "id" as an English kebab-case slug.`
+    )
+  }
   if (askedQuestions.length > 0) {
     lines.push(
       '',
@@ -866,9 +876,10 @@ export async function generateEndlessBatch(
   count: number,
   category: string,
   askedQuestions: string[],
-  weakQuestions: string[]
+  weakQuestions: string[],
+  outputLanguage: EndlessLanguage = 'English'
 ): Promise<GeneratedQuiz> {
-  const subject = buildEndlessSubject(topic, askedQuestions.slice(-30), weakQuestions.slice(-10))
+  const subject = buildEndlessSubject(topic, askedQuestions.slice(-30), weakQuestions.slice(-10), outputLanguage)
   return generateQuiz(settings, subject, count, category, undefined, undefined, 'options')
 }
 

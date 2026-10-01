@@ -1,23 +1,28 @@
 'use client'
 
+import { useProfile } from '@/contexts/ProfileContext'
 import { useEffect, useRef, useState } from 'react'
-import { FaKey, FaEye, FaEyeSlash, FaCheck, FaTimes, FaSpinner, FaInfinity, FaTrash, FaPlay } from 'react-icons/fa'
+import { FaKey, FaEye, FaEyeSlash, FaCheck, FaTimes, FaSpinner, FaInfinity, FaTrash, FaPlay, FaHistory, FaSave } from 'react-icons/fa'
 import type { OptionsQuestion } from '@/types/quiz'
 import {
   generateEndlessBatch,
-  fetchOpenRouterFreeModels,
+  fetchOpenRouterFreeModels, PAID_OPENROUTER_MODELS,
   slugify,
   GEMINI_MODELS,
+  ENDLESS_LANGUAGES,
   type AiProvider,
   type AiSettings,
   type OpenRouterModelOption,
+  type EndlessLanguage,
 } from '@/utils/aiQuiz'
 import {
   getEndlessRounds,
+  getEndlessRound,
   saveEndlessRound,
   deleteEndlessRound,
   type EndlessRound,
 } from '@/utils/localEndlessRounds'
+import { writeJsonFile } from '@/utils/localQuizzes'
 import { CATEGORIES } from '@/data/categories'
 
 const OPENROUTER_KEY_STORAGE = 'polimind.openRouterKey'
@@ -25,6 +30,8 @@ const GEMINI_KEY_STORAGE = 'polimind.geminiKey'
 const PROVIDER_STORAGE = 'polimind.aiProvider'
 const OPENROUTER_MODEL_STORAGE = 'polimind.openRouterModel'
 const GEMINI_MODEL_STORAGE = 'polimind.endlessGeminiModel'
+const LANGUAGE_STORAGE = 'polimind.endlessLanguage'
+const REPO_MODE = process.env.NEXT_PUBLIC_TARGET_SAVE === 'repo'
 
 const INITIAL_COUNT = 10
 const BATCH_COUNT = 5
@@ -38,10 +45,13 @@ export default function EndlessPage() {
   const [openRouterModel, setOpenRouterModel] = useState('')
   const [geminiModel, setGeminiModel] = useState('')
   const [freeModels, setFreeModels] = useState<OpenRouterModelOption[]>([])
+  const { allowPaidModels, preferPortuguese } = useProfile()
+  const openRouterModels = allowPaidModels ? [...freeModels, ...PAID_OPENROUTER_MODELS] : freeModels
   const [modelsLoading, setModelsLoading] = useState(false)
   const [modelsError, setModelsError] = useState<string | null>(null)
   const [category, setCategory] = useState('general')
   const [topic, setTopic] = useState('')
+  const [outputLanguage, setOutputLanguage] = useState<EndlessLanguage>('English')
 
   const [started, setStarted] = useState(false)
   const [questions, setQuestions] = useState<OptionsQuestion[]>([])
@@ -50,6 +60,7 @@ export default function EndlessPage() {
   const [loadingMore, setLoadingMore] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [rounds, setRounds] = useState<EndlessRound[]>([])
+  const [showHistory, setShowHistory] = useState(false)
   const triggeredAt = useRef(0)
   const roundIdRef = useRef<string | null>(null)
 
@@ -60,7 +71,15 @@ export default function EndlessPage() {
     setGeminiModel(localStorage.getItem(GEMINI_MODEL_STORAGE) ?? '')
     const storedProvider = localStorage.getItem(PROVIDER_STORAGE)
     if (storedProvider === 'openrouter' || storedProvider === 'gemini') setProvider(storedProvider)
+    const storedLanguage = localStorage.getItem(LANGUAGE_STORAGE)
+    if (ENDLESS_LANGUAGES.includes(storedLanguage as EndlessLanguage)) {
+      setOutputLanguage(storedLanguage as EndlessLanguage)
+    } else if (preferPortuguese) {
+      setOutputLanguage('Portuguese (Brazil)')
+    }
     setRounds(getEndlessRounds())
+    // only runs once on mount; preferPortuguese is read as the initial default, not re-applied on later changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -90,7 +109,7 @@ export default function EndlessPage() {
         if (cancelled) return
         setFreeModels(models)
         setOpenRouterModel((current) =>
-          current && !models.some((m) => m.id === current) ? '' : current
+          current && !models.some((m) => m.id === current) && !PAID_OPENROUTER_MODELS.some((m) => m.id === current) ? '' : current
         )
       })
       .catch(() => {
@@ -129,7 +148,8 @@ export default function EndlessPage() {
       count,
       category,
       questions.map((q) => q.question),
-      weakQuestions()
+      weakQuestions(),
+      outputLanguage
     )
     const fresh = result.quiz.questions.filter(
       (q): q is OptionsQuestion => 'options' in q
@@ -145,6 +165,7 @@ export default function EndlessPage() {
     localStorage.setItem(PROVIDER_STORAGE, provider)
     localStorage.setItem(OPENROUTER_MODEL_STORAGE, openRouterModel)
     localStorage.setItem(GEMINI_MODEL_STORAGE, geminiModel)
+    localStorage.setItem(LANGUAGE_STORAGE, outputLanguage)
     try {
       setQuestions([])
       setAnswers({})
@@ -167,12 +188,52 @@ export default function EndlessPage() {
     setAnswers(round.answers)
     triggeredAt.current = round.questions.length
     setError(null)
+    setShowHistory(false)
     setStarted(true)
   }
 
   const handleDeleteRound = (id: string) => {
     deleteEndlessRound(id)
     setRounds((prev) => prev.filter((r) => r.id !== id))
+  }
+
+  const [savingJson, setSavingJson] = useState(false)
+  const [savedJson, setSavedJson] = useState(false)
+  const [saveJsonError, setSaveJsonError] = useState(false)
+
+  const handleSaveJson = async () => {
+    const id = roundIdRef.current
+    if (!id) return
+    const round = getEndlessRound(id) ?? {
+      id,
+      topic: topic.trim(),
+      category,
+      questions,
+      answers,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    }
+    setSavingJson(true)
+    try {
+      if (REPO_MODE) {
+        const res = await fetch('/api/save-repo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ kind: 'endless', id: round.id, data: round }),
+        })
+        if (!res.ok) throw new Error(await res.text())
+      } else {
+        await writeJsonFile(`${round.id}.json`, JSON.stringify(round, null, 2))
+      }
+      setSavedJson(true)
+      setTimeout(() => setSavedJson(false), 2000)
+    } catch (err) {
+      console.error('Endless round save failed', err)
+      setSaveJsonError(true)
+      setTimeout(() => setSaveJsonError(false), 2000)
+    } finally {
+      setSavingJson(false)
+    }
   }
 
   useEffect(() => {
@@ -223,9 +284,21 @@ export default function EndlessPage() {
       </div>
 
       {!started && rounds.length > 0 && (
-        <div className="p-6 mb-6 bg-white border-2 rounded-xl border-plum-200 dark:bg-stone-900 dark:border-plum-900/60">
+        <div className="mb-6">
+          <button
+            type="button"
+            onClick={() => setShowHistory((v) => !v)}
+            className="flex items-center justify-center w-full gap-2 px-6 py-3 font-semibold transition-colors bg-transparent border-2 rounded-lg text-plum-700 border-plum-500 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-400 dark:hover:bg-stone-800"
+          >
+            <FaHistory /> {showHistory ? 'Hide history' : `History (${rounds.length})`}
+          </button>
+        </div>
+      )}
+
+      {!started && showHistory && rounds.length > 0 && (
+        <div className="p-6 mb-6 bg-white border-2 rounded-xl border-plum-200 dark:bg-stone-900 dark:border-plum-900/60 animate-fade-in">
           <h2 className="mb-4 text-lg font-semibold text-stone-800 dark:text-white">
-            Continue a round
+            Past rounds
           </h2>
           <div className="space-y-2">
             {rounds.map((round) => {
@@ -307,6 +380,23 @@ export default function EndlessPage() {
 
           <div className="mb-5">
             <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
+              Output language
+            </label>
+            <select
+              value={outputLanguage}
+              onChange={(e) => setOutputLanguage(e.target.value as EndlessLanguage)}
+              className="w-full px-4 py-3 text-sm bg-white border-2 rounded-lg border-stone-200 text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+            >
+              {ENDLESS_LANGUAGES.map((lang) => (
+                <option key={lang} value={lang}>
+                  {lang}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="mb-5">
+            <label className="block mb-2 text-sm font-semibold text-stone-700 dark:text-stone-200">
               Model
             </label>
             {provider === 'openrouter' ? (
@@ -318,7 +408,7 @@ export default function EndlessPage() {
                   className="w-full px-4 py-3 text-sm bg-white border-2 rounded-lg border-stone-200 text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white disabled:opacity-60"
                 >
                   <option value="">Auto (best available free model)</option>
-                  {freeModels.map((m) => (
+                  {openRouterModels.map((m) => (
                     <option key={m.id} value={m.id}>
                       {m.name}
                     </option>
@@ -419,6 +509,26 @@ export default function EndlessPage() {
                 <span className="ml-2 text-plum-600 dark:text-plum-400">{percentage}%</span>
               )}
             </span>
+            <button
+              type="button"
+              onClick={handleSaveJson}
+              disabled={savingJson}
+              className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold transition-colors bg-transparent border-2 rounded-lg text-plum-700 border-plum-500 hover:bg-plum-50 dark:text-plum-300 dark:border-plum-400 dark:hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {savedJson ? (
+                <>
+                  <FaCheck /> Saved!
+                </>
+              ) : saveJsonError ? (
+                <>
+                  <FaSave /> Save failed
+                </>
+              ) : (
+                <>
+                  <FaSave /> {REPO_MODE ? 'Save to Repo' : 'Save as JSON'}
+                </>
+              )}
+            </button>
           </div>
 
           <div className="space-y-4">
