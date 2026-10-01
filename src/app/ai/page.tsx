@@ -1,5 +1,6 @@
 'use client'
 
+import { useProfile } from '@/contexts/ProfileContext'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   FaKey,
@@ -21,7 +22,7 @@ import {
 import { FaWandMagicSparkles, FaLayerGroup } from 'react-icons/fa6'
 import { QuizMetadata, Question, QuizListing } from '@/types/quiz'
 import type { Glossary } from '@/types/glossary'
-import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, buildQuizContext, parseQuizJson, generateGlossary, generateGlossaryTerm, buildGlossaryCopyPrompt, generateClassify, buildClassifyCopyPrompt, regenerateClassifyEntity, fetchOpenRouterFreeModels, GEMINI_MODELS } from '@/utils/aiQuiz'
+import { generateQuizStream, regenerateQuestion, quizToDataFile, buildCopyPrompt, buildQuizContext, parseQuizJson, generateGlossary, generateGlossaryTerm, buildGlossaryCopyPrompt, generateClassify, buildClassifyCopyPrompt, regenerateClassifyEntity, fetchOpenRouterFreeModels, PAID_OPENROUTER_MODELS, GEMINI_MODELS } from '@/utils/aiQuiz'
 import { generateClassifyQuestions } from '@/utils/classify/generate'
 import { CATEGORIES, getCategoryById } from '@/data/categories'
 import type { StreamCallbacks, AiProvider, AiSettings, GenType, OpenRouterModelOption } from '@/utils/aiQuiz'
@@ -50,6 +51,8 @@ export default function AiPage() {
   const [geminiKey, setGeminiKey] = useState('')
   const [openRouterModel, setOpenRouterModel] = useState('')
   const [freeModels, setFreeModels] = useState<OpenRouterModelOption[]>([])
+  const { allowPaidModels } = useProfile()
+  const openRouterModels = allowPaidModels ? [...freeModels, ...PAID_OPENROUTER_MODELS] : freeModels
   const [modelsLoading, setModelsLoading] = useState(false)
   const [modelsError, setModelsError] = useState<string | null>(null)
   const [showApiKey, setShowApiKey] = useState(false)
@@ -182,7 +185,7 @@ export default function AiPage() {
         if (cancelled) return
         setFreeModels(models)
         setOpenRouterModel((current) =>
-          current && !models.some((m) => m.id === current) ? '' : current
+          current && !models.some((m) => m.id === current) && !PAID_OPENROUTER_MODELS.some((m) => m.id === current) ? '' : current
         )
       })
       .catch(() => {
@@ -218,8 +221,8 @@ export default function AiPage() {
   }, [quiz])
   const quizContext = useMemo(() => buildQuizContext(referenceQuizzes), [referenceQuizzes])
   const judgeModels = useMemo(
-    () => (provider === 'openrouter' ? freeModels : GEMINI_MODELS.map((id) => ({ id, name: id }))),
-    [provider, freeModels]
+    () => (provider === 'openrouter' ? openRouterModels : GEMINI_MODELS.map((id) => ({ id, name: id }))),
+    [provider, openRouterModels]
   )
 
   const activeKey = provider === 'openrouter' ? openRouterKey : geminiKey
@@ -729,7 +732,7 @@ export default function AiPage() {
               className="w-full px-4 py-3 text-sm border-2 rounded-lg border-stone-200 bg-white text-stone-800 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-plum-500 dark:border-stone-700 dark:bg-stone-800 dark:text-white disabled:opacity-60"
             >
               <option value="">Auto (best available free model)</option>
-              {freeModels.map((m) => (
+              {openRouterModels.map((m) => (
                 <option key={m.id} value={m.id}>
                   {m.name}
                 </option>

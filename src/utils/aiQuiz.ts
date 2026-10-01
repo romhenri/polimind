@@ -61,6 +61,13 @@ export async function fetchOpenRouterFreeModels(): Promise<OpenRouterModelOption
   return free
 }
 
+export const PAID_OPENROUTER_MODELS: OpenRouterModelOption[] = [
+  { id: 'deepseek/deepseek-v4-flash', name: 'DeepSeek V4 Flash' },
+  { id: 'google/gemini-3.5-flash', name: 'Gemini 3.5 Flash' },
+  { id: 'nvidia/nemotron-3.5-lightning', name: 'Nemotron 3.5 Lightning' },
+  { id: 'openai/gpt-6-luna', name: 'GPT-6 Luna' },
+]
+
 export const QUIZ_CATEGORIES = CATEGORIES.map((c) => c.id)
 
 function providerName(provider: AiProvider): string {
