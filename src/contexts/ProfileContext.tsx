@@ -32,6 +32,8 @@ interface ProfileContextType {
   clearData: () => void
   preferPortuguese: boolean
   setPreferPortuguese: (pref: boolean) => void
+  allowPaidModels: boolean
+  setAllowPaidModels: (allow: boolean) => void
   isProfileOpen: boolean
   setIsProfileOpen: (open: boolean) => void
 }
@@ -44,12 +46,14 @@ interface StoredProfile {
   avatar: AvatarOption
   completedQuizzes: Record<string, string[]>
   preferPortuguese?: boolean
+  allowPaidModels?: boolean
 }
 
 export function ProfileProvider({ children }: { children: ReactNode }) {
   const [avatar, setAvatarState] = useState<AvatarOption>('user')
   const [completedQuizzes, setCompletedQuizzes] = useState<Record<string, string[]>>({})
   const [preferPortuguese, setPreferPortugueseState] = useState<boolean>(false)
+  const [allowPaidModels, setAllowPaidModelsState] = useState<boolean>(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
 
   // Load from localStorage on mount
@@ -66,6 +70,9 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
         }
         if (parsed.preferPortuguese !== undefined) {
           setPreferPortugueseState(parsed.preferPortuguese)
+        }
+        if (parsed.allowPaidModels !== undefined) {
+          setAllowPaidModelsState(parsed.allowPaidModels)
         }
       }
     } catch (err) {
@@ -97,6 +104,18 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const setAllowPaidModels = (allow: boolean) => {
+    setAllowPaidModelsState(allow)
+    try {
+      const stored = localStorage.getItem(PROFILE_KEY)
+      const current: StoredProfile = stored ? JSON.parse(stored) : { avatar: 'user', completedQuizzes: {} }
+      current.allowPaidModels = allow
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(current))
+    } catch (err) {
+      console.error('Error saving allowPaidModels to localStorage', err)
+    }
+  }
+
   const completeQuiz = (subjectId: string, category: string) => {
     if (!subjectId || !category) return
 
@@ -125,6 +144,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     setAvatarState('user')
     setCompletedQuizzes({})
     setPreferPortugueseState(false)
+    setAllowPaidModelsState(false)
     try {
       localStorage.removeItem(PROFILE_KEY)
     } catch (err) {
@@ -142,6 +162,8 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
         clearData,
         preferPortuguese,
         setPreferPortuguese,
+        allowPaidModels,
+        setAllowPaidModels,
         isProfileOpen,
         setIsProfileOpen
       }}

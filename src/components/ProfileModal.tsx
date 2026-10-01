@@ -14,6 +14,8 @@ export default function ProfileModal() {
     clearData,
     preferPortuguese,
     setPreferPortuguese,
+    allowPaidModels,
+    setAllowPaidModels,
     isProfileOpen,
     setIsProfileOpen,
   } = useProfile()
@@ -135,6 +137,20 @@ export default function ProfileModal() {
                     type="checkbox"
                     checked={preferPortuguese}
                     onChange={(e) => setPreferPortuguese(e.target.checked)}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-stone-200 rounded-full peer dark:bg-stone-700 peer-focus:ring-2 peer-focus:ring-clay-300 dark:peer-focus:ring-clay-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-clay-500 transition-colors"></div>
+                </div>
+              </label>
+              <label className="flex items-center justify-between cursor-pointer group">
+                <span className="text-sm font-medium text-stone-700 dark:text-stone-300 group-hover:text-stone-900 dark:group-hover:text-stone-100 transition-colors">
+                  Allow paid models
+                </span>
+                <div className="relative">
+                  <input
+                    type="checkbox"
+                    checked={allowPaidModels}
+                    onChange={(e) => setAllowPaidModels(e.target.checked)}
                     className="sr-only peer"
                   />
                   <div className="w-11 h-6 bg-stone-200 rounded-full peer dark:bg-stone-700 peer-focus:ring-2 peer-focus:ring-clay-300 dark:peer-focus:ring-clay-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-clay-500 transition-colors"></div>
